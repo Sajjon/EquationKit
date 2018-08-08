@@ -10,18 +10,21 @@ import XCTest
 @testable import EquationKit
 
 class TestBase: XCTestCase {
-    func testEquation(expect expected: Int, infix: Token...) {
-        guard let solution = Equation(infix: infix).evaluate() else { XCTFail("cant solve"); return }
+
+    func testEquation(expect expected: Int, equation: Equation) {
+        guard let solution = equation.numericSolution() else { XCTFail("cant solve"); return }
         XCTAssertEqual(expected, solution)
+    }
+
+    func testEquation(expect expected: Int, infix: Token...) {
+        testEquation(expect: expected, equation: Equation(infix: infix))
     }
 
     func testEquation(expect expected: Int, infix: Term...) {
-        guard let solution = Equation(infix: infix).evaluate() else { XCTFail("cant solve"); return }
-        XCTAssertEqual(expected, solution)
+        testEquation(expect: expected, equation: Equation(infix: infix))
     }
 
     func testEquation(expect expected: Int, infix: [Term]) {
-        guard let solution = Equation(infix: infix).evaluate() else { XCTFail("cant solve"); return }
-        XCTAssertEqual(expected, solution)
+        testEquation(expect: expected, equation: Equation(infix: infix))
     }
 }

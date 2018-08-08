@@ -21,6 +21,7 @@
 		48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022838211B22BE00AEFB58 /* Custom_Operators.swift */; };
 		4802283B211B276900AEFB58 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283A211B276900AEFB58 /* Variable.swift */; };
 		4802283D211B2A4400AEFB58 /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283C211B2A4400AEFB58 /* TestBase.swift */; };
+		48022842211B37A200AEFB58 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283F211B378000AEFB58 /* Solution.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		48022838211B22BE00AEFB58 /* Custom_Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom_Operators.swift; sourceTree = "<group>"; };
 		4802283A211B276900AEFB58 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		4802283C211B2A4400AEFB58 /* TestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
+		4802283F211B378000AEFB58 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				48022830211B219800AEFB58 /* Operand.swift */,
 				4802283A211B276900AEFB58 /* Variable.swift */,
 				4802282A211B215900AEFB58 /* Equation.swift */,
+				4802283F211B378000AEFB58 /* Solution.swift */,
 				48022832211B220B00AEFB58 /* ReversePolishNotation.swift */,
 				48022834211B222B00AEFB58 /* Term.swift */,
 				48022838211B22BE00AEFB58 /* Custom_Operators.swift */,
@@ -263,6 +266,7 @@
 				48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */,
 				4802282D211B217700AEFB58 /* Operator.swift in Sources */,
 				48022831211B219800AEFB58 /* Operand.swift in Sources */,
+				48022842211B37A200AEFB58 /* Solution.swift in Sources */,
 				48022837211B22A900AEFB58 /* Token_Shorthand.swift in Sources */,
 				48022833211B220B00AEFB58 /* ReversePolishNotation.swift in Sources */,
 				48022835211B222B00AEFB58 /* Term.swift in Sources */,

@@ -19,22 +19,13 @@ public struct Equation {
 }
 
 public extension Equation {
-    func evaluate() -> Int? {
-        guard isSolvable() else { return nil }
-        let tokens = reversePolishNotationFrom(infix: infix)
-        return ReversePolishNotation.evaluate(tokens)
+    func solve() -> Solution {
+        return ReversePolishNotation.solveEquation(self)
     }
 
-    func isSolvable() -> Bool {
-        return !containsUnsetVariables()
-    }
-
-    func containsUnsetVariables() -> Bool {
-        return !infix.filter { $0.isUnsetVariable }.isEmpty
-    }
-
-    func differentiate() -> Equation {
-        fatalError("todo")
+    func numericSolution() -> Int? {
+        guard case .numeric(let solution) = solve() else { return nil }
+        return solution
     }
 }
 

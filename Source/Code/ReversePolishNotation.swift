@@ -8,28 +8,61 @@
 
 import Foundation
 
+private enum OperandOrOperator {
+    case operand(Int)
+    case `operator`(Operator.Function)
+}
+
+private extension OperandOrOperator {
+    init?(token: Token) {
+        if let `operator` = token.asOperator() {
+            self = .operator(`operator`.function)
+        } else if let operand = token.asOperand(), let value = operand.value {
+            self = .operand(value)
+        } else {
+            return nil
+        }
+    }
+}
+
+private extension Array {
+    mutating func removeLastTwo() -> (lhs: Element, rhs: Element) {
+        let rhs = removeLast()
+        let lhs = removeLast()
+        return (lhs: lhs, rhs: rhs)
+    }
+}
 
 /// Reverse Polish Notation
 /// https://en.wikipedia.org/wiki/Reverse_Polish_notation
 public class ReversePolishNotation {
 
-    public static func evaluate(_ tokens: [Token]) -> Int {
+    public static func solveEquation(_ equation: Equation) -> Solution {
+        let reversePolish = reversePolishNotationFrom(infix: equation.infix)
+
+        if reversePolish.contains(where: { $0.isUnsetVariable }) {
+            // TODO this
+            return .algebraic(equation)
+        } else {
+            return .numeric(
+                solveNumeric(reversePolish.compactMap { OperandOrOperator(token: $0) })
+            )
+        }
+    }
+
+    private static func solveNumeric(_ tokens: [OperandOrOperator]) -> Int {
         var stack = [Int]()
 
         for token in tokens {
-            if let value = token.value {
-                stack.append(value)
-            } else if let `operator` = token.asOperator() {
-                let function = `operator`.function
-                let rhs = stack.removeLast()
-                let lhs = stack.removeLast()
-                let value = function(lhs, rhs)
-                stack.append(value)
-            } else { fatalError("unexpected") }
+            switch token {
+            case .operand(let operand): stack.append(operand)
+            case .operator(let function):
+                let operands = stack.removeLastTwo()
+                stack.append(function(operands.lhs, operands.rhs))
+            }
         }
 
-        let value = stack.first ?? 0
-        return value
+        return stack.first ?? 0
     }
 
 }

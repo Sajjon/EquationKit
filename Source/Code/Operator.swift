@@ -46,7 +46,8 @@ public enum Operator: String {
         }
     }
 
-    var function: (Int, Int) -> Int {
+    public typealias Function = (Int, Int) -> Int
+    var function: Function {
         switch self {
         case .add: return { $0 + $1 }
         case .sub: return { $0 - $1 }
