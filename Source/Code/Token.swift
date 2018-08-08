@@ -61,6 +61,10 @@ public extension Token {
         return asOperand()?.asVariable()
     }
 
+    var value: Int? {
+        return asOperand()?.value
+    }
+
     var isParenthesis: Bool {
         switch self {
         case .parenthesis: return true

@@ -14,47 +14,24 @@ import Foundation
 public class ReversePolishNotation {
 
     public static func evaluate(_ tokens: [Token]) -> Int {
-        return evaluate(tokens: tokens.map { $0.description })
-    }
-}
-
-// MARK: - Private
-private extension ReversePolishNotation {
-    static func evaluate(tokens: [String]) -> Int {
         var stack = [Int]()
 
         for token in tokens {
-            if let num = Int(token) {
-                stack.append(num)
-            } else {
-                let `operator` = token
-                let post = stack.removeLast()
-                let prev = stack.removeLast()
-                stack.append(operate(prev, post, `operator`))
-            }
+            if let value = token.value {
+                stack.append(value)
+            } else if let `operator` = token.asOperator() {
+                let function = `operator`.function
+                let rhs = stack.removeLast()
+                let lhs = stack.removeLast()
+                let value = function(lhs, rhs)
+                stack.append(value)
+            } else { fatalError("unexpected") }
         }
 
         let value = stack.first ?? 0
         return value
     }
 
-    static func operate(_ prev: Int, _ post: Int, _ token: String) -> Int {
-        switch token {
-        case Operator.add.rawValue:
-            return prev + post
-        case Operator.sub.rawValue:
-            return prev - post
-        case Operator.mul.rawValue:
-            return prev * post
-        case Operator.div.rawValue:
-            return prev / post
-        case Operator.mod.rawValue:
-            return prev % post
-        case Operator.pow.rawValue:
-            return prev ** post // right associative?
-        default: fatalError("unsupported operation: `\(token)`")
-        }
-    }
 }
 
 /// https://en.wikipedia.org/wiki/Shunting-yard_algorithm

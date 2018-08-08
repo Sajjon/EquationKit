@@ -45,6 +45,17 @@ public enum Operator: String {
         case .pow: return .power
         }
     }
+
+    var function: (Int, Int) -> Int {
+        switch self {
+        case .add: return { $0 + $1 }
+        case .sub: return { $0 - $1 }
+        case .mul: return { $0 * $1 }
+        case .div: return { $0 / $1 }
+        case .mod: return { $0 % $1 }
+        case .pow: return { $0 ** $1 }
+        }
+    }
 }
 
 // MARK: - ExpressibleByStringLiteral
