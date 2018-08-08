@@ -19,6 +19,8 @@
 		48022835211B222B00AEFB58 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022834211B222B00AEFB58 /* Term.swift */; };
 		48022837211B22A900AEFB58 /* Token_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022836211B22A900AEFB58 /* Token_Shorthand.swift */; };
 		48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022838211B22BE00AEFB58 /* Custom_Operators.swift */; };
+		4802283B211B276900AEFB58 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283A211B276900AEFB58 /* Variable.swift */; };
+		4802283D211B2A4400AEFB58 /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283C211B2A4400AEFB58 /* TestBase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		48022834211B222B00AEFB58 /* Term.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		48022836211B22A900AEFB58 /* Token_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token_Shorthand.swift; sourceTree = "<group>"; };
 		48022838211B22BE00AEFB58 /* Custom_Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom_Operators.swift; sourceTree = "<group>"; };
+		4802283A211B276900AEFB58 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
+		4802283C211B2A4400AEFB58 /* TestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				4802281D211B208C00AEFB58 /* EquationKitTests.swift */,
+				4802283C211B2A4400AEFB58 /* TestBase.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -137,6 +142,7 @@
 				4802282C211B217700AEFB58 /* Operator.swift */,
 				4802282E211B218500AEFB58 /* Parenthesis.swift */,
 				48022830211B219800AEFB58 /* Operand.swift */,
+				4802283A211B276900AEFB58 /* Variable.swift */,
 				4802282A211B215900AEFB58 /* Equation.swift */,
 				48022832211B220B00AEFB58 /* ReversePolishNotation.swift */,
 				48022834211B222B00AEFB58 /* Term.swift */,
@@ -262,6 +268,7 @@
 				48022835211B222B00AEFB58 /* Term.swift in Sources */,
 				4802282F211B218500AEFB58 /* Parenthesis.swift in Sources */,
 				4802282B211B215900AEFB58 /* Equation.swift in Sources */,
+				4802283B211B276900AEFB58 /* Variable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4802283D211B2A4400AEFB58 /* TestBase.swift in Sources */,
 				48022820211B208C00AEFB58 /* EquationKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

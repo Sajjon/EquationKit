@@ -9,24 +9,7 @@
 import XCTest
 @testable import EquationKit
 
-class BaseTest: XCTestCase {
-    func testEquation(expect expected: Int, infix: Token...) {
-        guard let solution = Equation(infix: infix).evaluate() else { XCTFail("cant solve"); return }
-        XCTAssertEqual(expected, solution)
-    }
-
-    func testEquation(expect expected: Int, infix: Term...) {
-        guard let solution = Equation(infix: infix).evaluate() else { XCTFail("cant solve"); return }
-        XCTAssertEqual(expected, solution)
-    }
-
-    func testEquation(expect expected: Int, infix: [Term]) {
-        guard let solution = Equation(infix: infix).evaluate() else { XCTFail("cant solve"); return }
-        XCTAssertEqual(expected, solution)
-    }
-}
-
-class EquationKitTests: BaseTest {
+class EquationKitTests: TestBase {
 
     override func setUp() {
         continueAfterFailure = false

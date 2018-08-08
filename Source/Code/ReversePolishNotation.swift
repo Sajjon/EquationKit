@@ -11,13 +11,16 @@ import Foundation
 
 /// Reverse Polish Notation
 /// https://en.wikipedia.org/wiki/Reverse_Polish_notation
-class ReversePolishNotation {
+public class ReversePolishNotation {
 
-    static func evaluate(_ tokens: [Token]) -> Int {
+    public static func evaluate(_ tokens: [Token]) -> Int {
         return evaluate(tokens: tokens.map { $0.description })
     }
+}
 
-    private static func evaluate(tokens: [String]) -> Int {
+// MARK: - Private
+private extension ReversePolishNotation {
+    static func evaluate(tokens: [String]) -> Int {
         var stack = [Int]()
 
         for token in tokens {
@@ -35,7 +38,7 @@ class ReversePolishNotation {
         return value
     }
 
-    private static func operate(_ prev: Int, _ post: Int, _ token: String) -> Int {
+    static func operate(_ prev: Int, _ post: Int, _ token: String) -> Int {
         switch token {
         case Operator.add.rawValue:
             return prev + post
@@ -55,7 +58,7 @@ class ReversePolishNotation {
 }
 
 /// https://en.wikipedia.org/wiki/Shunting-yard_algorithm
-func reversePolishNotationFrom(infix: [Token]) -> [Token] {
+public func reversePolishNotationFrom(infix: [Token]) -> [Token] {
     var tokenStack = [Token]()
     var reversePolishNotation = [Token]()
 

@@ -8,26 +8,31 @@
 
 import Foundation
 
-enum Token {
+public enum Token {
     case `operator`(Operator)
     case operand(Operand)
     case parenthesis(Parenthesis)
 }
 
-extension Token: ExpressibleByStringLiteral {
+// MARK: - ExpressibleByStringLiteral
+extension Token: ExpressibleByStringLiteral {}
+public extension Token {
     init(stringLiteral value: String) {
         guard let `operator` = Operator(rawValue: value) else { fatalError("cannot create operand") }
         self = .operator(`operator`)
     }
 }
 
-extension Token: ExpressibleByIntegerLiteral {
+
+extension Token: ExpressibleByIntegerLiteral {}
+public extension Token {
     init(integerLiteral value: Int) {
         self = .operand(.constant(value))
     }
 }
 
-extension Token: CustomStringConvertible {
+extension Token: CustomStringConvertible {}
+public extension Token {
     var description: String {
         switch self {
         case .operand(let operand): return operand.description
@@ -37,7 +42,7 @@ extension Token: CustomStringConvertible {
     }
 }
 
-extension Token {
+public extension Token {
     func asOperand() -> Operand? {
         switch self {
         case .operand(let operand): return operand
@@ -52,7 +57,7 @@ extension Token {
         }
     }
 
-    var variable: Operand.Variable? {
+    var variable: Variable? {
         return asOperand()?.asVariable()
     }
 
@@ -90,7 +95,7 @@ extension Token {
     }
 }
 
-extension Token {
+public extension Token {
     static var add: Token {
         return .operator(.add)
     }

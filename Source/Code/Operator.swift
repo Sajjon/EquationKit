@@ -8,29 +8,7 @@
 
 import Foundation
 
-enum Operator: String, ExpressibleByStringLiteral {
-
-    enum Associativity {
-        case none
-        case left
-        case right
-    }
-
-    enum Precedence: Int, Comparable {
-        // Ascending order
-        case addition = 0
-        case multiplication = 5
-        case power = 10
-
-        static func < (lhs: Precedence, rhs: Precedence) -> Bool {
-            return lhs.rawValue < rhs.rawValue
-        }
-
-        static func == (lhs: Precedence, rhs: Precedence) -> Bool {
-            return lhs.rawValue == rhs.rawValue
-        }
-    }
-
+public enum Operator: String {
     case add = "+"
     case sub = "-"
     case mul = "*"
@@ -38,12 +16,16 @@ enum Operator: String, ExpressibleByStringLiteral {
     case mod = "%"
     case pow = "^"
 
-    init(stringLiteral value: String) {
-        if let `operator` = Operator(rawValue: value) {
-            self = `operator`
-        } else {
-            fatalError("oh oh")
-        }
+    public enum Associativity {
+        case none
+        case left
+        case right
+    }
+
+    public enum Precedence: Int {
+        case addition = 0
+        case multiplication = 5
+        case power = 10
     }
 
     var associativity: Associativity {
@@ -62,5 +44,28 @@ enum Operator: String, ExpressibleByStringLiteral {
         case .mod: return .multiplication
         case .pow: return .power
         }
+    }
+}
+
+// MARK: - ExpressibleByStringLiteral
+extension Operator: ExpressibleByStringLiteral {}
+public extension Operator {
+    init(stringLiteral value: String) {
+        if let `operator` = Operator(rawValue: value) {
+            self = `operator`
+        } else {
+            fatalError("oh oh")
+        }
+    }
+}
+
+extension Operator.Precedence: Comparable {}
+public extension Operator.Precedence {
+    static func < (lhs: Operator.Precedence, rhs: Operator.Precedence) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+
+    static func == (lhs: Operator.Precedence, rhs: Operator.Precedence) -> Bool {
+        return lhs.rawValue == rhs.rawValue
     }
 }

@@ -8,14 +8,17 @@
 
 import Foundation
 
-struct Equation {
-    private var infix: [Token]
-    init(infix: [Token]) {
+public struct Equation {
+
+    public var infix: [Token]
+
+    public init(infix: [Token]) {
         self.infix = infix
     }
+
 }
 
-extension Equation {
+public extension Equation {
     func evaluate() -> Int? {
         guard isSolvable() else { return nil }
         let tokens = reversePolishNotationFrom(infix: infix)
@@ -36,21 +39,23 @@ extension Equation {
 }
 
 // MARK: - Convenience Initializers
-extension Equation {
+public extension Equation {
     init(infix terms: [Term]) {
         self.infix = terms.flatMap { $0.toTokens() }
     }
 }
 
 // MARK: - ExpressibleByArrayLiteral
-extension Equation: ExpressibleByArrayLiteral {
+extension Equation: ExpressibleByArrayLiteral {}
+public extension Equation {
     init(arrayLiteral elements: Token...) {
         self.init(infix: elements)
     }
 }
 
 // MARK: - CustomStringConvertible
-extension Equation: CustomStringConvertible {
+extension Equation: CustomStringConvertible {}
+public extension Equation {
     var description: String {
         return infix.map { $0.description }.joined(separator: " ")
     }

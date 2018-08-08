@@ -8,10 +8,12 @@
 
 import Foundation
 
-enum Parenthesis: String {
+public enum Parenthesis: String {
     case left = "("
     case right = ")"
+}
 
+public extension Parenthesis {
     var isLeft: Bool {
         return self == .left
     }
