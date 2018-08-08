@@ -32,6 +32,7 @@ class EquationKitTests: BaseTest {
         continueAfterFailure = false
     }
 
+    /// https://en.wikipedia.org/wiki/Reverse_Polish_notation#Example
     func testInfixToPostfixNotation() {
         testEquation(expect: 5, infix: ﹙,﹙,15, ୵,﹙,7,－,﹙,1, ＋, 1,﹚,﹚,﹚, ·, 3,﹚,－,﹙,2, ＋,﹙,1, ＋, 1,﹚,﹚)
     }
