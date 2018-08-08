@@ -24,10 +24,19 @@ class EquationKitTests: TestBase {
         testEquation(expect: 8, infix: 2,³)
         testEquation(expect: 16, infix: 2,⁴)
         testEquation(expect: 512, infix: 2,⁹)
+        testEquation(expect: 1024, infix: 2,＾,10)
     }
 
     func testModulus() {
         testEquation(expect: 0, infix: 60, ％, 60)
         testEquation(expect: 1, infix: 61, ％, 60)
+
+        testEquation(expect: 4, infix: 2, ＾, 10, ％, 5)
+    }
+
+    func testAssociativity() {
+        testEquation(expect: 17, infix: 2, ＋, 3, ·, 5)
+        testEquation(expect: 24, infix: 2, ＋, 3, ·, 5, ＋, 7, ·, 11, ％, 10)
+        testEquation(expect: 19, infix: 2, ＋, 3, ·, 5, ＋, ﹙, 7, ·, 11, ﹚, ％, 75)
     }
 }

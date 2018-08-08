@@ -23,6 +23,9 @@ public let ·: Token = .mul
 /// U+FF05
 public let ％: Token = .mod
 
+/// U+FF3E
+public let ＾: Token = .pow
+
 /// U+FE59 "Small Left Par"
 public let ﹙: Token = .parenthesis(.left)
 
