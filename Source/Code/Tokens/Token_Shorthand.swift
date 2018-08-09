@@ -46,9 +46,15 @@ public extension Term {
 
 /// U+FE59 "Small Left Par"
 public let ﹙: InfixToken = .parenthesis(.left)
+public extension Term {
+    static var ﹙: Term { return .token(EquationKit.﹙) }
+}
 
 /// U+FE5A
 public let ﹚: InfixToken = .parenthesis(.right)
+public extension Term {
+    static var ﹚: Term { return .token(EquationKit.﹚) }
+}
 
 public let ²: Term = [.pow, 2]
 public let ³: Term = [.pow, 3]
@@ -61,7 +67,58 @@ public let ⁹: Term = [.pow, 9]
 
 func variable(_ name: String, value: Int? = nil) -> InfixToken {
     let variable = Variable(name, value: value)
-    return InfixToken.operand(.variable(variable))
+    return .operand(.variable(variable))
 }
 
+//extension Term {
+//    static func variable(_ name: String, value: Int? = nil) -> Term {
+//        return .token(EquationKit.variable(name, value: value))
+//    }
+//}
+
 public let 𝑦: InfixToken = variable("𝑦")
+extension Term {
+    static var 𝑦: Term = .token(EquationKit.𝑦)
+}
+
+public let 𝑥: InfixToken = variable("𝑥")
+extension Term {
+    static var 𝑥: Term = .token(EquationKit.𝑥)
+}
+
+public let 𝑎: InfixToken = variable("𝑎")
+extension Term {
+    static var 𝑎: Term = .token(EquationKit.𝑎)
+}
+
+public let 𝑏: InfixToken = variable("𝑏")
+extension Term {
+    static var 𝑏: Term = .token(EquationKit.𝑏)
+}
+
+// MARK: Binary Operators
+public extension Term {
+    static var add: Term {
+        return .token(.add)
+    }
+
+    static var sub: Term {
+        return .token(.sub)
+    }
+
+    static var mul: Term {
+        return .token(.mul)
+    }
+
+    static var div: Term {
+        return .token(.div)
+    }
+
+    static var mod: Term {
+        return .token(.mod)
+    }
+
+    static var pow: Term {
+        return .token(.pow)
+    }
+}

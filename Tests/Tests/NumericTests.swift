@@ -1,5 +1,5 @@
 //
-//  EquationKitTests.swift
+//  NumericTests.swift
 //  EquationKitTests
 //
 //  Created by Alexander Cyon on 2018-08-08.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import EquationKit
 
-class EquationKitTests: TestBase {
+class NumericTests: TestBase {
 
     override func setUp() {
         continueAfterFailure = false
@@ -50,9 +50,16 @@ class EquationKitTests: TestBase {
         testEquation(expect: 19, infix: 2, ＋, 3, ·, 5, ＋, ﹙, 7, ·, 11, ﹚, ％, 75)
     }
 
-    func testConversionToReversePolishAndBackToInfix() {
+    func testConversionToReversePolishAndBackToInfixSimple() {
         let eq: Equation = [2, ＋, 3, ·, 5]
         let eq2 = Equation(infix: eq.toReversePolishNotation().toInfixNotation())
+        XCTAssertEqual(eq, eq2)
+    }
+
+    func testConversionToReversePolishAndBackToInfixAdvanced() {
+        let eq: Equation = [2, ＋, 3, ·, 5, ＋, ﹙, 7, ·, 11, ﹚, ％, 75]
+        let eq2 = Equation(infix: eq.toReversePolishNotation().toInfixNotation())
+        print(eq2)
         XCTAssertEqual(eq, eq2)
     }
 

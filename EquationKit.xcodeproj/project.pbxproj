@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		48022816211B203500AEFB58 /* EquationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48022802211B1FFC00AEFB58 /* EquationKit.framework */; };
-		48022820211B208C00AEFB58 /* EquationKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802281D211B208C00AEFB58 /* EquationKitTests.swift */; };
+		48022820211B208C00AEFB58 /* NumericTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802281D211B208C00AEFB58 /* NumericTests.swift */; };
 		48022825211B20A400AEFB58 /* EquationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48022824211B209C00AEFB58 /* EquationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48022829211B214B00AEFB58 /* InfixToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022827211B214A00AEFB58 /* InfixToken.swift */; };
 		4802282B211B215900AEFB58 /* Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282A211B215900AEFB58 /* Equation.swift */; };
@@ -37,6 +37,7 @@
 		48022860211C6CE600AEFB58 /* Operator_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802285F211C6CE600AEFB58 /* Operator_Shorthand.swift */; };
 		48022866211C705900AEFB58 /* InfixToken_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */; };
 		48022868211C85D100AEFB58 /* Equation_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022867211C85D100AEFB58 /* Equation_Shorthand.swift */; };
+		4802286A211C8AE400AEFB58 /* AlgebraicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022869211C8AE400AEFB58 /* AlgebraicTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +53,7 @@
 /* Begin PBXFileReference section */
 		48022802211B1FFC00AEFB58 /* EquationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EquationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48022811211B203500AEFB58 /* EquationKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EquationKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4802281D211B208C00AEFB58 /* EquationKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquationKitTests.swift; sourceTree = "<group>"; };
+		4802281D211B208C00AEFB58 /* NumericTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumericTests.swift; sourceTree = "<group>"; };
 		4802281F211B208C00AEFB58 /* EquationKitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EquationKitTests-Info.plist"; sourceTree = "<group>"; };
 		48022823211B209C00AEFB58 /* EquationKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EquationKit-Info.plist"; sourceTree = "<group>"; };
 		48022824211B209C00AEFB58 /* EquationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquationKit.h; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 		4802285F211C6CE600AEFB58 /* Operator_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Shorthand.swift; sourceTree = "<group>"; };
 		48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixToken_Shorthand.swift; sourceTree = "<group>"; };
 		48022867211C85D100AEFB58 /* Equation_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation_Shorthand.swift; sourceTree = "<group>"; };
+		48022869211C8AE400AEFB58 /* AlgebraicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgebraicTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,7 +145,8 @@
 		4802281C211B208C00AEFB58 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4802281D211B208C00AEFB58 /* EquationKitTests.swift */,
+				4802281D211B208C00AEFB58 /* NumericTests.swift */,
+				48022869211C8AE400AEFB58 /* AlgebraicTests.swift */,
 				4802283C211B2A4400AEFB58 /* TestBase.swift */,
 			);
 			path = Tests;
@@ -380,8 +383,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4802286A211C8AE400AEFB58 /* AlgebraicTests.swift in Sources */,
 				4802283D211B2A4400AEFB58 /* TestBase.swift in Sources */,
-				48022820211B208C00AEFB58 /* EquationKitTests.swift in Sources */,
+				48022820211B208C00AEFB58 /* NumericTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

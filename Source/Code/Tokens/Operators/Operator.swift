@@ -66,6 +66,41 @@ public extension Operator {
 //    }
 }
 
+public extension Operator {
+    var asUnary: UnaryOperator? {
+        switch self {
+        case .unary(let unary): return unary
+        default: return nil
+        }
+    }
+
+    var isUnary: Bool {
+        return asUnary != nil
+    }
+
+    var asBinary: BinaryOperator? {
+        switch self {
+        case .binary(let binary): return binary
+        default: return nil
+        }
+    }
+
+    var isBinary: Bool {
+        return asBinary != nil
+    }
+
+    var asTernary: TernaryOperator? {
+        switch self {
+        case .ternary(let ternary): return ternary
+        default: return nil
+        }
+    }
+
+    var isTernary: Bool {
+        return asTernary != nil
+    }
+}
+
 // MARK: - CustomStringConvertible
 public extension Operator {
     public var description: String {

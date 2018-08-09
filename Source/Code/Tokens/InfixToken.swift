@@ -17,8 +17,8 @@ public enum InfixToken {
 public extension InfixToken {
     init(_ reversePolishToken: ReversePolishToken) {
         switch reversePolishToken {
-        case .operand(let constant):
-            self = .operand(.constant(constant))
+        case .operand(let operand):
+            self = .operand(operand)
         case .operator(let `operator`):
             self = .operator(`operator`)
         }
@@ -66,7 +66,7 @@ public extension InfixToken {
         default: return nil
         }
     }
-
+    
     func asOperator() -> Operator? {
         switch self {
         case .operator(let `operator`): return `operator`
@@ -92,6 +92,13 @@ public extension InfixToken {
     var isLeftParenthesis: Bool {
         switch self {
         case .parenthesis(let parenthesis): return parenthesis.isLeft
+        default: return false
+        }
+    }
+
+    var isRightParenthesis: Bool {
+        switch self {
+        case .parenthesis(let parenthesis): return parenthesis.isRight
         default: return false
         }
     }
