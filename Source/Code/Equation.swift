@@ -9,37 +9,49 @@
 import Foundation
 
 public struct Equation {
+    public let infix: InfixNotation
 
-    public var infix: [Token]
-
-    public init(infix: [Token]) {
+    public init(infix: InfixNotation) {
         self.infix = infix
     }
-
 }
 
+// MARK: - EquationRepresentation
+extension Equation: EquationRepresentation {}
 public extension Equation {
-    func solve() -> Solution {
-        return ReversePolishNotation.solveEquation(self)
+    var tokens: [InfixToken] {
+        return infix.tokens
     }
 
-    func numericSolution() -> Int? {
-        guard case .numeric(let solution) = solve() else { return nil }
-        return solution
+    func solveNumeric() -> Int? {
+        return infix.solveNumeric()
+    }
+
+    func toInfixNotation() -> InfixNotation {
+        return infix
+    }
+
+    func toReversePolishNotation() -> ReversePolishNotation {
+        return infix.toReversePolishNotation()
     }
 }
 
 // MARK: - Convenience Initializers
 public extension Equation {
+
+    init(infix tokens: [InfixToken]) {
+        self.init(infix: InfixNotation(tokens))
+    }
+
     init(infix terms: [Term]) {
-        self.infix = terms.flatMap { $0.toTokens() }
+        self.init(infix: terms.flatMap { $0.toTokens() })
     }
 }
 
 // MARK: - ExpressibleByArrayLiteral
 extension Equation: ExpressibleByArrayLiteral {}
 public extension Equation {
-    init(arrayLiteral elements: Token...) {
+    init(arrayLiteral elements: InfixToken...) {
         self.init(infix: elements)
     }
 }
@@ -48,6 +60,6 @@ public extension Equation {
 extension Equation: CustomStringConvertible {}
 public extension Equation {
     var description: String {
-        return infix.map { $0.description }.joined(separator: " ")
+        return infix.tokens.map { $0.description }.joined(separator: " ")
     }
 }

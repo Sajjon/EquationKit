@@ -1,5 +1,5 @@
 //
-//  Token_Shorthand.swift
+//  InfixToken_Shorthand.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-08.
@@ -9,28 +9,28 @@
 import Foundation
 
 /// U+FF0B
-public let ＋: Token = .add
+public let ＋: InfixToken = .add
 
 /// U+FF0D
-public let －: Token = .sub
-
-/// U+0B75
-public let ୵: Token = .div
+public let －: InfixToken = .sub
 
 /// U+00B7
-public let ·: Token = .mul
+public let ·: InfixToken = .mul
+
+/// U+0B75
+public let ୵: InfixToken = .div
 
 /// U+FF05
-public let ％: Token = .mod
+public let ％: InfixToken = .mod
 
 /// U+FF3E
-public let ＾: Token = .pow
+public let ＾: InfixToken = .pow
 
 /// U+FE59 "Small Left Par"
-public let ﹙: Token = .parenthesis(.left)
+public let ﹙: InfixToken = .parenthesis(.left)
 
 /// U+FE5A
-public let ﹚: Token = .parenthesis(.right)
+public let ﹚: InfixToken = .parenthesis(.right)
 
 public let ²: Term = [.pow, 2]
 public let ³: Term = [.pow, 3]
@@ -41,9 +41,9 @@ public let ⁷: Term = [.pow, 7]
 public let ⁸: Term = [.pow, 8]
 public let ⁹: Term = [.pow, 9]
 
-func variable(_ name: String, value: Int? = nil) -> Token {
+func variable(_ name: String, value: Int? = nil) -> InfixToken {
     let variable = Variable(name, value: value)
-    return Token.operand(.variable(variable))
+    return InfixToken.operand(.variable(variable))
 }
 
-public let 𝑦: Token = variable("𝑦")
+public let 𝑦: InfixToken = variable("𝑦")

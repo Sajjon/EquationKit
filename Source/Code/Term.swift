@@ -9,12 +9,12 @@
 import Foundation
 
 public enum Term {
-    case token(Token)
-    case tokens([Token])
+    case token(InfixToken)
+    case tokens([InfixToken])
 }
 
 public extension Term {
-    func toTokens() -> [Token] {
+    func toTokens() -> [InfixToken] {
         switch self {
         case .token(let token): return [token]
         case .tokens(let tokens): return tokens
@@ -26,14 +26,14 @@ public extension Term {
 extension Term: ExpressibleByIntegerLiteral {}
 public extension Term {
     init(integerLiteral value: Int) {
-        self = .token(Token.operand(.constant(value)))
+        self = .token(InfixToken.operand(.constant(value)))
     }
 }
 
 // MARK: - ExpressibleByArrayLiteral
 extension Term: ExpressibleByArrayLiteral {}
 public extension Term {
-    init(arrayLiteral elements: Token...) {
+    init(arrayLiteral elements: InfixToken...) {
         self = .tokens(elements)
     }
 }

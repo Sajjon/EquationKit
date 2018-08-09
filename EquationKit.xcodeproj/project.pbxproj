@@ -10,18 +10,23 @@
 		48022816211B203500AEFB58 /* EquationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48022802211B1FFC00AEFB58 /* EquationKit.framework */; };
 		48022820211B208C00AEFB58 /* EquationKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802281D211B208C00AEFB58 /* EquationKitTests.swift */; };
 		48022825211B20A400AEFB58 /* EquationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48022824211B209C00AEFB58 /* EquationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		48022829211B214B00AEFB58 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022827211B214A00AEFB58 /* Token.swift */; };
+		48022829211B214B00AEFB58 /* InfixToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022827211B214A00AEFB58 /* InfixToken.swift */; };
 		4802282B211B215900AEFB58 /* Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282A211B215900AEFB58 /* Equation.swift */; };
 		4802282D211B217700AEFB58 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282C211B217700AEFB58 /* Operator.swift */; };
 		4802282F211B218500AEFB58 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282E211B218500AEFB58 /* Parenthesis.swift */; };
 		48022831211B219800AEFB58 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022830211B219800AEFB58 /* Operand.swift */; };
-		48022833211B220B00AEFB58 /* ReversePolishNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022832211B220B00AEFB58 /* ReversePolishNotation.swift */; };
 		48022835211B222B00AEFB58 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022834211B222B00AEFB58 /* Term.swift */; };
 		48022837211B22A900AEFB58 /* Token_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022836211B22A900AEFB58 /* Token_Shorthand.swift */; };
 		48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022838211B22BE00AEFB58 /* Custom_Operators.swift */; };
 		4802283B211B276900AEFB58 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283A211B276900AEFB58 /* Variable.swift */; };
 		4802283D211B2A4400AEFB58 /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283C211B2A4400AEFB58 /* TestBase.swift */; };
 		48022842211B37A200AEFB58 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802283F211B378000AEFB58 /* Solution.swift */; };
+		48022843211C3F2200AEFB58 /* ReversePolishNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022832211B220B00AEFB58 /* ReversePolishNotation.swift */; };
+		48022845211C411F00AEFB58 /* ReversePolishToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022844211C411F00AEFB58 /* ReversePolishToken.swift */; };
+		48022847211C416300AEFB58 /* Extension_Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022846211C416300AEFB58 /* Extension_Array.swift */; };
+		48022849211C418F00AEFB58 /* InfixNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022848211C418F00AEFB58 /* InfixNotation.swift */; };
+		4802284F211C67D300AEFB58 /* TokenRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284E211C67D300AEFB58 /* TokenRepresentation.swift */; };
+		48022851211C67DF00AEFB58 /* EquationRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022850211C67DF00AEFB58 /* EquationRepresentation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +46,7 @@
 		4802281F211B208C00AEFB58 /* EquationKitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EquationKitTests-Info.plist"; sourceTree = "<group>"; };
 		48022823211B209C00AEFB58 /* EquationKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EquationKit-Info.plist"; sourceTree = "<group>"; };
 		48022824211B209C00AEFB58 /* EquationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquationKit.h; sourceTree = "<group>"; };
-		48022827211B214A00AEFB58 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		48022827211B214A00AEFB58 /* InfixToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixToken.swift; sourceTree = "<group>"; };
 		4802282A211B215900AEFB58 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
 		4802282C211B217700AEFB58 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4802282E211B218500AEFB58 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
@@ -53,6 +58,11 @@
 		4802283A211B276900AEFB58 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		4802283C211B2A4400AEFB58 /* TestBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
 		4802283F211B378000AEFB58 /* Solution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
+		48022844211C411F00AEFB58 /* ReversePolishToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversePolishToken.swift; sourceTree = "<group>"; };
+		48022846211C416300AEFB58 /* Extension_Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Array.swift; sourceTree = "<group>"; };
+		48022848211C418F00AEFB58 /* InfixNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixNotation.swift; sourceTree = "<group>"; };
+		4802284E211C67D300AEFB58 /* TokenRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepresentation.swift; sourceTree = "<group>"; };
+		48022850211C67DF00AEFB58 /* EquationRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationRepresentation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +149,12 @@
 		48022826211B213A00AEFB58 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				48022827211B214A00AEFB58 /* Token.swift */,
+				48022827211B214A00AEFB58 /* InfixToken.swift */,
+				48022848211C418F00AEFB58 /* InfixNotation.swift */,
+				48022850211C67DF00AEFB58 /* EquationRepresentation.swift */,
+				4802284E211C67D300AEFB58 /* TokenRepresentation.swift */,
+				48022846211C416300AEFB58 /* Extension_Array.swift */,
+				48022844211C411F00AEFB58 /* ReversePolishToken.swift */,
 				48022836211B22A900AEFB58 /* Token_Shorthand.swift */,
 				4802282C211B217700AEFB58 /* Operator.swift */,
 				4802282E211B218500AEFB58 /* Parenthesis.swift */,
@@ -262,17 +277,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48022829211B214B00AEFB58 /* Token.swift in Sources */,
+				48022851211C67DF00AEFB58 /* EquationRepresentation.swift in Sources */,
+				48022829211B214B00AEFB58 /* InfixToken.swift in Sources */,
 				48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */,
 				4802282D211B217700AEFB58 /* Operator.swift in Sources */,
 				48022831211B219800AEFB58 /* Operand.swift in Sources */,
+				4802284F211C67D300AEFB58 /* TokenRepresentation.swift in Sources */,
+				48022849211C418F00AEFB58 /* InfixNotation.swift in Sources */,
+				48022843211C3F2200AEFB58 /* ReversePolishNotation.swift in Sources */,
 				48022842211B37A200AEFB58 /* Solution.swift in Sources */,
 				48022837211B22A900AEFB58 /* Token_Shorthand.swift in Sources */,
-				48022833211B220B00AEFB58 /* ReversePolishNotation.swift in Sources */,
 				48022835211B222B00AEFB58 /* Term.swift in Sources */,
 				4802282F211B218500AEFB58 /* Parenthesis.swift in Sources */,
 				4802282B211B215900AEFB58 /* Equation.swift in Sources */,
+				48022847211C416300AEFB58 /* Extension_Array.swift in Sources */,
 				4802283B211B276900AEFB58 /* Variable.swift in Sources */,
+				48022845211C411F00AEFB58 /* ReversePolishToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

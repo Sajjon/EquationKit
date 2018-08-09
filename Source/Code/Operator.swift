@@ -8,13 +8,13 @@
 
 import Foundation
 
-public enum Operator: String {
-    case add = "+"
-    case sub = "-"
-    case mul = "*"
-    case div = "/"
-    case mod = "%"
-    case pow = "^"
+public enum Operator {
+    case add
+    case sub
+    case mul
+    case div
+    case mod
+    case pow
 
     public enum Associativity {
         case none
@@ -27,7 +27,9 @@ public enum Operator: String {
         case multiplication = 5
         case power = 10
     }
+}
 
+public extension Operator {
     var associativity: Associativity {
         switch self {
         case .pow: return .right
@@ -55,30 +57,45 @@ public enum Operator: String {
         }
     }
 
-    public typealias Function = (Int, Int) -> Int
+    public typealias Function = ([Int]) -> Int
     var function: Function {
         switch self {
-        case .add: return { $0 + $1 }
-        case .sub: return { $0 - $1 }
-        case .mul: return { $0 * $1 }
-        case .div: return { $0 / $1 }
-        case .mod: return { $0 % $1 }
-        case .pow: return { $0 ** $1 }
+        case .add: return { $0[0] + $0[1] }
+        case .sub: return { $0[0] - $0[1] }
+        case .mul: return { $0[0] * $0[1] }
+        case .div: return { $0[0] / $0[1] }
+        case .mod: return { $0[0] % $0[1] }
+        case .pow: return { $0[0] ** $0[1] }
         }
     }
 }
 
-// MARK: - ExpressibleByStringLiteral
-extension Operator: ExpressibleByStringLiteral {}
+// MARK: - CustomStringConvertible
+extension Operator: CustomStringConvertible {}
 public extension Operator {
-    init(stringLiteral value: String) {
-        if let `operator` = Operator(rawValue: value) {
-            self = `operator`
-        } else {
-            fatalError("oh oh")
+    var description: String {
+        switch self {
+        case .add: return "＋"
+        case .sub: return "－"
+        case .mul: return "·"
+        case .div: return "୵"
+        case .mod: return "％"
+        case .pow: return "＾"
         }
     }
 }
+
+//// MARK: - ExpressibleByStringLiteral
+//extension Operator: ExpressibleByStringLiteral {}
+//public extension Operator {
+//    init(stringLiteral value: String) {
+//        if let `operator` = Operator(rawValue: value) {
+//            self = `operator`
+//        } else {
+//            fatalError("oh oh")
+//        }
+//    }
+//}
 
 extension Operator.Precedence: Comparable {}
 public extension Operator.Precedence {

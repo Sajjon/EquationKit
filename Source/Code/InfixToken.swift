@@ -1,5 +1,5 @@
 //
-//  Token.swift
+//  InfixToken.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-08.
@@ -8,41 +8,67 @@
 
 import Foundation
 
-public enum Token {
+public enum InfixToken {
     case `operator`(Operator)
     case operand(Operand)
     case parenthesis(Parenthesis)
 }
 
-// MARK: - ExpressibleByStringLiteral
-extension Token: ExpressibleByStringLiteral {}
-public extension Token {
-    init(stringLiteral value: String) {
-        guard let `operator` = Operator(rawValue: value) else { fatalError("cannot create operand") }
-        self = .operator(`operator`)
+public extension InfixToken {
+    init(_ reversePolishToken: ReversePolishToken) {
+        switch reversePolishToken {
+        case .operand(let constant):
+            self = .operand(.constant(constant))
+        case .operator(let `operator`):
+            self = .operator(`operator`)
+        }
     }
 }
 
+// MARK: - TokenRepresentation
+extension InfixToken: TokenRepresentation {}
+public extension InfixToken {
 
-extension Token: ExpressibleByIntegerLiteral {}
-public extension Token {
+    var isUnsetVariable: Bool {
+        switch self {
+        case .operand(let operand): return operand.isUnsetVariable
+        default: return false
+        }
+    }
+
+}
+
+//// MARK: - ExpressibleByStringLiteral
+//extension InfixToken: ExpressibleByStringLiteral {}
+//public extension InfixToken {
+//    init(stringLiteral value: String) {
+//        guard let `operator` = Operator(rawValue: value) else { fatalError("cannot create operator") }
+//        self = .operator(`operator`)
+//    }
+//}
+
+// MARK: - ExpressibleByIntegerLiteral
+extension InfixToken: ExpressibleByIntegerLiteral {}
+public extension InfixToken {
     init(integerLiteral value: Int) {
         self = .operand(.constant(value))
     }
 }
 
-extension Token: CustomStringConvertible {}
-public extension Token {
+// MARK: - CustomStringConvertible
+extension InfixToken: CustomStringConvertible {}
+public extension InfixToken {
     var description: String {
         switch self {
         case .operand(let operand): return operand.description
-        case .operator(let `operator`): return `operator`.rawValue
-        case .parenthesis(let parenthesis): return parenthesis.rawValue
+        case .operator(let `operator`): return `operator`.description
+        case .parenthesis(let parenthesis): return parenthesis.description
         }
     }
 }
 
-public extension Token {
+// MARK: - Public
+public extension InfixToken {
     func asOperand() -> Operand? {
         switch self {
         case .operand(let operand): return operand
@@ -86,41 +112,34 @@ public extension Token {
         }
     }
 
-    var isUnsetVariable: Bool {
-        switch self {
-        case .operand(let operand): return operand.isUnsetVariable
-        default: return false
-        }
-    }
-
     var pow: Operator? {
         guard let `operator` = asOperator(), `operator` == .pow else { return nil }
         return `operator`
     }
 }
 
-public extension Token {
-    static var add: Token {
+public extension InfixToken {
+    static var add: InfixToken {
         return .operator(.add)
     }
 
-    static var sub: Token {
+    static var sub: InfixToken {
         return .operator(.sub)
     }
 
-    static var mul: Token {
+    static var mul: InfixToken {
         return .operator(.mul)
     }
 
-    static var div: Token {
+    static var div: InfixToken {
         return .operator(.div)
     }
 
-    static var mod: Token {
+    static var mod: InfixToken {
         return .operator(.mod)
     }
 
-    static var pow: Token {
+    static var pow: InfixToken {
         return .operator(.pow)
     }
 }

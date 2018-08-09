@@ -12,15 +12,15 @@ import XCTest
 class TestBase: XCTestCase {
 
     func testEquation(expect expected: Int, equation: Equation) {
-        guard let solution = equation.numericSolution() else { XCTFail("cant solve"); return }
+        guard let solution = equation.solveNumeric() else { XCTFail("cant solve"); return }
         XCTAssertEqual(expected, solution)
     }
 
-    func testEquation(expect expected: Int, infix: [Token]) {
+    func testEquation(expect expected: Int, infix: [InfixToken]) {
         testEquation(expect: expected, equation: Equation(infix: infix))
     }
 
-    func testEquation(expect expected: Int, infix: Token...) {
+    func testEquation(expect expected: Int, infix: InfixToken...) {
         testEquation(expect: expected, equation: Equation(infix: infix))
     }
 

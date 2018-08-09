@@ -8,9 +8,20 @@
 
 import Foundation
 
-public enum Parenthesis: String {
-    case left = "("
-    case right = ")"
+public enum Parenthesis {
+    case left
+    case right
+}
+
+// MARK: - CustomStringConvertible
+extension Parenthesis: CustomStringConvertible {}
+public extension Parenthesis {
+    var description: String {
+        switch self {
+        case .left: return "﹙"
+        case .right: return "﹚"
+        }
+    }
 }
 
 public extension Parenthesis {

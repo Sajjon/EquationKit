@@ -44,20 +44,7 @@ class EquationKitTests: TestBase {
 
     func testFoo() {
         let eq: Equation = [2, ＋, 3, ·, 5]
-        let rpn = reversePolishNotationFrom(infix: eq.infix)
-        let tmp = rpn.compactMap { OperandOrOperator(token: $0) }
-        let infix = ReversePolishNotation.toInfixFrom(rpn: tmp)
-        let eq2 = Equation(infix: infix)
-
-        print(eq2.description)
-
-        guard let a = eq.numericSolution(), let b = eq2.numericSolution() else {
-            XCTFail()
-            return
-        }
-
-        XCTAssertEqual(a, b)
-        XCTAssertEqual(17, a)
-        XCTAssertEqual(17, b)
+        let eq2 = Equation(infix: eq.toReversePolishNotation().toInfixNotation())
+        XCTAssertEqual(eq, eq2)
     }
 }
