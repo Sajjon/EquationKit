@@ -25,6 +25,8 @@
 		48022845211C411F00AEFB58 /* ReversePolishToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022844211C411F00AEFB58 /* ReversePolishToken.swift */; };
 		48022847211C416300AEFB58 /* Extension_Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022846211C416300AEFB58 /* Extension_Array.swift */; };
 		48022849211C418F00AEFB58 /* InfixNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022848211C418F00AEFB58 /* InfixNotation.swift */; };
+		4802284B211C64B200AEFB58 /* ModInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284A211C64B200AEFB58 /* ModInverse.swift */; };
+		4802284D211C673500AEFB58 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284C211C673400AEFB58 /* Operators.swift */; };
 		4802284F211C67D300AEFB58 /* TokenRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284E211C67D300AEFB58 /* TokenRepresentation.swift */; };
 		48022851211C67DF00AEFB58 /* EquationRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022850211C67DF00AEFB58 /* EquationRepresentation.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,8 @@
 		48022844211C411F00AEFB58 /* ReversePolishToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversePolishToken.swift; sourceTree = "<group>"; };
 		48022846211C416300AEFB58 /* Extension_Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Array.swift; sourceTree = "<group>"; };
 		48022848211C418F00AEFB58 /* InfixNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixNotation.swift; sourceTree = "<group>"; };
+		4802284A211C64B200AEFB58 /* ModInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInverse.swift; sourceTree = "<group>"; };
+		4802284C211C673400AEFB58 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		4802284E211C67D300AEFB58 /* TokenRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepresentation.swift; sourceTree = "<group>"; };
 		48022850211C67DF00AEFB58 /* EquationRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationRepresentation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +161,8 @@
 				48022844211C411F00AEFB58 /* ReversePolishToken.swift */,
 				48022836211B22A900AEFB58 /* Token_Shorthand.swift */,
 				4802282C211B217700AEFB58 /* Operator.swift */,
+				4802284C211C673400AEFB58 /* Operators.swift */,
+				4802284A211C64B200AEFB58 /* ModInverse.swift */,
 				4802282E211B218500AEFB58 /* Parenthesis.swift */,
 				48022830211B219800AEFB58 /* Operand.swift */,
 				4802283A211B276900AEFB58 /* Variable.swift */,
@@ -279,6 +285,7 @@
 			files = (
 				48022851211C67DF00AEFB58 /* EquationRepresentation.swift in Sources */,
 				48022829211B214B00AEFB58 /* InfixToken.swift in Sources */,
+				4802284B211C64B200AEFB58 /* ModInverse.swift in Sources */,
 				48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */,
 				4802282D211B217700AEFB58 /* Operator.swift in Sources */,
 				48022831211B219800AEFB58 /* Operand.swift in Sources */,
@@ -287,6 +294,7 @@
 				48022843211C3F2200AEFB58 /* ReversePolishNotation.swift in Sources */,
 				48022842211B37A200AEFB58 /* Solution.swift in Sources */,
 				48022837211B22A900AEFB58 /* Token_Shorthand.swift in Sources */,
+				4802284D211C673500AEFB58 /* Operators.swift in Sources */,
 				48022835211B222B00AEFB58 /* Term.swift in Sources */,
 				4802282F211B218500AEFB58 /* Parenthesis.swift in Sources */,
 				4802282B211B215900AEFB58 /* Equation.swift in Sources */,
