@@ -8,19 +8,30 @@
 
 import Foundation
 
-private enum OperandOrOperator {
+public enum OperandOrOperator {
     case operand(Int)
-    case `operator`(Operator.Function)
+    case `operator`(Operator)
 }
 
-private extension OperandOrOperator {
+extension OperandOrOperator {
     init?(token: Token) {
         if let `operator` = token.asOperator() {
-            self = .operator(`operator`.function)
+            self = .operator(`operator`)
         } else if let operand = token.asOperand(), let value = operand.value {
             self = .operand(value)
         } else {
             return nil
+        }
+    }
+}
+
+private extension Token {
+    init(_ operandOrOperator: OperandOrOperator) {
+        switch operandOrOperator {
+        case .operand(let constant):
+            self = .operand(.constant(constant))
+        case .operator(let `operator`):
+            self = .operator(`operator`)
         }
     }
 }
@@ -30,6 +41,21 @@ private extension Array {
         let rhs = removeLast()
         let lhs = removeLast()
         return (lhs: lhs, rhs: rhs)
+    }
+}
+
+enum InfixOrNumeric {
+    case infix([Token])
+    case numeric(Int)
+}
+
+extension RangeReplaceableCollection {
+    static func + (lhs: Element, rhs: Self) -> Self {
+        return [lhs] + rhs
+    }
+
+    static func + (lhs: Self, rhs: Element) -> Self {
+        return lhs + [rhs]
     }
 }
 
@@ -55,59 +81,82 @@ public class ReversePolishNotation {
 
         for token in tokens {
             switch token {
-            case .operand(let operand): stack.append(operand)
-            case .operator(let function):
+            case .operand(let operand):
+                stack.append(operand)
+            case .operator(let `operator`):
                 let operands = stack.removeLastTwo()
+                let function = `operator`.function
                 stack.append(function(operands.lhs, operands.rhs))
             }
         }
-
         return stack.first ?? 0
     }
 
-}
+    static func toInfixFrom(rpn tokens: [OperandOrOperator]) -> [Token] {
+        var terms = [Term]()
 
-/// https://en.wikipedia.org/wiki/Shunting-yard_algorithm
-public func reversePolishNotationFrom(infix: [Token]) -> [Token] {
-    var tokenStack = [Token]()
-    var reversePolishNotation = [Token]()
-
-    for token in infix {
-        switch token {
-        case .operand(_):
-            reversePolishNotation.append(token)
-
-        case .parenthesis(let parenthesis):
-            switch parenthesis {
-            case .left: tokenStack.append(token)
-            case .right:
-                while tokenStack.count > 0, case let top = tokenStack.removeLast(), !top.isLeftParenthesis {
-                    reversePolishNotation.append(top)
-                }
+        for token in tokens {
+            switch token {
+            case .operand(let operand):
+                let term: Term = .token(.operand(.constant(operand)))
+                terms.append(term)
+            case .operator(let `operator`):
+                guard terms.count >= `operator`.arity else { fatalError("too few operands") }
+                let rhs = terms.removeLast().toTokens()
+                let lhs = terms.removeLast().toTokens()
+                let op = Token(token)
+                terms.append(.tokens(
+                    ﹙ + lhs + op + rhs + ﹚
+                    ))
             }
-
-        case .operator(let `operator`):
-            for tempToken in tokenStack {
-                guard
-                    case let .operator(tempOperatorToken) = tempToken,
-                    (
-                        `operator`.associativity == .left && `operator`.precedence <= tempOperatorToken.precedence
-                            ||
-                            `operator`.associativity == .right && `operator`.precedence < tempOperatorToken.precedence
-                    )
-                    else { break }
-                reversePolishNotation.append(tokenStack.removeLast())
-            }
-            tokenStack.append(token)
         }
+
+        return terms.flatMap { $0.toTokens() }
     }
 
-    while tokenStack.count > 0, case let tmpToken = tokenStack.removeLast() {
-        guard !tmpToken.isParenthesis else { continue }
-        reversePolishNotation.append(tmpToken)
+
+    /// https://en.wikipedia.org/wiki/Shunting-yard_algorithm
+    public static func reversePolishNotationFrom(infix: [Token]) -> [Token] {
+        var tokenStack = [Token]()
+        var reversePolishNotation = [Token]()
+
+        for token in infix {
+            switch token {
+            case .operand:
+                reversePolishNotation.append(token)
+
+            case .parenthesis(let parenthesis):
+                switch parenthesis {
+                case .left: tokenStack.append(token)
+                case .right:
+                    while tokenStack.count > 0, case let top = tokenStack.removeLast(), !top.isLeftParenthesis {
+                        reversePolishNotation.append(top)
+                    }
+                }
+
+            case .operator(let `operator`):
+                for tempToken in tokenStack {
+                    guard
+                        case let .operator(tempOperatorToken) = tempToken,
+                        (
+                            `operator`.associativity == .left && `operator`.precedence <= tempOperatorToken.precedence
+                                ||
+                                `operator`.associativity == .right && `operator`.precedence < tempOperatorToken.precedence
+                        )
+                        else { break }
+                    reversePolishNotation.append(tokenStack.removeLast())
+                }
+                tokenStack.append(token)
+            }
+        }
+
+        while tokenStack.count > 0, case let tmpToken = tokenStack.removeLast() {
+            guard !tmpToken.isParenthesis else { continue }
+            reversePolishNotation.append(tmpToken)
+        }
+
+        reversePolishNotation = reversePolishNotation.filter { !$0.isParenthesis }
+
+        return reversePolishNotation
     }
-
-    reversePolishNotation = reversePolishNotation.filter { !$0.isParenthesis }
-
-    return reversePolishNotation
 }

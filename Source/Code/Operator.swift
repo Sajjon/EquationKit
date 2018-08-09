@@ -35,6 +35,15 @@ public enum Operator: String {
         }
     }
 
+    /// In logic, mathematics, and computer science, the `arity` of a function or operation is the number of arguments or operands that the function takes.
+    /// https://en.wikipedia.org/wiki/Arity
+    var arity: Int {
+        switch self {
+        default:
+            return 2
+        }
+    }
+
     var precedence: Precedence {
         switch self {
         case .add: return .addition

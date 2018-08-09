@@ -16,15 +16,19 @@ class TestBase: XCTestCase {
         XCTAssertEqual(expected, solution)
     }
 
+    func testEquation(expect expected: Int, infix: [Token]) {
+        testEquation(expect: expected, equation: Equation(infix: infix))
+    }
+
     func testEquation(expect expected: Int, infix: Token...) {
         testEquation(expect: expected, equation: Equation(infix: infix))
     }
 
-    func testEquation(expect expected: Int, infix: Term...) {
+    func testEquation(expect expected: Int, infix: [Term]) {
         testEquation(expect: expected, equation: Equation(infix: infix))
     }
 
-    func testEquation(expect expected: Int, infix: [Term]) {
+    func testEquation(expect expected: Int, infix: Term...) {
         testEquation(expect: expected, equation: Equation(infix: infix))
     }
 }

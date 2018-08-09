@@ -17,7 +17,9 @@ class EquationKitTests: TestBase {
 
     /// https://en.wikipedia.org/wiki/Reverse_Polish_notation#Example
     func testInfixToPostfixNotation() {
-        testEquation(expect: 5, infix: ﹙,﹙,15, ୵,﹙,7,－,﹙,1, ＋, 1,﹚,﹚,﹚, ·, 3,﹚,－,﹙,2, ＋,﹙,1, ＋, 1,﹚,﹚)
+        let infix = [﹙,﹙,15, ୵,﹙,7,－,﹙,1, ＋, 1,﹚,﹚,﹚, ·, 3,﹚,－,﹙,2, ＋,﹙,1, ＋, 1,﹚,﹚]
+        testEquation(expect: 5, infix: infix)
+
     }
 
     func testExponentiationUsingShorthandNotation() {
@@ -38,5 +40,24 @@ class EquationKitTests: TestBase {
         testEquation(expect: 17, infix: 2, ＋, 3, ·, 5)
         testEquation(expect: 24, infix: 2, ＋, 3, ·, 5, ＋, 7, ·, 11, ％, 10)
         testEquation(expect: 19, infix: 2, ＋, 3, ·, 5, ＋, ﹙, 7, ·, 11, ﹚, ％, 75)
+    }
+
+    func testFoo() {
+        let eq: Equation = [2, ＋, 3, ·, 5]
+        let rpn = reversePolishNotationFrom(infix: eq.infix)
+        let tmp = rpn.compactMap { OperandOrOperator(token: $0) }
+        let infix = ReversePolishNotation.toInfixFrom(rpn: tmp)
+        let eq2 = Equation(infix: infix)
+
+        print(eq2.description)
+
+        guard let a = eq.numericSolution(), let b = eq2.numericSolution() else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(a, b)
+        XCTAssertEqual(17, a)
+        XCTAssertEqual(17, b)
     }
 }
