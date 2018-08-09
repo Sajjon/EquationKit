@@ -12,6 +12,7 @@ import XCTest
 class TestBase: XCTestCase {
 
     func testEquation(expect expected: Int, equation: Equation) {
+        print("TESTING EQUATION: \n\(equation.description)\n\n")
         guard let solution = equation.solveNumeric() else { XCTFail("cant solve"); return }
         XCTAssertEqual(expected, solution)
     }

@@ -38,15 +38,6 @@ public extension InfixToken {
 
 }
 
-//// MARK: - ExpressibleByStringLiteral
-//extension InfixToken: ExpressibleByStringLiteral {}
-//public extension InfixToken {
-//    init(stringLiteral value: String) {
-//        guard let `operator` = Operator(rawValue: value) else { fatalError("cannot create operator") }
-//        self = .operator(`operator`)
-//    }
-//}
-
 // MARK: - ExpressibleByIntegerLiteral
 extension InfixToken: ExpressibleByIntegerLiteral {}
 public extension InfixToken {
@@ -110,36 +101,5 @@ public extension InfixToken {
         case .operator: return true
         default: return false
         }
-    }
-
-    var pow: Operator? {
-        guard let `operator` = asOperator(), `operator` == .pow else { return nil }
-        return `operator`
-    }
-}
-
-public extension InfixToken {
-    static var add: InfixToken {
-        return .operator(.add)
-    }
-
-    static var sub: InfixToken {
-        return .operator(.sub)
-    }
-
-    static var mul: InfixToken {
-        return .operator(.mul)
-    }
-
-    static var div: InfixToken {
-        return .operator(.div)
-    }
-
-    static var mod: InfixToken {
-        return .operator(.mod)
-    }
-
-    static var pow: InfixToken {
-        return .operator(.pow)
     }
 }

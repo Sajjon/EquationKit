@@ -13,6 +13,22 @@ public enum Operand {
     case variable(Variable)
 }
 
+// MARK: - NumericConververtible
+extension Operand: NumericConververtible {}
+public extension Operand {
+    func solveNumeric() -> Int? {
+        return value
+    }
+}
+
+// MARK: - ExpressibleByIntegerLiteral
+extension Operand: ExpressibleByIntegerLiteral {}
+public extension Operand {
+    public init(integerLiteral value: Int) {
+        self = .constant(value)
+    }
+}
+
 public extension Operand {
     var value: Int? {
         switch self {
@@ -45,5 +61,4 @@ public extension Operand {
         case .variable(let variable): return variable.description
         }
     }
-
 }

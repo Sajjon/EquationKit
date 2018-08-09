@@ -8,13 +8,16 @@
 
 import Foundation
 
-public protocol EquationRepresentation: CustomStringConvertible, Equatable {
+public protocol NumericConververtible: CustomStringConvertible {
+//    func solveNumeric<SN>() -> SN? where SN: SignedNumeric
+    func solveNumeric() -> Int?
+}
+
+public protocol EquationRepresentation: NumericConververtible, Equatable {
     associatedtype Token: TokenRepresentation
     var tokens: [Token] { get }
-
     func trimmed() -> Self
     func hasNumericSolution() -> Bool
-    func solveNumeric() -> Int?
     func toInfixNotation() -> InfixNotation
     func toReversePolishNotation() -> ReversePolishNotation
 }

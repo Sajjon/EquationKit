@@ -13,10 +13,10 @@ func multiplicativeInverseOf<T: BinaryInteger>(_ x: T, and y: T, mod p: T) -> T 
     let y = y > 0 ? y : y + p
     let euclideanResult = extendedGreatestCommonDivisor(y, p)
     let inverse = euclideanResult.bézoutCoefficients.0
-    return mod(inverse * x, modulus: p)
+    return modulus(inverse * x, modulus: p)
 }
 
-private func mod<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
+func modulus<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
     var mod = number % modulus
     if mod < 0 {
         mod = mod + modulus
@@ -25,8 +25,8 @@ private func mod<T>(_ number: T, modulus: T) -> T where T: BinaryInteger {
     return mod
 }
 
-private func mod<T>(_ modulus: T, expression: () -> T) -> T where T: BinaryInteger {
-    return mod(expression(), modulus: modulus)
+private func modulus<T>(_ p: T, expression: () -> T) -> T where T: BinaryInteger {
+    return modulus(expression(), modulus: p)
 }
 
 struct ExtendedEuclideanAlgorithmResult<T: BinaryInteger> {

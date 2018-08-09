@@ -12,7 +12,6 @@
 		48022825211B20A400AEFB58 /* EquationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48022824211B209C00AEFB58 /* EquationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48022829211B214B00AEFB58 /* InfixToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022827211B214A00AEFB58 /* InfixToken.swift */; };
 		4802282B211B215900AEFB58 /* Equation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282A211B215900AEFB58 /* Equation.swift */; };
-		4802282D211B217700AEFB58 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282C211B217700AEFB58 /* Operator.swift */; };
 		4802282F211B218500AEFB58 /* Parenthesis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802282E211B218500AEFB58 /* Parenthesis.swift */; };
 		48022831211B219800AEFB58 /* Operand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022830211B219800AEFB58 /* Operand.swift */; };
 		48022835211B222B00AEFB58 /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022834211B222B00AEFB58 /* Term.swift */; };
@@ -26,9 +25,18 @@
 		48022847211C416300AEFB58 /* Extension_Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022846211C416300AEFB58 /* Extension_Array.swift */; };
 		48022849211C418F00AEFB58 /* InfixNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022848211C418F00AEFB58 /* InfixNotation.swift */; };
 		4802284B211C64B200AEFB58 /* ModInverse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284A211C64B200AEFB58 /* ModInverse.swift */; };
-		4802284D211C673500AEFB58 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284C211C673400AEFB58 /* Operators.swift */; };
+		4802284D211C673500AEFB58 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284C211C673400AEFB58 /* Operator.swift */; };
 		4802284F211C67D300AEFB58 /* TokenRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802284E211C67D300AEFB58 /* TokenRepresentation.swift */; };
 		48022851211C67DF00AEFB58 /* EquationRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022850211C67DF00AEFB58 /* EquationRepresentation.swift */; };
+		48022854211C69A200AEFB58 /* Associativity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022853211C69A200AEFB58 /* Associativity.swift */; };
+		48022856211C69B100AEFB58 /* Precedence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022855211C69B100AEFB58 /* Precedence.swift */; };
+		48022858211C69C300AEFB58 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022857211C69C300AEFB58 /* Vector.swift */; };
+		4802285A211C69D600AEFB58 /* Unary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022859211C69D600AEFB58 /* Unary.swift */; };
+		4802285C211C69EA00AEFB58 /* Binary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802285B211C69EA00AEFB58 /* Binary.swift */; };
+		4802285E211C6A0E00AEFB58 /* Ternary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802285D211C6A0E00AEFB58 /* Ternary.swift */; };
+		48022860211C6CE600AEFB58 /* Operator_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802285F211C6CE600AEFB58 /* Operator_Shorthand.swift */; };
+		48022866211C705900AEFB58 /* InfixToken_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */; };
+		48022868211C85D100AEFB58 /* Equation_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022867211C85D100AEFB58 /* Equation_Shorthand.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +58,6 @@
 		48022824211B209C00AEFB58 /* EquationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquationKit.h; sourceTree = "<group>"; };
 		48022827211B214A00AEFB58 /* InfixToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixToken.swift; sourceTree = "<group>"; };
 		4802282A211B215900AEFB58 /* Equation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation.swift; sourceTree = "<group>"; };
-		4802282C211B217700AEFB58 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4802282E211B218500AEFB58 /* Parenthesis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parenthesis.swift; sourceTree = "<group>"; };
 		48022830211B219800AEFB58 /* Operand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operand.swift; sourceTree = "<group>"; };
 		48022832211B220B00AEFB58 /* ReversePolishNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReversePolishNotation.swift; sourceTree = "<group>"; };
@@ -64,9 +71,18 @@
 		48022846211C416300AEFB58 /* Extension_Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension_Array.swift; sourceTree = "<group>"; };
 		48022848211C418F00AEFB58 /* InfixNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixNotation.swift; sourceTree = "<group>"; };
 		4802284A211C64B200AEFB58 /* ModInverse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModInverse.swift; sourceTree = "<group>"; };
-		4802284C211C673400AEFB58 /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		4802284C211C673400AEFB58 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		4802284E211C67D300AEFB58 /* TokenRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenRepresentation.swift; sourceTree = "<group>"; };
 		48022850211C67DF00AEFB58 /* EquationRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquationRepresentation.swift; sourceTree = "<group>"; };
+		48022853211C69A200AEFB58 /* Associativity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Associativity.swift; sourceTree = "<group>"; };
+		48022855211C69B100AEFB58 /* Precedence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Precedence.swift; sourceTree = "<group>"; };
+		48022857211C69C300AEFB58 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		48022859211C69D600AEFB58 /* Unary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unary.swift; sourceTree = "<group>"; };
+		4802285B211C69EA00AEFB58 /* Binary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binary.swift; sourceTree = "<group>"; };
+		4802285D211C6A0E00AEFB58 /* Ternary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ternary.swift; sourceTree = "<group>"; };
+		4802285F211C6CE600AEFB58 /* Operator_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator_Shorthand.swift; sourceTree = "<group>"; };
+		48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixToken_Shorthand.swift; sourceTree = "<group>"; };
+		48022867211C85D100AEFB58 /* Equation_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation_Shorthand.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,26 +169,74 @@
 		48022826211B213A00AEFB58 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				48022827211B214A00AEFB58 /* InfixToken.swift */,
-				48022848211C418F00AEFB58 /* InfixNotation.swift */,
-				48022850211C67DF00AEFB58 /* EquationRepresentation.swift */,
-				4802284E211C67D300AEFB58 /* TokenRepresentation.swift */,
-				48022846211C416300AEFB58 /* Extension_Array.swift */,
-				48022844211C411F00AEFB58 /* ReversePolishToken.swift */,
-				48022836211B22A900AEFB58 /* Token_Shorthand.swift */,
-				4802282C211B217700AEFB58 /* Operator.swift */,
-				4802284C211C673400AEFB58 /* Operators.swift */,
-				4802284A211C64B200AEFB58 /* ModInverse.swift */,
-				4802282E211B218500AEFB58 /* Parenthesis.swift */,
-				48022830211B219800AEFB58 /* Operand.swift */,
-				4802283A211B276900AEFB58 /* Variable.swift */,
 				4802282A211B215900AEFB58 /* Equation.swift */,
+				48022867211C85D100AEFB58 /* Equation_Shorthand.swift */,
+				48022850211C67DF00AEFB58 /* EquationRepresentation.swift */,
 				4802283F211B378000AEFB58 /* Solution.swift */,
-				48022832211B220B00AEFB58 /* ReversePolishNotation.swift */,
-				48022834211B222B00AEFB58 /* Term.swift */,
-				48022838211B22BE00AEFB58 /* Custom_Operators.swift */,
+				48022861211C6DAA00AEFB58 /* Extensions */,
+				48022864211C6DF300AEFB58 /* Notation */,
+				48022862211C6DBC00AEFB58 /* Tokens */,
 			);
 			path = Code;
+			sourceTree = "<group>";
+		};
+		48022852211C68DD00AEFB58 /* Operators */ = {
+			isa = PBXGroup;
+			children = (
+				48022859211C69D600AEFB58 /* Unary.swift */,
+				4802285B211C69EA00AEFB58 /* Binary.swift */,
+				48022857211C69C300AEFB58 /* Vector.swift */,
+				4802284C211C673400AEFB58 /* Operator.swift */,
+				4802285F211C6CE600AEFB58 /* Operator_Shorthand.swift */,
+				4802285D211C6A0E00AEFB58 /* Ternary.swift */,
+				48022855211C69B100AEFB58 /* Precedence.swift */,
+				4802284A211C64B200AEFB58 /* ModInverse.swift */,
+				48022838211B22BE00AEFB58 /* Custom_Operators.swift */,
+				48022853211C69A200AEFB58 /* Associativity.swift */,
+			);
+			path = Operators;
+			sourceTree = "<group>";
+		};
+		48022861211C6DAA00AEFB58 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				48022846211C416300AEFB58 /* Extension_Array.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		48022862211C6DBC00AEFB58 /* Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				48022827211B214A00AEFB58 /* InfixToken.swift */,
+				48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */,
+				4802282E211B218500AEFB58 /* Parenthesis.swift */,
+				48022844211C411F00AEFB58 /* ReversePolishToken.swift */,
+				48022834211B222B00AEFB58 /* Term.swift */,
+				48022836211B22A900AEFB58 /* Token_Shorthand.swift */,
+				4802284E211C67D300AEFB58 /* TokenRepresentation.swift */,
+				48022863211C6DDC00AEFB58 /* Operands */,
+				48022852211C68DD00AEFB58 /* Operators */,
+			);
+			path = Tokens;
+			sourceTree = "<group>";
+		};
+		48022863211C6DDC00AEFB58 /* Operands */ = {
+			isa = PBXGroup;
+			children = (
+				4802283A211B276900AEFB58 /* Variable.swift */,
+				48022830211B219800AEFB58 /* Operand.swift */,
+			);
+			path = Operands;
+			sourceTree = "<group>";
+		};
+		48022864211C6DF300AEFB58 /* Notation */ = {
+			isa = PBXGroup;
+			children = (
+				48022832211B220B00AEFB58 /* ReversePolishNotation.swift */,
+				48022848211C418F00AEFB58 /* InfixNotation.swift */,
+			);
+			path = Notation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,22 +347,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48022866211C705900AEFB58 /* InfixToken_Shorthand.swift in Sources */,
 				48022851211C67DF00AEFB58 /* EquationRepresentation.swift in Sources */,
+				4802285A211C69D600AEFB58 /* Unary.swift in Sources */,
+				48022856211C69B100AEFB58 /* Precedence.swift in Sources */,
 				48022829211B214B00AEFB58 /* InfixToken.swift in Sources */,
 				4802284B211C64B200AEFB58 /* ModInverse.swift in Sources */,
 				48022839211B22BE00AEFB58 /* Custom_Operators.swift in Sources */,
-				4802282D211B217700AEFB58 /* Operator.swift in Sources */,
 				48022831211B219800AEFB58 /* Operand.swift in Sources */,
 				4802284F211C67D300AEFB58 /* TokenRepresentation.swift in Sources */,
 				48022849211C418F00AEFB58 /* InfixNotation.swift in Sources */,
+				48022860211C6CE600AEFB58 /* Operator_Shorthand.swift in Sources */,
+				48022854211C69A200AEFB58 /* Associativity.swift in Sources */,
+				48022858211C69C300AEFB58 /* Vector.swift in Sources */,
 				48022843211C3F2200AEFB58 /* ReversePolishNotation.swift in Sources */,
+				4802285E211C6A0E00AEFB58 /* Ternary.swift in Sources */,
 				48022842211B37A200AEFB58 /* Solution.swift in Sources */,
 				48022837211B22A900AEFB58 /* Token_Shorthand.swift in Sources */,
-				4802284D211C673500AEFB58 /* Operators.swift in Sources */,
+				48022868211C85D100AEFB58 /* Equation_Shorthand.swift in Sources */,
+				4802284D211C673500AEFB58 /* Operator.swift in Sources */,
 				48022835211B222B00AEFB58 /* Term.swift in Sources */,
 				4802282F211B218500AEFB58 /* Parenthesis.swift in Sources */,
 				4802282B211B215900AEFB58 /* Equation.swift in Sources */,
 				48022847211C416300AEFB58 /* Extension_Array.swift in Sources */,
+				4802285C211C69EA00AEFB58 /* Binary.swift in Sources */,
 				4802283B211B276900AEFB58 /* Variable.swift in Sources */,
 				48022845211C411F00AEFB58 /* ReversePolishToken.swift in Sources */,
 			);

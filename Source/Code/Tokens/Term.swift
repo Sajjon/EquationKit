@@ -33,7 +33,12 @@ public extension Term {
 // MARK: - ExpressibleByArrayLiteral
 extension Term: ExpressibleByArrayLiteral {}
 public extension Term {
+
+    init(_ tokens: [InfixToken]) {
+        self = .tokens(tokens)
+    }
+
     init(arrayLiteral elements: InfixToken...) {
-        self = .tokens(elements)
+        self.init(elements)
     }
 }
