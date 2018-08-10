@@ -66,55 +66,12 @@ public extension ReversePolishNotation {
                 let term: Term = .token(.operand(operand))
                 terms.append(term)
             case .operator(let `operator`):
-
                 guard terms.count >= `operator`.arity else { fatalError("too few operands") }
                 guard let binary = `operator`.asBinary else { fatalError("not supported")  }
-
                 let rhs = terms.removeLast()
                 let lhs = terms.removeLast()
-                let op = InfixToken(token)
-
-                switch binary {
-                case .pow:
-                    switch (lhs, rhs) {
-                    case (.token(let l), .token(let r)):
-                        guard let b = l.variable, let e = r.value else { fatalError() }
-
-                        let prefix: [InfixToken] = {
-                            let suffix: [InfixToken] = e > 1 ? [.c(e), .mul] : []
-                            return [﹙] + suffix
-                        }()
-
-                        let suffix: [InfixToken] = {
-                            let mid: [InfixToken] = e > 2 ? [.pow, .c(e-1)] : []
-                            return [.v(b)] + mid + [﹚]
-                        }()
-
-                        terms.append(.tokens(
-                            prefix + suffix
-                            ))
-
-                    case (.tokens, .token(let r)):
-                        guard let e = r.value else { fatalError() }
-                        let asTerms: [Term] = [.﹙, .c(e), .mul, lhs, .pow, .c(e-1), .﹚]
-                        terms.append(
-                            .tokens(asTerms.flatMap { $0.toTokens() })
-                        )
-
-                    default: fatalError()
-
-                    }
-
-                default:
-                    let asTerms: [Term] = [.﹙, lhs, .token(op), rhs, .﹚]
-                    terms.append(
-                        .tokens(asTerms.flatMap { $0.toTokens() })
-                    )
-                }
-
-
-
-
+                let differentiated = binary.differentate(lhs: lhs, rhs: rhs)
+                terms.append(differentiated)
             }
         }
         var infixTokens = terms.flatMap { $0.toTokens() }

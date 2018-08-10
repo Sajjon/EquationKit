@@ -35,19 +35,34 @@ class AlgebraicTests: TestBase {
         )
     }
 
-//    func testDifferentiation𝑥²＋𝑥() {
+    func testDifferentiation𝑥²＋𝑥() {
+        _differentiate(
+            equation: [𝑥, ＾, 2, ＋, 𝑥],
+            expected: [﹙, 2, ·, 𝑥, ﹚, ＋, 1]
+        )
+    }
+
+    func testDifferentiation𝑥＋𝑥²() {
+        _differentiate(
+            equation: [𝑥, ＋, 𝑥, ＾, 2],
+            expected: [1, ＋, ﹙, 2, ·, 𝑥, ﹚]
+        )
+    }
+
+    func testDifferentiation𝑥²－𝑥() {
+        _differentiate(
+            equation: [𝑥, ＾, 2, －, 𝑥],
+            expected: [﹙, 2, ·, 𝑥, ﹚, －, 1]
+        )
+    }
+
+//    ///      𝑦² = 𝑥³ + 𝑎𝑥 + 𝑏
+//    func testEllipticCurveEquationDifferentiation() {
 //        _differentiate(
-//            equation: [𝑥, ＾, 2, ＋, 𝑥],
-//            expected: [2, ·, 𝑥, ＋, 1]
+//            equation: [𝑦,＾, 2, －, 𝑎, ·, 𝑥,＾, 3, ＋, 𝑏],
+//            expected: [2, ·, 𝑦, －, 𝑎, ·, 𝑥,＾, 3]
 //        )
 //    }
 
-    ///      𝑦² = 𝑥³ + 𝑎𝑥 + 𝑏
-//    func testEllipticCurveEquationDifferentiation() {
-//        let terms: [Term] = [𝑦,², .－, 𝑎, .·, 𝑥,³, .＋, 𝑏]
-//        let equation = Equation(infix: terms)
-//        print(equation)
-//        let yPrim = equation.differentiate()
-//        print(yPrim)
-//    }
+
 }

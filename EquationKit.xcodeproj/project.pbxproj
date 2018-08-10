@@ -38,6 +38,7 @@
 		48022866211C705900AEFB58 /* InfixToken_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */; };
 		48022868211C85D100AEFB58 /* Equation_Shorthand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022867211C85D100AEFB58 /* Equation_Shorthand.swift */; };
 		4802286A211C8AE400AEFB58 /* AlgebraicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48022869211C8AE400AEFB58 /* AlgebraicTests.swift */; };
+		4802286D211CAF1C00AEFB58 /* BinaryOperator+Term+Differentiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4802286C211CAF1C00AEFB58 /* BinaryOperator+Term+Differentiate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		48022865211C705900AEFB58 /* InfixToken_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfixToken_Shorthand.swift; sourceTree = "<group>"; };
 		48022867211C85D100AEFB58 /* Equation_Shorthand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equation_Shorthand.swift; sourceTree = "<group>"; };
 		48022869211C8AE400AEFB58 /* AlgebraicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgebraicTests.swift; sourceTree = "<group>"; };
+		4802286C211CAF1C00AEFB58 /* BinaryOperator+Term+Differentiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryOperator+Term+Differentiate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,10 +174,11 @@
 		48022826211B213A00AEFB58 /* Code */ = {
 			isa = PBXGroup;
 			children = (
-				4802282A211B215900AEFB58 /* Equation.swift */,
 				48022867211C85D100AEFB58 /* Equation_Shorthand.swift */,
+				4802282A211B215900AEFB58 /* Equation.swift */,
 				48022850211C67DF00AEFB58 /* EquationRepresentation.swift */,
 				4802283F211B378000AEFB58 /* Solution.swift */,
+				4802286B211CAEE400AEFB58 /* Differentiation */,
 				48022861211C6DAA00AEFB58 /* Extensions */,
 				48022864211C6DF300AEFB58 /* Notation */,
 				48022862211C6DBC00AEFB58 /* Tokens */,
@@ -240,6 +243,14 @@
 				48022848211C418F00AEFB58 /* InfixNotation.swift */,
 			);
 			path = Notation;
+			sourceTree = "<group>";
+		};
+		4802286B211CAEE400AEFB58 /* Differentiation */ = {
+			isa = PBXGroup;
+			children = (
+				4802286C211CAF1C00AEFB58 /* BinaryOperator+Term+Differentiate.swift */,
+			);
+			path = Differentiation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,6 +385,7 @@
 				4802282B211B215900AEFB58 /* Equation.swift in Sources */,
 				48022847211C416300AEFB58 /* Extension_Array.swift in Sources */,
 				4802285C211C69EA00AEFB58 /* Binary.swift in Sources */,
+				4802286D211CAF1C00AEFB58 /* BinaryOperator+Term+Differentiate.swift in Sources */,
 				4802283B211B276900AEFB58 /* Variable.swift in Sources */,
 				48022845211C411F00AEFB58 /* ReversePolishToken.swift in Sources */,
 			);
