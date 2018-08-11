@@ -10,21 +10,39 @@ import Foundation
 
 /// U+FF0B
 public let ＋: InfixToken = .add
+public extension Term {
+    static var ＋: Term { return .token(EquationKit.＋) }
+}
 
 /// U+FF0D
 public let －: InfixToken = .sub
+public extension Term {
+    static var －: Term { return .token(EquationKit.－) }
+}
 
 /// U+00B7
 public let ·: InfixToken = .mul
+public extension Term {
+    static var ·: Term { return .token(EquationKit.·) }
+}
 
 /// U+0B75
 public let ୵: InfixToken = .div
+public extension Term {
+    static var ୵: Term { return .token(EquationKit.୵) }
+}
 
 /// U+FF05
 public let ％: InfixToken = .mod
+public extension Term {
+    static var ％: Term { return .token(EquationKit.％) }
+}
 
 /// U+FF3E
 public let ＾: InfixToken = .pow
+public extension Term {
+    static var ＾: Term { return .token(EquationKit.＾) }
+}
 
 /// U+FE59 "Small Left Par"
 public let ﹙: InfixToken = .parenthesis(.left)

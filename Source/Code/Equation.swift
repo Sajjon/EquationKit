@@ -56,6 +56,15 @@ public extension Equation {
     }
 }
 
+
+// MARK: - ExpressibleByIntegerLiteral
+extension Equation: ExpressibleByIntegerLiteral {}
+public extension Equation {
+    public init(integerLiteral value: Int) {
+        self.init(infix: [.operand(.constant(value))])
+    }
+}
+
 // MARK: - CustomStringConvertible
 extension Equation: CustomStringConvertible {}
 public extension Equation {

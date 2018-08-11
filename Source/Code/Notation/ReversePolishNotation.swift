@@ -32,9 +32,17 @@ public extension ReversePolishNotation {
             case .operand(let operand):
                 stack.append(operand)
             case .operator(let `operator`):
-                let operands = stack.pop(`operator`.arity)
-                let function = `operator`.function
-                stack.append(function(operands))
+                let value: Int
+                switch `operator` {
+                case .unary(let unaryOperator):
+                    value = try! unaryOperator.function() as! Int
+                case .binary(let binaryOperator):
+                    let operands = stack.pop(`operator`.arity)
+                    value = try! binaryOperator.function(operands) as! Int
+                case .ternary(let ternaryOperator):
+                    value = try! ternaryOperator.function() as! Int
+                }
+                stack.append(value)
             }
         }
         return stack.first
