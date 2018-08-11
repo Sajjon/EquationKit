@@ -19,6 +19,10 @@ public extension Operand {
     func solveNumeric() -> Int? {
         return value
     }
+
+    public func hasNumericSolution() -> Bool {
+        return !isUnsetVariable
+    }
 }
 
 // MARK: - ExpressibleByIntegerLiteral

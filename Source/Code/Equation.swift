@@ -72,3 +72,9 @@ public extension Equation {
         return infix.tokens.map { $0.description }.joined(separator: " ")
     }
 }
+
+public extension Equation {
+    func differentiate() -> Equation {
+        return toReversePolishNotation().differentiate()
+    }
+}

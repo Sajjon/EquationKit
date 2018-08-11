@@ -9,7 +9,7 @@
 import Foundation
 
 public enum ReversePolishToken {
-    case operand(Int)
+    case operand(Operand)
     case `operator`(Operator)
 }
 
@@ -17,8 +17,8 @@ public extension ReversePolishToken {
     init?(infix: InfixToken) {
         if let `operator` = infix.asOperator() {
             self = .operator(`operator`)
-        } else if let operand = infix.asOperand(), let value = operand.value {
-            self = .operand(value)
+        } else if let operand = infix.asOperand() {
+            self = .operand(operand)
         } else {
             return nil
         }

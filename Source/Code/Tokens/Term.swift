@@ -22,6 +22,34 @@ public extension Term {
     }
 }
 
+// MARK: - NumericConververtible
+extension Term: NumericConververtible {}
+public extension Term {
+    func solveNumeric() -> Int? {
+        switch self {
+        case .token(let token): return token.value
+        case .tokens(let tokens): return Equation(infix: tokens).solveNumeric()
+        }
+    }
+
+    func hasNumericSolution() -> Bool {
+        switch self {
+        case .token(let token): return !token.isUnsetVariable
+        case .tokens(let tokens): return !tokens.containsUnsetVariable()
+        }
+    }
+}
+
+// MARK: - CustomStringConvertible
+public extension Term {
+    public var description: String {
+        switch self {
+        case .token(let token): return token.description
+        case .tokens(let tokens): return tokens.description
+        }
+    }
+}
+
 // MARK: - ExpressibleByIntegerLiteral
 extension Term: ExpressibleByIntegerLiteral {}
 public extension Term {
