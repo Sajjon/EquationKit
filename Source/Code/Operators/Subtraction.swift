@@ -8,9 +8,7 @@
 
 import Foundation
 
-protocol AdditionOrSubtraction {}
-
-struct Sub: Operator, AdditionOrSubtraction {
+struct Sub: Operator {
     let lhs: Expression
     let rhs: Expression
     let wrapInParenthesis: Bool

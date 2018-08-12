@@ -21,7 +21,6 @@
 		4858F29F211EF76B00ECEC93 /* Division.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F29E211EF76B00ECEC93 /* Division.swift */; };
 		4858F2A4211EF7B300ECEC93 /* SimpleAdditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2A2211EF7AE00ECEC93 /* SimpleAdditionTests.swift */; };
 		4858F2A6211EF7F000ECEC93 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2A5211EF7F000ECEC93 /* BaseTest.swift */; };
-		4858F2A9211EF9EC00ECEC93 /* ExpressionADDInt_Old.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2A8211EF9EC00ECEC93 /* ExpressionADDInt_Old.swift */; };
 		4858F2B6211EFDBF00ECEC93 /* AdditionNumberVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2B5211EFDBF00ECEC93 /* AdditionNumberVariable.swift */; };
 		4858F2B9211EFE9500ECEC93 /* SubtractionNumberVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2B8211EFE9500ECEC93 /* SubtractionNumberVariable.swift */; };
 		4858F2BC211EFF3700ECEC93 /* MultiplicationNumberVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2BB211EFF3700ECEC93 /* MultiplicationNumberVariable.swift */; };
@@ -63,7 +62,6 @@
 		4858F29E211EF76B00ECEC93 /* Division.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Division.swift; sourceTree = "<group>"; };
 		4858F2A2211EF7AE00ECEC93 /* SimpleAdditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAdditionTests.swift; sourceTree = "<group>"; };
 		4858F2A5211EF7F000ECEC93 /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
-		4858F2A8211EF9EC00ECEC93 /* ExpressionADDInt_Old.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionADDInt_Old.swift; sourceTree = "<group>"; };
 		4858F2AB211EFA2500ECEC93 /* AdditionOfProductTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionOfProductTests.swift; sourceTree = "<group>"; };
 		4858F2AE211EFAFE00ECEC93 /* AdditionOfDivisionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionOfDivisionTests.swift; sourceTree = "<group>"; };
 		4858F2B0211EFB9400ECEC93 /* SimpleSubtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSubtractionTests.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 				4858F2BA211EFF1C00ECEC93 /* Multiplication */,
 				4858F2B7211EFE8600ECEC93 /* Subtraction */,
 				4858F2B4211EFD9800ECEC93 /* Addition */,
-				4858F2A8211EF9EC00ECEC93 /* ExpressionADDInt_Old.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -398,7 +395,6 @@
 				4858F2CC2120964A00ECEC93 /* DivisionNumberExpression.swift in Sources */,
 				4858F299211EF74700ECEC93 /* Addition.swift in Sources */,
 				4858F2B9211EFE9500ECEC93 /* SubtractionNumberVariable.swift in Sources */,
-				4858F2A9211EF9EC00ECEC93 /* ExpressionADDInt_Old.swift in Sources */,
 				4858F28F211EF65D00ECEC93 /* Variable.swift in Sources */,
 				4858F2C6211F315700ECEC93 /* MultiplicationNumberExpression.swift in Sources */,
 				4858F29D211EF76000ECEC93 /* Multiplication.swift in Sources */,

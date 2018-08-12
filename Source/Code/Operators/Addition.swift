@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct Add: Operator, AdditionOrSubtraction {
+struct Add: Operator {
     let lhs: Expression
     let rhs: Expression
     let wrapInParenthesis: Bool
