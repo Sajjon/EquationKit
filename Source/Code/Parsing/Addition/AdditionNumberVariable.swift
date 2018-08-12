@@ -10,7 +10,16 @@ import Foundation
 
 func +(lhs: Variable, rhs: Int) -> Expression {
     if rhs == 0 { return .variable(lhs) }
-    if rhs < 0 { return .sub(`var`: lhs, int: abs(rhs)) }
+    if rhs < 0 {
+        if lhs.isNegative {
+            // -x - 2 <=> Sub(-2, x)
+            return .sub(int: rhs, `var`: lhs.negated())
+        } else {
+            // x - 2
+            return .sub(`var`: lhs, int: abs(rhs))
+        }
+    }
+    if lhs.isNegative { return .sub(int: rhs, `var`: lhs.negated()) }
     return .add(`var`: lhs, int: rhs)
 }
 

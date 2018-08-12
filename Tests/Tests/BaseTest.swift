@@ -30,4 +30,20 @@ class BaseTest: XCTestCase {
     func eval(_ expected: String, _ expression: () -> Expression) {
         eval(expected: expected, expression)
     }
+
+    func debugEvaluate(expected: String, expression: Expression) {
+        XCTAssertEqual(expected, expression.debugDescription)
+    }
+
+    func deval(expected: String, _ expression: () -> Expression) {
+        debugEvaluate(expected: expected, expression: expression())
+    }
+
+    func deval(_ expected: String, expression: Expression) {
+        debugEvaluate(expected: expected, expression: expression)
+    }
+
+    func deval(_ expected: String, _ expression: () -> Expression) {
+        deval(expected: expected, expression)
+    }
 }

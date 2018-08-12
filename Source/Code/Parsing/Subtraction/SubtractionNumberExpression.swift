@@ -16,6 +16,8 @@ func -(lhs: Expression, rhs: Int) -> Expression {
 }
 
 func -(lhs: Int, rhs: Expression) -> Expression {
-    if lhs == 0 { return rhs }
+    if lhs == 0 { return rhs.negated() }
     return .sub(int: lhs, exp: rhs)
 }
+
+

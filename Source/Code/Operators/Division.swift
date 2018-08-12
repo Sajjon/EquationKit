@@ -23,6 +23,29 @@ struct Div: Operator {
     var operatorString: String { return "/" }
 }
 
+extension Div {
+    func divided(by number: Int) -> Expression {
+        if let numerator = lhs.number, let denominator = rhs.variable {
+            // Example: 10/x
+            let gcd = extendedGreatestCommonDivisor(numerator, number).gcd
+            if gcd == 1 { // `Div(10, x) / 3` ==> `Div(10, Mul(3, x)`
+                let _multiplication = Mul(int: number, `var`: denominator)
+                let _division = Div(int: numerator, operator: _multiplication, wrapInParenthesis: true)
+                return .operator(_division)
+            } else { // `Div(10, x) / 5` ==> `Div(2, x)`
+                let newNumerator = numerator/gcd
+                return newNumerator / denominator
+            }
+        } else if let numerator = lhs.variable, let denominator = rhs.number {
+            // Example: `Div(x, 10) / 5` ==> `Div(x, 50)`
+            let newDenominator = denominator * number
+            return numerator / newDenominator
+        }
+        fatalError("which case did I miss?")
+    }
+}
+
+
 extension Expression {
 
     /// Case 0: Int / Int
@@ -52,48 +75,18 @@ extension Expression {
 
     /// Case 4: Operator / Int
     static func div(`operator` lhs: Operator, int rhs: Int) -> Expression {
-        if rhs == 0 { return .number(0) } // TODO replace with `nil`
+        guard rhs != 0 else { fatalError("division by zero") }
         if rhs == 1 { return .operator(lhs) }
-
-        if let division = lhs as? Div {
-            if let numerator = division.lhs.number, let denominator = division.rhs.variable {
-                // Example: 10/x
-                let gcd = extendedGreatestCommonDivisor(numerator, rhs).gcd
-                if gcd == 1 { // `Div(10, x) / 3` ==> `Div(10, Mul(3, x)`
-                    let _multiplication = Mul(int: rhs, `var`: denominator)
-                    let _division = Div(int: numerator, operator: _multiplication, wrapInParenthesis: true)
-                    return .operator(_division)
-                } else { // `Div(10, x) / 5` ==> `Div(2, x)`
-                    return .operator(Div(int: numerator/gcd, `var`: denominator))
-                }
-            } else if let numerator = division.lhs.variable, let denominator = division.rhs.number {
-                // Example: `Div(x, 10) / 5` ==> `Div(x, 50)`
-                return .operator(Div(`var`: numerator, int: denominator * rhs))
-            }
-        } else if let multiplication = lhs as? Mul {
-            // Multiplication is commutative, so we dont care if `8 * x` or `x * 8`, we treat them the same below
-            var variable: Variable?
-            var number: Int?
-            if let n = multiplication.lhs.number, let v = multiplication.rhs.variable {
-                variable = v
-                number = n
-            } else if let v = multiplication.lhs.variable, let n = multiplication.rhs.number {
-                variable = v
-                number = n
-            }
-            if let variable = variable, let number = number {
-                let gcd = extendedGreatestCommonDivisor(number, rhs).gcd
-                if gcd != 1 {
-                    return .operator(
-                        Mul(int: number/gcd, `var`: variable)
-                    )
-                }
-            }
-        }
         return .operator(Div(operator: lhs, int: rhs, wrapInParenthesis: true))
     }
 
-    /// Case 5: Int * Expression
+    /// Case 5: Int / Operator
+    static func div(int lhs: Int, `operator` rhs: Operator) -> Expression {
+        if lhs == 0 { return .number(0) } // TODO replace with `nil`
+        return .operator(Div(int: lhs, operator: rhs, wrapInParenthesis: true))
+    }
+
+    /// Case 6: Int / Expression
     static func div(int lhs: Int, exp rhs: Expression) -> Expression {
         if lhs == 0 { return .number(0) } // TODO replace with `nil`
 
@@ -103,7 +96,21 @@ extension Expression {
         } else if let rhsVariable = rhs.variable {
             return .div(`var`: rhsVariable, int: lhs)
         } else if let `operator` = rhs.asOperator() {
-            return `operator`.divided(by: lhs)
+            return `operator`.dividingNumberByThisOperator(lhs)
+        } else { fatalError("this should not happend") }
+    }
+
+    /// Case 7: Expression / Int
+    static func div(exp lhs: Expression, int rhs: Int) -> Expression {
+        guard rhs != 0 else { fatalError("division by 0") }
+
+        if let lhsNumber = lhs.number {
+            print("⚠️ This should probably have been handled elsewhere???")
+            return .div(int: lhsNumber, int: rhs)
+        } else if let lhsVariable = lhs.variable {
+            return .div(`var`: lhsVariable, int: rhs)
+        } else if let `operator` = lhs.asOperator() {
+            return `operator`.divided(by: rhs)
         } else { fatalError("this should not happend") }
     }
 }

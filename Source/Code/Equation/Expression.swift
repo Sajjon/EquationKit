@@ -13,11 +13,18 @@ enum Expression {
     case operand(Operand)
 }
 
-extension Expression: CustomStringConvertible {
+extension Expression: CustomStringConvertible, CustomDebugStringConvertible {
     var description: String {
         switch self {
         case .`operator`(let `operator`): return `operator`.description
         case .operand(let operand): return operand.description
+        }
+    }
+
+    var debugDescription: String {
+        switch self {
+        case .`operator`(let `operator`): return `operator`.debugDescription
+        case .operand(let operand): return operand.debugDescription
         }
     }
 }

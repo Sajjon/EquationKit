@@ -25,6 +25,36 @@ struct Sub: Operator, AdditionOrSubtraction {
     var operatorString: String { return "-" }
 }
 
+extension Sub {
+
+    func adding(number: Int) -> Expression {
+        if let lhsNumber = lhs.number {
+            return (lhsNumber + number) - rhs
+        } else if let rhsNumber = rhs.number {
+            return lhs - (rhsNumber - number)
+        }
+        return .add(operator: self, int: number)
+    }
+
+    func subtracting(number: Int) -> Expression {
+        if let lhsNumber = lhs.number {
+            return (lhsNumber - number) - rhs
+        } else if let rhsNumber = rhs.number {
+            return lhs - (rhsNumber + number)
+        }
+        return .sub(operator: self, int: number)
+    }
+
+    func subtractingThisOperatorFrom(number: Int) -> Expression {
+        if let lhsNumber = lhs.number {
+            return (number-lhsNumber) + rhs
+        } else if let rhsNumber = rhs.number {
+            return (number - rhsNumber) - lhs
+        }
+        return .sub(operator: self, int: number)
+    }
+}
+
 extension Expression {
 
     /// Case 0: Int - Int
@@ -45,7 +75,7 @@ extension Expression {
     /// Case 2: Variable - Int
     static func sub(`var` lhs: Variable, int rhs: Int) -> Expression {
         if rhs == 0 { return .variable(lhs) }
-        if rhs < 0 { return .add(`var`: lhs, int: abs(rhs)) }
+//        if rhs < 0 { return .add(`var`: lhs, int: abs(rhs)) }
         return .operator(Sub(`var`: lhs, int: rhs))
     }
 
@@ -59,14 +89,20 @@ extension Expression {
     /// Case 4: Operator - Int
     static func sub(`operator` lhs: Operator, int rhs: Int) -> Expression {
         if rhs == 0 { return .operator(lhs) }
-        if rhs < 0 { return .add(operator: lhs, int: abs(rhs)) }
+//        if rhs < 0 { return .add(operator: lhs, int: abs(rhs)) }
         return .operator(Sub(operator: lhs, int: rhs, wrapInParenthesis: true))
     }
 
-    /// Case 5: Expression - Int
+    /// Case 5: Int - Operator
+    static func sub(int lhs: Int, `operator` rhs: Operator) -> Expression {
+        if lhs == 0 { fatalError("return just rhs (Operator) Negated???") }
+        return .operator(Sub(int: lhs, operator: rhs, wrapInParenthesis: true))
+    }
+
+    /// Case 6: Expression - Int
     static func sub(exp lhs: Expression, int rhs: Int) -> Expression {
         if rhs == 0 { return lhs }
-        if rhs < 0 { return .add(exp: lhs, int: abs(rhs)) }
+//        if rhs < 0 { return .add(exp: lhs, int: abs(rhs)) }
 
         if let lhsNumber = lhs.number {
             print("⚠️ This should probably have been handled elsewhere???")
@@ -78,19 +114,17 @@ extension Expression {
         } else { fatalError("this should not happend") }
     }
 
-    /// Case 6: Int - Expression
+    /// Case 7: Int - Expression
     /// Note: Subtraction is not commutative, making the need for this
     static func sub(int lhs: Int, exp rhs: Expression) -> Expression {
-        if lhs == 0 { return rhs }
-
+        if lhs == 0 { fatalError("return just rhs NEGATED?") }
         if let rhsNumber = rhs.number {
             print("⚠️ This should probably have been handled elsewhere???")
-            return .sub(int: rhsNumber, int: lhs)
+            return .sub(int: lhs, int: rhsNumber)
         } else if let rhsVariable = rhs.variable {
-            return .sub(`var`: rhsVariable, int: lhs)
+            return .sub(int: lhs, `var`: rhsVariable)
         } else if let `operator` = rhs.asOperator() {
-            // Trick, OP - LHS <=> OP + (-LHS)
-            return `operator`.adding(number: -lhs)
+            return `operator`.subtractingThisOperatorFrom(number: lhs)
         } else { fatalError("this should not happend") }
     }
 }

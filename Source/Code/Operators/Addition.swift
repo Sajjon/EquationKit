@@ -24,6 +24,35 @@ struct Add: Operator, AdditionOrSubtraction {
     var operatorString: String { return "+" }
 }
 
+extension Add {
+
+    func adding(number: Int) -> Expression {
+        if let lhsNumber = lhs.number {
+            return (lhsNumber + number) + rhs
+        } else if let rhsNumber = rhs.number {
+            return lhs + (rhsNumber + number)
+        }
+        return .add(operator: self, int: number)
+    }
+
+    func subtracting(number: Int) -> Expression {
+        if let lhsNumber = lhs.number {
+            return (number - lhsNumber) - rhs
+        } else if let rhsNumber = rhs.number {
+            return lhs - (number - rhsNumber)
+        }
+        return .sub(operator: self, int: number)
+    }
+
+    func subtractingThisOperatorFrom(number: Int) -> Expression {
+        if let lhsNumber = lhs.number {
+            return (number - lhsNumber) - rhs
+        } else if let rhsNumber = rhs.number {
+            return (number - rhsNumber) - lhs
+        }
+        return .sub(operator: self, int: number)
+    }
+}
 
 extension Expression {
 
@@ -44,7 +73,7 @@ extension Expression {
     }
     internal static func case2Add(`var` lhs: Variable, int rhs: Int) -> Expression {
         if rhs == 0 { return .variable(lhs) }
-        if rhs < 0 { return .sub(`var`: lhs, int: abs(rhs)) }
+//        if rhs < 0 { return .sub(`var`: lhs, int: abs(rhs)) }
         return .operator(Add(`var`: lhs, int: rhs))
     }
 
@@ -56,15 +85,19 @@ extension Expression {
     /// Case 4 - Operator + Int
     static func add(`operator` lhs: Operator, int rhs: Int) -> Expression {
         if rhs == 0 { return .operator(lhs) }
-        if rhs < 0 { return .sub(operator: lhs, int: abs(rhs)) }
+//        if rhs < 0 { return .sub(operator: lhs, int: abs(rhs)) }
         return .operator(Add(operator: lhs, int: rhs, wrapInParenthesis: true))
     }
 
     /// Case 5 - Expression + Int
     /// Using Case 5 of Subtraction if `rhs` is negative
     static func add(exp lhs: Expression, int rhs: Int) -> Expression {
+
+        print("lhs: \(lhs)")
+        print("rhs: \(rhs)")
+
         if rhs == 0 { return lhs }
-        if rhs < 0 { return .sub(exp: lhs, int: abs(rhs)) }
+//        if rhs < 0 { return .sub(exp: lhs, int: abs(rhs)) }
 
         if let lhsNumber = lhs.number {
             print("⚠️ This should probably have been handled elsewhere???")
@@ -76,47 +109,3 @@ extension Expression {
         } else { fatalError("this should not happend") }
     }
 }
-
-extension Add {
-
-    /// Case - result ==0: `(x + 3) + (-3)` => `Variable(x)` <==> `x`
-    /// Case - result  <0: `(x + 3) + (-4)` => `Sub(x, 1)`   <==> `x - 1`
-    /// Case - result  >0: `(x + 3) + 1`    => `Add(x, 4)`   <==> `x + 4`
-    func adding(number: Int) -> Expression {
-        func combineNumber(_ selfNumber: Int) -> Int {
-         // `number` is on the right hand side, since calling this method is `someOperator.adding(number: A)` for any integer `A`. `selfNumber` refers to this operators rhs OR lhs, whichever was as number (if any, otherwise handled elsewhere in this function). This is important for non commuative operations such as Subtraction
-            return function(selfNumber, number)
-        }
-
-        if let lhsNumber = lhs.number {
-            return combineNumber(lhsNumber) + rhs
-        } else if let rhsNumber = rhs.number {
-            return lhs + combineNumber(rhsNumber)
-        } else {
-            print("💣 adding two Expressions, should this have been handled elsewhere???")
-            return .add(operator: self, int: number)
-        }
-    }
-}
-
-//extension Sub {
-//
-//    /// Case - result ==0: `(x - 3) + 3` => `Variable(x)` <==> `x`
-//    /// Case - result  <0: `(x - 3) + 4` => `Add(x, 1)`   <==> `x + 1`
-//    /// Case - result  >0: `(x - 3) + 1` => `Sub(x, 2)`   <==> `x - 2`
-//    func adding(number: Int) -> Expression {
-//        func combineNumber(_ selfNumber: Int) -> Int {
-//            // `number` is on the right hand side, since calling this method is `someOperator.adding(number: A)` for any integer `A`.
-//            return function(selfNumber, number)
-//        }
-//
-//        if let lhsNumber = lhs.number {
-//            return combineNumber(lhsNumber) + rhs
-//        } else if let rhsNumber = rhs.number {
-//            return lhs + combineNumber(rhsNumber)
-//        } else {
-//            print("💣 adding two Expressions, should this have been handled elsewhere???")
-//            return .add(self, number)
-//        }
-//    }
-//}

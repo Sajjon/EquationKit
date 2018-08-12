@@ -8,18 +8,57 @@
 
 import Foundation
 
+public protocol Negatable {
+    func negated() -> Self
+}
+
+extension Int: Negatable {
+    public func negated() -> Int {
+        return -self
+    }
+}
+
+extension Expression: Negatable {
+    func negated() -> Expression {
+        switch self {
+        case .operand(let operand): return .operand(operand.negated())
+        case .operator: return self // do nothing
+        }
+    }
+}
+
 struct Variable: Equatable {
     let name: String
-    init(_ name: String) {
+    let isNegative: Bool
+    init(_ name: String, isNegative: Bool = false) {
         self.name = name
+        self.isNegative = isNegative
     }
 
     static func == (lhs: Variable, rhs: Variable) -> Bool {
-        return lhs.name == rhs.name
+        let sameName = lhs.name == rhs.name
+        if sameName && (lhs.isNegative != rhs.isNegative) { fatalError("How to handle this? Probably return `false`?") }
+        return sameName
     }
 }
-extension Variable: CustomStringConvertible {
+
+extension Variable: Negatable {
+    public func negated() -> Variable {
+        return Variable(name, isNegative: !isNegative)
+    }
+}
+
+extension Variable: CustomStringConvertible, CustomDebugStringConvertible {
     var description: String {
-        return name
+        return "\(sign)\(name)"
+    }
+
+    private var sign: String {
+        guard isNegative else { return "" }
+        return "-"
+    }
+
+    var debugDescription: String {
+        return "\(printName(self))(\(sign)\(name))"
     }
 }

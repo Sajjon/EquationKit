@@ -32,6 +32,7 @@
 		4858F2C7211F33BE00ECEC93 /* SimpleMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2B2211EFC7400ECEC93 /* SimpleMultiplicationTests.swift */; };
 		4858F2C8211F33F300ECEC93 /* SimpleSubtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2B0211EFB9400ECEC93 /* SimpleSubtractionTests.swift */; };
 		4858F2CA211F350400ECEC93 /* SubtractionNumberExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2C9211F350400ECEC93 /* SubtractionNumberExpression.swift */; };
+		4858F2CC2120964A00ECEC93 /* DivisionNumberExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858F2CB2120964A00ECEC93 /* DivisionNumberExpression.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		4858F2C3211F16D700ECEC93 /* Optional_Numeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional_Numeric.swift; sourceTree = "<group>"; };
 		4858F2C5211F315700ECEC93 /* MultiplicationNumberExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplicationNumberExpression.swift; sourceTree = "<group>"; };
 		4858F2C9211F350400ECEC93 /* SubtractionNumberExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtractionNumberExpression.swift; sourceTree = "<group>"; };
+		4858F2CB2120964A00ECEC93 /* DivisionNumberExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DivisionNumberExpression.swift; path = Source/Code/Parsing/Multiplication/DivisionNumberExpression.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				4858F2BE211F00D900ECEC93 /* DivisionNumberVariable.swift */,
+				4858F2CB2120964A00ECEC93 /* DivisionNumberExpression.swift */,
 			);
 			path = Division;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				4858F2BC211EFF3700ECEC93 /* MultiplicationNumberVariable.swift in Sources */,
 				4858F291211EF66B00ECEC93 /* Operand.swift in Sources */,
 				4858F2CA211F350400ECEC93 /* SubtractionNumberExpression.swift in Sources */,
+				4858F2CC2120964A00ECEC93 /* DivisionNumberExpression.swift in Sources */,
 				4858F299211EF74700ECEC93 /* Addition.swift in Sources */,
 				4858F2B9211EFE9500ECEC93 /* SubtractionNumberVariable.swift in Sources */,
 				4858F2A9211EF9EC00ECEC93 /* ExpressionADDInt_Old.swift in Sources */,

@@ -11,6 +11,7 @@ import Foundation
 func *(lhs: Int, rhs: Variable) -> Expression {
     if lhs == 0 { return .number(0) } // TODO replace with nil
     if lhs == 1 { return .variable(rhs) }
+    if lhs == -1 { return .variable(rhs.negated()) }
     return .mul(int: lhs, `var`: rhs)
 }
 

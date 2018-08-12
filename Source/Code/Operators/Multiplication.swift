@@ -24,6 +24,22 @@ struct Mul: Operator {
 }
 
 extension Mul {
+    
+    func divided(by denominator: Int) -> Expression {
+        // Multiplication is commutative, so we dont care if `8 * x` or `x * 8`, we treat them the same below
+        guard
+            let (number, variable) = numberAndVariable,
+            case let gcd = extendedGreatestCommonDivisor(number, denominator).gcd,
+            gcd != 1
+            else {
+                // (2*x) / 3 => Div(Mul(2, x), 3)
+                return .div(operator: self, int: denominator)
+        }
+
+        let coefficient = number/gcd
+        return coefficient * variable
+    }
+
     /// Example:  (3 * x) * 5  <==>  (15 * x)
     func multiplied(by number: Int) -> Expression {
         if let lhsNumber = lhs.number {
@@ -53,7 +69,7 @@ extension Expression {
     }
 
     /// Case 2 - Int * Variable
-     public static func mul(int lhs: Int, `var` rhs: Variable) -> Expression {
+    public static func mul(int lhs: Int, `var` rhs: Variable) -> Expression {
         return case2Mul(int: lhs, `var`: rhs)
     }
     internal static func case2Mul(int lhs: Int, `var` rhs: Variable) -> Expression {
@@ -69,7 +85,7 @@ extension Expression {
         return case2Mul(int: rhs, `var`: lhs)
     }
 
-   /// Case 4 - Operator * Int
+    /// Case 4 - Operator * Int
     static func mul(`operator` lhs: Operator, int rhs: Int) -> Expression {
         if rhs == 0 { return .number(0) } // TODO replace with `nil`
         if rhs == 1 { return .operator(lhs) }

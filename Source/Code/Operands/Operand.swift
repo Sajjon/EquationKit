@@ -8,9 +8,18 @@
 
 import Foundation
 
-enum Operand: CustomStringConvertible {
+enum Operand: CustomStringConvertible, CustomDebugStringConvertible {
     case number(Int)
     case variable(Variable)
+}
+
+extension Operand: Negatable {
+    func negated() -> Operand {
+        switch self {
+        case .number(let number): return .number(number.negated())
+        case .variable(let variable): return .variable(variable.negated())
+        }
+    }
 }
 
 extension Operand {
@@ -18,6 +27,13 @@ extension Operand {
         switch self {
         case .number(let number): return number.description
         case .variable(let variable): return variable.description
+        }
+    }
+
+    var debugDescription: String {
+        switch self {
+        case .number(let number): return number.description
+        case .variable(let variable): return variable.debugDescription
         }
     }
 }
