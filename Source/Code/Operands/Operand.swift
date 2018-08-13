@@ -8,9 +8,17 @@
 
 import Foundation
 
-enum Operand: CustomStringConvertible, CustomDebugStringConvertible {
+enum Operand: CustomStringConvertible, CustomDebugStringConvertible, Equatable {
     case number(Int)
     case variable(Variable)
+
+    static func == (lhs: Operand, rhs: Operand) -> Bool {
+        switch (lhs, rhs) {
+        case (.number(let lhsNum), .number(let rhsNum)): return lhsNum == rhsNum
+        case (.variable(let lhsVar), .variable(let rhsVar)): return lhsVar == rhsVar
+        default: return false
+        }
+    }
 }
 
 extension Operand: Negatable {

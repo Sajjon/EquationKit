@@ -19,3 +19,33 @@ func *(lhs: Int, rhs: Expression) -> Expression {
 func *(lhs: Expression, rhs: Int) -> Expression {
     return rhs * lhs // flipping because of Commutative and setting a `Expression + 1` convention
 }
+
+func *(lhs: Variable, rhs: Expression) -> Expression {
+    switch rhs {
+    case .operand(let operand):
+        switch operand {
+        case .number(let number):
+            // Multiplication is commutative, prefer `2x` over `x2`
+            return number * lhs
+        case .variable(let variable):
+            return .mul(`var`: lhs, `var`: variable)
+        }
+    case .operator(let `operator`):
+        return .mul(`var`: lhs, operator: `operator`)
+    }
+}
+
+func *(lhs: Expression, rhs: Variable) -> Expression {
+    switch lhs {
+    case .operand(let operand):
+        switch operand {
+        case .number(let number):
+            // Multiplication is commutative, prefer `2x` over `x2`
+            return number * rhs
+        case .variable(let variable):
+            return .mul(`var`: variable, `var`: rhs)
+        }
+    case .operator(let `operator`):
+        return .mul(`var`: rhs, operator: `operator`)
+    }
+}

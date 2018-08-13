@@ -24,8 +24,18 @@ struct Div: Operator {
 }
 
 extension Div {
+    var numerator: Expression {
+        return lhs
+    }
+
+    var denominator: Expression {
+        return rhs
+    }
+}
+
+extension Div {
     func divided(by number: Int) -> Expression {
-        if let numerator = lhs.number, let denominator = rhs.variable {
+        if let numerator = numerator.number, let denominator = denominator.variable {
             // Example: 10/x
             let gcd = extendedGreatestCommonDivisor(numerator, number).gcd
             if gcd == 1 { // `Div(10, x) / 3` ==> `Div(10, Mul(3, x)`
@@ -36,12 +46,20 @@ extension Div {
                 let newNumerator = numerator/gcd
                 return newNumerator / denominator
             }
-        } else if let numerator = lhs.variable, let denominator = rhs.number {
+        } else if let numerator = numerator.variable, let denominator = denominator.number {
             // Example: `Div(x, 10) / 5` ==> `Div(x, 50)`
             let newDenominator = denominator * number
             return numerator / newDenominator
         }
         fatalError("which case did I miss?")
+    }
+
+    func dividingNumberByThisOperator(_ number: Int) -> Expression {
+        return .div(int: number, operator: self)
+    }
+
+    func multiplied(by number: Int) -> Expression {
+        fatalError("do this")
     }
 }
 

@@ -40,6 +40,10 @@ extension Mul {
         return coefficient * variable
     }
 
+    func dividingNumberByThisOperator(_ number: Int) -> Expression {
+        fatalError("do this")
+    }
+
     /// Example:  (3 * x) * 5  <==>  (15 * x)
     func multiplied(by number: Int) -> Expression {
         if let lhsNumber = lhs.number {
@@ -53,22 +57,25 @@ extension Mul {
     }
 }
 
+func *(lhs: Expression, rhs: Expression) -> Expression {
+    fatalError()
+}
+
 extension Expression {
 
-    /// Case 0 - Int * Int
+    /// Case 0: Int * Int
     /// TODO: Return `nil` instead of `number(0)` when multiplying with 0
     static func mul(int lhs: Int, int rhs: Int) -> Expression {
         return .number(Mul.function(lhs, rhs))
     }
 
-    /// Case 1 - Variable * Variable
-    /// TODO when POW replace x*x with pow(x, 2)
+    /// Case 1: Variable * Variable
     static func mul(`var` lhs: Variable, `var` rhs: Variable) -> Expression {
-        /* if lhs == rhs { return .pow(2, lhs) } */
+        if lhs == rhs { return .pow(`var`: lhs, int: 2) }
         return .operator(Mul(`var`: lhs, `var`: rhs))
     }
 
-    /// Case 2 - Int * Variable
+    /// Case 2: Int * Variable
     public static func mul(int lhs: Int, `var` rhs: Variable) -> Expression {
         return case2Mul(int: lhs, `var`: rhs)
     }
@@ -80,19 +87,27 @@ extension Expression {
     }
 
 
-    /// Case 3 - Variable * Int (Commutative version of Case 2)
+    /// Case 3: Variable * Int (Commutative version of Case 2)
     public static func mul(`var` lhs: Variable, int rhs: Int) -> Expression {
         return case2Mul(int: rhs, `var`: lhs)
     }
 
-    /// Case 4 - Operator * Int
+    /// Case 4: Operator * Int
     static func mul(`operator` lhs: Operator, int rhs: Int) -> Expression {
         if rhs == 0 { return .number(0) } // TODO replace with `nil`
         if rhs == 1 { return .operator(lhs) }
         return .operator(Mul(operator: lhs, int: rhs, wrapInParenthesis: true))
     }
 
-    /// Case 5 - Int * Expression
+    /// Case 5: Operator * Int
+    static func mul(int lhs: Int, `operator` rhs: Operator) -> Expression {
+        if lhs == 0 { return .number(0) } // TODO replace with `nil`
+        if lhs == 1 { return .operator(rhs) }
+        return .operator(Mul(int: lhs, operator: rhs, wrapInParenthesis: true))
+    }
+
+
+    /// Case 6: Int * Expression
     static func mul(int lhs: Int, exp rhs: Expression) -> Expression {
         if lhs == 0 { return .number(0) } // TODO replace with `nil`
         if lhs == 1 { return rhs }
@@ -108,4 +123,28 @@ extension Expression {
         } else { fatalError("this should not happend") }
     }
 
+    static func mul(`var` lhs: Variable, `operator` rhs: Operator) -> Expression {
+        if rhs.contains(variable: lhs) {
+            if let multiplication = rhs as? Mul {
+                fatalError()
+            } else if let division = rhs as? Div {
+                fatalError()
+            } else if let pow = rhs as? Pow {
+                fatalError()
+            }
+        }
+        return .operator(Mul(`var`: lhs, operator: rhs))
+    }
+}
+
+extension Operator {
+    func contains(variable: Variable) -> Bool {
+        if let lhsVar = lhs.variable, lhsVar == variable {
+            return true
+        }
+        if let rhsVar = rhs.variable, rhsVar == variable {
+            return true
+        }
+        return false
+    }
 }

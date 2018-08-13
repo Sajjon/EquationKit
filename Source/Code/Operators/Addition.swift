@@ -89,7 +89,7 @@ extension Expression {
         return .operator(Add(operator: lhs, int: rhs, wrapInParenthesis: true))
     }
 
-    /// Case 5 - Expression + Int
+    /// Case 6 - Expression + Int
     /// Using Case 5 of Subtraction if `rhs` is negative
     static func add(exp lhs: Expression, int rhs: Int) -> Expression {
 
@@ -107,5 +107,9 @@ extension Expression {
         } else if let `operator` = lhs.asOperator() {
             return `operator`.adding(number: rhs)
         } else { fatalError("this should not happend") }
+    }
+
+    static func add(`var` lhs: Variable, `operator` rhs: Operator) -> Expression {
+        fatalError()
     }
 }

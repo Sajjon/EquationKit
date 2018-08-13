@@ -19,3 +19,18 @@ func +(lhs: Expression, rhs: Int) -> Expression {
 func +(lhs: Int, rhs: Expression) -> Expression {
     return rhs + lhs // flipping because of Commutative and setting a `Expression + 1` convention
 }
+
+func +(lhs: Expression, rhs: Variable) -> Expression {
+    switch lhs {
+    case .operand(let operand):
+        switch operand {
+        case .number(let number):
+            // Addition is commutative, prefer `x+1` over `1+x`
+            return rhs + number
+        case .variable(let variable):
+            return .add(`var`: variable, `var`: rhs)
+        }
+    case .operator(let `operator`):
+        return .add(`var`: rhs, operator: `operator`)
+    }
+}

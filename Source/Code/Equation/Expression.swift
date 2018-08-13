@@ -11,6 +11,45 @@ import Foundation
 enum Expression {
     indirect case `operator`(Operator)
     case operand(Operand)
+
+    func equals(other: Expression) -> Bool {
+        switch (self, other) {
+        case (.operator(let selfOp), .operator(let otherOp)): return selfOp.equals(other: otherOp)
+        case (.operand(let selfOp), .operand(let otherOp)): return selfOp == otherOp
+        default: return false
+        }
+    }
+}
+
+protocol Differentiatable {
+    func differentiated(withRespectTo variable: Variable) -> Expression
+}
+
+extension Operand: Differentiatable {
+    func differentiated(withRespectTo variable: Variable) -> Expression {
+        return .operand(self)
+//        switch self {
+//        case .number: return .number(0)
+//        case .variable(let inner):
+//            guard inner == variable else { return self }
+//            return .number(1)
+//        }
+    }
+}
+
+extension Expression: Differentiatable {
+    func differentiated(withRespectTo variable: Variable) -> Expression {
+        print("differentiating: `\(self)`")
+        switch self {
+        case .operand(let operand): return operand.differentiated(withRespectTo: variable)
+        case .operator(let `operator`): return `operator`.differentiated(withRespectTo: variable)
+        }
+    }
+}
+
+func differentiate(expression: Expression, withRespectTo variable: Variable) -> Expression {
+    print("differentiating: `\(expression)`")
+    return expression.differentiated(withRespectTo: variable)
 }
 
 extension Expression: CustomStringConvertible, CustomDebugStringConvertible {

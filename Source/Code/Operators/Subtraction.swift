@@ -93,7 +93,10 @@ extension Expression {
 
     /// Case 5: Int - Operator
     static func sub(int lhs: Int, `operator` rhs: Operator) -> Expression {
-        if lhs == 0 { fatalError("return just rhs (Operator) Negated???") }
+        if lhs == 0 {
+            return .operator(rhs.negated())
+
+        }
         return .operator(Sub(int: lhs, operator: rhs, wrapInParenthesis: true))
     }
 
@@ -124,5 +127,13 @@ extension Expression {
         } else if let `operator` = rhs.asOperator() {
             return `operator`.subtractingThisOperatorFrom(number: lhs)
         } else { fatalError("this should not happend") }
+    }
+
+    static func sub(`var` lhs: Variable, `operator` rhs: Operator) -> Expression {
+        fatalError()
+    }
+
+    static func sub(`operator` lhs: Operator, `var` rhs: Variable) -> Expression {
+        fatalError()
     }
 }
