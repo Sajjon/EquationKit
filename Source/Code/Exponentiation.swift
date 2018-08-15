@@ -101,3 +101,10 @@ public extension Exponentiation {
     }
 
 }
+
+// MARK: Multiplying
+public extension Exponentiation {
+    func multiplyingExponent(by number: Double) -> Exponentiation {
+        return Exponentiation(variable, exponent: exponent * number)
+    }
+}

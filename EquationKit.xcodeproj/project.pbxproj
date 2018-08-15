@@ -24,6 +24,8 @@
 		48FBE3D32124ABC300ECD8D7 /* Negatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3D22124ABC300ECD8D7 /* Negatable.swift */; };
 		48FBE3D52124ABCE00ECD8D7 /* Differentiatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3D42124ABCE00ECD8D7 /* Differentiatable.swift */; };
 		48FBE3D72124ABDC00ECD8D7 /* Solvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3D62124ABDC00ECD8D7 /* Solvable.swift */; };
+		48FBE3D92124AEB100ECD8D7 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3D82124AEB100ECD8D7 /* Array.swift */; };
+		48FBE3DB2124B07100ECD8D7 /* Construction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3DA2124B07100ECD8D7 /* Construction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		48FBE3D22124ABC300ECD8D7 /* Negatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Negatable.swift; sourceTree = "<group>"; };
 		48FBE3D42124ABCE00ECD8D7 /* Differentiatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Differentiatable.swift; sourceTree = "<group>"; };
 		48FBE3D62124ABDC00ECD8D7 /* Solvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solvable.swift; sourceTree = "<group>"; };
+		48FBE3D82124AEB100ECD8D7 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		48FBE3DA2124B07100ECD8D7 /* Construction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Construction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 				48FBE3C12124A47A00ECD8D7 /* Modulus */,
 				484D742421238C64003C1700 /* Polynomial.swift */,
 				48FBE3CF2124A91400ECD8D7 /* Term.swift */,
+				48FBE3DA2124B07100ECD8D7 /* Construction.swift */,
 				48FBE3CD2124A6CC00ECD8D7 /* Exponentiation.swift */,
 				48FBE3BF2124A45E00ECD8D7 /* CustomOperators.swift */,
 				48FBE3BC2124A3DD00ECD8D7 /* Extensions */,
@@ -167,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				48FBE3BD2124A3EC00ECD8D7 /* Double.swift */,
+				48FBE3D82124AEB100ECD8D7 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -318,7 +324,9 @@
 				48FBE3C02124A45E00ECD8D7 /* CustomOperators.swift in Sources */,
 				48FBE3D52124ABCE00ECD8D7 /* Differentiatable.swift in Sources */,
 				48FBE3CE2124A6CC00ECD8D7 /* Exponentiation.swift in Sources */,
+				48FBE3DB2124B07100ECD8D7 /* Construction.swift in Sources */,
 				48FBE3D72124ABDC00ECD8D7 /* Solvable.swift in Sources */,
+				48FBE3D92124AEB100ECD8D7 /* Array.swift in Sources */,
 				48FBE3D02124A91400ECD8D7 /* Term.swift in Sources */,
 				48FBE3D32124ABC300ECD8D7 /* Negatable.swift in Sources */,
 				48FBE3C82124A63900ECD8D7 /* NamedVariable.swift in Sources */,

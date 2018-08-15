@@ -106,19 +106,15 @@ public extension Term {
         var coefficient = self.coefficient
         var coefficientFromConstants: Double = 1
         for exponentiation in self.exponentiations {
-            if let differentiationResult = exponentiation.differentiateWithRespectTo(variableToDifferentiate) {
-                switch differentiationResult {
-                case .constant(let differentiationConstant):
-                    coefficientFromConstants *= differentiationConstant
-                case .exponentiation(let differentiationCoefficient, let differentiationExponentiation):
-                    if let differentiationCoefficient = differentiationCoefficient {
-                        coefficient *= differentiationCoefficient
-                    }
-                    exponentiations.append(differentiationExponentiation)
+            guard let differentiationResult = exponentiation.differentiateWithRespectTo(variableToDifferentiate) else { exponentiations.append(exponentiation); continue }
+            switch differentiationResult {
+            case .constant(let differentiationConstant):
+                coefficientFromConstants *= differentiationConstant
+            case .exponentiation(let differentiationCoefficient, let differentiationExponentiation):
+                if let differentiationCoefficient = differentiationCoefficient {
+                    coefficient *= differentiationCoefficient
                 }
-
-            } else {
-                exponentiations.append(exponentiation)
+                exponentiations.append(differentiationExponentiation)
             }
         }
 
@@ -168,3 +164,55 @@ public extension Term {
     }
 }
 
+// MARK: - Appending
+public extension Term {
+    func appending(exponentiation: Exponentiation) -> Term {
+        return Term(exponentiations: Term.sortingExponentiation(exponentiations + exponentiation), coefficient: coefficient)
+    }
+
+    func appending(variable: Variable) -> Term {
+        return appending(exponentiation: Exponentiation(variable))
+    }
+}
+
+// MARK: - Multiplying
+public extension Term {
+    func multiplyingCoefficient(by number: Double) -> Term {
+        return Term(exponentiations: exponentiations, coefficient: coefficient * number)
+    }
+
+    func multiplyingExponent(by number: Double) -> Term {
+        guard let lastExponentiation = self.exponentiations.last else { fatalError("Terms should have at least one exponentation") }
+        let modified = lastExponentiation.multiplyingExponent(by: number)
+        var exponentiations = [modified]
+        if exponentiations.count > 1 {
+            exponentiations = self.exponentiations.dropLast() + exponentiations
+        }
+        return Term(exponentiations: exponentiations, coefficient: coefficient)
+    }
+}
+
+public func *(rhs: Term, lhs: Term) -> Term {
+    // e.g. (2*x*y) * (3x^2*y^2)
+    var mergedExponentiations = rhs.exponentiations + lhs.exponentiations
+
+    let coefficient = rhs.coefficient * lhs.coefficient
+
+    if mergedExponentiations.containsDuplicates() {
+        var count: [Exponentiation: Int] = [:]
+        for exp in mergedExponentiations {
+            guard let currentCount = count[exp] else { count[exp] = 1; continue }
+            count[exp] = currentCount + 1
+        }
+        let duplicatesDictionary = count.filter { $0.value > 1 }
+
+        let nonDuplicates: [Exponentiation] = Array(Set(mergedExponentiations).subtracting(Set(duplicatesDictionary.keys)))
+        let exponentiationsWithExponentGreaterThanOne: [Exponentiation] = duplicatesDictionary.map { Exponentiation($0.key.variable, exponent: Double($0.value)) }
+
+        mergedExponentiations = exponentiationsWithExponentGreaterThanOne + nonDuplicates
+
+        return Term(exponentiations: mergedExponentiations, coefficient: coefficient)
+    } else {
+        return Term(exponentiations: mergedExponentiations, coefficient: coefficient)
+    }
+}
