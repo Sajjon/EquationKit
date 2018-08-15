@@ -1,10 +1,14 @@
-##### Write equations in pure Swift as expressions (not as a String) thus getting help from compiler and evaluate them.
+##### Write equations in pure Swift, differentiate and solve them.
 
 ```swift
-/// https://en.wikipedia.org/wiki/Reverse_Polish_notation#Example
-Equation(infix: ﹙,﹙,15, ୵,﹙,7,－,﹙,1, ＋, 1,﹚,﹚,﹚, ·, 3,﹚,－,﹙,2, ＋,﹙,1, ＋, 1,﹚,﹚).evaluate() // 5
+let equation = (3*x + 5*y - 17) * (7*x - 9*y + 23)
+print(equation) // 21x² + 8xy - 50x - 45y² + 268y - 391)
 
-Equation(infix: 2,⁹).evaluate() // 512
+let y＇ = equation.differentiateWithRespectTo(x)
+print(y＇) // 42x + 8y - 50
+y＇.solve() {[ x == 1, y == 1 ]} // 0
 
-Equation(infix: 61, ％, 60).evaluate() // 1
+let x＇ = equation.differentiateWithRespectTo(y)
+print(x＇) // 8x - 90y + 268
+ x＇.solve() {[ x == 11.5,  y == 4 ]} // 0
 ```

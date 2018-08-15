@@ -101,9 +101,6 @@ class SimpleDifferentiationTests: XCTestCase {
         let yy＇ = y＇.differentiateWithRespectTo(x)
         XCTAssertEqual(Eq(6 * y⁵ * x), yy＇)
 
-
-
-
         let x＇ = eq.differentiateWithRespectTo(y)
         XCTAssertEqual(Eq(5*y⁴*x³), x＇)
 
