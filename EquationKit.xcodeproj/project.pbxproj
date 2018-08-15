@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		48022816211B203500AEFB58 /* EquationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48022802211B1FFC00AEFB58 /* EquationKit.framework */; };
 		48022825211B20A400AEFB58 /* EquationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48022824211B209C00AEFB58 /* EquationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		484D742521238C64003C1700 /* Polynomial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D742421238C64003C1700 /* Polynomial.swift */; };
+		484D742921238CD8003C1700 /* SimpleDifferentiationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D742821238CD8003C1700 /* SimpleDifferentiationTests.swift */; };
+		48FBE3BA2124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3B92124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +30,9 @@
 		4802281F211B208C00AEFB58 /* EquationKitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EquationKitTests-Info.plist"; sourceTree = "<group>"; };
 		48022823211B209C00AEFB58 /* EquationKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EquationKit-Info.plist"; sourceTree = "<group>"; };
 		48022824211B209C00AEFB58 /* EquationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EquationKit.h; sourceTree = "<group>"; };
+		484D742421238C64003C1700 /* Polynomial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polynomial.swift; sourceTree = "<group>"; };
+		484D742821238CD8003C1700 /* SimpleDifferentiationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleDifferentiationTests.swift; sourceTree = "<group>"; };
+		48FBE3B92124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolynomialMultipliedByPolynomialTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +75,7 @@
 		48022804211B1FFC00AEFB58 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				484D742321238C52003C1700 /* Code */,
 				48022822211B209C00AEFB58 /* SupportingFiles */,
 			);
 			path = Source;
@@ -85,6 +92,7 @@
 		4802281E211B208C00AEFB58 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				484D742621238C98003C1700 /* Tests */,
 				4802281F211B208C00AEFB58 /* EquationKitTests-Info.plist */,
 			);
 			path = SupportingFiles;
@@ -97,6 +105,31 @@
 				48022824211B209C00AEFB58 /* EquationKit.h */,
 			);
 			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		484D742321238C52003C1700 /* Code */ = {
+			isa = PBXGroup;
+			children = (
+				484D742421238C64003C1700 /* Polynomial.swift */,
+			);
+			path = Code;
+			sourceTree = "<group>";
+		};
+		484D742621238C98003C1700 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				484D742721238C9E003C1700 /* Differentiation */,
+				48FBE3B92124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		484D742721238C9E003C1700 /* Differentiation */ = {
+			isa = PBXGroup;
+			children = (
+				484D742821238CD8003C1700 /* SimpleDifferentiationTests.swift */,
+			);
+			path = Differentiation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +198,7 @@
 					};
 					48022810211B203500AEFB58 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -208,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				484D742521238C64003C1700 /* Polynomial.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +250,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				484D742921238CD8003C1700 /* SimpleDifferentiationTests.swift in Sources */,
+				48FBE3BA2124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +446,8 @@
 		4802281A211B203500AEFB58 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Tests/SupportingFiles/EquationKitTests-Info.plist";
@@ -420,6 +459,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EquationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -428,6 +468,8 @@
 		4802281B211B203500AEFB58 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "Tests/SupportingFiles/EquationKitTests-Info.plist";
