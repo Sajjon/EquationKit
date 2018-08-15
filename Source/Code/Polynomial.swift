@@ -295,6 +295,10 @@ struct Term: Equatable, CustomStringConvertible, Hashable {
     func negated() -> Term {
         return Term(exponentiations: exponentiations, coefficient: -coefficient)
     }
+
+    fileprivate var lowestVariableNameInAlpabeticOrder: String {
+        return exponentiations.sorted(by: { $0.variable.name < $1.variable.name })[0].variable.name
+    }
 }
 
 
@@ -309,7 +313,7 @@ struct Polynomial: Equatable, CustomStringConvertible {
     let terms: [Term]
 
     static func mergingAndSortingTerms(_ terms: [Term]) -> [Term] {
-        return mergingTerms(terms: terms).sorted(by: { $0.highestExponent > $1.highestExponent })
+        return mergingTerms(terms: terms).sorted(by: { $0.highestExponent > $1.highestExponent }).sorted(by: { $0.lowestVariableNameInAlpabeticOrder < $1.lowestVariableNameInAlpabeticOrder })
     }
 
     init(terms: [Term], constant: Double = 0) {
