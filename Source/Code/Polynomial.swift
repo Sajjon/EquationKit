@@ -240,7 +240,7 @@ struct Term: Equatable, CustomStringConvertible, Hashable {
     }
 
     static func sortingExponentiation(_ exponentiations: [Exponentiation]) -> [Exponentiation] {
-        return exponentiations.sorted(by: { $0.exponent > $1.exponent }).sorted(by: { $0.variable.name > $1.variable.name })
+        return exponentiations.sorted(by: { $0.exponent > $1.exponent }).sorted(by: { $0.variable.name < $1.variable.name })
     }
 
     init(exponentiations: [Exponentiation], coefficient: Double = 1) {
