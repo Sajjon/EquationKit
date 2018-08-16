@@ -15,7 +15,8 @@ precedencegroup ExponentiationPrecedence {
 }
 
 infix operator ^^: ExponentiationPrecedence
+infix operator <-: AssignmentPrecedence
 
-func ==(variable: Variable, value: Double) -> Constant {
+func <-(variable: Variable, value: Double) -> Constant {
     return Constant(variable, value: value)
 }

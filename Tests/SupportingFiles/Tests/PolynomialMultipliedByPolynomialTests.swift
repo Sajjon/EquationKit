@@ -23,8 +23,8 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         XCTAssertEqual(
             0,
             eq.solve() {[
-            x == 4,
-            y == 1
+            x <- 4,
+            y <- 1
         ]})
 
         let y＇ = eq.differentiateWithRespectTo(x)
@@ -32,8 +32,8 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         XCTAssertEqual(
             0,
             y＇.solve() {[
-                x == 1,
-                y == 1
+                x <- 1,
+                y <- 1
                 ]}
         )
 
@@ -42,8 +42,8 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         XCTAssertEqual(
             0,
             x＇.solve() {[
-                x == 11.5,
-                y == 4
+                x <- 11.5,
+                y <- 4
             ]}
         )
     }
