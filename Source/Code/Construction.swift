@@ -55,6 +55,14 @@ public func -(term: Term, exponentiation: Exponentiation) -> Polynomial {
     return Polynomial(term) - Polynomial(exponentiation: exponentiation)
 }
 
+public func +(exponentiation: Exponentiation, term: Term) -> Polynomial {
+    return Polynomial(exponentiation: exponentiation) + Polynomial(term)
+}
+
+public func -(exponentiation: Exponentiation, term: Term) -> Polynomial {
+    return Polynomial(exponentiation: exponentiation) - Polynomial(term)
+}
+
 public func +(term: Term, other: Term) -> Polynomial {
     return Polynomial(term).appending(term: other)
 }

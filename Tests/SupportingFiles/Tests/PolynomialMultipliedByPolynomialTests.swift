@@ -48,4 +48,34 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         )
     }
 
+    func testFourRoots() {
+
+        let roots2Factorized = (x-2)*(x+3)
+        let roots2Expanded = x² + x - 6
+
+        XCTAssertEqual(roots2Factorized, roots2Expanded)
+
+        let roots3FromRoots2FactorizedLHS = roots2Factorized * (x+7)
+        let roots3FromRoots2FactorizedRHS = (x+7) * roots2Factorized
+
+        let roots3ExpanedManual = x³ + 8*x² + x - 42
+        XCTAssertEqual(roots3FromRoots2FactorizedLHS, roots3ExpanedManual)
+        XCTAssertEqual(roots3FromRoots2FactorizedRHS, roots3ExpanedManual)
+
+        let roots3FactorizedManual = (x-2)*(x+3)*(x+7)
+
+
+
+        let eq = (x-2)*(x+3)*(x+7)*(x-11)
+        XCTAssertEqual(eq, x⁴ + 3*x³ - 87*x² - 53*x + 462)
+        let solutions = [
+            eq.solve() { x <- 2 },
+            eq.solve() { x <- -3 },
+            eq.solve() { x <- -7 },
+            eq.solve() { x <- 11 }
+        ]
+        solutions.forEach {
+            XCTAssertEqual($0, 0)
+        }
+    }
 }

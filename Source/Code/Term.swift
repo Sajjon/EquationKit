@@ -16,7 +16,14 @@ public struct Term {
 
     init(exponentiations: [Exponentiation], coefficient: Double = 1) {
         guard coefficient != 0 else { fatalError("You probably don't want a Zero coefficient") }
-        self.exponentiations = Term.sortingExponentiation(exponentiations)
+
+        var exponentsForVariables: [Variable: Double] = [:]
+        for exponentiation in exponentiations {
+            let variable = exponentiation.variable
+            exponentsForVariables[variable] = (exponentsForVariables[variable] ?? 0) + exponentiation.exponent
+        }
+
+        self.exponentiations = Term.sortingExponentiation(exponentsForVariables.map { Exponentiation($0.key, exponent: $0.value) })
         self.coefficient = coefficient
     }
 }
@@ -194,25 +201,6 @@ public extension Term {
 
 public func *(rhs: Term, lhs: Term) -> Term {
     // e.g. (2*x*y) * (3x^2*y^2)
-    var mergedExponentiations = rhs.exponentiations + lhs.exponentiations
 
-    let coefficient = rhs.coefficient * lhs.coefficient
-
-    if mergedExponentiations.containsDuplicates() {
-        var count: [Exponentiation: Int] = [:]
-        for exp in mergedExponentiations {
-            guard let currentCount = count[exp] else { count[exp] = 1; continue }
-            count[exp] = currentCount + 1
-        }
-        let duplicatesDictionary = count.filter { $0.value > 1 }
-
-        let nonDuplicates: [Exponentiation] = Array(Set(mergedExponentiations).subtracting(Set(duplicatesDictionary.keys)))
-        let exponentiationsWithExponentGreaterThanOne: [Exponentiation] = duplicatesDictionary.map { Exponentiation($0.key.variable, exponent: Double($0.value)) }
-
-        mergedExponentiations = exponentiationsWithExponentGreaterThanOne + nonDuplicates
-
-        return Term(exponentiations: mergedExponentiations, coefficient: coefficient)
-    } else {
-        return Term(exponentiations: mergedExponentiations, coefficient: coefficient)
-    }
+    return Term(exponentiations: rhs.exponentiations + lhs.exponentiations, coefficient: rhs.coefficient * lhs.coefficient)
 }

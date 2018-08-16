@@ -61,6 +61,11 @@ public extension Exponentiation {
 
 // MARK: - Hashable
 extension Exponentiation: Hashable {}
+public extension Exponentiation {
+    var hashValue: Int {
+        return variable.hashValue
+    }
+}
 
 // MARK: - Equatable
 extension Exponentiation: Equatable {}
