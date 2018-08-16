@@ -13,7 +13,7 @@ print(x＇) // 8x - 90y + 268
  x＇.solve() {[ x <- 11.5,  y <- 4 ]} // 0
 ```
 
-You write powers using the custom operator `x^^2`, but for powers between `2` and `9` you can use the unicode superscript symbols instead. As done in the unit test target in this SDK you can define *Variables* with expontents as global variables, like so:
+You write powers using the custom operator `x^^2`, but for powers between `2` and `9` you can use the [unicode superscript symbols](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts#Superscripts_and_subscripts_block) instead, like so:
 ```swift
 let x = Variable("x")
 let y = Variable("y")
