@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Exponentiation {
+public struct Exponentiation: Algebraic {
     
     public let variable: Variable
     public let exponent: Double
@@ -30,8 +30,8 @@ public extension Exponentiation {
 extension Exponentiation: Solvable {}
 public extension Exponentiation {
     func solve(constants: Set<Constant>, modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        guard let constant = constants.first(where: { $0.toVariable() == variable }) else { return nil }
-        let value = pow(constant.value, exponent)
+        guard let base = variable.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return nil }
+        let value = pow(base, exponent)
         guard let modulus = modulus else { return value }
         return mod(value, modulus: modulus, modulusMode: modulusMode)
     }

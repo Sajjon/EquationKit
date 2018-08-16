@@ -8,11 +8,27 @@
 
 import Foundation
 
-public struct Variable: NamedVariable {
+public struct Variable: NamedVariable, Algebraic {
 
     public let name: String
 
     init(_ name: String) {
         self.name = name
+    }
+}
+
+// MARK: - Solvable
+public extension Variable {
+    func solve(constants: Set<Constant>, modulus: Double?, modulusMode: ModulusMode) -> Double? {
+        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
+        return constant.value
+    }
+}
+
+// MARK: - Differentiatable
+public extension Variable {
+    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Variable? {
+        guard variableToDifferentiate == self else { return nil }
+        return self
     }
 }

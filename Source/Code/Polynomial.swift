@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Polynomial {
+public struct Polynomial: Algebraic {
 
     public let constant: Double
     public let terms: [Term]
@@ -91,10 +91,11 @@ public extension Polynomial {
     }
 }
 
-// MARK: - Differentiatable LIKE
+// MARK: - Differentiatable
+extension Polynomial: Differentiatable {}
 public extension Polynomial {
 
-    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Polynomial {
+    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Polynomial? {
         guard contains(variable: variableToDifferentiate) else { return Polynomial(terms: [], constant: 0) }
         var terms = [Term]()
         var constant: Double = 0

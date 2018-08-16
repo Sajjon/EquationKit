@@ -27,7 +27,7 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
             y <- 1
         ]})
 
-        let y＇ = eq.differentiateWithRespectTo(x)
+        let y＇ = eq.differentiateWithRespectTo(x)!
         XCTAssertEqual(42*x + 8*y - 50, y＇)
         XCTAssertEqual(
             0,
@@ -37,7 +37,7 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
                 ]}
         )
 
-        let x＇ = eq.differentiateWithRespectTo(y)
+        let x＇ = eq.differentiateWithRespectTo(y)!
         XCTAssertEqual(8*x - 90*y + 268, x＇)
         XCTAssertEqual(
             0,

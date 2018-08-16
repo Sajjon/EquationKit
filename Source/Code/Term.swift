@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Term {
+public struct Term: Algebraic {
 
     /// -1 if negative
     public let coefficient: Double
