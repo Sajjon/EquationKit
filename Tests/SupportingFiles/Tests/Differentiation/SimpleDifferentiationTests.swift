@@ -12,6 +12,7 @@ import XCTest
 
 let x = Variable("x")
 let y = Variable("y")
+let z = Variable("z")
 let x² = Exponentiation(x, exponent: 2)
 let x³ = Exponentiation(x, exponent: 3)
 let x⁴ = Exponentiation(x, exponent: 4)
@@ -29,6 +30,16 @@ let y⁶ = Exponentiation(y, exponent: 6)
 let y⁷ = Exponentiation(y, exponent: 7)
 let y⁸ = Exponentiation(y, exponent: 8)
 let y⁹ = Exponentiation(y, exponent: 9)
+
+let z² = Exponentiation(z, exponent: 2)
+let z³ = Exponentiation(z, exponent: 3)
+let z⁴ = Exponentiation(z, exponent: 4)
+let z⁵ = Exponentiation(z, exponent: 5)
+let z⁶ = Exponentiation(z, exponent: 6)
+let z⁷ = Exponentiation(z, exponent: 7)
+let z⁸ = Exponentiation(z, exponent: 8)
+let z⁹ = Exponentiation(z, exponent: 9)
+
 typealias Equation = Polynomial
 typealias Eq = Equation
 

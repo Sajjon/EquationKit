@@ -30,6 +30,9 @@
 		48FBE3E021263D7B00ECD8D7 /* Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3DF21263D7B00ECD8D7 /* Addition.swift */; };
 		48FBE3E321263E1D00ECD8D7 /* Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3E221263E1D00ECD8D7 /* Subtraction.swift */; };
 		48FBE3E521263E4D00ECD8D7 /* Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3E421263E4D00ECD8D7 /* Multiplication.swift */; };
+		48FBE3EA2126D7C600ECD8D7 /* ConcatenationByAdditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3E82126D7B500ECD8D7 /* ConcatenationByAdditionTests.swift */; };
+		48FBE3EE2126F67800ECD8D7 /* ConcatenationBySubtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3ED2126F67800ECD8D7 /* ConcatenationBySubtractionTests.swift */; };
+		48FBE3F02127218C00ECD8D7 /* ExploringRandomStuffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3EF2127218C00ECD8D7 /* ExploringRandomStuffTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		48FBE3DF21263D7B00ECD8D7 /* Addition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Addition.swift; sourceTree = "<group>"; };
 		48FBE3E221263E1D00ECD8D7 /* Subtraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtraction.swift; sourceTree = "<group>"; };
 		48FBE3E421263E4D00ECD8D7 /* Multiplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplication.swift; sourceTree = "<group>"; };
+		48FBE3E82126D7B500ECD8D7 /* ConcatenationByAdditionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenationByAdditionTests.swift; sourceTree = "<group>"; };
+		48FBE3ED2126F67800ECD8D7 /* ConcatenationBySubtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenationBySubtractionTests.swift; sourceTree = "<group>"; };
+		48FBE3EF2127218C00ECD8D7 /* ExploringRandomStuffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploringRandomStuffTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,8 +168,10 @@
 		484D742621238C98003C1700 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				48FBE3E62126D7A200ECD8D7 /* Concatenation */,
 				484D742721238C9E003C1700 /* Differentiation */,
 				48FBE3B92124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift */,
+				48FBE3EF2127218C00ECD8D7 /* ExploringRandomStuffTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -218,20 +226,37 @@
 		48FBE3DE21263D6D00ECD8D7 /* Concatenation */ = {
 			isa = PBXGroup;
 			children = (
-				48FBE3E121263D8D00ECD8D7 /* Addition */,
-			);
-			path = Concatenation;
-			sourceTree = "<group>";
-		};
-		48FBE3E121263D8D00ECD8D7 /* Addition */ = {
-			isa = PBXGroup;
-			children = (
 				48FBE3DF21263D7B00ECD8D7 /* Addition.swift */,
 				48FBE3E421263E4D00ECD8D7 /* Multiplication.swift */,
 				48FBE3DA2124B07100ECD8D7 /* ExponentiationOfVariables.swift */,
 				48FBE3E221263E1D00ECD8D7 /* Subtraction.swift */,
 			);
+			path = Concatenation;
+			sourceTree = "<group>";
+		};
+		48FBE3E62126D7A200ECD8D7 /* Concatenation */ = {
+			isa = PBXGroup;
+			children = (
+				48FBE3EC2126F66200ECD8D7 /* Subtraction */,
+				48FBE3E72126D7AD00ECD8D7 /* Addition */,
+			);
+			path = Concatenation;
+			sourceTree = "<group>";
+		};
+		48FBE3E72126D7AD00ECD8D7 /* Addition */ = {
+			isa = PBXGroup;
+			children = (
+				48FBE3E82126D7B500ECD8D7 /* ConcatenationByAdditionTests.swift */,
+			);
 			path = Addition;
+			sourceTree = "<group>";
+		};
+		48FBE3EC2126F66200ECD8D7 /* Subtraction */ = {
+			isa = PBXGroup;
+			children = (
+				48FBE3ED2126F67800ECD8D7 /* ConcatenationBySubtractionTests.swift */,
+			);
+			path = Subtraction;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,7 +395,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48FBE3EA2126D7C600ECD8D7 /* ConcatenationByAdditionTests.swift in Sources */,
 				484D742921238CD8003C1700 /* SimpleDifferentiationTests.swift in Sources */,
+				48FBE3F02127218C00ECD8D7 /* ExploringRandomStuffTests.swift in Sources */,
+				48FBE3EE2126F67800ECD8D7 /* ConcatenationBySubtractionTests.swift in Sources */,
 				48FBE3BA2124609B00ECD8D7 /* PolynomialMultipliedByPolynomialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

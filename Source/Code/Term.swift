@@ -39,6 +39,20 @@ public extension Term {
         self.init(exponentiation: Exponentiation(variable))
     }
 
+    /// Use this as short hand when you want to write `x*y*z` which does not compile, nor does `(x*y)*z` nor `x(*y*z)`, but using this initializer enables you to write `Term(x*y)*z` which is equivalent to `((x*y) as Term)*z` but more easiliy readable.
+    /// - See Also: `init(_ variables: [Variable])` for using `Term(x, y, z)`
+    init(_ term: Term) {
+        self.init(exponentiations: term.exponentiations, coefficient: term.coefficient)
+    }
+
+    init(_ variables: [Variable]) {
+        self.init(exponentiations: variables.map { Exponentiation($0) })
+    }
+
+    init(_ variables: Variable...) {
+        self.init(variables)
+    }
+
 }
 
 // MARK: - Public
@@ -60,7 +74,6 @@ internal extension Term {
     }
 
     var highestExponent: Double {
-        precondition(Term.sortingExponentiation(exponentiations) == exponentiations) // TODO remove this when tested
         return exponentiations[0].exponent
     }
 
@@ -69,7 +82,8 @@ internal extension Term {
     }
 
     var lowestVariableNameInAlpabeticOrder: String {
-        return exponentiations.sorted(by: { $0.variable.name < $1.variable.name })[0].variable.name
+        let lowestVariableNameInAlpabeticOrder = exponentiations.sorted(by: { $0.variable.name < $1.variable.name })[0].variable.name
+        return signString + lowestVariableNameInAlpabeticOrder
     }
 
     static func sortingExponentiation(_ exponentiations: [Exponentiation]) -> [Exponentiation] {
@@ -173,8 +187,14 @@ public extension Term {
 
 // MARK: - Appending
 public extension Term {
+
+    func appending(term other: Term) -> Term {
+            // e.g. (2*x*y) * (3x^2*y^2)
+        return Term(exponentiations: Term.sortingExponentiation(exponentiations + other.exponentiations), coefficient: coefficient*other.coefficient)
+    }
+
     func appending(exponentiation: Exponentiation) -> Term {
-        return Term(exponentiations: Term.sortingExponentiation(exponentiations + exponentiation), coefficient: coefficient)
+        return appending(term: Term(exponentiation: exponentiation))
     }
 
     func appending(variable: Variable) -> Term {
@@ -197,10 +217,4 @@ public extension Term {
         }
         return Term(exponentiations: exponentiations, coefficient: coefficient)
     }
-}
-
-public func *(rhs: Term, lhs: Term) -> Term {
-    // e.g. (2*x*y) * (3x^2*y^2)
-
-    return Term(exponentiations: rhs.exponentiations + lhs.exponentiations, coefficient: rhs.coefficient * lhs.coefficient)
 }
