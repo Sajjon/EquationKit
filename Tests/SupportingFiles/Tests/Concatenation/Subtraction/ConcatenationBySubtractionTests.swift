@@ -137,11 +137,9 @@ class ConcatenationBySubtractionTests: XCTestCase {
         let yx = y*x
         XCTAssertTrue(type(of: xy) == Term.self)
 
-
-
         XCTAssertNotEqual(x² - xy, xy - x²)
         XCTAssertNotEqual(y² - xy, xy - y²)
-        XCTAssertNotEqual(x² - xy, x² - yx)
+        XCTAssertEqual(x² - xy, x² - yx)
         XCTAssertNotEqual(x² - xy, y² - xy)
     }
 
