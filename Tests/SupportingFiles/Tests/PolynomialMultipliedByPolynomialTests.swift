@@ -12,6 +12,15 @@ import XCTest
 
 class PolynomialMultipliedByPolynomialTests: XCTestCase {
 
+    override func setUp() {
+        super.setUp()
+        continueAfterFailure = false
+    }
+
+    func testSortingOfTerms() {
+        XCTAssertEqual((2*x*y + 3*x + 5*y).description, "2xy + 3x + 5y")
+    }
+
     func testGrade1Short() {
         let eq = ((4*x) + 9) * ((8*x) + (5*y))
         XCTAssertEqual(eq, 32*x² + 20*x*y + 72*x + 45*y)
@@ -27,7 +36,7 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
             y <- 1
         ]})
 
-        let y＇ = eq.differentiateWithRespectTo(x)
+        let y＇ = eq.differentiateWithRespectTo(x)!
         XCTAssertEqual(42*x + 8*y - 50, y＇)
         XCTAssertEqual(
             0,
@@ -37,7 +46,7 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
                 ]}
         )
 
-        let x＇ = eq.differentiateWithRespectTo(y)
+        let x＇ = eq.differentiateWithRespectTo(y)!
         XCTAssertEqual(8*x - 90*y + 268, x＇)
         XCTAssertEqual(
             0,
@@ -46,6 +55,37 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
                 y <- 4
             ]}
         )
+    }
+
+    func testXMinusX() {
+        XCTAssertEqual(x-x, Polynomial(0))
+    }
+
+    func testX²MinusX²() {
+        XCTAssertEqual(x²-x², Polynomial(0))
+    }
+
+    func testXTimesXMinusXTimesX() {
+        XCTAssertEqual(x*x-x*x, Polynomial(0))
+    }
+
+    func test2XMinusXTwice() {
+        XCTAssertEqual(2*x-x-x, Polynomial(0))
+    }
+
+    func testConcatenation() {
+        let term = Term(x)
+        let polynomial = Polynomial(variable: y)
+        let eq1 = term + polynomial
+        XCTAssertEqual(eq1, x+y)
+        let exponentiation = Exponentiation(x, exponent: 2)
+        let eq2 = exponentiation + polynomial
+        XCTAssertEqual(eq2, x²+y)
+
+        let eq3 = term - polynomial
+        XCTAssertEqual(eq3, x-y)
+        let eq4 = exponentiation - polynomial
+        XCTAssertEqual(eq4, x²-y)
     }
 
     func testFourRoots() {

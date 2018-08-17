@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Polynomial {
+public struct Polynomial: Algebraic {
 
     public let constant: Double
     public let terms: [Term]
@@ -39,6 +39,30 @@ public extension Polynomial {
     }
 }
 
+// MARK: - ExpressibleByFloatLiteral
+extension Polynomial: ExpressibleByFloatLiteral {}
+public extension Polynomial {
+    init(floatLiteral value: Float) {
+        self.init(Double(value))
+    }
+}
+
+// MARK: - ExpressibleByIntegerLiteral
+extension Polynomial: ExpressibleByIntegerLiteral {}
+public extension Polynomial {
+    init(integerLiteral value: Int) {
+        self.init(Double(value))
+    }
+}
+
+// MARK: - ExpressibleByArrayLiteral
+extension Polynomial: ExpressibleByArrayLiteral {}
+public extension Polynomial {
+    init(arrayLiteral terms: Term...) {
+        self.init(terms: terms)
+    }
+}
+
 // MARK: - CustomStringConvertible
 extension Polynomial: CustomStringConvertible {}
 public extension Polynomial {
@@ -51,11 +75,13 @@ public extension Polynomial {
         }
 
         var termsString: String {
-            func foo(index: Int, term: Term) -> String {
-                let signString = (index == 0 || index == terms.endIndex) ? "" : " \(term.signString) "
+            func termString(index: Int, term: Term) -> String {
+                let signStringIfNegative = term.isNegative ? term.signString : ""
+                let signString = (index == 0 || index == terms.endIndex) ? "\(signStringIfNegative)" : " \(term.signString) "
                 return "\(signString)\(term.description)"
+
             }
-            return terms.enumerated().map { foo(index: $0, term: $1) }.joined()
+            return terms.enumerated().map { termString(index: $0, term: $1) }.joined()
         }
 
         return "\(termsString)\(constantString)"
@@ -91,10 +117,11 @@ public extension Polynomial {
     }
 }
 
-// MARK: - Differentiatable LIKE
+// MARK: - Differentiatable
+extension Polynomial: Differentiatable {}
 public extension Polynomial {
 
-    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Polynomial {
+    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Polynomial? {
         guard contains(variable: variableToDifferentiate) else { return Polynomial(terms: [], constant: 0) }
         var terms = [Term]()
         var constant: Double = 0
@@ -118,11 +145,18 @@ public extension Polynomial {
             guard let currentCount = count[term] else { count[term] = term.coefficient; continue }
             count[term] = currentCount + term.coefficient
         }
+        // removing e.g. `x-x` resulting in a 0 coefficient
+        count = count.filter {
+            $1 != 0
+        }
         return count.map { Term(exponentiations: $0.key.exponentiations, coefficient: $0.value) }
     }
 
     static func mergingAndSortingTerms(_ terms: [Term]) -> [Term] {
-        return mergingTerms(terms: terms).sorted(by: { $0.highestExponent > $1.highestExponent }).sorted(by: { $0.lowestVariableNameInAlpabeticOrder < $1.lowestVariableNameInAlpabeticOrder })
+        return mergingTerms(terms: terms)
+            .sorted(by: { $0.highestExponent > $1.highestExponent })
+            .sorted(by: { $0.exponentiations.count > $1.exponentiations.count })
+            .sorted(by: { $0.lowestVariableNameInAlpabeticOrder < $1.lowestVariableNameInAlpabeticOrder })
     }
 
     func contains(variable: Variable) -> Bool {
@@ -171,6 +205,10 @@ public extension Polynomial {
     func subtracting(_ number: Double) -> Polynomial {
         return Polynomial(terms: terms, constant: constant - number)
     }
+
+    func adding(_ number: Double) -> Polynomial {
+        return Polynomial(terms: terms, constant: constant + number)
+    }
 }
 
 // MARK: Multiplying
@@ -189,26 +227,3 @@ public extension Polynomial {
     }
 }
 
-public func *(lhs: Polynomial, rhs: Polynomial) -> Polynomial {
-
-    // ..... L H S .... * .... R H S ...
-    // (x*y + 2*x + 13) * (3*y - 7*x - 9)
-    var multipliedTerm = [Term]()
-    for lhsTerm in lhs.terms {
-        for rhsTerm in rhs.terms {
-            multipliedTerm.append(lhsTerm * rhsTerm)
-        }
-        if rhs.constant != 0 {
-            multipliedTerm.append(rhs.constant * lhsTerm)
-        }
-    }
-    if lhs.constant != 0 {
-        for rhsTerm in rhs.terms {
-            multipliedTerm.append(lhs.constant * rhsTerm)
-        }
-    }
-
-    let constant = lhs.constant * rhs.constant
-
-    return Polynomial(terms: multipliedTerm, constant: constant)
-}

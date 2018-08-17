@@ -20,3 +20,7 @@ infix operator <-: AssignmentPrecedence
 func <-(variable: Variable, value: Double) -> Constant {
     return Constant(variable, value: value)
 }
+
+func <-(variable: Variable, value: Int) -> Constant {
+    return variable <- Double(value)
+}

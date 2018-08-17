@@ -13,8 +13,20 @@ public protocol Solvable {
 }
 
 public extension Solvable {
+    func solve(constants: [Variable: Double], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
+        return solve(constants: Set(constants.map { Constant($0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
+    }
+
+    func solve(constants: [Variable: Int], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
+        return solve(constants: constants.mapValues { Double($0) }, modulus: modulus, modulusMode: modulusMode)
+    }
+
     func solve(constants: [String: Double], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
         return solve(constants: Set(constants.map { Constant($0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
+    }
+
+    func solve(constants: [String: Int], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
+        return solve(constants: constants.mapValues { Double($0) }, modulus: modulus, modulusMode: modulusMode)
     }
 
     func solve(constants: [Constant], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
@@ -37,5 +49,9 @@ public extension Solvable {
     func solve(modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [(Variable, Double)]) -> Double? {
         let array = assertingValue().map { Constant($0, value: $1) }
         return solve(constants: Set(array), modulus: modulus, modulusMode: modulusMode)
+    }
+
+    func solve(modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: @escaping () -> [(Variable, Int)]) -> Double? {
+        return solve(modulus: modulus, modulusMode: modulusMode, assertingValue: { assertingValue().map { ($0.0, Double($0.1)) } })
     }
 }

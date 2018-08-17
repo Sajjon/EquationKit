@@ -22,6 +22,10 @@ public extension Constant {
     init(_ variable: Variable, value: Double) {
         self.init(variable.name, value: value)
     }
+
+    init(_ variable: Variable, value: Int) {
+        self.init(variable, value: Double(value))
+    }
 }
 
 // MARK: - Public
