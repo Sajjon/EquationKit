@@ -63,10 +63,16 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         XCTAssertEqual(roots3FromRoots2FactorizedRHS, roots3ExpanedManual)
 
         let roots3FactorizedManual = (x-2)*(x+3)*(x+7)
+        XCTAssertEqual(roots3ExpanedManual, roots3FactorizedManual)
 
-
+        let roots4FromRoots3FactorizedLHS = roots3FromRoots2FactorizedLHS * (x-11)
+        let roots4FromRoots3FactorizedRHS = (x-11) * roots3FromRoots2FactorizedLHS
 
         let eq = (x-2)*(x+3)*(x+7)*(x-11)
+
+        XCTAssertEqual(eq, roots4FromRoots3FactorizedLHS)
+        XCTAssertEqual(eq, roots4FromRoots3FactorizedRHS)
+
         XCTAssertEqual(eq, x⁴ + 3*x³ - 87*x² - 53*x + 462)
         let solutions = [
             eq.solve() { x <- 2 },
