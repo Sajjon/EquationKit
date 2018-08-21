@@ -140,6 +140,11 @@ class ConcatenationBySubtractionTests: XCTestCase {
         XCTAssertNotEqual(x - xy, y - xy)
     }
 
+    func testControlIfDuplicates() {
+        let constants = [Constant(x, value: 3), Constant(y, value: 1)]
+        XCTAssertFalse(constants.containsDuplicates())
+    }
+
     func testVariableSubtractPolynomialAndReversed() {
         let eq = x - 2
         XCTAssertTrue(type(of: eq) == Polynomial.self)

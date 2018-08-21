@@ -10,7 +10,7 @@ import Foundation
 
 extension Array where Element: Hashable {
     public func containsDuplicates() -> Bool {
-        return Set(self).count != count
+        return Set<Element>(self).count != count
     }
 }
 
