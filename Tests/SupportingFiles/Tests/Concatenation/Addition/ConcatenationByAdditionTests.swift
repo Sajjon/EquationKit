@@ -115,6 +115,8 @@ class ConcatenationByAdditionTests: XCTestCase {
         let xz = x*z
         XCTAssertTrue(type(of: xy) == Term.self)
         XCTAssertTrue(type(of: xz) == Term.self)
+        XCTAssertEqual((xy + xz).asString(sorting: TermSorting(betweenTerms: .termsAlphabetically)), "xy + xz")
+        XCTAssertEqual((xz + xy).asString(sorting: TermSorting(betweenTerms: .termsAlphabetically)), "xy + xz")
         XCTAssertEqual(xy + xz, xz + xy) // Commutative
     }
 

@@ -14,8 +14,8 @@ public struct Polynomial: Algebraic {
     public let terms: [Term]
 
 
-    init(terms: [Term], constant: Double = 0) {
-        self.terms = Polynomial.mergingAndSortingTerms(terms)
+    init(terms: [Term], sorting: TermSorting = .default, constant: Double = 0) {
+        self.terms = terms.merged().sorted(by: sorting)
         self.constant = constant
     }
 }
@@ -63,11 +63,265 @@ public extension Polynomial {
     }
 }
 
+public protocol Sorting: Equatable {
+    associatedtype TypeToSort
+    typealias AreInIncreasingOrder = (TypeToSort, TypeToSort) -> (Bool)
+    func areInIncreasingOrder(tieBreakers: [Self]?) -> AreInIncreasingOrder
+    var comparing: (TypeToSort, TypeToSort) -> (ComparisonResult) { get }
+    var targetComparisonResult: ComparisonResult { get }
+//    var defaultTieBreakers: [Self] { get }
+}
+
+public extension Array {
+    func droppingFirst() -> [Element] {
+        guard count > 1 else { return [] }
+        return Array<Element>(dropFirst())
+    }
+
+    func droppingFirstNilIfEmpty() -> [Element]? {
+        guard count > 1 else { return nil }
+        return Array<Element>(dropFirst())
+    }
+}
+
+public extension Sorting {
+
+    func areInIncreasingOrder(tieBreakers: [Self]?) -> AreInIncreasingOrder {
+        return {
+            let comparison = self.comparing($0, $1)
+            guard comparison != .orderedSame else {
+
+                if let tieBreakers = tieBreakers, let tieBreaker = tieBreakers.removed(element: self).first {
+                    return tieBreaker.areInIncreasingOrder(tieBreakers: tieBreakers.droppingFirst())($0, $1)
+                } else {
+                    return false
+                }
+
+//                for tieBreaker in tieBreakers {
+//                    print("Using tiebreaker: `\(tieBreaker)`")
+//                    guard tieBreaker.areInIncreasingOrder(tieBreakers:[])($0, $1) else { continue }
+//                    print("Tiebreaker: `\(tieBreaker)` broke the tie")
+//                    return true
+//                }
+
+            }
+            let areInIncreasingOrder = comparison == self.targetComparisonResult
+            let typeString = "\(type(of: self))"
+//            print("Sorting: \($0) and \($1), using \(typeString).\(self)` had no ties, areInIncreasingOrder: `\(areInIncreasingOrder)`")
+            return areInIncreasingOrder
+        }
+
+    }
+}
+
+public extension Array where Element == SortingBetweenTerms {
+    static var `default`: [SortingBetweenTerms] {
+        return SortingBetweenTerms.all
+    }
+}
+
+public enum SortingBetweenTerms: Sorting {
+    case descendingExponent
+    case coefficient // positive higher than negative naturally
+    case termsWithMostVariables
+    case termsAlphabetically
+}
+
+public extension SortingBetweenTerms {
+    static var all: [SortingBetweenTerms] {
+        return [.descendingExponent, .termsWithMostVariables, .termsAlphabetically, .coefficient]
+    }
+}
+
+public extension SortingBetweenTerms {
+
+    var comparing: (Term, Term) -> (ComparisonResult) {
+        switch self {
+        case .descendingExponent: return { $0.highestExponent.compare(to: $1.highestExponent) }
+        case .coefficient: return { $0.coefficient.compare(to: $1.coefficient) }
+        case .termsWithMostVariables: return { $0.exponentiations.count.compare(to: $1.exponentiations.count) }
+        case .termsAlphabetically: return { $0.variableNames.compare(to: $1.variableNames) }
+        }
+    }
+
+    var targetComparisonResult: ComparisonResult {
+        switch self {
+        case .descendingExponent: return .orderedDescending
+        case .coefficient: return .orderedDescending
+        case .termsWithMostVariables: return .orderedDescending
+        case .termsAlphabetically: return .orderedAscending
+        }
+    }
+
+//    var defaultTieBreakers: [SortingBetweenTerms] {
+//        return SortingBetweenTerms.all.removed(element: self)
+//    }
+}
+
+public enum SortingWithinTerm: Sorting {
+    case descendingExponent
+    case variablesAlphabetically
+}
+
+public extension SortingWithinTerm {
+
+
+    var comparing: (Exponentiation, Exponentiation) -> (ComparisonResult) {
+        switch self {
+        case .descendingExponent: return { $0.exponent.compare(to: $1.exponent) }
+        case .variablesAlphabetically: return { $0.variable.name.compare(to: $1.variable.name) }
+        }
+    }
+
+    var targetComparisonResult: ComparisonResult {
+        switch self {
+        case .variablesAlphabetically: return .orderedAscending
+        case .descendingExponent: return .orderedDescending
+        }
+    }
+
+//    var defaultTieBreakers: [SortingWithinTerm] {
+//        switch self {
+//        case .descendingExponent: return [.variablesAlphabetically]
+//        case .variablesAlphabetically: return [.descendingExponent]
+//        }
+//    }
+}
+
+public struct TermSorting {
+    public let betweenTerms: [SortingBetweenTerms]
+    public let withinTerm: [SortingWithinTerm]
+    public init(betweenTerms: [SortingBetweenTerms] = .default, withinTerm: [SortingWithinTerm] = .default) {
+        self.betweenTerms = betweenTerms
+        self.withinTerm = withinTerm
+    }
+
+    public static var `default`: TermSorting { return TermSorting() }
+}
+
+public extension TermSorting {
+
+    init(betweenTerms: SortingBetweenTerms) {
+        self.init(betweenTerms: [betweenTerms])
+    }
+}
+
+extension SortingBetweenTerms: CustomStringConvertible {}
+public extension SortingBetweenTerms {
+    var description: String {
+        switch self {
+        case .descendingExponent: return "descendingExponent"
+        case .coefficient: return "coefficient"
+        case .termsWithMostVariables: return "termsWithMostVariables"
+        case .termsAlphabetically: return "termsAlphabetically"
+        }
+    }
+}
+
+
+
+public extension Array where Element == SortingWithinTerm {
+    static var `default`: [SortingWithinTerm] {
+        return [.descendingExponent, .variablesAlphabetically]
+    }
+}
+
+public extension Array where Element == Exponentiation {
+
+    func sorted(by sorting: SortingWithinTerm) -> [Exponentiation] {
+        return sorted(by: [sorting])
+    }
+
+    func sorted(by sorting: [SortingWithinTerm] = .default) -> [Exponentiation] {
+        guard let first = sorting.first else { return self }
+        return sorted(by: first.areInIncreasingOrder(tieBreakers: sorting.droppingFirstNilIfEmpty()))
+    }
+
+    func merged() -> [Exponentiation] {
+        var count: [Variable: Double] = [:]
+        for exponentiation in self {
+            count[exponentiation.variable] += exponentiation.exponent
+        }
+        return count.map { Exponentiation($0.key, exponent: $0.value) }
+    }
+}
+
+internal func += <N>(lhs: inout N?, rhs: N) where N: Numeric {
+    if let lhsIndeed = lhs {
+        lhs = lhsIndeed + rhs
+    } else {
+        lhs = rhs
+    }
+    if lhs == 0 {
+        lhs = nil
+    }
+}
+
+public extension Array where Element == Term {
+
+    func merged() -> [Term] {
+        var count: [[Exponentiation]: Double] = [:]
+        for term in self {
+            count[term.exponentiations] += term.coefficient
+        }
+        return count.map { Term(exponentiations: $0.key, coefficient: $0.value) }
+    }
+
+//    func merged() -> [Term] {
+//        var count: [Term: Double] = [:]
+//        for term in self {
+//            guard let currentCount = count[term] else { count[term] = term.coefficient; continue }
+//            count[term] = currentCount + term.coefficient
+//        }
+//        // removing e.g. `x-x` resulting in a 0 coefficient
+//        count = count.filter {
+//            $1 != 0
+//        }
+//        return count.map { Term(exponentiations: $0.key.exponentiations, coefficient: $0.value) }
+//    }
+
+    func sorting(betweenTerms: SortingBetweenTerms) -> [Term] {
+        return sorting(betweenTerms: [betweenTerms])
+    }
+
+    func sorting(betweenTerms: [SortingBetweenTerms]) -> [Term] {
+        return sorted(by: TermSorting(betweenTerms: betweenTerms))
+    }
+
+    func sorted(by sorting: TermSorting = .default) -> [Term] {
+//        var terms = self
+//
+//        sorting.betweenTerms.forEach {
+//           terms = terms.map { $0.sortingExponentiations(by: sorting.withinTerm) }.sorted(by: $0.sort)
+//        }
+//
+//        return terms
+
+        guard let first = sorting.betweenTerms.first else { return self }
+        return sorted(by: first.areInIncreasingOrder(tieBreakers: sorting.betweenTerms.droppingFirstNilIfEmpty()))
+    }
+
+}
+
+
 // MARK: - CustomStringConvertible
 extension Polynomial: CustomStringConvertible {}
 public extension Polynomial {
-    var description: String {
 
+    func sortingTerms(sorting: TermSorting = .default) -> Polynomial {
+        return Polynomial(terms: terms, sorting: sorting, constant: constant)
+    }
+
+    func asString(sorting betweenTerms: SortingBetweenTerms) -> String {
+        return asString(sorting: TermSorting(betweenTerms: betweenTerms))
+    }
+
+    func asString(sorting: TermSorting = .default) -> String {
+        let sortedPolynomial = sortingTerms(sorting: sorting)
+        return sortedPolynomial.description
+    }
+
+    var description: String {
         var constantString: String {
             guard constant != 0 else { return "" }
             let constantSignString = constant > 0 ? "+" : "-"
@@ -93,7 +347,7 @@ extension Polynomial: Equatable {}
 public extension Polynomial {
     static func == (lhs: Polynomial, rhs: Polynomial) -> Bool {
         return lhs.constant == rhs.constant
-            && lhs.terms == rhs.terms
+            && lhs.terms.sorted() == rhs.terms.sorted()
     }
 }
 
@@ -110,10 +364,12 @@ extension Polynomial: Solvable {}
 public extension Polynomial {
     func solve(constants: Set<Constant>, modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
-        return terms.reduce(constant, {
+        let solution = terms.reduce(constant, {
             guard let solution = $1.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return $0 }
             return $0 + solution
         })
+        guard let modulus = modulus else { return solution }
+        return mod(solution, modulus: modulus, modulusMode: modulusMode)
     }
 }
 
@@ -136,28 +392,9 @@ public extension Polynomial {
     }
 }
 
+
 // MARK: - Public
 public extension Polynomial {
-
-    static func mergingTerms(terms: [Term]) -> [Term] {
-        var count: [Term: Double] = [:]
-        for term in terms {
-            guard let currentCount = count[term] else { count[term] = term.coefficient; continue }
-            count[term] = currentCount + term.coefficient
-        }
-        // removing e.g. `x-x` resulting in a 0 coefficient
-        count = count.filter {
-            $1 != 0
-        }
-        return count.map { Term(exponentiations: $0.key.exponentiations, coefficient: $0.value) }
-    }
-
-    static func mergingAndSortingTerms(_ terms: [Term]) -> [Term] {
-        return mergingTerms(terms: terms)
-            .sorted(by: { $0.highestExponent > $1.highestExponent })
-            .sorted(by: { $0.exponentiations.count > $1.exponentiations.count })
-            .sorted(by: { $0.lowestVariableNameInAlpabeticOrder < $1.lowestVariableNameInAlpabeticOrder })
-    }
 
     func contains(variable: Variable) -> Bool {
         for term in terms {
@@ -176,7 +413,7 @@ public extension Polynomial {
 public extension Polynomial {
 
     func appending(term: Term) -> Polynomial {
-        return Polynomial(terms: Polynomial.mergingAndSortingTerms(terms + term), constant: constant)
+        return Polynomial(terms: terms + term, constant: constant)
     }
 
     func appending(exponentiation: Exponentiation) -> Polynomial {

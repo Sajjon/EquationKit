@@ -61,17 +61,19 @@ public extension Exponentiation {
 
 // MARK: - Hashable
 extension Exponentiation: Hashable {}
-public extension Exponentiation {
-    var hashValue: Int {
-        return variable.hashValue
-    }
-}
 
 // MARK: - Equatable
 extension Exponentiation: Equatable {}
 public extension Exponentiation {
     static func == (lhs: Exponentiation, rhs: Exponentiation) -> Bool {
         return lhs.variable == rhs.variable && lhs.exponent == rhs.exponent
+    }
+}
+
+// MARK: - Compareable
+extension Exponentiation: Comparable {
+    public static func < (lhs: Exponentiation, rhs: Exponentiation) -> Bool {
+        return [rhs, lhs].sorted() == [lhs, rhs]
     }
 }
 

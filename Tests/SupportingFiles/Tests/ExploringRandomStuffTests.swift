@@ -56,11 +56,18 @@ class ExploringRandomStuffTests: XCTestCase {
         let diffDiffsMod10Pattern: [Double] = [4, 0, 0, 4, 2]
 
         let eq1 = x⁴ - y⁴
+        let eq2 = 8*(x³+x) // (x-1)^^4 - (x-1)^^4/
 
         for i in 5..<1000 {
             let cx = Constant(x, value: i+1)
             let cy = Constant(y, value: i)
             let constants = [cx, cy]
+
+
+//            XCTAssertEqual(
+//                eq1.solve(constants: [cx, cy], modulus: 10)!,
+//                eq2.solve(modulus: 10) { x <- (i+1) }!
+//            )
 
             let difference = eq1.solve(constants: constants)!
 
@@ -73,6 +80,7 @@ class ExploringRandomStuffTests: XCTestCase {
             let diffDiffMod10 = mod(diffDiff, modulus: 10)
             diffDiffsMod10.append(diffDiffMod10)
 
+//            XCTAssertEqual(diffDiffMod10, eq2.solve(modulus: 10) { x <- i+1 } )
 
 
             if diffsMod10.count == diffsMod10Pattern.count {
