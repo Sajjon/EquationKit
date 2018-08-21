@@ -79,7 +79,6 @@ internal extension Term {
     }
 
     var variableNames: String {
-//        return exponentiations[0].variable.name
         return exponentiations.map { $0.variable.name }.joined()
     }
 }
@@ -157,38 +156,6 @@ extension Term: Comparable {
         return [rhs, lhs].sorted() == [lhs, rhs]
     }
 }
-//extension Term: Comparable {}
-//private extension Term {
-//
-//    var isPositive: Bool {
-//        return coefficient >= 0
-//    }
-//
-//    func compare(to other: Term) -> ComparisonResult {
-//        switch (isPositive, other.isPositive) {
-//        case (false, true): return .orderedAscending
-//        default: break
-//        }
-//
-//        if exponentiations > other.exponentiations { return .orderedDescending }
-//        if exponentiations < other.exponentiations { return .orderedAscending }
-//
-////        if coefficient > other.coefficient { return .orderedDescending }
-////        if coefficient < other.coefficient { return .orderedAscending }
-//
-//        return .orderedSame
-//    }
-//}
-//
-//public extension Term {
-//    static func < (lhs: Term, rhs: Term) -> Bool {
-//        return lhs.compare(to: rhs) == .orderedAscending
-//    }
-//
-//    static func > (lhs: Term, rhs: Term) -> Bool {
-//        return lhs.compare(to: rhs) == .orderedDescending
-//    }
-//}
 
 // MARK: - Hashable
 extension Term: Hashable {}
