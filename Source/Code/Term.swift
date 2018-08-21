@@ -242,23 +242,3 @@ public extension Term {
         return Term(exponentiations: exponentiations, coefficient: coefficient)
     }
 }
-
-public extension Array where Element == Exponentiation {
-
-    func sorted(by sorting: SortingWithinTerm) -> [Exponentiation] {
-        return sorted(by: [sorting])
-    }
-
-    func sorted(by sorting: [SortingWithinTerm] = .default) -> [Exponentiation] {
-        guard let first = sorting.first else { return self }
-        return sorted(by: first.areInIncreasingOrder(tieBreakers: sorting.droppingFirstNilIfEmpty()))
-    }
-
-    func merged() -> [Exponentiation] {
-        var count: [Variable: Double] = [:]
-        for exponentiation in self {
-            count[exponentiation.variable] += exponentiation.exponent
-        }
-        return count.map { Exponentiation($0.key, exponent: $0.value) }
-    }
-}

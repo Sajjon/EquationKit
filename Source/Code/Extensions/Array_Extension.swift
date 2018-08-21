@@ -27,3 +27,15 @@ extension Array where Element: Equatable {
         return elements
     }
 }
+
+public extension Array {
+    func droppingFirst() -> [Element] {
+        guard count > 1 else { return [] }
+        return Array<Element>(dropFirst())
+    }
+
+    func droppingFirstNilIfEmpty() -> [Element]? {
+        guard count > 1 else { return nil }
+        return Array<Element>(dropFirst())
+    }
+}

@@ -63,46 +63,6 @@ public extension Polynomial {
     }
 }
 
-public extension Array {
-    func droppingFirst() -> [Element] {
-        guard count > 1 else { return [] }
-        return Array<Element>(dropFirst())
-    }
-
-    func droppingFirstNilIfEmpty() -> [Element]? {
-        guard count > 1 else { return nil }
-        return Array<Element>(dropFirst())
-    }
-}
-
-
-
-public extension Array where Element == Term {
-
-    func merged() -> [Term] {
-        var count: [[Exponentiation]: Double] = [:]
-        for term in self {
-            count[term.exponentiations] += term.coefficient
-        }
-        return count.map { Term(exponentiations: $0.key, coefficient: $0.value) }
-    }
-
-    func sorting(betweenTerms: SortingBetweenTerms) -> [Term] {
-        return sorting(betweenTerms: [betweenTerms])
-    }
-
-    func sorting(betweenTerms: [SortingBetweenTerms]) -> [Term] {
-        return sorted(by: TermSorting(betweenTerms: betweenTerms))
-    }
-
-    func sorted(by sorting: TermSorting = .default) -> [Term] {
-        guard let first = sorting.betweenTerms.first else { return self }
-        return sorted(by: first.areInIncreasingOrder(tieBreakers: sorting.betweenTerms.droppingFirstNilIfEmpty()))
-    }
-
-}
-
-
 // MARK: - CustomStringConvertible
 extension Polynomial: CustomStringConvertible {}
 public extension Polynomial {
