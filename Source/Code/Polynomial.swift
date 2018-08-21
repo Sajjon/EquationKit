@@ -14,8 +14,8 @@ public struct Polynomial: Algebraic {
     public let terms: [Term]
 
 
-    init(terms: [Term], constant: Double = 0) {
-        self.terms = Polynomial.mergingAndSortingTerms(terms)
+    init(terms: [Term], sorting: TermSorting = .default, constant: Double = 0) {
+        self.terms = terms.merged().sorted(by: sorting)
         self.constant = constant
     }
 }
@@ -66,8 +66,21 @@ public extension Polynomial {
 // MARK: - CustomStringConvertible
 extension Polynomial: CustomStringConvertible {}
 public extension Polynomial {
-    var description: String {
 
+    func sortingTerms(sorting: TermSorting = .default) -> Polynomial {
+        return Polynomial(terms: terms, sorting: sorting, constant: constant)
+    }
+
+    func asString(sorting betweenTerms: SortingBetweenTerms) -> String {
+        return asString(sorting: TermSorting(betweenTerms: betweenTerms))
+    }
+
+    func asString(sorting: TermSorting = .default) -> String {
+        let sortedPolynomial = sortingTerms(sorting: sorting)
+        return sortedPolynomial.description
+    }
+
+    var description: String {
         var constantString: String {
             guard constant != 0 else { return "" }
             let constantSignString = constant > 0 ? "+" : "-"
@@ -93,7 +106,7 @@ extension Polynomial: Equatable {}
 public extension Polynomial {
     static func == (lhs: Polynomial, rhs: Polynomial) -> Bool {
         return lhs.constant == rhs.constant
-            && lhs.terms == rhs.terms
+            && lhs.terms.sorted() == rhs.terms.sorted()
     }
 }
 
@@ -110,10 +123,12 @@ extension Polynomial: Solvable {}
 public extension Polynomial {
     func solve(constants: Set<Constant>, modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
-        return terms.reduce(constant, {
+        let solution = terms.reduce(constant, {
             guard let solution = $1.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return $0 }
             return $0 + solution
         })
+        guard let modulus = modulus else { return solution }
+        return mod(solution, modulus: modulus, modulusMode: modulusMode)
     }
 }
 
@@ -136,28 +151,9 @@ public extension Polynomial {
     }
 }
 
+
 // MARK: - Public
 public extension Polynomial {
-
-    static func mergingTerms(terms: [Term]) -> [Term] {
-        var count: [Term: Double] = [:]
-        for term in terms {
-            guard let currentCount = count[term] else { count[term] = term.coefficient; continue }
-            count[term] = currentCount + term.coefficient
-        }
-        // removing e.g. `x-x` resulting in a 0 coefficient
-        count = count.filter {
-            $1 != 0
-        }
-        return count.map { Term(exponentiations: $0.key.exponentiations, coefficient: $0.value) }
-    }
-
-    static func mergingAndSortingTerms(_ terms: [Term]) -> [Term] {
-        return mergingTerms(terms: terms)
-            .sorted(by: { $0.highestExponent > $1.highestExponent })
-            .sorted(by: { $0.exponentiations.count > $1.exponentiations.count })
-            .sorted(by: { $0.lowestVariableNameInAlpabeticOrder < $1.lowestVariableNameInAlpabeticOrder })
-    }
 
     func contains(variable: Variable) -> Bool {
         for term in terms {
@@ -176,7 +172,7 @@ public extension Polynomial {
 public extension Polynomial {
 
     func appending(term: Term) -> Polynomial {
-        return Polynomial(terms: Polynomial.mergingAndSortingTerms(terms + term), constant: constant)
+        return Polynomial(terms: terms + term, constant: constant)
     }
 
     func appending(exponentiation: Exponentiation) -> Polynomial {

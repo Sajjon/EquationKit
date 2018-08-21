@@ -94,7 +94,7 @@ class SimpleDifferentiationTests: XCTestCase {
 
     func test𝟙𝟘𝑥＾𝟙𝟙－𝟜𝑥＾𝟙𝟙－𝟝𝑥＾𝟙𝟙＋𝟞·𝟠𝑥() {
         let eq = 10*x^^11 - 4*x^^11 - 5*x^^11 + 6*8*x
-        XCTAssertEqual(eq.description, "x^11 + 48x")
+        XCTAssertEqual(eq, x^^11 + 48*x)
         let y＇ = eq.differentiateWithRespectTo(x)!
         XCTAssertEqual(11*x^^10 + 48, y＇)
         XCTAssertEqual(eq.solve() { x <- 1 }, 49)

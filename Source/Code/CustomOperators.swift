@@ -24,3 +24,14 @@ func <-(variable: Variable, value: Double) -> Constant {
 func <-(variable: Variable, value: Int) -> Constant {
     return variable <- Double(value)
 }
+
+internal func += <N>(lhs: inout N?, rhs: N) where N: Numeric {
+    if let lhsIndeed = lhs {
+        lhs = lhsIndeed + rhs
+    } else {
+        lhs = rhs
+    }
+    if lhs == 0 {
+        lhs = nil
+    }
+}

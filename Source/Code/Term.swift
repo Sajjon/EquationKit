@@ -14,22 +14,19 @@ public struct Term: Algebraic {
     public let coefficient: Double
     public let exponentiations: [Exponentiation]
 
-    init(exponentiations: [Exponentiation], coefficient: Double = 1) {
+    init(exponentiations: [Exponentiation], sorting: [SortingWithinTerm] = .default, coefficient: Double = 1) {
         guard coefficient != 0 else { fatalError("You probably don't want a Zero coefficient") }
-
-        var exponentsForVariables: [Variable: Double] = [:]
-        for exponentiation in exponentiations {
-            let variable = exponentiation.variable
-            exponentsForVariables[variable] = (exponentsForVariables[variable] ?? 0) + exponentiation.exponent
-        }
-
-        self.exponentiations = Term.sortingExponentiation(exponentsForVariables.map { Exponentiation($0.key, exponent: $0.value) })
+        self.exponentiations = exponentiations.merged().sorted(by: sorting)
         self.coefficient = coefficient
     }
 }
 
 // MARK: - Convenience Initializers
 public extension Term {
+
+    init(_ exponentiations: Exponentiation..., coefficient: Double = 1) {
+        self.init(exponentiations: exponentiations, coefficient: coefficient)
+    }
 
     init(exponentiation: Exponentiation, coefficient: Double = 1) {
         self.init(exponentiations: [exponentiation], coefficient: coefficient)
@@ -74,20 +71,15 @@ internal extension Term {
     }
 
     var highestExponent: Double {
-        return exponentiations[0].exponent
+        return exponentiations.sorted(by: .descendingExponent)[0].exponent
     }
 
     var uniqueVariables: Set<Variable> {
         return Set(exponentiations.map { $0.variable })
     }
 
-    var lowestVariableNameInAlpabeticOrder: String {
-        let lowestVariableNameInAlpabeticOrder = exponentiations.sorted(by: { $0.variable.name < $1.variable.name })[0].variable.name
-        return signString + lowestVariableNameInAlpabeticOrder
-    }
-
-    static func sortingExponentiation(_ exponentiations: [Exponentiation]) -> [Exponentiation] {
-        return exponentiations.sorted(by: { $0.exponent > $1.exponent }).sorted(by: { $0.variable.name < $1.variable.name })
+    var variableNames: String {
+        return exponentiations.map { $0.variable.name }.joined()
     }
 }
 
@@ -154,7 +146,14 @@ public extension Term {
 extension Term: Equatable {}
 public extension Term {
     static func == (lhs: Term, rhs: Term) -> Bool {
-        return lhs.exponentiations == rhs.exponentiations
+        return lhs.exponentiations.sorted() == rhs.exponentiations.sorted() && lhs.coefficient == rhs.coefficient
+    }
+}
+
+// MARK: - Comparable
+extension Term: Comparable {
+    public static func < (lhs: Term, rhs: Term) -> Bool {
+        return [rhs, lhs].sorted() == [lhs, rhs]
     }
 }
 
@@ -169,8 +168,25 @@ public extension Term {
 // MARK: - CustomStringConvertible
 extension Term: CustomStringConvertible {}
 public extension Term {
-    var description: String {
 
+    func sortingExponentiations(by sorting: [SortingWithinTerm] = .default) -> Term {
+        return Term(exponentiations: exponentiations, sorting: sorting, coefficient: coefficient)
+    }
+
+    func sortingExponentiations(by sorting: SortingWithinTerm) -> Term {
+        return sortingExponentiations(by: [sorting])
+    }
+
+    func asString(sorting: SortingWithinTerm) -> String {
+        return asString(sorting: [sorting])
+    }
+
+    func asString(sorting: [SortingWithinTerm] = .default) -> String {
+        let sorted = sortingExponentiations(by: sorting)
+        return sorted.description
+    }
+
+    var description: String {
         var exponentiationsString: String {
             return exponentiations.map { $0.description }.joined()
         }
@@ -185,12 +201,20 @@ public extension Term {
     }
 }
 
+// MARK: - CustomDebugStringConvertible
+extension Term: CustomDebugStringConvertible {}
+public extension Term {
+    var debugDescription: String {
+        return "\(signString)\(description)"
+    }
+}
+
 // MARK: - Appending
 public extension Term {
 
     func appending(term other: Term) -> Term {
             // e.g. (2*x*y) * (3x^2*y^2)
-        return Term(exponentiations: Term.sortingExponentiation(exponentiations + other.exponentiations), coefficient: coefficient*other.coefficient)
+        return Term(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)
     }
 
     func appending(exponentiation: Exponentiation) -> Term {

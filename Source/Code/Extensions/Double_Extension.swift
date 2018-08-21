@@ -1,5 +1,5 @@
 //
-//  Double.swift
+//  Double_Extension.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-15.

@@ -17,9 +17,6 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testSortingOfTerms() {
-        XCTAssertEqual((2*x*y + 3*x + 5*y).description, "2xy + 3x + 5y")
-    }
 
     func testGrade1Short() {
         let eq = ((4*x) + 9) * ((8*x) + (5*y))
@@ -57,21 +54,6 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         )
     }
 
-    func testXMinusX() {
-        XCTAssertEqual(x-x, Polynomial(0))
-    }
-
-    func testX²MinusX²() {
-        XCTAssertEqual(x²-x², Polynomial(0))
-    }
-
-    func testXTimesXMinusXTimesX() {
-        XCTAssertEqual(x*x-x*x, Polynomial(0))
-    }
-
-    func test2XMinusXTwice() {
-        XCTAssertEqual(2*x-x-x, Polynomial(0))
-    }
 
     func testConcatenation() {
         let term = Term(x)
@@ -109,11 +91,10 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         let roots4FromRoots3FactorizedRHS = (x-11) * roots3FromRoots2FactorizedLHS
 
         let eq = (x-2)*(x+3)*(x+7)*(x-11)
-
         XCTAssertEqual(eq, roots4FromRoots3FactorizedLHS)
         XCTAssertEqual(eq, roots4FromRoots3FactorizedRHS)
 
-        XCTAssertEqual(eq, x⁴ + 3*x³ - 87*x² - 53*x + 462)
+        XCTAssertEqual(eq, x⁴ - 3*x³ - 87*x² - 53*x + 462)
         let solutions = [
             eq.solve() { x <- 2 },
             eq.solve() { x <- -3 },

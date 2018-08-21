@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol NamedVariable: CustomStringConvertible, Hashable {
+public protocol NamedVariable: CustomStringConvertible, Hashable, Comparable {
     var name: String { get }
 }
 
@@ -16,6 +16,13 @@ public protocol NamedVariable: CustomStringConvertible, Hashable {
 public extension NamedVariable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.name == rhs.name
+    }
+}
+
+// MARK: - Comparable
+public extension NamedVariable {
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        return lhs.name < rhs.name
     }
 }
 
