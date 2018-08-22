@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 public func *(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
     return Polynomial(lhs).multiply(by: Polynomial(rhs))
 }
@@ -54,46 +53,30 @@ private extension Term {
         return Term(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)
     }
 
-        func multiplyingCoefficient(by number: Double) -> Term {
-            return Term(exponentiations: exponentiations, coefficient: coefficient * number)
-        }
-}
-
-private func *(lhs: Term, rhs: Term) -> Term {
-    return lhs.appending(term: rhs)
-}
-
-private func *(coefficient: Double, term: Term) -> Term {
-    return term.multiplyingCoefficient(by: coefficient)
+    func multiplyingCoefficient(by number: Double) -> Term {
+        return Term(exponentiations: exponentiations, coefficient: coefficient * number)
+    }
 }
 
 // MARK: - Private Extension Polynomial
 private extension Polynomial {
     func multiply(by other: Polynomial) -> Polynomial {
-
-        let lhs = self
-        let rhs = other
-
-        // ..... L H S .... * .... R H S ...
-        // (x*y + 2*x + 13) * (3*y - 7*x - 9)
         var multipliedTerm = [Term]()
-        for lhsTerm in lhs.terms {
-            for rhsTerm in rhs.terms {
-                multipliedTerm.append(lhsTerm * rhsTerm)
+        for lhsTerm in terms {
+            for rhsTerm in other.terms {
+                multipliedTerm.append(lhsTerm.appending(term: rhsTerm))
             }
-            if rhs.constant != 0 {
-                multipliedTerm.append(rhs.constant * lhsTerm)
+            if other.constant != 0 {
+                multipliedTerm.append(lhsTerm.multiplyingCoefficient(by: other.constant))
             }
         }
-        if lhs.constant != 0 {
-            for rhsTerm in rhs.terms {
-                multipliedTerm.append(lhs.constant * rhsTerm)
+        if constant != 0 {
+            for rhsTerm in other.terms {
+                multipliedTerm.append(rhsTerm.multiplyingCoefficient(by: constant))
             }
         }
 
-        let constant = lhs.constant * rhs.constant
-
-        return Polynomial(terms: multipliedTerm, constant: constant)
+        return Polynomial(terms: multipliedTerm, constant: constant * other.constant)
     }
 
     func multiplied<F>(by number: F) -> Polynomial where F: BinaryFloatingPoint {
