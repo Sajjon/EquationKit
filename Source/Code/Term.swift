@@ -209,36 +209,18 @@ public extension Term {
     }
 }
 
-// MARK: - Appending
-public extension Term {
-
-    func appending(term other: Term) -> Term {
-            // e.g. (2*x*y) * (3x^2*y^2)
-        return Term(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)
-    }
-
-    func appending(exponentiation: Exponentiation) -> Term {
-        return appending(term: Term(exponentiation: exponentiation))
-    }
-
-    func appending(variable: Variable) -> Term {
-        return appending(exponentiation: Exponentiation(variable))
-    }
-}
-
+//// MARK: - Appending
+//public extension Term {
+//
+//
+//
+//    func appending(exponentiation: Exponentiation) -> Term {
+//        return appending(term: Term(exponentiation: exponentiation))
+//    }
+//
+//    func appending(variable: Variable) -> Term {
+//        return appending(exponentiation: Exponentiation(variable))
+//    }
+//}
+//
 // MARK: - Multiplying
-public extension Term {
-    func multiplyingCoefficient(by number: Double) -> Term {
-        return Term(exponentiations: exponentiations, coefficient: coefficient * number)
-    }
-
-    func multiplyingExponent(by number: Double) -> Term {
-        guard let lastExponentiation = self.exponentiations.last else { fatalError("Terms should have at least one exponentation") }
-        let modified = lastExponentiation.multiplyingExponent(by: number)
-        var exponentiations = [modified]
-        if exponentiations.count > 1 {
-            exponentiations = self.exponentiations.dropLast() + exponentiations
-        }
-        return Term(exponentiations: exponentiations, coefficient: coefficient)
-    }
-}

@@ -36,7 +36,6 @@ class ConcatenationByAdditionTests: XCTestCase {
     func testNumberAddTermAndReversed() {
         let xy = x*y
         let yx = y*x
-        XCTAssertTrue(type(of: xy) == Term.self)
         XCTAssertEqual(yx, xy) // Multiplication is commutative
 
         XCTAssertEqual(xy + 2, 2 + xy)
@@ -70,7 +69,6 @@ class ConcatenationByAdditionTests: XCTestCase {
 
     func testVariableAddTermAndReversed() {
         let xy = x*y
-        XCTAssertTrue(type(of: xy) == Term.self)
         XCTAssertEqual(x + xy, xy + x) // Commutative
         XCTAssertNotEqual(x + xy, y + xy)
     }
@@ -94,7 +92,6 @@ class ConcatenationByAdditionTests: XCTestCase {
     func testExponentiationAddTermAndReversed() {
         let xy = x*y
         let yx = y*x
-        XCTAssertTrue(type(of: xy) == Term.self)
         XCTAssertEqual(x² + xy, xy + x²) // Commutative
         XCTAssertEqual(y² + xy, xy + y²) // Commutative
         XCTAssertEqual(x² + xy, x² + yx) // Commutative
@@ -113,8 +110,6 @@ class ConcatenationByAdditionTests: XCTestCase {
     func testTermAddTerm() {
         let xy = x*y
         let xz = x*z
-        XCTAssertTrue(type(of: xy) == Term.self)
-        XCTAssertTrue(type(of: xz) == Term.self)
         XCTAssertEqual((xy + xz).asString(sorting: TermSorting(betweenTerms: .termsAlphabetically)), "xy + xz")
         XCTAssertEqual((xz + xy).asString(sorting: TermSorting(betweenTerms: .termsAlphabetically)), "xy + xz")
         XCTAssertEqual(xy + xz, xz + xy) // Commutative
@@ -123,8 +118,6 @@ class ConcatenationByAdditionTests: XCTestCase {
     func testTermAddPolynomialAndReversed() {
         let xy = x*y
         let xz = x*z
-        XCTAssertTrue(type(of: xy) == Term.self)
-        XCTAssertTrue(type(of: xz) == Term.self)
         let eq = x + 2
         XCTAssertTrue(type(of: eq) == Polynomial.self)
         let eq2 = x + 3

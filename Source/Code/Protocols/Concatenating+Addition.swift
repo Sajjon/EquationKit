@@ -8,29 +8,45 @@
 
 import Foundation
 
+/// Concatenate `lhs` and `rhs` using addition
 public func +(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
     return Polynomial(lhs).appending(polynomial: Polynomial(rhs))
 }
 
 // MARK: - Numberic Support
-public func +<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
+public func +(lhs: Concatenating, rhs: Int) -> Polynomial {
     return Polynomial(lhs).appending(constant: rhs)
 }
-
-public func +<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
+public func +(lhs: Int, rhs: Concatenating) -> Polynomial {
+    return rhs + lhs
+}
+public func +(lhs: Concatenating, rhs: Double) -> Polynomial {
     return Polynomial(lhs).appending(constant: rhs)
 }
-
-// MARK: - Multiplication is commutative
-public func +<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
+public func +(lhs: Double, rhs: Concatenating) -> Polynomial {
     return rhs + lhs
 }
 
-public func +<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
+
+
+// MARK: - PRIVATE LOGIC
+private func +<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
+    return Polynomial(lhs).appending(constant: rhs)
+}
+
+private func +<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
+    return Polynomial(lhs).appending(constant: rhs)
+}
+
+private func +<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
     return rhs + lhs
 }
 
-// MARK - Appending
+private func +<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
+    return rhs + lhs
+}
+
+// MARK - Private Polynomial Extension
 private extension Polynomial {
 
     func appending<F>(constant: F) -> Polynomial where F: BinaryFloatingPoint {

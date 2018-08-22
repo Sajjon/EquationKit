@@ -9,20 +9,46 @@
 import Foundation
 
 // MARK - Base Variable
-public func ^^(base: Variable, exponent: Double) -> Term {
+public func ^^(base: Variable, exponent: Double) -> Polynomial {
+    return Polynomial(term: base ^^ exponent)
+}
+
+private func ^^(base: Variable, exponent: Double) -> Term {
     return Term(exponentiation: Exponentiation(base, exponent: exponent))
 }
 
-public func ^^(base: Variable, exponent: Int) -> Term {
+public func ^^(base: Variable, exponent: Int) -> Polynomial {
+    return Polynomial(term: base ^^ exponent)
+}
+private func ^^(base: Variable, exponent: Int) -> Term {
     return base ^^ Double(exponent)
 }
 
 // MARK - Base Term
-public func ^^(base: Term, exponent: Double) -> Term {
+public func ^^(base: Term, exponent: Double) -> Polynomial {
+    return Polynomial(term: base ^^ exponent)
+}
+private func ^^(base: Term, exponent: Double) -> Term {
     return base.multiplyingExponent(by: exponent)
 }
 
-public func ^^(base: Term, exponent: Int) -> Term {
+private extension Term {
+
+    func multiplyingExponent(by number: Double) -> Term {
+        guard let lastExponentiation = self.exponentiations.last else { fatalError("Terms should have at least one exponentation") }
+        let modified = lastExponentiation.multiplyingExponent(by: number)
+        var exponentiations = [modified]
+        if exponentiations.count > 1 {
+            exponentiations = self.exponentiations.dropLast() + exponentiations
+        }
+        return Term(exponentiations: exponentiations, coefficient: coefficient)
+    }
+}
+
+public func ^^(base: Term, exponent: Int) -> Polynomial {
+    return Polynomial(term: base ^^ exponent)
+}
+private func ^^(base: Term, exponent: Int) -> Term {
     return base ^^ Double(exponent)
 }
 

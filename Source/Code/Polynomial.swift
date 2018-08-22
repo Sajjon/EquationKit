@@ -186,20 +186,3 @@ public extension Polynomial {
         return Polynomial(terms: terms, constant: constant + number)
     }
 }
-
-// MARK: Multiplying
-public extension Polynomial {
-
-    func multiplied(by number: Double) -> Polynomial {
-        guard let firstTerm = terms.first else { return Polynomial(terms: [], constant: constant * number) }
-        let termMultiplied = Term(exponentiations: firstTerm.exponentiations, coefficient: firstTerm.coefficient * number)
-        guard terms.count > 1 else { return Polynomial(termMultiplied, constant: constant) }
-        let rest = terms.dropFirst()
-        return Polynomial(terms: [termMultiplied] + rest, constant: constant)
-    }
-
-    func multiplied(by number: Int) -> Polynomial {
-        return multiplied(by: Double(number))
-    }
-}
-
