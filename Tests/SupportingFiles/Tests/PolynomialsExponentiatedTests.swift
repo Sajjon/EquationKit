@@ -22,7 +22,7 @@ class PolynomialsExponentiatedTests: XCTestCase {
 
     func test﹙𝑥＋𝟙﹚³() {
         let eq = (x + 1)^^3
-        XCTAssertEqual(eq, Eq(x + 1) * Eq(x + 1) * Eq(x + 1))
+        XCTAssertEqual(eq, (x + 1) * (x + 1) * (x + 1))
         XCTAssertEqual(eq, x³ + 3*x² + 3*x + 1)
     }
 

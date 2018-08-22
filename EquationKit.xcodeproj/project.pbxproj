@@ -19,6 +19,8 @@
 		4818E1C6212D92640027D2C5 /* ConcatenationByAdditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3E82126D7B500ECD8D7 /* ConcatenationByAdditionTests.swift */; };
 		4818E1C8212D96730027D2C5 /* Concatenating+Subtraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1C7212D96730027D2C5 /* Concatenating+Subtraction.swift */; };
 		4818E1CA212DB4F40027D2C5 /* Concatenating+Exponentiation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1C9212DB4F40027D2C5 /* Concatenating+Exponentiation.swift */; };
+		4818E1CB212DBF7B0027D2C5 /* ConcatenationBySubtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3ED2126F67800ECD8D7 /* ConcatenationBySubtractionTests.swift */; };
+		4818E1CC212DC2BB0027D2C5 /* ConcatenationByMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C491D7212D5F7000E04BA4 /* ConcatenationByMultiplicationTests.swift */; };
 		484D742521238C64003C1700 /* Polynomial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D742421238C64003C1700 /* Polynomial.swift */; };
 		48C491DB212D616300E04BA4 /* Concatenating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C491D9212D616000E04BA4 /* Concatenating.swift */; };
 		48C491DD212D61B600E04BA4 /* Concatenating+Addition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C491DC212D61B600E04BA4 /* Concatenating+Addition.swift */; };
@@ -437,8 +439,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4818E1CC212DC2BB0027D2C5 /* ConcatenationByMultiplicationTests.swift in Sources */,
 				4818E1C1212D8DAA0027D2C5 /* PolynomialsExponentiatedTests.swift in Sources */,
 				4818E1C6212D92640027D2C5 /* ConcatenationByAdditionTests.swift in Sources */,
+				4818E1CB212DBF7B0027D2C5 /* ConcatenationBySubtractionTests.swift in Sources */,
 				4818E1C2212D8DB80027D2C5 /* ExponentiationArraySortingTests.swift in Sources */,
 				4818E1C4212D8DD10027D2C5 /* ExploringRandomStuffTests.swift in Sources */,
 				4818E1C3212D8DC60027D2C5 /* TermSortingTests.swift in Sources */,

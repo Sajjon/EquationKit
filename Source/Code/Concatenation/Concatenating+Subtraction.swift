@@ -13,37 +13,42 @@ public func -(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
     return Polynomial(lhs).subtracting(other: Polynomial(rhs))
 }
 
+private func -(lhs: Concatenating, rhs: Polynomial) -> Polynomial {
+    return lhs - (rhs as Concatenating)
+}
+
 // MARK: - Numberic Support
 public func -(lhs: Concatenating, rhs: Int) -> Polynomial {
-    return Polynomial(lhs).subtracting(constant: rhs)
+    return lhs - Polynomial(constant: rhs)
 }
-public func -(lhs: Int, rhs: Concatenating) -> Polynomial {
-    return Polynomial(rhs).subtracting(constant: lhs)
-}
+
 public func -(lhs: Concatenating, rhs: Double) -> Polynomial {
-    return Polynomial(lhs).subtracting(constant: rhs)
+    return lhs - Polynomial(constant: rhs)
 }
+
+public func -(lhs: Int, rhs: Concatenating) -> Polynomial {
+    return Polynomial(constant:lhs) - rhs
+}
+
 public func -(lhs: Double, rhs: Concatenating) -> Polynomial {
-    return Polynomial(rhs).subtracting(constant: lhs)
+    return Polynomial(constant:lhs) - rhs
 }
 
 
-// MARK: - Internal
-internal func -<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
-    return Polynomial(lhs).subtracting(constant: rhs)
-}
+//private func -<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
+//    return lhs - Polynomial(constant: rhs)
+//}
+//private func -<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
+//    return Polynomial(constant:lhs) - rhs
+//}
+//
+//private func -<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
+//    return lhs - Polynomial(constant: rhs)
+//}
+//private func -<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
+//    return Polynomial(constant:lhs) - rhs
+//}
 
-internal func -<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
-    return Polynomial(lhs).subtracting(constant: rhs)
-}
-
-internal func -<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
-    return Polynomial(rhs).negated() + lhs
-}
-
-internal func -<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
-    return Polynomial(rhs).negated() + lhs
-}
 
 // MARK - Private Polynomial Extension
 private extension Polynomial {
