@@ -8,13 +8,30 @@
 
 import Foundation
 
-public struct Term: Algebraic {
+public protocol TermProtocol: Algebraic, Negatable, Comparable, CustomDebugStringConvertible where ExponentiationType.NumberType == Self.NumberType {
+    associatedtype NumberType // NumberExpressible
+    associatedtype ExponentiationType: ExponentiationProtocol
+    var coefficient: NumberType { get }
+    var exponentiations: [ExponentiationType] { get }
+    init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm], coefficient: NumberType)
+}
+
+public extension TermProtocol {
+    public init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm] = .default, coefficient: NumberType = .one) {
+        self.init(exponentiations: exponentiations, sorting: sorting, coefficient: coefficient)
+    }
+
+}
+
+public struct Term: TermProtocol {
 
     /// -1 if negative
-    public let coefficient: Double
-    public let exponentiations: [Exponentiation]
+    public typealias NumberType = Double
+    public typealias ExponentiationType = Exponentiation
+    public let coefficient: NumberType
+    public let exponentiations: [ExponentiationType]
 
-    init(exponentiations: [Exponentiation], sorting: [SortingWithinTerm] = .default, coefficient: Double = 1) {
+    public init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm], coefficient: NumberType) {
         guard coefficient != 0 else { fatalError("You probably don't want a Zero coefficient") }
         self.exponentiations = exponentiations.merged().sorted(by: sorting)
         self.coefficient = coefficient
@@ -22,28 +39,22 @@ public struct Term: Algebraic {
 }
 
 // MARK: - Convenience Initializers
-public extension Term {
+public extension TermProtocol {
 
-    init(_ exponentiations: Exponentiation..., coefficient: Double = 1) {
+    init(_ exponentiations: ExponentiationType..., coefficient: NumberType = .one) {
         self.init(exponentiations: exponentiations, coefficient: coefficient)
     }
 
-    init(exponentiation: Exponentiation, coefficient: Double = 1) {
+    init(exponentiation: ExponentiationType, coefficient: NumberType = .one) {
         self.init(exponentiations: [exponentiation], coefficient: coefficient)
     }
 
     init(_ variable: Variable) {
-        self.init(exponentiation: Exponentiation(variable))
-    }
-
-    /// Use this as short hand when you want to write `x*y*z` which does not compile, nor does `(x*y)*z` nor `x(*y*z)`, but using this initializer enables you to write `Term(x*y)*z` which is equivalent to `((x*y) as Term)*z` but more easiliy readable.
-    /// - See Also: `init(_ variables: [Variable])` for using `Term(x, y, z)`
-    init(_ term: Term) {
-        self.init(exponentiations: term.exponentiations, coefficient: term.coefficient)
+        self.init(exponentiation: ExponentiationType(variable))
     }
 
     init(_ variables: [Variable]) {
-        self.init(exponentiations: variables.map { Exponentiation($0) })
+        self.init(exponentiations: variables.map { ExponentiationType($0) })
     }
 
     init(_ variables: Variable...) {
@@ -208,19 +219,3 @@ public extension Term {
         return "\(signString)\(description)"
     }
 }
-
-//// MARK: - Appending
-//public extension Term {
-//
-//
-//
-//    func appending(exponentiation: Exponentiation) -> Term {
-//        return appending(term: Term(exponentiation: exponentiation))
-//    }
-//
-//    func appending(variable: Variable) -> Term {
-//        return appending(exponentiation: Exponentiation(variable))
-//    }
-//}
-//
-// MARK: - Multiplying

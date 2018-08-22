@@ -8,4 +8,4 @@
 
 import Foundation
 
-public protocol Algebraic: Solvable, Differentiatable, Equatable, CustomStringConvertible {}
+public protocol Algebraic: Solvable, Differentiatable, Concatenating, Hashable, CustomStringConvertible {}

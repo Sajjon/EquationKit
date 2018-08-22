@@ -8,23 +8,36 @@
 
 import Foundation
 
-public struct Exponentiation: Algebraic {
-    
-    public let variable: Variable
-    public let exponent: Double
+public protocol ExponentiationProtocol: Algebraic, Comparable {
+    associatedtype NumberType: NumberExpressible
+    var variable: Variable { get }
+    var exponent: NumberType { get }
+    init(variable: Variable, exponent: NumberType)
+}
 
-    init(_ variable: Variable, exponent: Double = 1) {
+// MARK: - Convenience Initializers
+public extension ExponentiationProtocol {
+    init(_ variable: Variable, exponent: NumberType = .one) {
+        self.init(variable: variable, exponent: exponent)
+    }
+
+    init(_ name: String, exponent: NumberType = .one) {
+        self.init(Variable(name), exponent: exponent)
+    }
+}
+
+public struct Exponentiation: ExponentiationProtocol {
+
+    public typealias NumberType = Double
+    public let variable: Variable
+    public let exponent: NumberType
+
+    public init(variable: Variable, exponent: NumberType) {
         self.variable = variable
         self.exponent = exponent
     }
 }
 
-// MARK: - Convenience Initializers
-public extension Exponentiation {
-    init(_ name: String, exponent: Double = 1) {
-        self.init(Variable(name), exponent: exponent)
-    }
-}
 
 // MARK: - Solvable
 extension Exponentiation: Solvable {}

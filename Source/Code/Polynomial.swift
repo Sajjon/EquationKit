@@ -8,61 +8,101 @@
 
 import Foundation
 
-public struct Polynomial: Algebraic {
+public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType {
+    associatedtype NumberType // NumberExpressible
+    associatedtype TermType: TermProtocol
+    var constant: NumberType { get }
+    var terms: [TermType] { get }
 
-    public let constant: Double
-    public let terms: [Term]
+    init(terms: [TermType], sorting: TermSorting, constant: NumberType)
+    init(term: TermType)
+    init(constant: NumberType)
+}
+public extension PolynomialProtocol {
+    typealias ExponentiationType = TermType.ExponentiationType
+}
 
 
-    init(terms: [Term], sorting: TermSorting = .default, constant: Double = 0) {
+
+
+public extension PolynomialProtocol {
+    init(terms: [TermType], sorting: TermSorting = .default, constant: NumberType = .zero) {
+        self.init(terms: terms, sorting: sorting, constant: constant)
+    }
+    init(term: TermType) {
+        self.init(terms: [term], sorting: .default, constant: .zero)
+    }
+    init(constant: NumberType) {
+        self.init(terms: [], sorting: .default, constant: constant)
+    }
+}
+
+//public typealias Polynomial = PolynomialStruct<Double>
+//public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
+
+public struct Polynomial: PolynomialProtocol {
+    public typealias NumberType = Double
+    public typealias TermType = Term
+    public let constant: NumberType
+    public let terms: [TermType]
+
+
+    public init(terms: [TermType], sorting: TermSorting, constant: NumberType) {
         self.terms = terms.merged().sorted(by: sorting)
         self.constant = constant
     }
 }
 
+
+
 // MARK: - Convenience Initializers
-public extension Polynomial {
+public extension PolynomialProtocol {
+
+    init(exponentiation: ExponentiationType, constant: NumberType = .zero) {
+        self.init(TermType(exponentiation: exponentiation), constant: constant)
+    }
+
+    init(variable: Variable, constant: NumberType = .zero) {
+        self.init(exponentiation: ExponentiationType(variable), constant: constant)
+    }
+
+    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
+    init(term: TermType, constant: NumberType = .zero) {
+        self.init(terms: [term], constant: constant)
+    }
+
+    init(_ term: TermType, constant: NumberType = .zero) {
+        self.init(terms: [term], constant: constant)
+    }
+
+    init(constant: Double) {
+        self.init(constant: NumberType(constant))
+    }
+    init(constant: Int) {
+        self.init(constant: NumberType(constant))
+    }
+}
+
+public extension PolynomialProtocol where NumberType: FloatingPointNumberExpressible {
 
     init<F>(constant: F) where F: BinaryFloatingPoint {
-       self.init(terms: [], constant: Double(constant))
+        self.init(constant: NumberType(constant))
     }
 
-    init(constant: Int) {
-        self.init(terms: [], constant: Double(constant))
+    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
+    init(_ constant: NumberType) {
+        self.init(terms: [], constant: constant)
     }
+    init(constant: NumberType) {
+        self.init(terms: [], constant: constant)
+    }
+}
+
+public extension PolynomialProtocol where NumberType: IntegerNumberExpressible {
+
 
     init<I>(constant: I) where I: BinaryInteger {
-        self.init(constant: Int(constant))
-    }
-
-    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
-    init(_ constant: Double) {
-        self.init(terms: [], constant: constant)
-    }
-    init(constant: Double) {
-        self.init(terms: [], constant: constant)
-    }
-
-
-
-    init(exponentiation: Exponentiation, constant: Double = 0) {
-        self.init(Term(exponentiation: exponentiation), constant: constant)
-    }
-
-    init(variable: Variable, constant: Double = 0) {
-        self.init(exponentiation: Exponentiation(variable), constant: constant)
-    }
-
-
-
-
-    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
-    init(term: Term, constant: Double = 0) {
-        self.init(terms: [term], constant: constant)
-    }
-
-    init(_ term: Term, constant: Double = 0) {
-        self.init(terms: [term], constant: constant)
+        self.init(constant: NumberType(constant))
     }
 }
 
@@ -73,6 +113,15 @@ public extension Polynomial {
         self.init(Double(value))
     }
 }
+//extension Polynomial: ExpressibleByFloatLiteral where Number: FloatingPointNumberExpressible {
+//    public typealias FloatLiteralType = Float
+//    public init(floatLiteral value: Float) {
+//        self.init(Number(value))
+//    }
+//}
+
+
+
 
 // MARK: - ExpressibleByIntegerLiteral
 extension Polynomial: ExpressibleByIntegerLiteral {}
@@ -81,6 +130,16 @@ public extension Polynomial {
         self.init(Double(value))
     }
 }
+//extension Polynomial: ExpressibleByIntegerLiteral where Number: IntegerNumberExpressible {
+//    public typealias IntegerLiteralType = Int
+//    public init(integerLiteral value: Int) {
+//        self.init(Number(value))
+//    }
+//}
+
+
+
+
 
 // MARK: - ExpressibleByArrayLiteral
 extension Polynomial: ExpressibleByArrayLiteral {}
