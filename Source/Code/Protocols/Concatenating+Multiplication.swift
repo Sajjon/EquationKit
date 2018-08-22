@@ -8,211 +8,27 @@
 
 import Foundation
 
-// MARK: -
-// MARK: - Number -
-// MARK: -
 
-// MARK: - Variable
-//public func *<F>(lhs: Variable, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
-//    return (lhs as Concatenating) * rhs
-//}
-//public func *(lhs: Variable, rhs: Double) -> Polynomial {
-//    return (lhs as Concatenating) * rhs
-//}
-
-//public func *<I>(lhs: Variable, rhs: I) -> Polynomial where I: BinaryInteger {
-//    return (lhs as Concatenating) * rhs
-//}
-public func *(lhs: Variable, rhs: Int) -> Polynomial {
-    return (lhs as Concatenating) * rhs
-}
-
-//public func *<F>(lhs: F, rhs: Variable) -> Polynomial where F: BinaryFloatingPoint {
-//    return lhs * (rhs as Concatenating)
-//}
-//public func *(lhs: Double, rhs: Variable) -> Polynomial {
-//    return lhs * (rhs as Concatenating)
-//}
-//public func *<I>(lhs: I, rhs: Variable) -> Polynomial where I: BinaryInteger {
-//    return lhs * (rhs as Concatenating)
-//}
-public func *(lhs: Int, rhs: Variable) -> Polynomial {
-    return lhs * (rhs as Concatenating)
-}
-
-// MARK: - Exponentiation
-//public func *<F>(lhs: Exponentiation, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
-//    return (lhs as Concatenating) * rhs
-//}
-//public func *(lhs: Exponentiation, rhs: Double) -> Polynomial {
-//    return (lhs as Concatenating) * rhs
-//}
-//
-//public func *<I>(lhs: Exponentiation, rhs: I) -> Polynomial where I: BinaryInteger {
-//    return (lhs as Concatenating) * rhs
-//}
-public func *(lhs: Exponentiation, rhs: Int) -> Polynomial {
-    return (lhs as Concatenating) * rhs
-}
-
-//public func *<F>(lhs: F, rhs: Exponentiation) -> Polynomial where F: BinaryFloatingPoint {
-//    return lhs * (rhs as Concatenating)
-//}
-//public func *(lhs: Double, rhs: Exponentiation) -> Polynomial {
-//    return lhs * (rhs as Concatenating)
-//}
-//
-//public func *<I>(lhs: I, rhs: Exponentiation) -> Polynomial where I: BinaryInteger {
-//    return lhs * (rhs as Concatenating)
-//}
-public func *(lhs: Int, rhs: Exponentiation) -> Polynomial {
-    return lhs * (rhs as Concatenating)
-}
-
-// MARK: - Term
-//public func *<F>(lhs: Term, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
-//    return (lhs as Concatenating) * rhs
-//}
-//
-//public func *<I>(lhs: Term, rhs: I) -> Polynomial where I: BinaryInteger {
-//    return (lhs as Concatenating) * rhs
-//}
-//
-//public func *<F>(lhs: F, rhs: Term) -> Polynomial where F: BinaryFloatingPoint {
-//    return lhs * (rhs as Concatenating)
-//}
-//
-//public func *<I>(lhs: I, rhs: Term) -> Polynomial where I: BinaryInteger {
-//    return lhs * (rhs as Concatenating)
-//}
-
-// MARK: - Polynomial
-//public func *<F>(lhs: Polynomial, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
-//    return (lhs as Concatenating) * rhs
-//}
-//
-//public func *<I>(lhs: Polynomial, rhs: I) -> Polynomial where I: BinaryInteger {
-//    return (lhs as Concatenating) * rhs
-//}
-//
-//public func *<F>(lhs: F, rhs: Polynomial) -> Polynomial where F: BinaryFloatingPoint {
-//    return lhs * (rhs as Concatenating)
-//}
-//
-//public func *<I>(lhs: I, rhs: Polynomial) -> Polynomial where I: BinaryInteger {
-//    return lhs * (rhs as Concatenating)
-//}
-public func *(lhs: Int, rhs: Polynomial) -> Polynomial {
-    return lhs * (rhs as Concatenating)
-}
-
-
-// MARK: -
-// MARK: - Variable -
-// MARK: -
-
-// MARK: - Variable
-public func *(lhs: Variable, rhs: Variable) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: - Exponentiation
-public func *(lhs: Variable, rhs: Exponentiation) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-public func *(lhs: Exponentiation, rhs: Variable) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: - Term
-public func *(lhs: Variable, rhs: Term) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-public func *(lhs: Term, rhs: Variable) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: - Polynomial
-public func *(lhs: Variable, rhs: Polynomial) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-public func *(lhs: Polynomial, rhs: Variable) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: -
-// MARK: - Exponentiation -
-// MARK: -
-// MARK: - Exponentiation
-public func *(lhs: Exponentiation, rhs: Exponentiation) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: - Term
-public func *(lhs: Term, rhs: Exponentiation) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-public func *(lhs: Exponentiation, rhs: Term) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: - Polynomial
-public func *(lhs: Polynomial, rhs: Exponentiation) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-public func *(lhs: Exponentiation, rhs: Polynomial) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: -
-// MARK: - Term -
-// MARK: -
-public func *(lhs: Term, rhs: Term) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: - Polynomial
-public func *(lhs: Polynomial, rhs: Term) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-public func *(lhs: Term, rhs: Polynomial) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-// MARK: -
-// MARK: - Polynomial -
-// MARK: -
-// MARK: - Polynomial
-public func *(lhs: Polynomial, rhs: Polynomial) -> Polynomial {
-    return (lhs as Concatenating) * (rhs as Concatenating)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// MARK: - PRIVATE LOGIC
-private func *(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
+public func *(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
     return Polynomial(lhs).multiply(by: Polynomial(rhs))
 }
 
+// MARK: - Numberic Support
+public func *(lhs: Concatenating, rhs: Int) -> Polynomial {
+    return Polynomial(lhs).multiplied(by: rhs)
+}
+public func *(lhs: Int, rhs: Concatenating) -> Polynomial {
+    return rhs * lhs
+}
+public func *(lhs: Concatenating, rhs: Double) -> Polynomial {
+  return Polynomial(lhs).multiplied(by: rhs)
+}
+public func *(lhs: Double, rhs: Concatenating) -> Polynomial {
+    return rhs * lhs
+}
+
+
+// MARK: - PRIVATE LOGIC
 // MARK: - Numberic Support
 private func *<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
     return Polynomial(lhs).multiplied(by: rhs)
