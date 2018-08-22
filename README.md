@@ -39,24 +39,6 @@ let y² = Exponentiation(y, exponent: 2)
 
 ## Limitations
 
-#### Ternary multiplication
-Since we cannot write custom ternary operators in Swift (actually Swift only has one single built in ternary operator, the [`ternary conditional operator`](https://docs.swift.org/swift-book/LanguageGuide/BasicOperators.html#ID71)) we **cannot** write:
-```swift
-x*y*z // not possibl
-x*(y*z) // not possible
-(x*y)*z // not possible
-```
-(As of Xcode 10 beta 6) The compiler fails to automatically derive which of all the multiplication functions to use which really is unfortunate.
-
-The workaround is to use any of the following solutions:
-```swift
-Term(x, y, z)
-Term([x, y, z]) // or more verbose
-Term(x*y)*z // or using `init(_ term: Term)`
-x*Term(y*z) // or the commutative counterpart
-((x*y) as Term)*z // or the pretty ugly and verbose solution using casting
-```
-
 ### Not supported, but on roadmap
 - [ ] Substitution `(3*(4*x + 5)^^2 - 2*(4x+5) - 1).substitute() { z <~ (4*x + 5) }` // `3*z²-2*z-1`  
 - [ ] Division  

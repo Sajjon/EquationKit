@@ -12,7 +12,17 @@ import XCTest
 @testable import EquationKit
 
 class ConcatenationByMultiplicationTests: XCTestCase {
-    /// Testing different ways of expressiong `x*y*z`
+
+    func testFo() {
+        let eq = x*x*x
+        XCTAssertEqual(eq, x³ + 0)
+        XCTAssertEqual(eq.solve() { x <- 2 }!, 8)
+        XCTAssertEqual(eq.solve() { x <- 3 }!, 27)
+        XCTAssertEqual(eq.solve() { x <- 4 }!, 64)
+        XCTAssertEqual(eq.solve() { x <- 5 }!, 125)
+    }
+
+    // Testing different ways of expressiong `x*y*z`
     func testVariableTimesVariableTimesVariable() {
         let xy = x*y
         let yx = y*x
@@ -26,9 +36,8 @@ class ConcatenationByMultiplicationTests: XCTestCase {
         let x_yz = x*yz
         XCTAssertEqual(x_yz, xy_z)
         XCTAssertEqual(x_yz, yx_z)
-        XCTAssertEqual(Term(x*y)*z, x_yz)
-        XCTAssertEqual(((x*y) as Term)*z, x_yz)
-        XCTAssertEqual(Term(x, y, z), x_yz)
+        XCTAssertEqual(x*y*z, x_yz)
+        XCTAssertEqual(x*y*z, x_yz)
 
         XCTAssertEqual(Term(exponentiation: x³), Term(x, x, x))
     }

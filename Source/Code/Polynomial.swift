@@ -22,9 +22,28 @@ public struct Polynomial: Algebraic {
 
 // MARK: - Convenience Initializers
 public extension Polynomial {
+
+    init<F>(constant: F) where F: BinaryFloatingPoint {
+       self.init(terms: [], constant: Double(constant))
+    }
+
+    init(constant: Int) {
+        self.init(terms: [], constant: Double(constant))
+    }
+
+    init<I>(constant: I) where I: BinaryInteger {
+        self.init(constant: Int(constant))
+    }
+
+    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
     init(_ constant: Double) {
         self.init(terms: [], constant: constant)
     }
+    init(constant: Double) {
+        self.init(terms: [], constant: constant)
+    }
+
+
 
     init(exponentiation: Exponentiation, constant: Double = 0) {
         self.init(Term(exponentiation: exponentiation), constant: constant)

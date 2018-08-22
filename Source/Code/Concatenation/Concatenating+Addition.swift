@@ -30,24 +30,24 @@ public func +(lhs: Double, rhs: Concatenating) -> Polynomial {
 
 
 // MARK: - Internal
-internal func +<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
-    return Polynomial(lhs).appending(constant: rhs)
-}
+//internal func +<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
+//    return Polynomial(lhs).appending(constant: rhs)
+//}
+//
+//internal func +<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
+//    return Polynomial(lhs).appending(constant: rhs)
+//}
+//
+//internal func +<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
+//    return rhs + lhs
+//}
+//
+//internal func +<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
+//    return rhs + lhs
+//}
 
-internal func +<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
-    return Polynomial(lhs).appending(constant: rhs)
-}
-
-internal func +<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
-    return rhs + lhs
-}
-
-internal func +<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
-    return rhs + lhs
-}
-
-// MARK - Private Polynomial Extension
-private extension Polynomial {
+// MARK - Polynomial Extension
+public extension Polynomial {
 
     func appending<F>(constant: F) -> Polynomial where F: BinaryFloatingPoint {
         return Polynomial(terms: terms, constant: self.constant + Double(constant))

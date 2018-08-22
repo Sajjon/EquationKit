@@ -40,31 +40,28 @@ let z⁷ = Exponentiation(z, exponent: 7)
 let z⁸ = Exponentiation(z, exponent: 8)
 let z⁹ = Exponentiation(z, exponent: 9)
 
-typealias Equation = Polynomial
-typealias Eq = Equation
-
 class SimpleDifferentiationTests: XCTestCase {
 
     /// y³x²
     func test𝑦³𝑥²() {
-        let eq = Eq(y³*x²)
-        XCTAssertEqual(Eq(2*y³*x), eq.differentiateWithRespectTo(x)!)
-        XCTAssertEqual(Eq(3*y²*x²), eq.differentiateWithRespectTo(y)!)
+        let eq = (y³*x²)
+        XCTAssertEqual((2*y³*x), eq.differentiateWithRespectTo(x)!)
+        XCTAssertEqual((3*y²*x²), eq.differentiateWithRespectTo(y)!)
     }
 
 
     /// 3x² - 3y
     func test𝟛𝑥²－𝟛𝑦() {
         let eq = 3*x² - 3*y
-        XCTAssertEqual(Eq(6*x), eq.differentiateWithRespectTo(x)!)
-        XCTAssertEqual(Eq(-3), eq.differentiateWithRespectTo(y)!)
+        XCTAssertEqual((6*x), eq.differentiateWithRespectTo(x)!)
+        XCTAssertEqual(Polynomial(-3), eq.differentiateWithRespectTo(y)!)
     }
 
     /// 3y² - 3x
     func test𝟛𝑦²－𝟛𝑥() {
         let eq = 3*y² - 3*x
-        XCTAssertEqual(Eq(-3), eq.differentiateWithRespectTo(x)!)
-        XCTAssertEqual(Eq(6*y), eq.differentiateWithRespectTo(y)!)
+        XCTAssertEqual(Polynomial(-3), eq.differentiateWithRespectTo(x)!)
+        XCTAssertEqual((6*y), eq.differentiateWithRespectTo(y)!)
     }
 
     /// 12x² + y³ - 12xy
@@ -104,26 +101,26 @@ class SimpleDifferentiationTests: XCTestCase {
     }
 
     func testDoubleDifferentationOf𝟝𝑦⁴𝑥³() {
-        let eq = Eq(y⁵*x³)
+        let eq = y⁵*x³
 
         let y＇ = eq.differentiateWithRespectTo(x)!
-        XCTAssertEqual(Eq(3*y⁵*x²), y＇)
+        XCTAssertEqual((3*y⁵*x²), y＇)
 
         let yy＇ = y＇.differentiateWithRespectTo(x)!
-        XCTAssertEqual(Eq(6 * y⁵ * x), yy＇)
+        XCTAssertEqual((6 * y⁵ * x), yy＇)
 
         let x＇ = eq.differentiateWithRespectTo(y)!
-        XCTAssertEqual(Eq(5*y⁴*x³), x＇)
+        XCTAssertEqual((5*y⁴*x³), x＇)
 
         let xx＇ = x＇.differentiateWithRespectTo(y)!
-        XCTAssertEqual(Eq(20 * y³ * x³), xx＇)
+        XCTAssertEqual((20 * y³ * x³), xx＇)
 
 
         let xy＇ = x＇.differentiateWithRespectTo(x)!
-        XCTAssertEqual(Eq(15*y⁴*x²), xy＇)
+        XCTAssertEqual(15*y⁴*x², xy＇)
 
         let yx＇ = y＇.differentiateWithRespectTo(y)!
-        XCTAssertEqual(Eq(15*y⁴*x²), xy＇)
+        XCTAssertEqual(15*y⁴*x², xy＇)
 
         XCTAssertEqual(xy＇, yx＇)
     }
