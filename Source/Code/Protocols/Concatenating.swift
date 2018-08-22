@@ -23,6 +23,30 @@ public extension Concatenating {
     func asPolynomial() -> Polynomial? { return nil }
 }
 
+// MARK: - Conformance - Variable
+extension Variable: Concatenating {}
+public extension Variable {
+    func asVariable() -> Variable? { return self }
+}
+
+// MARK: - Conformance - Exponentiation
+extension Exponentiation: Concatenating {}
+public extension Exponentiation {
+    func asExponentiation() -> Exponentiation? { return self }
+}
+
+// MARK: - Conformance - Term
+extension Term: Concatenating {}
+public extension Term {
+    func asTerm() -> Term? { return self }
+}
+
+// MARK: - Conformance - Variable
+extension Polynomial: Concatenating {}
+public extension Polynomial {
+    func asPolynomial() -> Polynomial? { return self }
+}
+
 // MARK: - Polynomial init Concatenating
 public extension Polynomial {
 
@@ -39,9 +63,4 @@ public extension Polynomial {
             fatalError("unhandled")
         }
     }
-}
-
-// Not sure about this... It seems to reduce compilation time? But should not be necessary?
-public func +(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
-    return Polynomial(lhs).appending(polynomial: Polynomial(rhs))
 }

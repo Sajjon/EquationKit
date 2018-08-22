@@ -176,34 +176,6 @@ public extension Polynomial {
     }
 }
 
-// MARK - Appending
-public extension Polynomial {
-
-    func appending(term: Term) -> Polynomial {
-        return Polynomial(terms: terms + term, constant: constant)
-    }
-
-    func appending(exponentiation: Exponentiation) -> Polynomial {
-        return appending(term: Term(exponentiation: exponentiation))
-    }
-
-    func appending(variable: Variable) -> Polynomial {
-        return appending(exponentiation: Exponentiation(variable))
-    }
-
-    func appending<F>(constant: F) -> Polynomial where F: BinaryFloatingPoint {
-        return Polynomial(terms: terms, constant: self.constant + Double(constant))
-    }
-    
-    func appending<I>(constant: I) -> Polynomial where I: BinaryInteger {
-        return appending(constant: Double(constant))
-    }
-
-    func appending(polynomial other: Polynomial) -> Polynomial {
-        return Polynomial(terms: terms + other.terms, constant: constant + other.constant)
-    }
-}
-
 // MARK: Subtracting
 public extension Polynomial {
     func subtracting(_ number: Double) -> Polynomial {
