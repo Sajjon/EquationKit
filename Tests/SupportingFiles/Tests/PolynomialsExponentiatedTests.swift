@@ -17,11 +17,12 @@ class PolynomialsExponentiatedTests: XCTestCase {
         let eq = (x + 1)^^2
         XCTAssertEqual(eq, (x + 1) * (x + 1))
         XCTAssertEqual(eq, x² + 2*x + 1)
+        XCTAssertEqual(eq, (1 + x)^^2)
     }
 
     func test﹙𝑥＋𝟙﹚³() {
         let eq = (x + 1)^^3
-        XCTAssertEqual(eq, (x + 1) * (x + 1) * (x + 1))
+        XCTAssertEqual(eq, Eq(x + 1) * Eq(x + 1) * Eq(x + 1))
         XCTAssertEqual(eq, x³ + 3*x² + 3*x + 1)
     }
 

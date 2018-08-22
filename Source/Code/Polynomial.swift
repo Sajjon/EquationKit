@@ -26,16 +26,24 @@ public extension Polynomial {
         self.init(terms: [], constant: constant)
     }
 
-    init(_ term: Term, constant: Double = 0) {
-        self.init(terms: [term], constant: constant)
-    }
-
     init(exponentiation: Exponentiation, constant: Double = 0) {
         self.init(Term(exponentiation: exponentiation), constant: constant)
     }
 
     init(variable: Variable, constant: Double = 0) {
         self.init(exponentiation: Exponentiation(variable), constant: constant)
+    }
+
+
+
+
+    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
+    init(term: Term, constant: Double = 0) {
+        self.init(terms: [term], constant: constant)
+    }
+
+    init(_ term: Term, constant: Double = 0) {
+        self.init(terms: [term], constant: constant)
     }
 }
 
@@ -183,11 +191,11 @@ public extension Polynomial {
         return appending(exponentiation: Exponentiation(variable))
     }
 
-    func appending(constant: Double) -> Polynomial {
-        return Polynomial(terms: terms, constant: self.constant + constant)
+    func appending<F>(constant: F) -> Polynomial where F: BinaryFloatingPoint {
+        return Polynomial(terms: terms, constant: self.constant + Double(constant))
     }
     
-    func appending(constant: Int) -> Polynomial {
+    func appending<I>(constant: I) -> Polynomial where I: BinaryInteger {
         return appending(constant: Double(constant))
     }
 
