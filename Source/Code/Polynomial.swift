@@ -175,14 +175,3 @@ public extension Polynomial {
         return Set(terms.flatMap { Array($0.uniqueVariables) })
     }
 }
-
-// MARK: Subtracting
-public extension Polynomial {
-    func subtracting(_ number: Double) -> Polynomial {
-        return Polynomial(terms: terms, constant: constant - number)
-    }
-
-    func adding(_ number: Double) -> Polynomial {
-        return Polynomial(terms: terms, constant: constant + number)
-    }
-}

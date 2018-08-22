@@ -29,20 +29,20 @@ public func +(lhs: Double, rhs: Concatenating) -> Polynomial {
 
 
 
-// MARK: - PRIVATE LOGIC
-private func +<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
+// MARK: - Internal
+internal func +<F>(lhs: Concatenating, rhs: F) -> Polynomial where F: BinaryFloatingPoint {
     return Polynomial(lhs).appending(constant: rhs)
 }
 
-private func +<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
+internal func +<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
     return Polynomial(lhs).appending(constant: rhs)
 }
 
-private func +<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
+internal func +<F>(lhs: F, rhs: Concatenating) -> Polynomial where F: BinaryFloatingPoint {
     return rhs + lhs
 }
 
-private func +<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
+internal func +<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteger {
     return rhs + lhs
 }
 
