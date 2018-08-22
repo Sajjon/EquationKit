@@ -26,16 +26,24 @@ public extension Polynomial {
         self.init(terms: [], constant: constant)
     }
 
-    init(_ term: Term, constant: Double = 0) {
-        self.init(terms: [term], constant: constant)
-    }
-
     init(exponentiation: Exponentiation, constant: Double = 0) {
         self.init(Term(exponentiation: exponentiation), constant: constant)
     }
 
     init(variable: Variable, constant: Double = 0) {
         self.init(exponentiation: Exponentiation(variable), constant: constant)
+    }
+
+
+
+
+    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
+    init(term: Term, constant: Double = 0) {
+        self.init(terms: [term], constant: constant)
+    }
+
+    init(_ term: Term, constant: Double = 0) {
+        self.init(terms: [term], constant: constant)
     }
 }
 
@@ -167,59 +175,3 @@ public extension Polynomial {
         return Set(terms.flatMap { Array($0.uniqueVariables) })
     }
 }
-
-// MARK - Appending
-public extension Polynomial {
-
-    func appending(term: Term) -> Polynomial {
-        return Polynomial(terms: terms + term, constant: constant)
-    }
-
-    func appending(exponentiation: Exponentiation) -> Polynomial {
-        return appending(term: Term(exponentiation: exponentiation))
-    }
-
-    func appending(variable: Variable) -> Polynomial {
-        return appending(exponentiation: Exponentiation(variable))
-    }
-
-    func appending(constant: Double) -> Polynomial {
-        return Polynomial(terms: terms, constant: self.constant + constant)
-    }
-    
-    func appending(constant: Int) -> Polynomial {
-        return appending(constant: Double(constant))
-    }
-
-    func appending(polynomial other: Polynomial) -> Polynomial {
-        return Polynomial(terms: terms + other.terms, constant: constant + other.constant)
-    }
-}
-
-// MARK: Subtracting
-public extension Polynomial {
-    func subtracting(_ number: Double) -> Polynomial {
-        return Polynomial(terms: terms, constant: constant - number)
-    }
-
-    func adding(_ number: Double) -> Polynomial {
-        return Polynomial(terms: terms, constant: constant + number)
-    }
-}
-
-// MARK: Multiplying
-public extension Polynomial {
-
-    func multiplied(by number: Double) -> Polynomial {
-        guard let firstTerm = terms.first else { return Polynomial(terms: [], constant: constant * number) }
-        let termMultiplied = Term(exponentiations: firstTerm.exponentiations, coefficient: firstTerm.coefficient * number)
-        guard terms.count > 1 else { return Polynomial(termMultiplied, constant: constant) }
-        let rest = terms.dropFirst()
-        return Polynomial(terms: [termMultiplied] + rest, constant: constant)
-    }
-
-    func multiplied(by number: Int) -> Polynomial {
-        return multiplied(by: Double(number))
-    }
-}
-

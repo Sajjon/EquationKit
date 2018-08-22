@@ -84,13 +84,13 @@ class PolynomialMultipliedByPolynomialTests: XCTestCase {
         XCTAssertEqual(roots3FromRoots2FactorizedLHS, roots3ExpanedManual)
         XCTAssertEqual(roots3FromRoots2FactorizedRHS, roots3ExpanedManual)
 
-        let roots3FactorizedManual = (x-2)*(x+3)*(x+7)
+        let roots3FactorizedManual = Eq(x-2)*Eq(x+3)*Eq(x+7)
         XCTAssertEqual(roots3ExpanedManual, roots3FactorizedManual)
 
         let roots4FromRoots3FactorizedLHS = roots3FromRoots2FactorizedLHS * (x-11)
         let roots4FromRoots3FactorizedRHS = (x-11) * roots3FromRoots2FactorizedLHS
 
-        let eq = (x-2)*(x+3)*(x+7)*(x-11)
+        let eq = Eq(x-2)*Eq(x+3)*Eq(x+7)*Eq(x-11)
         XCTAssertEqual(eq, roots4FromRoots3FactorizedLHS)
         XCTAssertEqual(eq, roots4FromRoots3FactorizedRHS)
 

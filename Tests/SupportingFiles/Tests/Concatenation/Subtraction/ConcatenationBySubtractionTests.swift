@@ -42,7 +42,6 @@ class ConcatenationBySubtractionTests: XCTestCase {
     func testNumberSubtractTermAndReversed() {
         let xy = x*y
         let yx = y*x
-        XCTAssertTrue(type(of: xy) == Term.self)
         XCTAssertEqual(yx, xy) // Multiplication is commutative
 
         XCTAssertEqual(xy - 2, xy - 2) // trivial
@@ -124,7 +123,6 @@ class ConcatenationBySubtractionTests: XCTestCase {
 
     func testVariableSubtractTermAndReversed() {
         let xy = x*y
-        XCTAssertTrue(type(of: xy) == Term.self)
 
         let 𝑥－𝑥𝑦 = x - xy
         XCTAssertEqual(𝑥－𝑥𝑦.solve() {[ x <- 5, y <- 3 ]}, -10)
@@ -177,7 +175,6 @@ class ConcatenationBySubtractionTests: XCTestCase {
     func testExponentiationSubtractTermAndReversed() {
         let xy = x*y
         let yx = y*x
-        XCTAssertTrue(type(of: xy) == Term.self)
 
         XCTAssertNotEqual(x² - xy, xy - x²)
         XCTAssertNotEqual(y² - xy, xy - y²)
@@ -200,8 +197,6 @@ class ConcatenationBySubtractionTests: XCTestCase {
     func testTermSubtractTerm() {
         let xy = x*y
         let xz = x*z
-        XCTAssertTrue(type(of: xy) == Term.self)
-        XCTAssertTrue(type(of: xz) == Term.self)
 
         XCTAssertEqual((xy - xz).asString(sorting: .coefficient), "xy - xz")
         XCTAssertEqual((xz - xy).asString(sorting: .coefficient), "xz - xy")
@@ -213,8 +208,6 @@ class ConcatenationBySubtractionTests: XCTestCase {
     func testTermSubtractPolynomialAndReversed() {
         let xy = x*y
         let xz = x*z
-        XCTAssertTrue(type(of: xy) == Term.self)
-        XCTAssertTrue(type(of: xz) == Term.self)
         let eq = x - 2
         XCTAssertTrue(type(of: eq) == Polynomial.self)
         let eq2 = x - 3
