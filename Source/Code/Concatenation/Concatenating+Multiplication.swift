@@ -47,21 +47,21 @@ private func *<I>(lhs: I, rhs: Concatenating) -> Polynomial where I: BinaryInteg
 }
 
 // MARK: - Private Extension Term
-private extension Term {
-    func appending(term other: Term) -> Term {
+private extension TermProtocol {
+    func appending(term other: Self) -> Self {
         // e.g. (2*x*y) * (3x^2*y^2)
-        return Term(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)
+        return Self(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)
     }
 
-    func multiplyingCoefficient(by number: Double) -> Term {
-        return Term(exponentiations: exponentiations, coefficient: coefficient * number)
+    func multiplyingCoefficient(by number: NumberType) -> Self {
+        return Self(exponentiations: exponentiations, coefficient: coefficient * number)
     }
 }
 
 // MARK: - Private Extension Polynomial
-private extension Polynomial {
-    func multiply(by other: Polynomial) -> Polynomial {
-        var multipliedTerm = [Term]()
+private extension PolynomialProtocol {
+    func multiply(by other: Self) -> Self {
+        var multipliedTerm = [TermType]()
         for lhsTerm in terms {
             for rhsTerm in other.terms {
                 multipliedTerm.append(lhsTerm.appending(term: rhsTerm))
@@ -76,18 +76,42 @@ private extension Polynomial {
             }
         }
 
-        return Polynomial(terms: multipliedTerm, constant: constant * other.constant)
+        return Self(terms: multipliedTerm, constant: constant * other.constant)
     }
 
-    func multiplied<F>(by number: F) -> Polynomial where F: BinaryFloatingPoint {
-        guard let firstTerm = terms.first else { return Polynomial(terms: [], constant: constant * Double(number)) }
-        let termMultiplied = Term(exponentiations: firstTerm.exponentiations, coefficient: firstTerm.coefficient * Double(number))
-        guard terms.count > 1 else { return Polynomial(termMultiplied, constant: constant) }
+    func multiplied<F>(by number: F) -> Self where F: BinaryFloatingPoint {
+        guard let firstTerm = terms.first else { return Self(terms: [], constant: constant * NumberType(number)) }
+        let termMultiplied = TermType(exponentiations: firstTerm.exponentiations, coefficient: firstTerm.coefficient * NumberType(number))
+        guard terms.count > 1 else { return Self(termMultiplied, constant: constant) }
         let rest = terms.dropFirst()
-        return Polynomial(terms: [termMultiplied] + rest, constant: constant)
+        return Self(terms: [termMultiplied] + rest, constant: constant)
     }
 
-    func multiplied<I>(by number: I) -> Polynomial where I: BinaryInteger {
+    func multiplied<I>(by number: I) -> Self where I: BinaryInteger {
         return multiplied(by: Double(number))
+    }
+}
+
+public func ^^(lhs: Concatenating, rhs: Int) -> Polynomial {
+    return Polynomial(lhs).raised(to: rhs)
+}
+
+
+// MARK: - Internal
+internal func ^^<I>(lhs: Concatenating, rhs: I) -> Polynomial where I: BinaryInteger {
+    return Polynomial(lhs).raised(to: rhs)
+}
+
+
+// MARK: - Polynomial
+private extension PolynomialProtocol {
+    func raised<I>(to exponent: I) -> Self where I: BinaryInteger {
+        var polynomialExponentiated = Self(constant: 1)
+
+        // base * base * base ... // exponent times
+        for _ in 0..<Int(exponent) {
+            polynomialExponentiated = polynomialExponentiated.multiply(by: self)
+        }
+        return polynomialExponentiated
     }
 }

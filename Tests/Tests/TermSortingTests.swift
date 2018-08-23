@@ -86,14 +86,14 @@ class TermSortingTests: XCTestCase {
 
     func testSingleSortingWithOneElement() {
         let terms = [tx]
-        SortingBetweenTerms.all.forEach {
+        SortingBetweenTerms.defaultArray.forEach {
             XCTAssertEqual(terms[0], terms.sorting(betweenTerms: $0)[0])
         }
     }
 
     func testSingleSortingWithTwoSortedElement() {
         let terms = [tx, ty]
-        SortingBetweenTerms.all.forEach {
+        SortingBetweenTerms.defaultArray.forEach {
             XCTAssertEqual(terms, terms.sorting(betweenTerms: $0))
         }
     }
@@ -176,7 +176,7 @@ class TermSortingTests: XCTestCase {
     func testSingleSortingElementsUnsortedByVariableCount() {
         let terms = [－txyz, tx²y²z², －tx²z³, －ty, tx², －tx³, txy, tx²y²z³, tx⁴].map { $0.sortingExponentiations(by: .variablesAlphabetically) }
 
-        SortingBetweenTerms.all.forEach {
+        SortingBetweenTerms.defaultArray.forEach {
             XCTAssertEqual(terms.sorting(betweenTerms: $0), terms.sorting(betweenTerms: $0))
         }
 

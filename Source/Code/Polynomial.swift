@@ -8,13 +8,13 @@
 
 import Foundation
 
-public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType {
-    associatedtype NumberType // NumberExpressible
+public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType { // PolynomialType == Self
+//    associatedtype NumberType // NumberExpressible
     associatedtype TermType: TermProtocol
     var constant: NumberType { get }
     var terms: [TermType] { get }
 
-    init(terms: [TermType], sorting: TermSorting, constant: NumberType)
+    init(terms: [TermType], sorting: TermSorting<NumberType>, constant: NumberType)
     init(term: TermType)
     init(constant: NumberType)
 }
@@ -26,28 +26,26 @@ public extension PolynomialProtocol {
 
 
 public extension PolynomialProtocol {
-    init(terms: [TermType], sorting: TermSorting = .default, constant: NumberType = .zero) {
+    init(terms: [TermType] = [], sorting: TermSorting<NumberType> = .default, constant: NumberType = .zero) {
         self.init(terms: terms, sorting: sorting, constant: constant)
     }
     init(term: TermType) {
-        self.init(terms: [term], sorting: .default, constant: .zero)
+        self.init(terms: [term], constant: NumberType.zero)
     }
     init(constant: NumberType) {
-        self.init(terms: [], sorting: .default, constant: constant)
+        self.init(terms: [], constant: constant)
     }
 }
+public typealias Polynomial = PolynomialStruct<Double>
+public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
 
-//public typealias Polynomial = PolynomialStruct<Double>
-//public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
-
-public struct Polynomial: PolynomialProtocol {
-    public typealias NumberType = Double
-    public typealias TermType = Term
+    public typealias NumberType = Number
+    public typealias TermType = TermStruct<Number>
     public let constant: NumberType
     public let terms: [TermType]
 
 
-    public init(terms: [TermType], sorting: TermSorting, constant: NumberType) {
+    public init(terms: [TermType], sorting: TermSorting<NumberType>, constant: NumberType) {
         self.terms = terms.merged().sorted(by: sorting)
         self.constant = constant
     }
@@ -99,82 +97,38 @@ public extension PolynomialProtocol where NumberType: FloatingPointNumberExpress
 }
 
 public extension PolynomialProtocol where NumberType: IntegerNumberExpressible {
-
-
     init<I>(constant: I) where I: BinaryInteger {
         self.init(constant: NumberType(constant))
     }
 }
 
-// MARK: - ExpressibleByFloatLiteral
-extension Polynomial: ExpressibleByFloatLiteral {}
-public extension Polynomial {
-    init(floatLiteral value: Float) {
-        self.init(Double(value))
-    }
-}
-//extension Polynomial: ExpressibleByFloatLiteral where Number: FloatingPointNumberExpressible {
-//    public typealias FloatLiteralType = Float
-//    public init(floatLiteral value: Float) {
-//        self.init(Number(value))
-//    }
-//}
-
-
-
-
-// MARK: - ExpressibleByIntegerLiteral
-extension Polynomial: ExpressibleByIntegerLiteral {}
-public extension Polynomial {
-    init(integerLiteral value: Int) {
-        self.init(Double(value))
-    }
-}
-//extension Polynomial: ExpressibleByIntegerLiteral where Number: IntegerNumberExpressible {
-//    public typealias IntegerLiteralType = Int
-//    public init(integerLiteral value: Int) {
-//        self.init(Number(value))
-//    }
-//}
-
-
-
-
-
-// MARK: - ExpressibleByArrayLiteral
-extension Polynomial: ExpressibleByArrayLiteral {}
-public extension Polynomial {
-    init(arrayLiteral terms: Term...) {
-        self.init(terms: terms)
-    }
-}
 
 // MARK: - CustomStringConvertible
-extension Polynomial: CustomStringConvertible {}
-public extension Polynomial {
+//extension Polynomial: CustomStringConvertible {}
+public extension PolynomialProtocol {
 
-    func sortingTerms(sorting: TermSorting = .default) -> Polynomial {
-        return Polynomial(terms: terms, sorting: sorting, constant: constant)
+    func sortingTerms(sorting: TermSorting<NumberType>) -> Self {
+        return Self(terms: terms, sorting: sorting, constant: constant)
     }
 
-    func asString(sorting betweenTerms: SortingBetweenTerms) -> String {
+    func asString(sorting betweenTerms: SortingBetweenTerms<NumberType>) -> String {
         return asString(sorting: TermSorting(betweenTerms: betweenTerms))
     }
 
-    func asString(sorting: TermSorting = .default) -> String {
+    func asString(sorting: TermSorting<NumberType>) -> String {
         let sortedPolynomial = sortingTerms(sorting: sorting)
         return sortedPolynomial.description
     }
 
     var description: String {
         var constantString: String {
-            guard constant != 0 else { return "" }
-            let constantSignString = constant > 0 ? "+" : "-"
-            return " \(constantSignString) \(abs(constant).shortFormat)"
+            guard constant != .zero else { return "" }
+            let constantSignString = constant.isPositive ? "+" : "-"
+            return " \(constantSignString) \(constant.absolute().shortFormat)"
         }
 
         var termsString: String {
-            func termString(index: Int, term: Term) -> String {
+            func termString(index: Int, term: TermType) -> String {
                 let signStringIfNegative = term.isNegative ? term.signString : ""
                 let signString = (index == 0 || index == terms.endIndex) ? "\(signStringIfNegative)" : " \(term.signString) "
                 return "\(signString)\(term.description)"
@@ -188,58 +142,41 @@ public extension Polynomial {
 }
 
 // MARK: - Equatable
-extension Polynomial: Equatable {}
-public extension Polynomial {
-    static func == (lhs: Polynomial, rhs: Polynomial) -> Bool {
+//extension Polynomial: Equatable {}
+public extension PolynomialProtocol {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.constant == rhs.constant
             && lhs.terms.sorted() == rhs.terms.sorted()
     }
 }
 
 // MARK: - Negatable
-extension Polynomial: Negatable {}
-public extension Polynomial {
-    func negated() -> Polynomial {
-        return Polynomial(terms: terms.negated(), constant: -constant)
+//extension Polynomial: Negatable {}
+public extension PolynomialProtocol {
+    func negated() -> Self {
+        return Self(terms: terms.negated(), sorting: TermSorting<NumberType>(), constant: constant.negated())
     }
 }
 
 // MARK: - Solvable
-extension Polynomial: Solvable {}
-public extension Polynomial {
-    func solve(constants: Set<Constant>, modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
+//extension Polynomial: Solvable {}
+public extension PolynomialProtocol {
+    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
         let solution = terms.reduce(constant, {
             guard let solution = $1.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return $0 }
             return $0 + solution
         })
         guard let modulus = modulus else { return solution }
-        return mod(solution, modulus: modulus, modulusMode: modulusMode)
+        return solution.mod(modulus, modulusMode: modulusMode)
     }
 }
 
-// MARK: - Differentiatable
-extension Polynomial: Differentiatable {}
-public extension Polynomial {
 
-    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Polynomial? {
-        guard contains(variable: variableToDifferentiate) else { return Polynomial(terms: [], constant: 0) }
-        var terms = [Term]()
-        var constant: Double = 0
-        for term in self.terms {
-            guard let differentiatedTerm = term.differentiateWithRespectTo(variableToDifferentiate) else { continue }
-            switch differentiatedTerm {
-            case .constant(let differentiatedConstant): constant += differentiatedConstant
-            case .term(let differentiatedTerm): terms.append(differentiatedTerm)
-            }
-        }
-        return Polynomial(terms: terms, constant: constant)
-    }
-}
 
 
 // MARK: - Public
-public extension Polynomial {
+public extension PolynomialProtocol {
 
     func contains(variable: Variable) -> Bool {
         for term in terms {
@@ -251,5 +188,33 @@ public extension Polynomial {
 
     var uniqueVariables: Set<Variable> {
         return Set(terms.flatMap { Array($0.uniqueVariables) })
+    }
+}
+
+
+
+
+// MARK: - PolynomialStruct
+
+// MARK: - ExpressibleByFloatLiteral
+extension PolynomialStruct: ExpressibleByFloatLiteral {
+    public typealias FloatLiteralType = Float
+    public init(floatLiteral value: Float) {
+        self.init(constant: NumberType(value))
+    }
+}
+
+// MARK: - ExpressibleByIntegerLiteral
+extension PolynomialStruct: ExpressibleByIntegerLiteral {
+    public typealias IntegerLiteralType = Int
+    public init(integerLiteral value: Int) {
+        self.init(constant: NumberType(value))
+    }
+}
+
+// MARK: - ExpressibleByArrayLiteral
+extension PolynomialStruct: ExpressibleByArrayLiteral {
+    public init(arrayLiteral terms: TermType...) {
+        self.init(terms: terms)
     }
 }

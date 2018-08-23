@@ -12,16 +12,22 @@ public protocol NumberExpressible: Numeric, Negatable, Hashable, Comparable {
     var isNegative: Bool { get }
     var isPositive: Bool { get }
     func absolute() -> Self
-    static func mod(_ number: Self, modulus: Self, modulusMode: ModulusMode) -> Self
+    func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self
     static func + (lhs: Self, rhs: Self) -> Self
     static func * (lhs: Self, rhs: Self) -> Self
     static func - (lhs: Self, rhs: Self) -> Self
     static func / (lhs: Self, rhs: Self) -> Self
 
+    func raised(to exponent: Self) -> Self
+
     static var zero: Self { get }
     static var one: Self { get }
     init(_ int: Int)
     init(_ double: Double)
+    init<F>(_ binaryFloatingPoint: F) where F: BinaryFloatingPoint
+    init<I>(_ binaryInteger: I) where I: BinaryInteger
+
+    var shortFormat: String { get }
 }
 
 public protocol FloatingPointNumberExpressible: NumberExpressible, BinaryFloatingPoint {
@@ -29,16 +35,20 @@ public protocol FloatingPointNumberExpressible: NumberExpressible, BinaryFloatin
 }
 
 public extension FloatingPointNumberExpressible {
-    static func mod(_ number: Self, modulus: Self, modulusMode: ModulusMode) -> Self {
-        return EquationKit.mod(number, modulus: number, modulusMode: modulusMode)
+    func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self {
+        return EquationKit.mod(self, modulus: modulus, modulusMode: modulusMode)
     }
 }
-
 extension Double: FloatingPointNumberExpressible {}
 public extension Double {
 
     static var zero: Double { return 0 }
     static var one: Double { return 1 }
+    var shortFormat: String {
+        let decimalsEqualToZero = truncatingRemainder(dividingBy: 1) == 0
+        let format = decimalsEqualToZero ? "%.0f" : "%.2f"
+        return String(format: format, self)
+    }
 
     var isNegative: Bool {
         return self < 0
@@ -55,14 +65,18 @@ public extension Double {
     func negated() -> Double {
         return -self
     }
+
+    func raised(to exponent: Double) -> Double {
+        return pow(self, exponent)
+    }
 }
 public protocol IntegerNumberExpressible: NumberExpressible, BinaryInteger {
     init(_ int: Int)
 }
 
 public extension IntegerNumberExpressible {
-    static func mod(_ number: Self, modulus: Self, modulusMode: ModulusMode) -> Self {
-        return EquationKit.mod(number, modulus: number, modulusMode: modulusMode)
+    func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self {
+        return EquationKit.mod(self, modulus: modulus, modulusMode: modulusMode)
     }
 }
 extension Int: IntegerNumberExpressible {}
@@ -70,6 +84,10 @@ public extension Int {
 
     static var zero: Int { return 0 }
     static var one: Int { return 1 }
+
+    var shortFormat: String {
+        return "\(self)"
+    }
 
     var isNegative: Bool {
         return self < 0
@@ -85,5 +103,10 @@ public extension Int {
 
     func negated() -> Int {
         return -self
+    }
+
+
+    func raised(to exponent: Int) -> Int {
+        return Int(pow(Double(self), Double(exponent)))
     }
 }

@@ -8,36 +8,53 @@
 
 import Foundation
 
-public struct Constant: NamedVariable {
-    public let name: String
-    public let value: Double
-    public init(_ name: String, value: Double) {
-        self.name = name
-        self.value = value
-    }
+public protocol ConstantProtocol: NamedVariable {
+    associatedtype NumberType: NumberExpressible
+    var name: String { get }
+    var value: NumberType { get }
+    init(name: String, value: NumberType)
+
+    func toVariable() -> Variable
 }
 
 // MARK: - Convenience Initializers
-public extension Constant {
+public extension ConstantProtocol {
+
+    init(variable: Variable, value: NumberType) {
+        self.init(name: variable.name, value: value)
+    }
+
     init(_ variable: Variable, value: Double) {
-        self.init(variable.name, value: value)
+        self.init(variable: variable, value: NumberType(value))
     }
 
     init(_ variable: Variable, value: Int) {
-        self.init(variable, value: Double(value))
+        self.init(variable: variable, value: NumberType(value))
     }
 }
 
 // MARK: - Public
-public extension Constant {
+public extension ConstantProtocol {
     func toVariable() -> Variable {
         return Variable(name)
     }
 }
 
 // MARK: - CustomStringConvertible
-public extension Constant {
+public extension ConstantProtocol {
     var description: String {
         return "<\(name)=\(value.shortFormat)>"
     }
 }
+
+public struct ConstantStruct<Number: NumberExpressible>: ConstantProtocol {
+    public typealias NumberType = Number
+    public let name: String
+    public let value: NumberType
+    public init(name: String, value: NumberType) {
+        self.name = name
+        self.value = value
+    }
+}
+
+public typealias Constant = ConstantStruct<Double>

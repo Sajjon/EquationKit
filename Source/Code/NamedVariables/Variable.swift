@@ -8,8 +8,7 @@
 
 import Foundation
 
-public struct Variable: NamedVariable, Algebraic {
-
+public struct Variable: NamedVariable, Concatenating, Hashable, CustomStringConvertible {
     public let name: String
 
     init(_ name: String) {
@@ -17,18 +16,18 @@ public struct Variable: NamedVariable, Algebraic {
     }
 }
 
-// MARK: - Solvable
-public extension Variable {
-    func solve(constants: Set<Constant>, modulus: Double?, modulusMode: ModulusMode) -> Double? {
-        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
-        return constant.value
-    }
-}
+//// MARK: - Solvable
+//public extension Variable {
+//    func solve(constants: Set<Constant>, modulus: Double?, modulusMode: ModulusMode) -> Double? {
+//        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
+//        return constant.value
+//    }
+//}
 
 // MARK: - Differentiatable
-public extension Variable {
-    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Variable? {
-        guard variableToDifferentiate == self else { return nil }
-        return self
-    }
-}
+//public extension Variable {
+//    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Variable? {
+//        guard variableToDifferentiate == self else { return nil }
+//        return self
+//    }
+//}

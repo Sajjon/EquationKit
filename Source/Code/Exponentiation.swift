@@ -8,8 +8,8 @@
 
 import Foundation
 
-public protocol ExponentiationProtocol: Algebraic, Comparable {
-    associatedtype NumberType: NumberExpressible
+public protocol ExponentiationProtocol: Algebraic, Comparable { // where PolynomialType.NumberType == Self.NumberType
+//    associatedtype NumberType
     var variable: Variable { get }
     var exponent: NumberType { get }
     init(variable: Variable, exponent: NumberType)
@@ -26,9 +26,11 @@ public extension ExponentiationProtocol {
     }
 }
 
-public struct Exponentiation: ExponentiationProtocol {
+public typealias Exponentiation = ExponentiationStruct<Double>
 
-    public typealias NumberType = Double
+public struct ExponentiationStruct<Number: NumberExpressible>: ExponentiationProtocol {
+
+    public typealias NumberType = Number
     public let variable: Variable
     public let exponent: NumberType
 
@@ -40,59 +42,69 @@ public struct Exponentiation: ExponentiationProtocol {
 
 
 // MARK: - Solvable
-extension Exponentiation: Solvable {}
-public extension Exponentiation {
-    func solve(constants: Set<Constant>, modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        guard let base = variable.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return nil }
-        let value = pow(base, exponent)
+//extension Exponentiation: Solvable {}
+public extension ExponentiationProtocol {
+    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+        guard let matchingVariable = constants.first(where: { $0.toVariable() == variable }) else { return nil }
+        let value = matchingVariable.value.raised(to: exponent)
         guard let modulus = modulus else { return value }
-        return mod(value, modulus: modulus, modulusMode: modulusMode)
+        return value.mod(modulus, modulusMode: modulusMode)
     }
 }
 
-// MARK: - Differentiatable
-extension Exponentiation: Differentiatable {}
-public extension Exponentiation {
+//public protocol ExponentiationDifferentiationResultProtocol where ExponentiationType.NumberType == Self.NumberType {
+//    associatedtype NumberType //: NumberExpressible
+//    associatedtype ExponentiationType: ExponentiationProtocol
+//    var caseConstant: NumberType? { get }
+//    var caseExponentiationWithCoefficient: (NumberType?, ExponentiationType?)? { get }
+//}
+//
+//public enum ExponentiationDifferentiationResult<Number: NumberExpressible>: ExponentiationDifferentiationResultProtocol {
+//    case constant(Number)
+//    case exponentiation(coefficient: Number?, exponentiation: ExponentiationStruct<Number>)
+//}
+//public extension ExponentiationDifferentiationResult {
+//
+//    typealias ExponentiationType = ExponentiationStruct<NumberType>
+//    typealias NumberType = Number
+//
+//    var caseConstant: NumberType? {
+//        switch self {
+//        case .constant(let numberType): return numberType
+//        default: return nil
+//        }
+//    }
+//    var caseExponentiationWithCoefficient: (NumberType?, ExponentiationType?)? {
+//        switch self {
+//        case .exponentiation(let coeff, let expo): return (coeff, expo)
+//   default: return nil
+//        }
+//    }
+//}
 
-    public enum DifferentiationResult {
-        case constant(Double)
-        case exponentiation(coefficient: Double?, exponentiation: Exponentiation)
-    }
 
-    /// Returns the differentiated variable and its coefficient with respect to the input variable, if this variable does not equal said variable, then this method returns `nil`
-    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> DifferentiationResult? {
-        guard variableToDifferentiate == variable else { return .exponentiation(coefficient: nil, exponentiation: self) }
-        let exponentPriorToDifferentiation = self.exponent
-        let exponent = exponentPriorToDifferentiation - 1
-        guard exponent > 0 else {
-            return .constant(1)
-        }
-        return .exponentiation(coefficient: exponentPriorToDifferentiation, exponentiation: Exponentiation(variable, exponent: exponent))
-    }
-
-}
 
 // MARK: - Hashable
-extension Exponentiation: Hashable {}
+//extension Exponentiation: Hashable {}
 
 // MARK: - Equatable
-extension Exponentiation: Equatable {}
-public extension Exponentiation {
-    static func == (lhs: Exponentiation, rhs: Exponentiation) -> Bool {
+//extension ExponentiationProtocol: Equatable {}
+public extension ExponentiationProtocol {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.variable == rhs.variable && lhs.exponent == rhs.exponent
     }
 }
 
 // MARK: - Compareable
-extension Exponentiation: Comparable {
-    public static func < (lhs: Exponentiation, rhs: Exponentiation) -> Bool {
+extension ExponentiationProtocol {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         return [rhs, lhs].sorted() == [lhs, rhs]
     }
 }
 
 // MARK: - CustomStringConvertible
-extension Exponentiation: CustomStringConvertible {}
-public extension Exponentiation {
+//extension Exponentiation: CustomStringConvertible {}
+public extension ExponentiationProtocol {
     var description: String {
         guard exponent != 1 else { return variable.description }
         if exponent > 1 && exponent < 10 {
@@ -123,8 +135,8 @@ public extension Exponentiation {
 }
 
 // MARK: Multiplying
-public extension Exponentiation {
-    func multiplyingExponent(by number: Double) -> Exponentiation {
-        return Exponentiation(variable, exponent: exponent * number)
+public extension ExponentiationProtocol {
+    func multiplyingExponent(by number: NumberType) -> Self {
+        return Self(variable, exponent: exponent * number)
     }
 }

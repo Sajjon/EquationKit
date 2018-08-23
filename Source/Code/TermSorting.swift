@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct TermSorting {
-    public let betweenTerms: [SortingBetweenTerms]
-    public let withinTerm: [SortingWithinTerm]
-    public init(betweenTerms: [SortingBetweenTerms] = .default, withinTerm: [SortingWithinTerm] = .default) {
+public struct TermSorting<Number: NumberExpressible> {
+    public let betweenTerms: [SortingBetweenTerms<Number>]
+    public let withinTerm: [SortingWithinTerm<Number>]
+    public init(betweenTerms: [SortingBetweenTerms<Number>] = SortingBetweenTerms<Number>.defaultArray, withinTerm: [SortingWithinTerm<Number>] = SortingWithinTerm<Number>.defaultArray) {
         self.betweenTerms = betweenTerms
         self.withinTerm = withinTerm
     }
@@ -21,7 +21,7 @@ public struct TermSorting {
 
 public extension TermSorting {
 
-    init(betweenTerms: SortingBetweenTerms) {
+    init(betweenTerms: SortingBetweenTerms<Number>) {
         self.init(betweenTerms: [betweenTerms])
     }
 }
