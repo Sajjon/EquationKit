@@ -8,35 +8,35 @@
 
 import Foundation
 
-public protocol ConstantProtocol: NamedVariable {
-    associatedtype NumberType: NumberExpressible
+public protocol ConstantProtocol: NamedVariable, VariableTypeSpecifying {
+//    associatedtype NumberType: NumberExpressible
     var name: String { get }
-    var value: NumberType { get }
-    init(name: String, value: NumberType)
+    var value: VariableType.NumberType { get }
+    init(name: String, value: VariableType.NumberType)
 
-    func toVariable() -> Variable
+    func toVariable() -> VariableType//VariableStruct<NumberType>
 }
 
 // MARK: - Convenience Initializers
 public extension ConstantProtocol {
 
-    init(variable: Variable, value: NumberType) {
+    init(variable: VariableType, value: VariableType.NumberType) {
         self.init(name: variable.name, value: value)
     }
 
-    init(_ variable: Variable, value: Double) {
-        self.init(variable: variable, value: NumberType(value))
+    init(_ variable: VariableType, value: Double) {
+        self.init(variable: variable, value: VariableType.NumberType(value))
     }
 
-    init(_ variable: Variable, value: Int) {
-        self.init(variable: variable, value: NumberType(value))
+    init(_ variable: VariableType, value: Int) {
+        self.init(variable: variable, value: VariableType.NumberType(value))
     }
 }
 
 // MARK: - Public
 public extension ConstantProtocol {
-    func toVariable() -> Variable {
-        return Variable(name)
+    func toVariable() -> VariableType { //VariableStruct<NumberType> {
+        return VariableType(name)
     }
 }
 
@@ -47,14 +47,14 @@ public extension ConstantProtocol {
     }
 }
 
-public struct ConstantStruct<Number: NumberExpressible>: ConstantProtocol {
-    public typealias NumberType = Number
+public struct ConstantStruct<Variable_: VariableProtocol>: ConstantProtocol {
+    public typealias VariableType = Variable_
     public let name: String
-    public let value: NumberType
-    public init(name: String, value: NumberType) {
+    public let value: VariableType.NumberType
+    public init(name: String, value: VariableType.NumberType) {
         self.name = name
         self.value = value
     }
 }
 
-public typealias Constant = ConstantStruct<Double>
+public typealias Constant = ConstantStruct<VariableStruct<Double>>

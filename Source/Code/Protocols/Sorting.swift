@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol Sorting: Equatable {
-    associatedtype TypeToSort //: NumberTypeSpecifying
+    associatedtype TypeToSort
     typealias AreInIncreasingOrder = (TypeToSort, TypeToSort) -> (Bool)
     func areInIncreasingOrder(tieBreakers: [Self]?) -> AreInIncreasingOrder
     var comparing: (TypeToSort, TypeToSort) -> (ComparisonResult) { get }

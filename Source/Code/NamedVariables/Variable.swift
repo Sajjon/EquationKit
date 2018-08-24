@@ -8,26 +8,35 @@
 
 import Foundation
 
-public struct Variable: NamedVariable, Concatenating, Hashable, CustomStringConvertible {
+public protocol VariableProtocol: NamedVariable, Concatenating, NumberTypeSpecifying { // Solvable
+    init(_ name: String)
+}
+
+public typealias Variable = VariableStruct<Double>
+
+public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
+    public typealias NumberType = Number
     public let name: String
 
-    init(_ name: String) {
+    public init(_ name: String) {
         self.name = name
     }
 }
 
-//// MARK: - Solvable
-//public extension Variable {
-//    func solve(constants: Set<Constant>, modulus: Double?, modulusMode: ModulusMode) -> Double? {
-//        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
-//        return constant.value
+// MARK: - Solvable
+//public extension VariableProtocol {
+//    func solve(constants: Set<ConstantStruct<Self>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+////        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
+////        return constant.value
+//        fatalError()
 //    }
 //}
-
-// MARK: - Differentiatable
-//public extension Variable {
-//    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Variable? {
-//        guard variableToDifferentiate == self else { return nil }
-//        return self
+//
+//// MARK: - Differentiatable
+//public extension VariableProtocol {
+//    func differentiateWithRespectTo(_ variableToDifferentiate: Self) -> PolynomialStruct<NumberType>? {
+//        fatalError()
+////        guard variableToDifferentiate == self else { return nil }
+////        return self
 //    }
 //}

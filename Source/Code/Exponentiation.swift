@@ -8,33 +8,34 @@
 
 import Foundation
 
-public protocol ExponentiationProtocol: Algebraic, Comparable { // where PolynomialType.NumberType == Self.NumberType
-//    associatedtype NumberType
-    var variable: Variable { get }
+public protocol ExponentiationProtocol: Differentiatable, Algebraic, Comparable where PolynomialType.TermType.ExponentiationType == Self, PolynomialType.NumberType == Self.NumberType {
+    var variable: VariableType { get }
     var exponent: NumberType { get }
-    init(variable: Variable, exponent: NumberType)
+    init(variable: VariableType, exponent: NumberType)
 }
 
 // MARK: - Convenience Initializers
 public extension ExponentiationProtocol {
-    init(_ variable: Variable, exponent: NumberType = .one) {
+    init(_ variable: VariableType, exponent: NumberType = .one) {
         self.init(variable: variable, exponent: exponent)
     }
 
     init(_ name: String, exponent: NumberType = .one) {
-        self.init(Variable(name), exponent: exponent)
+        self.init(VariableType(name), exponent: exponent)
     }
 }
 
 public typealias Exponentiation = ExponentiationStruct<Double>
 
 public struct ExponentiationStruct<Number: NumberExpressible>: ExponentiationProtocol {
+    public typealias PolynomialType = PolynomialStruct<Number>
+    public typealias VariableType = VariableStruct<Number>
 
     public typealias NumberType = Number
-    public let variable: Variable
+    public let variable: VariableType
     public let exponent: NumberType
 
-    public init(variable: Variable, exponent: NumberType) {
+    public init(variable: VariableType, exponent: NumberType) {
         self.variable = variable
         self.exponent = exponent
     }
@@ -44,44 +45,13 @@ public struct ExponentiationStruct<Number: NumberExpressible>: ExponentiationPro
 // MARK: - Solvable
 //extension Exponentiation: Solvable {}
 public extension ExponentiationProtocol {
-    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+    func solve(constants: Set<ConstantStruct<VariableType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard let matchingVariable = constants.first(where: { $0.toVariable() == variable }) else { return nil }
         let value = matchingVariable.value.raised(to: exponent)
         guard let modulus = modulus else { return value }
         return value.mod(modulus, modulusMode: modulusMode)
     }
 }
-
-//public protocol ExponentiationDifferentiationResultProtocol where ExponentiationType.NumberType == Self.NumberType {
-//    associatedtype NumberType //: NumberExpressible
-//    associatedtype ExponentiationType: ExponentiationProtocol
-//    var caseConstant: NumberType? { get }
-//    var caseExponentiationWithCoefficient: (NumberType?, ExponentiationType?)? { get }
-//}
-//
-//public enum ExponentiationDifferentiationResult<Number: NumberExpressible>: ExponentiationDifferentiationResultProtocol {
-//    case constant(Number)
-//    case exponentiation(coefficient: Number?, exponentiation: ExponentiationStruct<Number>)
-//}
-//public extension ExponentiationDifferentiationResult {
-//
-//    typealias ExponentiationType = ExponentiationStruct<NumberType>
-//    typealias NumberType = Number
-//
-//    var caseConstant: NumberType? {
-//        switch self {
-//        case .constant(let numberType): return numberType
-//        default: return nil
-//        }
-//    }
-//    var caseExponentiationWithCoefficient: (NumberType?, ExponentiationType?)? {
-//        switch self {
-//        case .exponentiation(let coeff, let expo): return (coeff, expo)
-//   default: return nil
-//        }
-//    }
-//}
-
 
 
 // MARK: - Hashable

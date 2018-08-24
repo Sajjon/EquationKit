@@ -8,19 +8,27 @@
 
 import Foundation
 
-public protocol TermProtocol: Algebraic, Negatable, Comparable, CustomDebugStringConvertible where ExponentiationType.NumberType == Self.NumberType { // PolynomialType.TermType == Self, PolynomialType.NumberType == Self.NumberType
-//    associatedtype NumberType // NumberExpressible
+public protocol TermProtocol: Algebraic, Negatable, Differentiatable, Comparable, CustomDebugStringConvertible where ExponentiationType.NumberType == Self.NumberType, PolynomialType.NumberType == Self.NumberType, PolynomialType.TermType == Self, Self.ExponentiationType.PolynomialType == Self.PolynomialType, Self.ExponentiationType.VariableType == Self.VariableType {
     associatedtype ExponentiationType: ExponentiationProtocol
     var coefficient: NumberType { get }
     var exponentiations: [ExponentiationType] { get }
     init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm<NumberType>], coefficient: NumberType)
 }
 
+
+
+
+
+
+
 public extension TermProtocol {
-    public init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm<NumberType>] = SortingWithinTerm<NumberType>.defaultArray, coefficient: NumberType = .one) {
+    init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm<NumberType>] = SortingWithinTerm<NumberType>.defaultArray, coefficient: NumberType = .one) {
         self.init(exponentiations: exponentiations, sorting: sorting, coefficient: coefficient)
     }
 
+    init(exponentiation: ExponentiationType, coefficient: NumberType = .one) {
+        self.init(exponentiations: [exponentiation], coefficient: coefficient)
+    }
 }
 
 public typealias Term = TermStruct<Double>
@@ -28,8 +36,10 @@ public typealias Term = TermStruct<Double>
 public struct TermStruct<Number: NumberExpressible>: TermProtocol {
 
     /// -1 if negative
+    public typealias PolynomialType = PolynomialStruct<Number>
     public typealias NumberType = Number
     public typealias ExponentiationType = ExponentiationStruct<NumberType>
+    public typealias VariableType = VariableStruct<NumberType>
     public let coefficient: NumberType
     public let exponentiations: [ExponentiationType]
 
@@ -47,19 +57,16 @@ public extension TermProtocol {
         self.init(exponentiations: exponentiations, coefficient: coefficient)
     }
 
-    init(exponentiation: ExponentiationType, coefficient: NumberType = .one) {
-        self.init(exponentiations: [exponentiation], coefficient: coefficient)
-    }
 
-    init(_ variable: Variable) {
+    init(_ variable: VariableType) {
         self.init(exponentiation: ExponentiationType(variable))
     }
 
-    init(_ variables: [Variable]) {
+    init(_ variables: [VariableType]) {
         self.init(exponentiations: variables.map { ExponentiationType($0) })
     }
 
-    init(_ variables: Variable...) {
+    init(_ variables: VariableType...) {
         self.init(variables)
     }
 
@@ -71,7 +78,7 @@ public extension TermProtocol {
         return coefficient.isNegative
     }
 
-    func contains(variable: Variable) -> Bool {
+    func contains(variable: VariableType) -> Bool {
         return exponentiations.map { $0.variable }.contains(variable)
     }
 }
@@ -87,7 +94,7 @@ internal extension TermProtocol {
         return exponentiations.sorted(by: .descendingExponent)[0].exponent
     }
 
-    var uniqueVariables: Set<Variable> {
+    var uniqueVariables: Set<VariableType> {
         return Set(exponentiations.map { $0.variable })
     }
 
@@ -107,7 +114,7 @@ public extension TermProtocol {
 // MARK: - Solvable
 //extension Term: Solvable {}
 public extension TermProtocol {
-    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+    func solve(constants: Set<ConstantStruct<VariableType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
         let values = exponentiations.compactMap { $0.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) }
         return values.reduce(1, { $0*$1 }) * coefficient

@@ -15,7 +15,7 @@ public protocol Concatenating {}
 public extension PolynomialProtocol {
 
     init(_ concatenating: Concatenating) {
-        if let variable = concatenating as? Variable {
+        if let variable = concatenating as? VariableType {
             self.init(variable: variable)
         } else if let exponentiation = concatenating as? ExponentiationType {
             self.init(exponentiation: exponentiation, constant: NumberType.zero)

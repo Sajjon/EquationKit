@@ -11,6 +11,7 @@ import Foundation
 public protocol NumberExpressible: Numeric, Negatable, Hashable, Comparable {
     var isNegative: Bool { get }
     var isPositive: Bool { get }
+//    var isZero: Bool { get }
     func absolute() -> Self
     func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self
     static func + (lhs: Self, rhs: Self) -> Self

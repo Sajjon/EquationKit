@@ -8,8 +8,7 @@
 
 import Foundation
 
-public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType { // PolynomialType == Self
-//    associatedtype NumberType // NumberExpressible
+public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType, TermType.VariableType == Self.VariableType { 
     associatedtype TermType: TermProtocol
     var constant: NumberType { get }
     var terms: [TermType] { get }
@@ -35,12 +34,17 @@ public extension PolynomialProtocol {
     init(constant: NumberType) {
         self.init(terms: [], constant: constant)
     }
+
+    init(exponentiation: ExponentiationType) {
+        fatalError()
+    }
 }
 public typealias Polynomial = PolynomialStruct<Double>
 public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
 
     public typealias NumberType = Number
     public typealias TermType = TermStruct<Number>
+    public typealias VariableType = VariableStruct<NumberType>
     public let constant: NumberType
     public let terms: [TermType]
 
@@ -60,7 +64,7 @@ public extension PolynomialProtocol {
         self.init(TermType(exponentiation: exponentiation), constant: constant)
     }
 
-    init(variable: Variable, constant: NumberType = .zero) {
+    init(variable: VariableType, constant: NumberType = .zero) {
         self.init(exponentiation: ExponentiationType(variable), constant: constant)
     }
 
@@ -161,7 +165,7 @@ public extension PolynomialProtocol {
 // MARK: - Solvable
 //extension Polynomial: Solvable {}
 public extension PolynomialProtocol {
-    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+    func solve(constants: Set<ConstantStruct<VariableType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
         let solution = terms.reduce(constant, {
             guard let solution = $1.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return $0 }
@@ -178,7 +182,7 @@ public extension PolynomialProtocol {
 // MARK: - Public
 public extension PolynomialProtocol {
 
-    func contains(variable: Variable) -> Bool {
+    func contains(variable: VariableType) -> Bool {
         for term in terms {
             guard term.contains(variable: variable) else { continue }
             return true
@@ -186,7 +190,7 @@ public extension PolynomialProtocol {
         return false
     }
 
-    var uniqueVariables: Set<Variable> {
+    var uniqueVariables: Set<VariableType> {
         return Set(terms.flatMap { Array($0.uniqueVariables) })
     }
 }
