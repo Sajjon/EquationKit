@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 precedencegroup ExponentiationPrecedence {
     higherThan: MultiplicationPrecedence
     associativity: left

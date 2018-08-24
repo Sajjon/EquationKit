@@ -15,16 +15,15 @@ public protocol NumberTypeSpecifying {
 public protocol VariableTypeSpecifying {
     associatedtype VariableType: VariableProtocol
 }
-public protocol Differentiatable: VariableTypeSpecifying {//where PolynomialType.TermType.ExponentiationType.VariableType == Self.VariableType {
+public protocol Differentiatable: VariableTypeSpecifying {
+    //where PolynomialType.TermType.ExponentiationType.VariableType == Self.VariableType {
     associatedtype PolynomialType: PolynomialProtocol
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> PolynomialType?
 
 }
 
 // MARK: - Differentiatable
-//extension Polynomial: Differentiatable {}
 public extension PolynomialProtocol {
-
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> Self? {
         guard contains(variable: variableToDifferentiate) else { return Self(constant: NumberType.zero) }
@@ -45,14 +44,9 @@ public extension PolynomialProtocol {
     }
 }
 
-public extension NumberExpressible {
-    var isZero: Bool {
-        return self == .zero
-    }
-}
+
 
 // MARK: - Differentiatable
-//extension Term: Differentiatable {}
 public extension TermProtocol {
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> PolynomialType? {
@@ -77,13 +71,10 @@ public extension TermProtocol {
             let term = Self(exponentiations: exponentiations, coefficient: coefficient)
             return PolynomialType(term: term)
         }
-
     }
-
 }
 
 // MARK: - Differentiatable
-//extension Exponentiation: Differentiatable {}
 public extension ExponentiationProtocol {
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> PolynomialType? {
@@ -91,13 +82,14 @@ public extension ExponentiationProtocol {
         let exponentPriorToDifferentiation = self.exponent
         let exponent = exponentPriorToDifferentiation - 1
         guard exponent > 0 else {
-            return PolynomialType(constant: NumberType.one) // actually this is never used.... but makes us able to distinguish between doing `exponentiations.append(exponentiation)` and doing nothing in differentiation in TermProtocol
+            // actually this is never used.... but makes us able to distinguish between
+            // doing `exponentiations.append(exponentiation)` and doing
+            // nothing in differentiation in TermProtocol
+            return PolynomialType(constant: NumberType.one)
         }
 
         let exponentiation = Self(variable, exponent: exponent)
-
         let term = PolynomialType.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)
-
         return PolynomialType(term: term)
     }
 

@@ -13,6 +13,11 @@ import XCTest
 
 class DoubleTestsBase: XCTestCase {
 
+    typealias Variable = VariableStruct<Double>
+    typealias Exponentiation = ExponentiationStruct<Double>
+    typealias Term = TermStruct<Double>
+    typealias Constant = ConstantStruct<VariableStruct<Double>>
+
     lazy var x = Variable("x")
     lazy var y = Variable("y")
     lazy var z = Variable("z")

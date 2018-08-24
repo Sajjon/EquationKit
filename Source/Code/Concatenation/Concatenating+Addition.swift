@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias Polynomial = PolynomialStruct<Double>
+
 ///// Concatenate `lhs` and `rhs` using addition
 public func +(lhs: Concatenating, rhs: Concatenating) -> Polynomial {
     return Polynomial(lhs).appending(polynomial: Polynomial(rhs))

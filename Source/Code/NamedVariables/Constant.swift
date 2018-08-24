@@ -9,12 +9,25 @@
 import Foundation
 
 public protocol ConstantProtocol: NamedVariable, VariableTypeSpecifying {
-//    associatedtype NumberType: NumberExpressible
     var name: String { get }
     var value: VariableType.NumberType { get }
     init(name: String, value: VariableType.NumberType)
 
-    func toVariable() -> VariableType//VariableStruct<NumberType>
+    func toVariable() -> VariableType
+}
+
+// MARK: - Default Implementation
+public extension ConstantProtocol {
+    func toVariable() -> VariableType {
+        return VariableType(name)
+    }
+}
+
+// MARK: - CustomStringConvertible
+public extension ConstantProtocol {
+    var description: String {
+        return "<\(name)=\(value.shortFormat)>"
+    }
 }
 
 // MARK: - Convenience Initializers
@@ -33,22 +46,9 @@ public extension ConstantProtocol {
     }
 }
 
-// MARK: - Public
-public extension ConstantProtocol {
-    func toVariable() -> VariableType { //VariableStruct<NumberType> {
-        return VariableType(name)
-    }
-}
-
-// MARK: - CustomStringConvertible
-public extension ConstantProtocol {
-    var description: String {
-        return "<\(name)=\(value.shortFormat)>"
-    }
-}
-
-public struct ConstantStruct<Variable_: VariableProtocol>: ConstantProtocol {
-    public typealias VariableType = Variable_
+// MARK: - ConstantStruct
+public struct ConstantStruct<Variable: VariableProtocol>: ConstantProtocol {
+    public typealias VariableType = Variable
     public let name: String
     public let value: VariableType.NumberType
     public init(name: String, value: VariableType.NumberType) {
@@ -57,4 +57,3 @@ public struct ConstantStruct<Variable_: VariableProtocol>: ConstantProtocol {
     }
 }
 
-public typealias Constant = ConstantStruct<VariableStruct<Double>>

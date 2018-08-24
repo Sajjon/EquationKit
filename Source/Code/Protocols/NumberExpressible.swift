@@ -11,7 +11,6 @@ import Foundation
 public protocol NumberExpressible: Numeric, Negatable, Hashable, Comparable {
     var isNegative: Bool { get }
     var isPositive: Bool { get }
-//    var isZero: Bool { get }
     func absolute() -> Self
     func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self
     static func + (lhs: Self, rhs: Self) -> Self
@@ -29,6 +28,12 @@ public protocol NumberExpressible: Numeric, Negatable, Hashable, Comparable {
     init<I>(_ binaryInteger: I) where I: BinaryInteger
 
     var shortFormat: String { get }
+}
+
+public extension NumberExpressible {
+    var isZero: Bool {
+        return self == .zero
+    }
 }
 
 public protocol FloatingPointNumberExpressible: NumberExpressible, BinaryFloatingPoint {

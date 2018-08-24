@@ -12,8 +12,6 @@ public protocol VariableProtocol: NamedVariable, Concatenating, NumberTypeSpecif
     init(_ name: String)
 }
 
-public typealias Variable = VariableStruct<Double>
-
 public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
     public typealias NumberType = Number
     public let name: String

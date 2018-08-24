@@ -1,8 +1,8 @@
 //
-//  Polynomial.swift
+//  PolynomialProtocol.swift
 //  EquationKit
 //
-//  Created by Alexander Cyon on 2018-08-15.
+//  Created by Alexander Cyon on 2018-08-24.
 //  Copyright © 2018 Sajjon. All rights reserved.
 //
 
@@ -17,13 +17,13 @@ public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberTy
     init(term: TermType)
     init(constant: NumberType)
 }
+
+// MARK: - Typealias
 public extension PolynomialProtocol {
     typealias ExponentiationType = TermType.ExponentiationType
 }
 
-
-
-
+// MARK: - Convenience Initializers
 public extension PolynomialProtocol {
     init(terms: [TermType] = [], sorting: TermSorting<NumberType> = .default, constant: NumberType = .zero) {
         self.init(terms: terms, sorting: sorting, constant: constant)
@@ -38,27 +38,6 @@ public extension PolynomialProtocol {
     init(exponentiation: ExponentiationType) {
         self.init(term: TermType(exponentiation: exponentiation))
     }
-}
-public typealias Polynomial = PolynomialStruct<Double>
-public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
-
-    public typealias NumberType = Number
-    public typealias TermType = TermStruct<Number>
-    public typealias VariableType = VariableStruct<NumberType>
-    public let constant: NumberType
-    public let terms: [TermType]
-
-
-    public init(terms: [TermType], sorting: TermSorting<NumberType>, constant: NumberType) {
-        self.terms = terms.merged().sorted(by: sorting)
-        self.constant = constant
-    }
-}
-
-
-
-// MARK: - Convenience Initializers
-public extension PolynomialProtocol {
 
     init(exponentiation: ExponentiationType, constant: NumberType = .zero) {
         self.init(TermType(exponentiation: exponentiation), constant: constant)
@@ -80,6 +59,7 @@ public extension PolynomialProtocol {
     init(constant: Double) {
         self.init(constant: NumberType(constant))
     }
+
     init(constant: Int) {
         self.init(constant: NumberType(constant))
     }
@@ -107,79 +87,7 @@ public extension PolynomialProtocol where NumberType: IntegerNumberExpressible {
 }
 
 
-// MARK: - CustomStringConvertible
-//extension Polynomial: CustomStringConvertible {}
-public extension PolynomialProtocol {
-
-    func sortingTerms(sorting: TermSorting<NumberType>) -> Self {
-        return Self(terms: terms, sorting: sorting, constant: constant)
-    }
-
-    func asString(sorting betweenTerms: SortingBetweenTerms<NumberType>) -> String {
-        return asString(sorting: TermSorting(betweenTerms: betweenTerms))
-    }
-
-    func asString(sorting: TermSorting<NumberType>) -> String {
-        let sortedPolynomial = sortingTerms(sorting: sorting)
-        return sortedPolynomial.description
-    }
-
-    var description: String {
-        var constantString: String {
-            guard constant != .zero else { return "" }
-            let constantSignString = constant.isPositive ? "+" : "-"
-            return " \(constantSignString) \(constant.absolute().shortFormat)"
-        }
-
-        var termsString: String {
-            func termString(index: Int, term: TermType) -> String {
-                let signStringIfNegative = term.isNegative ? term.signString : ""
-                let signString = (index == 0 || index == terms.endIndex) ? "\(signStringIfNegative)" : " \(term.signString) "
-                return "\(signString)\(term.description)"
-
-            }
-            return terms.enumerated().map { termString(index: $0, term: $1) }.joined()
-        }
-
-        return "\(termsString)\(constantString)"
-    }
-}
-
-// MARK: - Equatable
-//extension Polynomial: Equatable {}
-public extension PolynomialProtocol {
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.constant == rhs.constant
-            && lhs.terms.sorted() == rhs.terms.sorted()
-    }
-}
-
-// MARK: - Negatable
-//extension Polynomial: Negatable {}
-public extension PolynomialProtocol {
-    func negated() -> Self {
-        return Self(terms: terms.negated(), sorting: TermSorting<NumberType>(), constant: constant.negated())
-    }
-}
-
-// MARK: - Solvable
-//extension Polynomial: Solvable {}
-public extension PolynomialProtocol {
-    func solve(constants: Set<ConstantStruct<VariableType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
-        guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
-        let solution = terms.reduce(constant, {
-            guard let solution = $1.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return $0 }
-            return $0 + solution
-        })
-        guard let modulus = modulus else { return solution }
-        return solution.mod(modulus, modulusMode: modulusMode)
-    }
-}
-
-
-
-
-// MARK: - Public
+// MARK: - Public Extensions
 public extension PolynomialProtocol {
 
     func contains(variable: VariableType) -> Bool {
@@ -195,10 +103,6 @@ public extension PolynomialProtocol {
     }
 }
 
-
-
-
-// MARK: - PolynomialStruct
 
 // MARK: - ExpressibleByFloatLiteral
 extension PolynomialStruct: ExpressibleByFloatLiteral {

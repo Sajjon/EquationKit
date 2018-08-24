@@ -19,7 +19,6 @@ public extension Solvable {
         return solve(constants: constants, modulus: modulus, modulusMode: modulusMode)
     }
 
-
     func solve(constants: [String: NumberType], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
         return solve(constants: Set(constants.map { ConstantStruct<VariableType>(name: $0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
     }
@@ -45,22 +44,21 @@ public extension Solvable {
         return solve(constants: [assertingValue()], modulus: modulus, modulusMode: modulusMode)
     }
 
-        func solve(constants: [VariableType: NumberType], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
-            return solve(constants: Set(constants.map { ConstantStruct<VariableType>(variable: $0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
-        }
+    func solve(constants: [VariableType: NumberType], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
+        return solve(constants: Set(constants.map { ConstantStruct<VariableType>(variable: $0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
+    }
 
-        func solve(constants: [VariableType: Int], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
-            return solve(constants: constants.mapValues { NumberType($0) }, modulus: modulus, modulusMode: modulusMode)
-        }
+    func solve(constants: [VariableType: Int], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
+        return solve(constants: constants.mapValues { NumberType($0) }, modulus: modulus, modulusMode: modulusMode)
+    }
 
+    func solve(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [(VariableType, NumberType)]) -> NumberType? {
+        let array = assertingValue().map { ConstantStruct<VariableType>(variable: $0, value: $1) }
+        return solve(constants: Set(array), modulus: modulus, modulusMode: modulusMode)
+    }
 
-        func solve(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [(VariableType, NumberType)]) -> NumberType? {
-            let array = assertingValue().map { ConstantStruct<VariableType>(variable: $0, value: $1) }
-            return solve(constants: Set(array), modulus: modulus, modulusMode: modulusMode)
-        }
-
-        func solve(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: @escaping () -> [(VariableType, Int)]) -> NumberType? {
-            return solve(modulus: modulus, modulusMode: modulusMode, assertingValue: { assertingValue().map { ($0.0, NumberType($0.1)) } })
-        }
+    func solve(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: @escaping () -> [(VariableType, Int)]) -> NumberType? {
+        return solve(modulus: modulus, modulusMode: modulusMode, assertingValue: { assertingValue().map { ($0.0, NumberType($0.1)) } })
+    }
 
 }
