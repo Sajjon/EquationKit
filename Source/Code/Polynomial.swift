@@ -36,7 +36,7 @@ public extension PolynomialProtocol {
     }
 
     init(exponentiation: ExponentiationType) {
-        fatalError()
+        self.init(term: TermType(exponentiation: exponentiation))
     }
 }
 public typealias Polynomial = PolynomialStruct<Double>

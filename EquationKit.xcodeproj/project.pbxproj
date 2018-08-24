@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		48022816211B203500AEFB58 /* EquationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48022802211B1FFC00AEFB58 /* EquationKit.framework */; };
 		48022825211B20A400AEFB58 /* EquationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 48022824211B209C00AEFB58 /* EquationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		480EE15E213048F300E67EFA /* SimpleDifferentiationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1D8212DC5450027D2C5 /* SimpleDifferentiationTests.swift */; };
+		480EE15F21304AF200E67EFA /* ConcatenationBySubtractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1D0212DC5450027D2C5 /* ConcatenationBySubtractionTests.swift */; };
 		4838F13F212F1626008D5626 /* ConcatenationByAdditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1D4212DC5450027D2C5 /* ConcatenationByAdditionTests.swift */; };
 		4838F141212F1831008D5626 /* Concatenating+Multiplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1BE212D62700027D2C5 /* Concatenating+Multiplication.swift */; };
 		4838F142212F1972008D5626 /* ConcatenationByMultiplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4818E1D2212DC5450027D2C5 /* ConcatenationByMultiplicationTests.swift */; };
@@ -440,9 +442,11 @@
 				4838F144212F48C8008D5626 /* PolynomialsExponentiatedTests.swift in Sources */,
 				4838F13F212F1626008D5626 /* ConcatenationByAdditionTests.swift in Sources */,
 				4838F147212F4A7C008D5626 /* ExponentiationArraySortingTests.swift in Sources */,
+				480EE15F21304AF200E67EFA /* ConcatenationBySubtractionTests.swift in Sources */,
 				4838F142212F1972008D5626 /* ConcatenationByMultiplicationTests.swift in Sources */,
 				4838F149212F4ACF008D5626 /* ExploringRandomStuffTests.swift in Sources */,
 				4838F148212F4A86008D5626 /* TermSortingTests.swift in Sources */,
+				480EE15E213048F300E67EFA /* SimpleDifferentiationTests.swift in Sources */,
 				4838F143212F48AB008D5626 /* PolynomialMultipliedByPolynomialTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

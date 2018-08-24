@@ -71,7 +71,7 @@ class ConcatenationBySubtractionTests: XCTestCase {
         XCTAssertEqual((y - x).asString(sorting: .coefficient), "y - x")
         XCTAssertEqual(x - x, x - x) // trivial
         XCTAssertEqual(x - y, x - y) // trivial
-//        XCTAssertEqual((x - y).description, "x - y")
+        XCTAssertEqual((x - y).asString(sorting: .coefficient), "x - y")
         print((x - y).asString(sorting: .coefficient))
         print((y - x).asString(sorting: .coefficient))
         XCTAssertNotEqual(x - y, y - x)

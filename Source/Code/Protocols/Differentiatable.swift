@@ -27,21 +27,21 @@ public extension PolynomialProtocol {
 
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> Self? {
-        fatalError()
-//        guard contains(variable: variableToDifferentiate) else { return Self(constant: NumberType.zero) }
-//        var terms = [TermType]()
-//        var constant: NumberType = .zero
-//        for term in self.terms {
-//            let differentiatedTerm = term.differentiateWithRespectTo(variableToDifferentiate)
-//            if differentiatedTerm.terms.isEmpty && differentiatedTerm.constant != 0 {
-//                constant += differentiatedTerm.constant
-//            } else if !differentiatedTerm.terms.isEmpty && differentiatedTerm.constant == 0 {
-//                terms.append(contentsOf: differentiatedTerm.terms)
-//            } else {
-//                fatalError("should not happen")
-//            }
-//        }
-//        return Self(terms: terms, constant: constant)
+        guard contains(variable: variableToDifferentiate) else { return Self(constant: NumberType.zero) }
+        var terms = [TermType]()
+        var constant: NumberType = .zero
+        for term in self.terms {
+            guard let differentiationResult = term.differentiateWithRespectTo(variableToDifferentiate) else { continue }
+            if differentiationResult.terms.isEmpty && !differentiationResult.constant.isZero {
+                constant += differentiationResult.constant
+            } else if differentiationResult.terms.count == 1 && differentiationResult.constant.isZero, let term = differentiationResult.terms.first {
+                terms.append(term)
+            } else {
+                fatalError("should not happen")
+            }
+
+        }
+        return Self(terms: terms, constant: constant)
     }
 }
 
@@ -55,52 +55,28 @@ public extension NumberExpressible {
 //extension Term: Differentiatable {}
 public extension TermProtocol {
 
-    //    public enum DifferentiationResult {
-    //        case constant(Double)
-    //        case term(Term)
-    //    }
-
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> PolynomialType? {
-        fatalError()
-//        guard contains(variable: variableToDifferentiate) else { return PolynomialType(constant: 0) }
-//
-//                var exponentiations = [ExponentiationType]()
-//                var coefficient = self.coefficient
-//                var coefficientFromConstants: NumberType = 1
-//                for exponentiation in self.exponentiations {
-//                    guard let differentiationResult = exponentiation.differentiateWithRespectTo(variableToDifferentiate) else { exponentiations.append(exponentiation); continue }
-////                    switch differentiationResult {
-////                    case .constant(let differentiationConstant):
-////                        coefficientFromConstants *= differentiationConstant
-////                    case .exponentiation(let differentiationCoefficient, let differentiationExponentiation):
-////                        if let differentiationCoefficient = differentiationCoefficient {
-////                            coefficient *= differentiationCoefficient
-////                        }
-////                        exponentiations.append(differentiationExponentiation)
-////                    }
-//
-//                    if differentiationResult.terms.isEmpty && differentiationResult.constant.isZero {
-//                        exponentiations.append(exponentiation)
-//                    } else if differentiationResult.terms.isEmpty && !differentiationResult.constant.isZero {
-//                         coefficientFromConstants *= differentiationResult.constant
-//                    } else if !differentiationResult.terms.isEmpty && !differentiationResult.constant.isZero {
-//                        if !differentiationResult.constant.isZero {
-//
-//                        }
-//                    }
-//                }
-//
-//                let multiplied = coefficient * coefficientFromConstants
-//
-//                if exponentiations.count == 0 {
-//                    return PolynomialType(constant: multiplied)
-//        //            return .constant(coefficient * coefficientFromConstants) // ORIGINAL
-//                } else {
-//                    let term = Self(exponentiations: exponentiations, coefficient: multiplied)
-////                    let termCasted:  term as! PolynomialStruct<NumberType>.TermType
-//        //            return .term(term)
-//                    return PolynomialType(terms: [term], sorting: TermSorting.default, constant: .zero)
-//                }
+        guard contains(variable: variableToDifferentiate) else { return nil }
+
+        var exponentiations = [ExponentiationType]()
+        var coefficient = self.coefficient
+        for exponentiation in self.exponentiations {
+            guard let differentiationResult = exponentiation.differentiateWithRespectTo(variableToDifferentiate) else { exponentiations.append(exponentiation); continue }
+
+            guard let term = differentiationResult.terms.first else { continue }
+            guard differentiationResult.terms.count == 1 else { fatalError("what? bad state...") }
+
+            coefficient *= term.coefficient
+            guard let exponentiation = term.exponentiations.first, term.exponentiations.count == 1 else { return nil }
+            exponentiations.append(exponentiation)
+        }
+
+        if exponentiations.count == 0 {
+            return PolynomialType(constant: coefficient)
+        } else {
+            let term = Self(exponentiations: exponentiations, coefficient: coefficient)
+            return PolynomialType(term: term)
+        }
 
     }
 
@@ -111,22 +87,18 @@ public extension TermProtocol {
 public extension ExponentiationProtocol {
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableType) -> PolynomialType? {
-        fatalError()
-//        guard variableToDifferentiate == variable else { return PolynomialType(exponentiation: self) }
-//        let exponentPriorToDifferentiation = self.exponent
-//        let exponent = exponentPriorToDifferentiation - 1
-//        guard exponent > 0 else {
-//            return PolynomialType(constant: NumberType.one)
-//            //            return .constant(1)
-//        }
-//
-//        //        return .exponentiation(coefficient: exponentPriorToDifferentiation, exponentiation: Exponentiation(variable, exponent: exponent))
-//
-//        let exponentiation = Self(variable, exponent: exponent)
-//
-//        let term = PolynomialType.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)
-//
-//        return PolynomialType(term: term)
+        guard variableToDifferentiate == variable else { return PolynomialType(exponentiation: self) }
+        let exponentPriorToDifferentiation = self.exponent
+        let exponent = exponentPriorToDifferentiation - 1
+        guard exponent > 0 else {
+            return PolynomialType(constant: NumberType.one) // actually this is never used.... but makes us able to distinguish between doing `exponentiations.append(exponentiation)` and doing nothing in differentiation in TermProtocol
+        }
+
+        let exponentiation = Self(variable, exponent: exponent)
+
+        let term = PolynomialType.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)
+
+        return PolynomialType(term: term)
     }
 
 }
