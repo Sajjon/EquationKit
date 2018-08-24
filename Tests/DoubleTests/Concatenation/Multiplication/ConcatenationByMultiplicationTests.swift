@@ -11,7 +11,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class ConcatenationByMultiplicationTests: XCTestCase {
+class ConcatenationByMultiplicationTests: DoubleTestsBase {
 
     func testX³() {
         let eq = x*x*x

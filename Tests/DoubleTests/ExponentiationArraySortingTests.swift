@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class ExponentiationArraySortingTests: XCTestCase {
+class ExponentiationArraySortingTests: DoubleTestsBase {
 
     override func setUp() {
         super.setUp()

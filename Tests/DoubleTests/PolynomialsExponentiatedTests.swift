@@ -12,7 +12,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class PolynomialsExponentiatedTests: XCTestCase {
+class PolynomialsExponentiatedTests: DoubleTestsBase {
     func test﹙𝑥＋𝟙﹚²() {
         let eq = (x + 1)^^2
         XCTAssertEqual(eq, (x + 1) * (x + 1))

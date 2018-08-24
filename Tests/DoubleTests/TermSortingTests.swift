@@ -10,50 +10,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-let tx = Term(x)
-let －tx = tx.negated()
-
-let ty = Term(y)
-let －ty = ty.negated()
-
-let tz = Term(z)
-let －tz = tz.negated()
-
-let tx² = Term(exponentiation: x²)
-let －tx² = tx².negated()
-
-let ty² = Term(exponentiation: y²)
-let －ty² = ty².negated()
-
-let tz² = Term(exponentiation: z²)
-let －tz² = tz².negated()
-
-let tx³ = Term(exponentiation: x³)
-let －tx³ = tx³.negated()
-
-let ty³ = Term(exponentiation: y³)
-let －ty³ = ty³.negated()
-
-let tz³ = Term(exponentiation: z³)
-let －tz³ = tz³.negated()
-
-let tx⁴ = Term(x⁴)
-
-let txyz = Term(x, y, z)
-let －txyz = txyz.negated()
-
-let txy = Term(x, y)
-let －txy = txy.negated()
-let txz = Term(x, z)
-let －txz = txz
-let tx²z³ = Term(x², z³)
-let －tx²z³ = tx²z³.negated()
-let tx²y²z² = Term(x², y², z²)
-let －tx²y²z² = tx²y²z².negated()
-let tx²y²z³ = Term(x²,y²,z³)
-let －tx²y²z³ = tx²y²z³.negated()
-
-class TermSortingTests: XCTestCase {
+class TermSortingTests: DoubleTestsBase {
 
     override func setUp() {
         super.setUp()

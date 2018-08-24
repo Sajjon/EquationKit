@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class ExploringRandomStuffTests: XCTestCase {
+class ExploringRandomStuffTests: DoubleTestsBase {
     func testDifferenceOfConsecutiveSquares() {
         var lastSquareDiff: Double? = nil
         let equation = x² - y²

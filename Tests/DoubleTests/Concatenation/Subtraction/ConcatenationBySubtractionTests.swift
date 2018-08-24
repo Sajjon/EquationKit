@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class ConcatenationBySubtractionTests: XCTestCase {
+class ConcatenationBySubtractionTests: DoubleTestsBase {
 
     // MARK: - Number
     func testNumberSubtractVariableAndReversed() {

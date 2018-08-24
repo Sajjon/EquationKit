@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class SimpleDifferentiationTests: XCTestCase {
+class SimpleDifferentiationTests: DoubleTestsBase {
 
     /// y³x²
     func test𝑦³𝑥²() {

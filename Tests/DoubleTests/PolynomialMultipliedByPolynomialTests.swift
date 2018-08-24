@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-class PolynomialMultipliedByPolynomialTests: XCTestCase {
+class PolynomialMultipliedByPolynomialTests: DoubleTestsBase {
 
     override func setUp() {
         super.setUp()
