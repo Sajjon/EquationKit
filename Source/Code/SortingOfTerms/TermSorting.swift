@@ -15,8 +15,6 @@ public struct TermSorting<Number: NumberExpressible> {
         self.betweenTerms = betweenTerms
         self.withinTerm = withinTerm
     }
-
-    public static var `default`: TermSorting { return TermSorting() }
 }
 
 public extension TermSorting {

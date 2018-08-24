@@ -12,13 +12,12 @@ import Foundation
 public struct ExponentiationStruct<Number: NumberExpressible>: ExponentiationProtocol {
 
     public typealias NumberType = Number
-    public typealias VariableType = VariableStruct<Number>
     public typealias PolynomialType = PolynomialStruct<Number>
 
-    public let variable: VariableType
+    public let variable: VariableStruct<NumberType>
     public let exponent: NumberType
 
-    public init(variable: VariableType, exponent: NumberType) {
+    public init(variable: VariableStruct<NumberType>, exponent: NumberType) {
         self.variable = variable
         self.exponent = exponent
     }

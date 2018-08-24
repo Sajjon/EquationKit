@@ -18,8 +18,7 @@ public protocol TermProtocol:
     ExponentiationType.NumberType == Self.NumberType,
     PolynomialType.NumberType == Self.NumberType,
     PolynomialType.TermType == Self,
-    Self.ExponentiationType.PolynomialType == Self.PolynomialType,
-    Self.ExponentiationType.VariableType == Self.VariableType
+    Self.ExponentiationType.PolynomialType == Self.PolynomialType
 {
 
     associatedtype ExponentiationType: ExponentiationProtocol
@@ -46,15 +45,15 @@ public extension TermProtocol {
     }
 
 
-    init(_ variable: VariableType) {
+    init(_ variable: VariableStruct<NumberType>) {
         self.init(exponentiation: ExponentiationType(variable))
     }
 
-    init(_ variables: [VariableType]) {
+    init(_ variables: [VariableStruct<NumberType>]) {
         self.init(exponentiations: variables.map { ExponentiationType($0) })
     }
 
-    init(_ variables: VariableType...) {
+    init(_ variables: VariableStruct<NumberType>...) {
         self.init(variables)
     }
 
@@ -66,7 +65,7 @@ public extension TermProtocol {
         return coefficient.isNegative
     }
 
-    func contains(variable: VariableType) -> Bool {
+    func contains(variable: VariableStruct<NumberType>) -> Bool {
         return exponentiations.map { $0.variable }.contains(variable)
     }
 }
@@ -82,7 +81,7 @@ internal extension TermProtocol {
         return exponentiations.sorted(by: .descendingExponent)[0].exponent
     }
 
-    var uniqueVariables: Set<VariableType> {
+    var uniqueVariables: Set<VariableStruct<NumberType>> {
         return Set(exponentiations.map { $0.variable })
     }
 

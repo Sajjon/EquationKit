@@ -28,6 +28,7 @@ public protocol NumberExpressible: Numeric, Negatable, Hashable, Comparable {
     init<I>(_ binaryInteger: I) where I: BinaryInteger
 
     var shortFormat: String { get }
+
 }
 
 public extension NumberExpressible {

@@ -11,7 +11,6 @@ import Foundation
 public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
 
     public typealias NumberType = Number
-    public typealias VariableType = VariableStruct<NumberType>
     public typealias TermType = TermStruct<Number>
 
     public let constant: NumberType

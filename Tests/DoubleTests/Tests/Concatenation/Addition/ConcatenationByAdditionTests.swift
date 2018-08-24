@@ -44,9 +44,7 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
 
     func testNumberAddPolynomialAndReversed() {
         let eq = x + 2
-        let eq2 = x + 5
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
-        XCTAssertTrue(type(of: eq2) == Polynomial.self)
+        let eq2: PolynomialStruct<Double> = x + 5
 
         XCTAssertEqual(eq + 3, eq2)
         XCTAssertEqual(3 + eq, eq2)
@@ -75,7 +73,6 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
 
     func testVariableAddPolynomialAndReversed() {
         let eq = x + 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
 
         XCTAssertEqual(x + eq, eq + x) // Commutative
         XCTAssertNotEqual(x + eq, y + eq)
@@ -100,7 +97,6 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
 
     func testExponentiationAddPolynomialAndReversed() {
         let eq = x + 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
         XCTAssertEqual(x² + eq, eq + x²)
         XCTAssertEqual(y² + eq, eq + y²)
         XCTAssertNotEqual(x² + eq, y² + eq)
@@ -119,9 +115,7 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
         let xy = x*y
         let xz = x*z
         let eq = x + 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
         let eq2 = x + 3
-        XCTAssertTrue(type(of: eq2) == Polynomial.self)
 
         XCTAssertEqual(xy + eq, eq + xy) // Commutative
         XCTAssertNotEqual(xy + eq, xz + eq) // Commutative
@@ -131,9 +125,7 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
     // MARK: - Polynomial
     func testPolynomialAddPolynomial() {
         let eq = x + 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
         let eq2 = y + 3
-        XCTAssertTrue(type(of: eq2) == Polynomial.self)
         XCTAssertEqual(eq + eq2, eq2 + eq) // Commutative
         XCTAssertEqual(eq + eq2, x + y + 5)
     }
@@ -142,5 +134,7 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
         let eq = x + x + x
         XCTAssertEqual(eq.description, "3x")
     }
+
+
 }
 

@@ -80,7 +80,7 @@ public extension Array where Element: TermProtocol {
         return sorted(by: TermSorting<Element.NumberType>(betweenTerms: betweenTerms))
     }
 
-    func sorted(by sorting: TermSorting<Element.NumberType> = .default) -> [Element] {
+    func sorted(by sorting: TermSorting<Element.NumberType> = TermSorting<Element.NumberType>()) -> [Element] {
         guard let first = sorting.betweenTerms.first else { return self }
 
         let areInIncreasingOrderClosure: (Element, Element) -> Bool = {

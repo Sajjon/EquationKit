@@ -13,7 +13,6 @@ public struct TermStruct<Number: NumberExpressible>: TermProtocol {
     public typealias PolynomialType = PolynomialStruct<Number>
     public typealias NumberType = Number
     public typealias ExponentiationType = ExponentiationStruct<NumberType>
-    public typealias VariableType = VariableStruct<NumberType>
     public let coefficient: NumberType
     public let exponentiations: [ExponentiationType]
 

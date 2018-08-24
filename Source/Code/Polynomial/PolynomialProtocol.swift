@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType, TermType.VariableType == Self.VariableType { 
+public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType {
     associatedtype TermType: TermProtocol
     var constant: NumberType { get }
     var terms: [TermType] { get }
@@ -25,7 +25,7 @@ public extension PolynomialProtocol {
 
 // MARK: - Convenience Initializers
 public extension PolynomialProtocol {
-    init(terms: [TermType] = [], sorting: TermSorting<NumberType> = .default, constant: NumberType = .zero) {
+    init(terms: [TermType] = [], sorting: TermSorting<NumberType> = TermSorting<NumberType>(), constant: NumberType = .zero) {
         self.init(terms: terms, sorting: sorting, constant: constant)
     }
     init(term: TermType) {
@@ -43,7 +43,7 @@ public extension PolynomialProtocol {
         self.init(TermType(exponentiation: exponentiation), constant: constant)
     }
 
-    init(variable: VariableType, constant: NumberType = .zero) {
+    init(variable: VariableStruct<NumberType>, constant: NumberType = .zero) {
         self.init(exponentiation: ExponentiationType(variable), constant: constant)
     }
 
@@ -56,13 +56,13 @@ public extension PolynomialProtocol {
         self.init(terms: [term], constant: constant)
     }
 
-    init(constant: Double) {
-        self.init(constant: NumberType(constant))
-    }
-
-    init(constant: Int) {
-        self.init(constant: NumberType(constant))
-    }
+//    init(constant: Double) {
+//        self.init(constant: NumberType(constant))
+//    }
+//
+//    init(constant: Int) {
+//        self.init(constant: NumberType(constant))
+//    }
 }
 
 public extension PolynomialProtocol where NumberType: FloatingPointNumberExpressible {
@@ -90,7 +90,7 @@ public extension PolynomialProtocol where NumberType: IntegerNumberExpressible {
 // MARK: - Public Extensions
 public extension PolynomialProtocol {
 
-    func contains(variable: VariableType) -> Bool {
+    func contains(variable: VariableStruct<NumberType>) -> Bool {
         for term in terms {
             guard term.contains(variable: variable) else { continue }
             return true
@@ -98,7 +98,7 @@ public extension PolynomialProtocol {
         return false
     }
 
-    var uniqueVariables: Set<VariableType> {
+    var uniqueVariables: Set<VariableStruct<NumberType>> {
         return Set(terms.flatMap { Array($0.uniqueVariables) })
     }
 }

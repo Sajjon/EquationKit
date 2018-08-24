@@ -53,11 +53,9 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
     func testNumberSubtractPolynomialAndReversed() {
         let eq = x + 2
         let eq2 = x + 5
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
-        XCTAssertTrue(type(of: eq2) == Polynomial.self)
 
         XCTAssertEqual(eq - 2, eq - 2) // trivial
-        XCTAssertEqual(eq - 2, Polynomial(variable: x))
+        XCTAssertEqual(eq - 2, x + 0)
         XCTAssertEqual((eq - 3).description, "x - 1")
 
         // Inequality because of lack of commutativity
@@ -145,7 +143,6 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
 
     func testVariableSubtractPolynomialAndReversed() {
         let eq = x - 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
 
         XCTAssertNotEqual(x - eq, eq - x)
         XCTAssertNotEqual(x - eq, y - eq)
@@ -184,7 +181,6 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
 
     func testExponentiationSubtractPolynomialAndReversed() {
         let eq = x - 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
 
         XCTAssertEqual((x² - eq).description, "x² - x + 2")
 
@@ -209,9 +205,7 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
         let xy = x*y
         let xz = x*z
         let eq = x - 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
         let eq2 = x - 3
-        XCTAssertTrue(type(of: eq2) == Polynomial.self)
 
         XCTAssertEqual((xy - eq).asString(sorting: .coefficient), "xy - x + 2")
         XCTAssertEqual((eq - xy).asString(sorting: .coefficient), "x - xy - 2")
@@ -224,9 +218,7 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
     // MARK: - Polynomial
     func testPolynomialSubtractPolynomial() {
         let eq = x - 2
-        XCTAssertTrue(type(of: eq) == Polynomial.self)
         let eq2 = y - 3
-        XCTAssertTrue(type(of: eq2) == Polynomial.self)
 
         XCTAssertEqual((eq - eq2).asString(sorting: .coefficient), "x - y + 1")
         XCTAssertEqual((eq2 - eq).asString(sorting: .coefficient), "y - x - 1")

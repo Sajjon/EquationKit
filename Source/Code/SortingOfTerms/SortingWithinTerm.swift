@@ -65,7 +65,7 @@ public extension Array where Element: ExponentiationProtocol {
     }
 
     func merged() -> [Element] {
-        var count: [Element.VariableType: Element.NumberType] = [:]
+        var count: [VariableStruct<Element.NumberType>: Element.NumberType] = [:]
         for exponentiation in self {
             count[exponentiation.variable] += exponentiation.exponent
         }

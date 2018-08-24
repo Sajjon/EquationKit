@@ -16,7 +16,7 @@ class DoubleTestsBase: XCTestCase {
     typealias Variable = VariableStruct<Double>
     typealias Exponentiation = ExponentiationStruct<Double>
     typealias Term = TermStruct<Double>
-    typealias Constant = ConstantStruct<VariableStruct<Double>>
+    typealias Constant = ConstantStruct<Double>
 
     lazy var x = Variable("x")
     lazy var y = Variable("y")

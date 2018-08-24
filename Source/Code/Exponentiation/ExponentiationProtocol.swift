@@ -13,19 +13,19 @@ public protocol ExponentiationProtocol: Differentiatable, Algebraic, Comparable
     PolynomialType.TermType.ExponentiationType == Self,
     PolynomialType.NumberType == Self.NumberType
 {
-    var variable: VariableType { get }
+    var variable: VariableStruct<NumberType> { get }
     var exponent: NumberType { get }
-    init(variable: VariableType, exponent: NumberType)
+    init(variable: VariableStruct<NumberType>, exponent: NumberType)
 }
 
 // MARK: - Convenience Initializers
 public extension ExponentiationProtocol {
-    init(_ variable: VariableType, exponent: NumberType = .one) {
+    init(_ variable: VariableStruct<NumberType>, exponent: NumberType = .one) {
         self.init(variable: variable, exponent: exponent)
     }
 
     init(_ name: String, exponent: NumberType = .one) {
-        self.init(VariableType(name), exponent: exponent)
+        self.init(VariableStruct<NumberType>(name), exponent: exponent)
     }
 }
 
