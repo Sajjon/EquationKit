@@ -17,12 +17,8 @@ precedencegroup ExponentiationPrecedence {
 infix operator ^^: ExponentiationPrecedence
 infix operator <-: AssignmentPrecedence
 
-func <-(variable: VariableStruct<Double>, value: Double) -> ConstantStruct<VariableStruct<Double>> {
-    return ConstantStruct(variable, value: value)
-}
-
-func <-(variable: VariableStruct<Double>, value: Int) -> ConstantStruct<VariableStruct<Double>> {
-    return variable <- Double(value)
+func <-<N>(variable: VariableStruct<N>, value: N) -> ConstantStruct<VariableStruct<N>> where N: NumberExpressible {
+    return ConstantStruct<VariableStruct<N>>(variable: variable, value: value)
 }
 
 internal func += <N>(lhs: inout N?, rhs: N) where N: Numeric {
