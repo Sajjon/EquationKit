@@ -12,14 +12,18 @@ import Foundation
 public extension ExponentiationProtocol {
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
-        guard variableToDifferentiate == variable else { return Polynomial(exponentiation: self as! Polynomial<NumberType>.ExponentiationType) }
+
+        guard let _ = variable.differentiateWithRespectTo(variableToDifferentiate) else {
+            return Polynomial(exponentiation: self as! Polynomial<NumberType>.ExponentiationType)
+        }
+
         let exponentPriorToDifferentiation = self.exponent
         let exponent = exponentPriorToDifferentiation - 1
         guard exponent > 0 else {
             // actually this is never used.... but makes us able to distinguish between
             // doing `exponentiations.append(exponentiation)` and doing
             // nothing in differentiation in TermProtocol
-            return Polynomial(constant: NumberType.one)
+            return Polynomial(constant: .one)
         }
 
         let exponentiation = Polynomial.ExponentiationType(variable, exponent: exponent)

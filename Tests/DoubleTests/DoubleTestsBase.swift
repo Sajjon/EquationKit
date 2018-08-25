@@ -10,45 +10,12 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
-public func +(lhs: Concatenating, rhs: Concatenating) -> Polynomial<Double> {
-    return Polynomial(lhs).adding(other: Polynomial(rhs))
-}
-public func +(lhs: Concatenating, rhs: Double) -> Polynomial<Double> {
-    return Polynomial(lhs).adding(constant: rhs)
-}
-public func +(lhs: Double, rhs: Concatenating) -> Polynomial<Double> {
-    return Polynomial(rhs).adding(constant: lhs)
-}
-public func -(lhs: Concatenating, rhs: Concatenating) -> Polynomial<Double> {
-    return Polynomial(lhs).subtracting(other: Polynomial(rhs))
-}
-public func -(lhs: Concatenating, rhs: Double) -> Polynomial<Double> {
-    return Polynomial(lhs).subtracting(constant: rhs)
-}
-public func -(lhs: Double, rhs: Concatenating) -> Polynomial<Double> {
-    return Polynomial(rhs).negated().adding(constant: lhs)
-}
-public func *(lhs: Concatenating, rhs: Concatenating) -> Polynomial<Double> {
-    return Polynomial(lhs).multipliedBy(other: Polynomial(rhs))
-}
-public func *(lhs: Concatenating, rhs: Double) -> Polynomial<Double> {
-    return Polynomial(lhs).multipliedBy(constant: rhs)
-}
-public func *(lhs: Double, rhs: Concatenating) -> Polynomial<Double> {
-    return rhs * lhs
-}
-
-public func ^^(lhs: Concatenating, rhs: Int) -> Polynomial<Double> {
-    return Polynomial(lhs).raised(to: rhs)
-}
-
 class DoubleTestsBase: XCTestCase {
 
     typealias Variable = VariableStruct<Double>
     typealias Constant = ConstantStruct<Double>
     typealias Exponentiation = ExponentiationStruct<Double>
     typealias Term = TermStruct<Exponentiation>
-    typealias Eq = Polynomial<Double>
 
     lazy var x = Variable("x")
     lazy var y = Variable("y")

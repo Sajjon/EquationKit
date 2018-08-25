@@ -10,6 +10,7 @@ import Foundation
 
 public protocol VariableProtocol: NamedVariable, Algebraic {
     init(_ name: String)
+
 }
 
 public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
@@ -24,7 +25,7 @@ public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
 // MARK: - Solvable
 public extension VariableProtocol {
     func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
-        guard let constant = constants.first(where: { $0.toVariable().name == self.name }) else { return nil }
+        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
         return constant.value
     }
 }
@@ -32,8 +33,10 @@ public extension VariableProtocol {
 // MARK: - Differentiatable
 public extension VariableProtocol {
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
-        fatalError()
-//        guard variableToDifferentiate == self else { return nil }
-//        return self
+        guard variableToDifferentiate == self else { return nil }
+        // actually this is never used.... but makes us able to distinguish between
+        // doing `exponentiations.append(exponentiation)` and doing
+        // nothing in differentiation in TermProtocol
+        return Polynomial(constant: .one)
     }
 }

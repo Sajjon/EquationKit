@@ -11,8 +11,8 @@ import Foundation
 // MARK: - Solvable
 public extension ExponentiationProtocol {
     func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
-        guard let matchingVariable = constants.first(where: { $0.toVariable() == variable }) else { return nil }
-        let value = matchingVariable.value.raised(to: exponent)
+        guard let base = variable.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return nil }
+        let value = base.raised(to: exponent)
         guard let modulus = modulus else { return value }
         return value.mod(modulus, modulusMode: modulusMode)
     }

@@ -91,10 +91,7 @@ class BigIntTestsBase: XCTestCase {
     typealias Constant = ConstantStruct<BigInt>
     typealias Exponentiation = ExponentiationStruct<BigInt>
     typealias Term = TermStruct<Exponentiation>
-    typealias Eq = Polynomial<BigInt>
 
-//    lazy var a = Variable("a")
-//    lazy var b = Variable("b")
     lazy var x = Variable("x")
     lazy var y = Variable("y")
     lazy var z = Variable("z")

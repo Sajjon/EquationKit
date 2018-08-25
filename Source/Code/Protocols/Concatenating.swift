@@ -24,7 +24,7 @@ public extension PolynomialProtocol {
         } else if let polynomial = concatenating as? Self {
             self.init(terms: polynomial.terms, constant: polynomial.constant)
         } else {
-            fatalError("unhandled, self.numbertype")
+            fatalError("incorrect implementation")
         }
     }
 }

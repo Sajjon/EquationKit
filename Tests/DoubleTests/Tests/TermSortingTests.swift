@@ -80,15 +80,15 @@ class TermSortingTests: DoubleTestsBase {
     }
 
     func testSortingOfTermsOfPolynomialByMostVariables() {
-        let eq = 2*x*y + 3*y//+ 5*x
-//        XCTAssertEqual(eq.asString(sorting: TermSorting(betweenTerms: [.termsWithMostVariables, .termsAlphabetically])), "2xy + 5x + 3y")
+        let eq = 2*x*y + 3*y + 5*x
+        XCTAssertEqual(eq.asString(sorting: TermSorting(betweenTerms: [.termsWithMostVariables, .termsAlphabetically])), "2xy + 5x + 3y")
     }
 
-//    func testSortingOfTermsOfPolynomialByAlphabeticOrder() {
-//        let eq = 2*x*y + 3*y + 5*x
-//        XCTAssertEqual(eq.asString(sorting: TermSorting(betweenTerms: [.termsWithMostVariables, .termsAlphabetically])), "2xy + 5x + 3y")
-//
-//    }
+    func testSortingOfTermsOfPolynomialByAlphabeticOrder() {
+        let eq = 2*x*y + 3*y + 5*x
+        XCTAssertEqual(eq.asString(sorting: TermSorting(betweenTerms: [.termsWithMostVariables, .termsAlphabetically])), "2xy + 5x + 3y")
+
+    }
 
 
     func testXYEqualsYX() {

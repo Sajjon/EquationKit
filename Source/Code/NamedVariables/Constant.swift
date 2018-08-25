@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ConstantProtocol: NamedVariable, NumberTypeSpecifying {
+public protocol ConstantProtocol: NamedVariable {
     var name: String { get }
     var value: NumberType { get }
     init(name: String, value: NumberType)
