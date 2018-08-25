@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Differentiatable
 public extension TermProtocol {
 
-    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> PolynomialType? {
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
         guard contains(variable: variableToDifferentiate) else { return nil }
 
         var exponentiations = [ExponentiationType]()
@@ -24,14 +24,14 @@ public extension TermProtocol {
 
             coefficient *= term.coefficient
             guard let exponentiation = term.exponentiations.first, term.exponentiations.count == 1 else { return nil }
-            exponentiations.append(exponentiation)
+            exponentiations.append(exponentiation as! ExponentiationType)
         }
 
         if exponentiations.count == 0 {
-            return PolynomialType(constant: coefficient)
+            return Polynomial(constant: coefficient)
         } else {
             let term = Self(exponentiations: exponentiations, coefficient: coefficient)
-            return PolynomialType(term: term)
+            return Polynomial(term: term as! Polynomial<NumberType>.TermType)
         }
     }
 }

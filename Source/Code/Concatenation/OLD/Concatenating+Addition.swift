@@ -83,45 +83,8 @@ public func +<N>(lhs: N, rhs: Concatenating) -> PolynomialStruct<N> {
 
 
 // MARK - Polynomial Extension
-public extension PolynomialProtocol {
 
-    func appending(constant: NumberType) -> Self {
-        return Self.init(terms: terms, constant: self.constant + constant)
-    }
 
-    func appending<F>(constant: F) -> Self where F: BinaryFloatingPoint {
-        return Self.init(terms: terms, constant: self.constant + NumberType(constant))
-    }
-
-    func appending<I>(constant: I) -> Self where I: BinaryInteger {
-        return appending(constant: Double(constant))
-    }
-
-    func appending(polynomial other: Self) -> Self {
-        return Self(terms: terms + other.terms, constant: constant + other.constant)
-    }
-}
-
-private extension PolynomialProtocol {
-    static func + (lhs: Self, rhs: Self) -> Self {
-        return lhs.appending(polynomial: rhs)
-    }
-
-    static func + (lhs: Self, rhs: Int) -> Self {
-        return lhs.appending(constant: rhs)
-    }
-    // addition is commutative
-    static func + (lhs: Int, rhs: Self) -> Self {
-        return rhs + lhs
-    }
-
-    static func + (lhs: Self, rhs: Double) -> Self {
-        return lhs.appending(constant: rhs)
-    }
-    static func + (lhs: Double, rhs: Self) -> Self {
-        return rhs + lhs
-    }
-}
 
 
 /// Concatenate `lhs` and `rhs` using addition
@@ -184,21 +147,4 @@ public func -(lhs: Int, rhs: Concatenating) -> PolynomialStruct<Double> {
 //}
 
 // MARK - Private Polynomial Extension
-private extension PolynomialProtocol {
 
-    func subtracting(other: Self) -> Self {
-        return self + other.negated()
-    }
-
-    func subtracting(constant: NumberType) -> Self {
-        return Self(terms: terms, constant: self.constant - constant)
-    }
-
-    func subtracting<F>(constant: F) -> Self where F: BinaryFloatingPoint {
-        return Self(terms: terms, constant: self.constant - NumberType(constant))
-    }
-
-    func subtracting<I>(constant: I) -> Self where I: BinaryInteger {
-        return Self(terms: terms, constant: self.constant - NumberType(constant))
-    }
-}

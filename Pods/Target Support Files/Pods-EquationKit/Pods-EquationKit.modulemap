@@ -1,0 +1,6 @@
+framework module Pods_EquationKit {
+  umbrella header "Pods-EquationKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

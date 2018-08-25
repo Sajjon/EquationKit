@@ -11,9 +11,9 @@ import Foundation
 // MARK: - Differentiatable LIKE but cannot mark conformance because it would result in circular reference
 public extension PolynomialProtocol {
 
-    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Self? {
-        guard contains(variable: variableToDifferentiate) else { return Self(constant: NumberType.zero) }
-        var terms = [TermType]()
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
+        guard contains(variable: variableToDifferentiate) else { return Polynomial(constant: NumberType.zero) }
+        var terms = [Polynomial<NumberType>.TermType]()
         var constant: NumberType = .zero
         for term in self.terms {
             guard let differentiationResult = term.differentiateWithRespectTo(variableToDifferentiate) else { continue }
@@ -26,6 +26,6 @@ public extension PolynomialProtocol {
             }
 
         }
-        return Self(terms: terms, constant: constant)
+        return Polynomial(terms: terms, constant: constant)
     }
 }

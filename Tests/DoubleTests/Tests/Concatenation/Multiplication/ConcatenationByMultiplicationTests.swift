@@ -14,6 +14,7 @@ import XCTest
 class ConcatenationByMultiplicationTests: DoubleTestsBase {
 
     func testX³() {
+
         let eq = x*x*x
         XCTAssertEqual(eq, x³ + 0)
         XCTAssertEqual(eq.solve() { x <- 2 }!, 8)

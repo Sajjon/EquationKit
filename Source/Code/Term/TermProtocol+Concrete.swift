@@ -8,11 +8,11 @@
 
 import Foundation
 
-public struct TermStruct<Number: NumberExpressible>: TermProtocol {
+public struct TermStruct<Exponentiation: ExponentiationProtocol>: TermProtocol {
 
-    public typealias PolynomialType = PolynomialStruct<Number>
-    public typealias NumberType = Number
-    public typealias ExponentiationType = ExponentiationStruct<NumberType>
+//    public typealias PolynomialType = PolynomialStruct<Number>
+    public typealias NumberType = Exponentiation.NumberType
+    public typealias ExponentiationType = Exponentiation//ExponentiationStruct<NumberType>
     public let coefficient: NumberType
     public let exponentiations: [ExponentiationType]
 

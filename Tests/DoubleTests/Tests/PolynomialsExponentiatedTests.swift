@@ -17,7 +17,7 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         let eq = (x + 1)^^2
         XCTAssertEqual(eq, (x + 1) * (x + 1))
         XCTAssertEqual(eq, x² + 2*x + 1)
-        XCTAssertEqual(eq, (1 + x)^^2)
+        XCTAssertEqual(eq, (Double(1) + x)^^2)
     }
 
     func test﹙𝑥＋𝟙﹚³() {

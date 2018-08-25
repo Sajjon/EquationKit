@@ -9,7 +9,7 @@
 import Foundation
 
 public enum SortingBetweenTerms<Number: NumberExpressible>: Sorting {
-      public typealias TypeToSort = TermStruct<Number>
+      public typealias TypeToSort = TermStruct<ExponentiationStruct<Number>>
     case descendingExponent
     case coefficient // positive higher than negative naturally
     case termsWithMostVariables
@@ -85,8 +85,8 @@ public extension Array where Element: TermProtocol {
 
         let areInIncreasingOrderClosure: (Element, Element) -> Bool = {
             guard
-                let lhs = $0 as? TermStruct<Element.NumberType>,
-                let rhs = $1 as? TermStruct<Element.NumberType>
+                let lhs = $0 as? SortingBetweenTerms<Element.NumberType>.TypeToSort, // TermStruct<Element.NumberType>,
+                let rhs = $1 as? SortingBetweenTerms<Element.NumberType>.TypeToSort //TermStruct<Element.NumberType>
                 else {
                     fatalError("what to do")
             }

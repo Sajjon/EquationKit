@@ -103,23 +103,6 @@ public extension PolynomialProtocol {
     }
 }
 
-
-// MARK: - ExpressibleByFloatLiteral
-extension PolynomialStruct: ExpressibleByFloatLiteral {
-    public typealias FloatLiteralType = Float
-    public init(floatLiteral value: Float) {
-        self.init(constant: NumberType(value))
-    }
-}
-
-// MARK: - ExpressibleByIntegerLiteral
-extension PolynomialStruct: ExpressibleByIntegerLiteral {
-    public typealias IntegerLiteralType = Int
-    public init(integerLiteral value: Int) {
-        self.init(constant: NumberType(value))
-    }
-}
-
 // MARK: - ExpressibleByArrayLiteral
 extension PolynomialStruct: ExpressibleByArrayLiteral {
     public init(arrayLiteral terms: TermType...) {

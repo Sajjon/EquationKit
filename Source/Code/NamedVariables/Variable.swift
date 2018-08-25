@@ -29,11 +29,11 @@ public extension VariableProtocol {
     }
 }
 
-//// MARK: - Differentiatable
-//public extension VariableProtocol {
-//    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> PolynomialType? {
-//        fatalError()
-////        guard variableToDifferentiate == self else { return nil }
-////        return self
-//    }
-//}
+// MARK: - Differentiatable
+public extension VariableProtocol {
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
+        fatalError()
+//        guard variableToDifferentiate == self else { return nil }
+//        return self
+    }
+}

@@ -44,7 +44,7 @@ class ConcatenationByAdditionTests: DoubleTestsBase {
 
     func testNumberAddPolynomialAndReversed() {
         let eq = x + 2
-        let eq2: PolynomialStruct<Double> = x + 5
+        let eq2: Eq = x + 5
 
         XCTAssertEqual(eq + 3, eq2)
         XCTAssertEqual(3 + eq, eq2)

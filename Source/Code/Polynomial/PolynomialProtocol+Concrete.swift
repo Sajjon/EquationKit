@@ -8,10 +8,10 @@
 
 import Foundation
 
-public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
+public struct PolynomialStruct<Term: TermProtocol>: PolynomialProtocol {
 
-    public typealias NumberType = Number
-    public typealias TermType = TermStruct<Number>
+    public typealias NumberType = Term.NumberType
+    public typealias TermType = Term//TermStruct<Number>
 
     public let constant: NumberType
     public let terms: [TermType]
@@ -21,4 +21,20 @@ public struct PolynomialStruct<Number: NumberExpressible>: PolynomialProtocol {
         self.constant = constant
     }
     
+}
+
+// MARK: - ExpressibleByFloatLiteral
+extension PolynomialStruct: ExpressibleByFloatLiteral {
+    public typealias FloatLiteralType = Float
+    public init(floatLiteral value: Float) {
+        self.init(constant: NumberType(value))
+    }
+}
+
+// MARK: - ExpressibleByIntegerLiteral
+extension PolynomialStruct: ExpressibleByIntegerLiteral {
+    public typealias IntegerLiteralType = Int
+    public init(integerLiteral value: Int) {
+        self.init(constant: NumberType(value))
+    }
 }

@@ -11,19 +11,8 @@ import Foundation
 
 public protocol Concatenating {}
 
-public extension NumberExpressible {
-    static var typeName: String {
-        let typeName = "\(type(of: self))"
-        return typeName
-    }
-}
-
 // MARK: - Polynomial init Concatenating
 public extension PolynomialProtocol {
-
-    static var nameOfNumberType: String {
-        return NumberType.typeName
-    }
 
     init(_ concatenating: Concatenating) {
         if let variable = concatenating as? VariableStruct<NumberType> {
@@ -35,7 +24,7 @@ public extension PolynomialProtocol {
         } else if let polynomial = concatenating as? Self {
             self.init(terms: polynomial.terms, constant: polynomial.constant)
         } else {
-            fatalError("unhandled, self.numbertype: `\(Self.nameOfNumberType)`")
+            fatalError("unhandled, self.numbertype")
         }
     }
 }
