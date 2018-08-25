@@ -48,9 +48,9 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         let eq = (x - 1)^^9
         XCTAssertEqual(eq.asString(sorting: .descendingExponent), "x⁹ - 9x⁸ + 36x⁷ - 84x⁶ + 126x⁵ - 126x⁴ + 84x³ - 36x² + 9x - 1")
         XCTAssertEqual(eq, x⁹ - 9*x⁸ + 36*x⁷ - 84*x⁶ + 126*x⁵ - 126*x⁴ + 84*x³ - 36*x² + 9*x - 1)
-        XCTAssertEqual(eq.solve() { x <- 1 }!, 0)
-        XCTAssertEqual(eq.solve() { x <- 2 }!, 1)
-        XCTAssertEqual(eq.solve() { x <- 3 }!, 512)
-        XCTAssertEqual(eq.solve() { x <- 4 }!, 19683)
+        XCTAssertEqual(eq.evaluate() { x <- 1 }!, 0)
+        XCTAssertEqual(eq.evaluate() { x <- 2 }!, 1)
+        XCTAssertEqual(eq.evaluate() { x <- 3 }!, 512)
+        XCTAssertEqual(eq.evaluate() { x <- 4 }!, 19683)
     }
 }

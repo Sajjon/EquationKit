@@ -29,7 +29,7 @@ class PolynomialMultipliedByPolynomialTests: DoubleTestsBase {
         XCTAssertEqual(eq, 21*x² + 8*x*y - 50*x - 45*y² + 268*y - 391)
         XCTAssertEqual(
             0,
-            eq.solve() {[
+            eq.evaluate() {[
             x <- 4,
             y <- 1
         ]})
@@ -38,7 +38,7 @@ class PolynomialMultipliedByPolynomialTests: DoubleTestsBase {
         XCTAssertEqual(42*x + 8*y - 50, y＇)
         XCTAssertEqual(
             0,
-            y＇.solve() {[
+            y＇.evaluate() {[
                 x <- 1,
                 y <- 1
                 ]}
@@ -48,7 +48,7 @@ class PolynomialMultipliedByPolynomialTests: DoubleTestsBase {
         XCTAssertEqual(8*x - 90*y + 268, x＇)
         XCTAssertEqual(
             0,
-            x＇.solve() {[
+            x＇.evaluate() {[
                 x <- 11.5,
                 y <- 4
             ]}
@@ -97,10 +97,10 @@ class PolynomialMultipliedByPolynomialTests: DoubleTestsBase {
 
         XCTAssertEqual(eq, x⁴ - 3*x³ - 87*x² - 53*x + 462)
         let solutions = [
-            eq.solve() { x <- 2 },
-            eq.solve() { x <- -3 },
-            eq.solve() { x <- -7 },
-            eq.solve() { x <- 11 }
+            eq.evaluate() { x <- 2 },
+            eq.evaluate() { x <- -3 },
+            eq.evaluate() { x <- -7 },
+            eq.evaluate() { x <- 11 }
         ]
         solutions.forEach {
             XCTAssertEqual($0, 0)

@@ -15,7 +15,7 @@ class ExploringRandomStuffTests: DoubleTestsBase {
         var lastSquareDiff: Double? = nil
         let equation = x² - y²
         for i in 0..<1000 {
-            let squareDiff = equation.solve() {[ x <- Double(i+1), y <- Double(i) ]}!
+            let squareDiff = equation.evaluate() {[ x <- Double(i+1), y <- Double(i) ]}!
             defer { lastSquareDiff = squareDiff }
             guard let lastSquareDiff = lastSquareDiff else { continue }
             XCTAssertEqual(squareDiff - lastSquareDiff, 2)
@@ -27,7 +27,7 @@ class ExploringRandomStuffTests: DoubleTestsBase {
         let hexagonalRightmostDigitsPattern: [Double] = [1, 7, 9, 7, 1]
         let equation = x³ - y³
         for i in 0..<1000 {
-            let difference = equation.solve() {[ x <- Double(i+1), y <- Double(i) ]}!
+            let difference = equation.evaluate() {[ x <- Double(i+1), y <- Double(i) ]}!
             let modRes = mod(difference, modulus: 10)
             list.append(modRes)
             if list.count == hexagonalRightmostDigitsPattern.count {
@@ -65,11 +65,11 @@ class ExploringRandomStuffTests: DoubleTestsBase {
 
 
 //            XCTAssertEqual(
-//                eq1.solve(constants: [cx, cy], modulus: 10)!,
-//                eq2.solve(modulus: 10) { x <- (i+1) }!
+//                eq1.evaluate(constants: [cx, cy], modulus: 10)!,
+//                eq2.evaluate(modulus: 10) { x <- (i+1) }!
 //            )
 
-            let difference = eq1.solve(constants: constants)!
+            let difference = eq1.evaluate(constants: constants)!
 
             defer { lastDiff = difference }
             guard let lastDiff = lastDiff else { continue }
@@ -80,7 +80,7 @@ class ExploringRandomStuffTests: DoubleTestsBase {
             let diffDiffMod10 = mod(diffDiff, modulus: 10)
             diffDiffsMod10.append(diffDiffMod10)
 
-//            XCTAssertEqual(diffDiffMod10, eq2.solve(modulus: 10) { x <- i+1 } )
+//            XCTAssertEqual(diffDiffMod10, eq2.evaluate(modulus: 10) { x <- i+1 } )
 
 
             if diffsMod10.count == diffsMod10Pattern.count {

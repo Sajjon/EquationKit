@@ -17,10 +17,10 @@ class ConcatenationByMultiplicationTests: DoubleTestsBase {
 
         let eq = x*x*x
         XCTAssertEqual(eq, x³ + 0)
-        XCTAssertEqual(eq.solve() { x <- 2 }!, 8)
-        XCTAssertEqual(eq.solve() { x <- 3 }!, 27)
-        XCTAssertEqual(eq.solve() { x <- 4 }!, 64)
-        XCTAssertEqual(eq.solve() { x <- 5 }!, 125)
+        XCTAssertEqual(eq.evaluate() { x <- 2 }!, 8)
+        XCTAssertEqual(eq.evaluate() { x <- 3 }!, 27)
+        XCTAssertEqual(eq.evaluate() { x <- 4 }!, 64)
+        XCTAssertEqual(eq.evaluate() { x <- 5 }!, 125)
     }
 
     // Testing different ways of expressiong `x*y*z`

@@ -1,5 +1,5 @@
 //
-//  ExponentiationProtocol+Solvable.swift
+//  ExponentiationProtocol+Evaluatable.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-24.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-// MARK: - Solvable
+// MARK: - Evaluatable
 public extension ExponentiationProtocol {
-    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
-        guard let base = variable.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return nil }
+    func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+        guard let base = variable.evaluate(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return nil }
         let value = base.raised(to: exponent)
         guard let modulus = modulus else { return value }
         return value.mod(modulus, modulusMode: modulusMode)

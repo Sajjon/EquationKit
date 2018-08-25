@@ -64,10 +64,10 @@ class SimpleDifferentiationTests: DoubleTestsBase {
         XCTAssertEqual(eq, x^^11 + 48*x)
         let y＇ = eq.differentiateWithRespectTo(x)!
         XCTAssertEqual(11*x^^10 + 48, y＇)
-        XCTAssertEqual(eq.solve() { x <- 1 }, 49)
-        XCTAssertEqual(eq.solve() { x <- 2 }, 2048+96)
-        XCTAssertEqual(y＇.solve() { x <- 1 }, 59)
-        XCTAssertEqual(y＇.solve() { x <- 2 }, 11*1024+48)
+        XCTAssertEqual(eq.evaluate() { x <- 1 }, 49)
+        XCTAssertEqual(eq.evaluate() { x <- 2 }, 2048+96)
+        XCTAssertEqual(y＇.evaluate() { x <- 1 }, 59)
+        XCTAssertEqual(y＇.evaluate() { x <- 2 }, 11*1024+48)
     }
 
     func testDoubleDifferentationOf𝟝𝑦⁴𝑥³() {

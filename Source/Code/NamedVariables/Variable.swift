@@ -22,9 +22,9 @@ public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
     }
 }
 
-// MARK: - Solvable
+// MARK: - Evaluatable
 public extension VariableProtocol {
-    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+    func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
         return constant.value
     }

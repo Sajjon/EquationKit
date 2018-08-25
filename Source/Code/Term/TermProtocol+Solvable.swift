@@ -1,5 +1,5 @@
 //
-//  TermProtocol+Solvable.swift
+//  TermProtocol+Evaluatable.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-24.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-// MARK: - Solvable
+// MARK: - Evaluatable
 public extension TermProtocol {
-    func solve(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
+    func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
-        let values = exponentiations.compactMap { $0.solve(constants: constants, modulus: modulus, modulusMode: modulusMode) }
+        let values = exponentiations.compactMap { $0.evaluate(constants: constants, modulus: modulus, modulusMode: modulusMode) }
         return values.reduce(1, { $0*$1 }) * coefficient
     }
 }

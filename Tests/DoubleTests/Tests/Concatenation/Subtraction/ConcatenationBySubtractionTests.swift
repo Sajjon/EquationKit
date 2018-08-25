@@ -99,23 +99,23 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
     func testVariableSubtractExponentiationAndReversed() {
         let 𝑥²－𝑥 = x² - x
         let 𝑥－𝑥² = x - x²
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- 2 }, 2)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- -2 }, 6)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- 3 }, 6)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- -3 }, 12)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- 4 }, 12)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- -4 }, 20)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- 5 }, 20)
-        XCTAssertEqual(𝑥²－𝑥.solve() { x <- -5 }, 30)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- 2 }, 2)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- -2 }, 6)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- 3 }, 6)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- -3 }, 12)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- 4 }, 12)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- -4 }, 20)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- 5 }, 20)
+        XCTAssertEqual(𝑥²－𝑥.evaluate() { x <- -5 }, 30)
 
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- 2 }, -2)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- -2 }, -6)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- 3 }, -6)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- -3 }, -12)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- 4 }, -12)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- -4 }, -20)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- 5 }, -20)
-        XCTAssertEqual(𝑥－𝑥².solve() { x <- -5 }, -30 )
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- 2 }, -2)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- -2 }, -6)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- 3 }, -6)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- -3 }, -12)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- 4 }, -12)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- -4 }, -20)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- 5 }, -20)
+        XCTAssertEqual(𝑥－𝑥².evaluate() { x <- -5 }, -30 )
 
         XCTAssertNotEqual(x² - x, x - x²)
         XCTAssertNotEqual(x² - x, x² - y)
@@ -127,14 +127,14 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
         let xy = x*y
 
         let 𝑥－𝑥𝑦 = x - xy
-        XCTAssertEqual(𝑥－𝑥𝑦.solve() {[ x <- 5, y <- 3 ]}, -10)
-        XCTAssertEqual(𝑥－𝑥𝑦.solve() {[ x <- 5, y <- -3 ]}, 20)
-        XCTAssertEqual(𝑥－𝑥𝑦.solve() {[ x <- 6, y <- -4 ]}, 30)
+        XCTAssertEqual(𝑥－𝑥𝑦.evaluate() {[ x <- 5, y <- 3 ]}, -10)
+        XCTAssertEqual(𝑥－𝑥𝑦.evaluate() {[ x <- 5, y <- -3 ]}, 20)
+        XCTAssertEqual(𝑥－𝑥𝑦.evaluate() {[ x <- 6, y <- -4 ]}, 30)
 
 
         let 𝑥𝑦－𝑥 = xy-x
-        XCTAssertEqual(𝑥𝑦－𝑥.solve() {[ x <- 5, y <- 3 ]}, 10)
-        XCTAssertEqual(𝑥𝑦－𝑥.solve() {[ x <- 7, y <- 11 ]}, 70)
+        XCTAssertEqual(𝑥𝑦－𝑥.evaluate() {[ x <- 5, y <- 3 ]}, 10)
+        XCTAssertEqual(𝑥𝑦－𝑥.evaluate() {[ x <- 7, y <- 11 ]}, 70)
 
         XCTAssertNotEqual(x - xy, xy - x)
         XCTAssertNotEqual(x - xy, y - xy)
@@ -153,7 +153,7 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
 
         XCTAssertEqual(x - eq, 2)
         XCTAssertEqual((y - eq).asString(sorting: .coefficient), "y - x + 2")
-        XCTAssertEqual((y - eq).solve() {[ x <- 3, y <- 1 ]}, 0)
+        XCTAssertEqual((y - eq).evaluate() {[ x <- 3, y <- 1 ]}, 0)
     }
 
     // MARK: - Exponentiation
