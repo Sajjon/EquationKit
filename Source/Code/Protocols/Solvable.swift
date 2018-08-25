@@ -19,14 +19,6 @@ public extension Solvable {
         return solve(constants: constants, modulus: modulus, modulusMode: modulusMode)
     }
 
-    func solve(constants: [String: NumberType], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
-        return solve(constants: Set(constants.map { ConstantStruct<NumberType>(name: $0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
-    }
-
-    func solve(constants: [String: Int], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
-        return solve(constants: constants.mapValues { NumberType($0) }, modulus: modulus, modulusMode: modulusMode)
-    }
-
     func solve(constants: [ConstantStruct<NumberType>], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
         guard !constants.containsDuplicates() else { fatalError() }
         return solve(constants: Set(constants), modulus: modulus, modulusMode: modulusMode)
@@ -48,17 +40,8 @@ public extension Solvable {
         return solve(constants: Set(constants.map { ConstantStruct<NumberType>(variable: $0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
     }
 
-    func solve(constants: [VariableStruct<NumberType>: Int], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
-        return solve(constants: constants.mapValues { NumberType($0) }, modulus: modulus, modulusMode: modulusMode)
-    }
-
     func solve(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [(VariableStruct<NumberType>, NumberType)]) -> NumberType? {
         let array = assertingValue().map { ConstantStruct<NumberType>(variable: $0, value: $1) }
         return solve(constants: Set(array), modulus: modulus, modulusMode: modulusMode)
     }
-
-    func solve(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: @escaping () -> [(VariableStruct<NumberType>, Int)]) -> NumberType? {
-        return solve(modulus: modulus, modulusMode: modulusMode, assertingValue: { assertingValue().map { ($0.0, NumberType($0.1)) } })
-    }
-
 }
