@@ -16,11 +16,11 @@ print(x＇) // 8x - 90y + 268
 ```
 
 ## Generics
-EquationKit is fully generic and supports any number type conforming to the protocol [`NumberExpressible`](Source/Code/Protocols/NumberExpressible.swift), Swift Foundation's `Int` and `Double` both conforms to said protocol. By conforming to `NumberExpressible` you can use EquationKit with e.g. excellent [attaswift/BigInt](https://github.com/attaswift/BigInt). You need only to copy the code from [`BigInt+IntegerNumberExpressible`](Support/BigInt/BigInt+IntegerNumberExpressible.swift)
+EquationKit is fully generic and supports any number type conforming to the protocol [`NumberExpressible`](Source/Code/NumberExpressible/NumberExpressible.swift), Swift Foundation's `Int` and `Double` both conforms to said protocol. By conforming to `NumberExpressible` you can use EquationKit with e.g. excellent [attaswift/BigInt](https://github.com/attaswift/BigInt). You need only to copy the code from [`BigInt+IntegerNumberExpressible`](Support/BigInt/BigInt+IntegerNumberExpressible.swift)
 
-We would like to use operator overloading, making it possible to write `x + y`, `x - 2`, `x*z² - y³` etc. Supporting operator overloading using generic `func + <N: NumberExpressible>(lhs: Variable, rhs: N) -> PolynomialStruct<N>` results in Swift compiler taking too long time to compile polynomials having over 3 terms (using Xcode 10 beta 6 at least). Thus EquationKit does not come bundled with any operator support at all. Instead, you chose your Number type yourself. If you don't need `BigInt` then `Double` is probably what you want. Just copy the file [`Double_Operators.swift`](Support/Double/Double_Operators.swift) into your project and you are good to go! It contains around 10 operators which are all 3 lines of code each.
+We would like to use operator overloading, making it possible to write `x + y`, `x - 2`, `x*z² - y³` etc. Supporting operator overloading using generic `func + <N: NumberExpressible>(lhs: Variable, rhs: N) -> PolynomialStruct<N>` results in Swift compiler taking too long time to compile polynomials having over 3 terms (using Xcode 10 beta 6 at least). Thus EquationKit does not come bundled with any operator support at all. Instead, you chose your Number type yourself. If you don't need `BigInt` then `Double` is probably what you want. Just copy the file [`Double_Operators`](Support/Double/Double_Operators.swift) into your project and you are good to go! It contains around 10 operators which are all 3 lines of code each.
 
-If you need `BigInt` support, just copy the file [`BigInt_Operators.swift`](Support/BigInt/BigInt_Operators.swift) instead.
+If you need `BigInt` support, just copy the file [`BigInt_Operators`](Support/BigInt/BigInt_Operators.swift) instead.
 
 ## Variables
 You write powers using the custom operator `x^^2`, but for powers between `2` and `9` you can use the [unicode superscript symbols](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts#Superscripts_and_subscripts_block) instead, like so:
@@ -39,7 +39,7 @@ let x⁹ = Exponentiation(x, exponent: 9)
 let y² = Exponentiation(y, exponent: 2)
 ```
 
-You can copy the contents of the file [`Double_Variables.swift`](Support/Double/Double_Variables.swift) or for BigInt support: [`BigInt_Variables.swift`](Support/BigInt/BigInt_Variables.swift) and of course extended with more variables of your choice.
+You can copy the contents of the file [`Double_Variables`](Support/Double/Double_Variables.swift) or for BigInt support: [`BigInt_Variables`](Support/BigInt/BigInt_Variables.swift) and of course extended with more variables of your choice.
 
 
 ## Supported
