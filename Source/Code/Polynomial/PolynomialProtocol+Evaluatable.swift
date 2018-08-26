@@ -10,6 +10,11 @@ import Foundation
 
 // MARK: - Evaluatable
 public extension PolynomialProtocol {
+
+    var uniqueVariables: Set<VariableStruct<NumberType>> {
+        return Set(terms.flatMap { Array($0.uniqueVariables) })
+    }
+
     func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard uniqueVariables.isSubset(of: constants.map { $0.toVariable() }) else { return nil }
         let solution = terms.reduce(constant, {

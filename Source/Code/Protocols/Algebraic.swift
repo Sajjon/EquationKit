@@ -9,3 +9,4 @@
 import Foundation
 
 public protocol Algebraic: Evaluatable, Concatenating, Differentiatable, Hashable, CustomStringConvertible {}
+

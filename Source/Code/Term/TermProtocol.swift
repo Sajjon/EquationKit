@@ -15,9 +15,6 @@ public protocol TermProtocol:
     CustomDebugStringConvertible
     where
     ExponentiationType.NumberType == Self.NumberType
-//    PolynomialType.NumberType == Self.NumberType,
-//    PolynomialType.TermType == Self,
-//    Self.ExponentiationType.PolynomialType == Self.PolynomialType
 {
 
     associatedtype ExponentiationType: ExponentiationProtocol
@@ -78,10 +75,6 @@ internal extension TermProtocol {
 
     var highestExponent: NumberType {
         return exponentiations.sorted(by: .descendingExponent)[0].exponent
-    }
-
-    var uniqueVariables: Set<VariableStruct<NumberType>> {
-        return Set(exponentiations.map { $0.variable })
     }
 
     var variableNames: String {

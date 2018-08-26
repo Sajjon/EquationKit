@@ -9,7 +9,9 @@
 import Foundation
 
 
+
 public protocol Evaluatable: NumberTypeSpecifying {
+    var uniqueVariables: Set<VariableStruct<NumberType>> { get }
     func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType?
 }
 

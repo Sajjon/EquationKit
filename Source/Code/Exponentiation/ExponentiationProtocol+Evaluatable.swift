@@ -10,6 +10,11 @@ import Foundation
 
 // MARK: - Evaluatable
 public extension ExponentiationProtocol {
+
+    var uniqueVariables: Set<VariableStruct<NumberType>> {
+        return variable.uniqueVariables
+    }
+
     func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard let base = variable.evaluate(constants: constants, modulus: modulus, modulusMode: modulusMode) else { return nil }
         let value = base.raised(to: exponent)
@@ -17,3 +22,4 @@ public extension ExponentiationProtocol {
         return value.mod(modulus, modulusMode: modulusMode)
     }
 }
+

@@ -8,7 +8,12 @@
 
 import Foundation
 
-public protocol PolynomialProtocol: Algebraic, Negatable where TermType.NumberType == Self.NumberType {
+public protocol PolynomialProtocol:
+    Algebraic,
+    Negatable
+    where
+    TermType.NumberType == Self.NumberType
+{
     associatedtype TermType: TermProtocol
     var constant: NumberType { get }
     var terms: [TermType] { get }
@@ -96,10 +101,6 @@ public extension PolynomialProtocol {
             return true
         }
         return false
-    }
-
-    var uniqueVariables: Set<VariableStruct<NumberType>> {
-        return Set(terms.flatMap { Array($0.uniqueVariables) })
     }
 }
 

@@ -8,11 +8,7 @@
 
 import Foundation
 
-public protocol ExponentiationProtocol: Algebraic, Comparable
-//    where
-//    PolynomialType.TermType.ExponentiationType == Self,
-//    PolynomialType.NumberType == Self.NumberType
-{
+public protocol ExponentiationProtocol: Algebraic, Comparable {
     var variable: VariableStruct<NumberType> { get }
     var exponent: NumberType { get }
     init(variable: VariableStruct<NumberType>, exponent: NumberType)

@@ -30,6 +30,19 @@ public extension VariableProtocol {
     }
 }
 
+// MARK: - Solvable
+public extension VariableProtocol {
+
+    var uniqueVariables: Set<VariableStruct<NumberType>> {
+        return Set([self as! VariableStruct<NumberType>])
+    }
+
+    func findRoots(constants: Set<ConstantStruct<NumberType>>) -> Set<ConstantStruct<NumberType>> {
+        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return Set() }
+        return Set([ConstantStruct<NumberType>(name: self.name, value: constant.value)])
+    }
+}
+
 // MARK: - Differentiatable
 public extension VariableProtocol {
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
