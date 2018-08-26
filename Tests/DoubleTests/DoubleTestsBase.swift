@@ -12,42 +12,6 @@ import XCTest
 
 class DoubleTestsBase: XCTestCase {
 
-    typealias Variable = VariableStruct<Double>
-    typealias Constant = ConstantStruct<Double>
-    typealias Exponentiation = ExponentiationStruct<Double>
-    typealias Term = TermStruct<Exponentiation>
-
-    lazy var x = Variable("x")
-    lazy var y = Variable("y")
-    lazy var z = Variable("z")
-    lazy var x² = Exponentiation(x, exponent: 2)
-    lazy var x³ = Exponentiation(x, exponent: 3)
-    lazy var x⁴ = Exponentiation(x, exponent: 4)
-    lazy var x⁵ = Exponentiation(x, exponent: 5)
-    lazy var x⁶ = Exponentiation(x, exponent: 6)
-    lazy var x⁷ = Exponentiation(x, exponent: 7)
-    lazy var x⁸ = Exponentiation(x, exponent: 8)
-    lazy var x⁹ = Exponentiation(x, exponent: 9)
-
-    lazy var y² = Exponentiation(y, exponent: 2)
-    lazy var y³ = Exponentiation(y, exponent: 3)
-    lazy var y⁴ = Exponentiation(y, exponent: 4)
-    lazy var y⁵ = Exponentiation(y, exponent: 5)
-    lazy var y⁶ = Exponentiation(y, exponent: 6)
-    lazy var y⁷ = Exponentiation(y, exponent: 7)
-    lazy var y⁸ = Exponentiation(y, exponent: 8)
-    lazy var y⁹ = Exponentiation(y, exponent: 9)
-
-    lazy var z² = Exponentiation(z, exponent: 2)
-    lazy var z³ = Exponentiation(z, exponent: 3)
-    lazy var z⁴ = Exponentiation(z, exponent: 4)
-    lazy var z⁵ = Exponentiation(z, exponent: 5)
-    lazy var z⁶ = Exponentiation(z, exponent: 6)
-    lazy var z⁷ = Exponentiation(z, exponent: 7)
-    lazy var z⁸ = Exponentiation(z, exponent: 8)
-    lazy var z⁹ = Exponentiation(z, exponent: 9)
-
-
     lazy var tx = Term(x)
     lazy var －tx = tx.negated()
 

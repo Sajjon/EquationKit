@@ -39,11 +39,11 @@ public extension Evaluatable {
     }
 
     func evaluate(constants: [VariableStruct<NumberType>: NumberType], modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> NumberType? {
-        return evaluate(constants: Set(constants.map { ConstantStruct<NumberType>(variable: $0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
+        return evaluate(constants: Set(constants.map { ConstantStruct<NumberType>($0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
     }
 
     func evaluate(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [(VariableStruct<NumberType>, NumberType)]) -> NumberType? {
-        let array = assertingValue().map { ConstantStruct<NumberType>(variable: $0, value: $1) }
+        let array = assertingValue().map { ConstantStruct<NumberType>($0, value: $1) }
         return evaluate(constants: Set(array), modulus: modulus, modulusMode: modulusMode)
     }
 }

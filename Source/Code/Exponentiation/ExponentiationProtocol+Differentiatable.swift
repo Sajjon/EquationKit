@@ -11,10 +11,10 @@ import Foundation
 // MARK: - Differentiatable
 public extension ExponentiationProtocol {
 
-    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> PolynomialType<NumberType>? {
 
         guard let _ = variable.differentiateWithRespectTo(variableToDifferentiate) else {
-            return Polynomial(exponentiation: self as! Polynomial<NumberType>.ExponentiationType)
+            return PolynomialType(exponentiation: self as! PolynomialType<NumberType>.ExponentiationType)
         }
 
         let exponentPriorToDifferentiation = self.exponent
@@ -23,12 +23,12 @@ public extension ExponentiationProtocol {
             // actually this is never used.... but makes us able to distinguish between
             // doing `exponentiations.append(exponentiation)` and doing
             // nothing in differentiation in TermProtocol
-            return Polynomial(constant: .one)
+            return PolynomialType(constant: .one)
         }
 
-        let exponentiation = Polynomial.ExponentiationType(variable, exponent: exponent)
-        let term = Polynomial.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)
-        return Polynomial(term: term)
+        let exponentiation = PolynomialType.ExponentiationType(variable, exponent: exponent)
+        let term = PolynomialType.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)
+        return PolynomialType(term: term)
     }
 
 }

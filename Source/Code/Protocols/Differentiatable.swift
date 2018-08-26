@@ -8,13 +8,13 @@
 
 import Foundation
 
-public typealias Polynomial<N: NumberExpressible> = PolynomialStruct<TermStruct<ExponentiationStruct<N>>>
+public typealias PolynomialType<N: NumberExpressible> = PolynomialStruct<TermStruct<ExponentiationStruct<N>>>
 
 public protocol NumberTypeSpecifying {
     associatedtype NumberType: NumberExpressible
 }
 
 public protocol Differentiatable: NumberTypeSpecifying {
-    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>?
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> PolynomialType<NumberType>?
 }
 

@@ -10,9 +10,8 @@ import Foundation
 
 public struct TermStruct<Exponentiation: ExponentiationProtocol>: TermProtocol {
 
-//    public typealias PolynomialType = PolynomialStruct<Number>
     public typealias NumberType = Exponentiation.NumberType
-    public typealias ExponentiationType = Exponentiation//ExponentiationStruct<NumberType>
+    public typealias ExponentiationType = Exponentiation
     public let coefficient: NumberType
     public let exponentiations: [ExponentiationType]
 
