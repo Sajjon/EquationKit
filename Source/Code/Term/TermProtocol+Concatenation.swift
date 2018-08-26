@@ -1,5 +1,5 @@
 //
-//  TermProtocol+Concatenating.swift
+//  TermProtocol+Concatenation.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-24.

@@ -19,7 +19,7 @@ public protocol PolynomialProtocol:
     var terms: [TermType] { get }
 
     init(terms: [TermType], sorting: TermSorting<NumberType>, constant: NumberType)
-    init(term: TermType)
+    init(term: TermType, constant: NumberType)
     init(constant: NumberType)
 }
 
@@ -30,77 +30,29 @@ public extension PolynomialProtocol {
 
 // MARK: - Convenience Initializers
 public extension PolynomialProtocol {
-    init(terms: [TermType] = [], sorting: TermSorting<NumberType> = TermSorting<NumberType>(), constant: NumberType = .zero) {
+
+    init(polynomial: Self) {
+        self.init(terms: polynomial.terms, constant: polynomial.constant)
+    }
+
+    init(terms: [TermType], sorting: TermSorting<NumberType> = TermSorting<NumberType>(), constant: NumberType = .zero) {
         self.init(terms: terms, sorting: sorting, constant: constant)
     }
-    init(term: TermType) {
-        self.init(terms: [term], constant: NumberType.zero)
-    }
-    init(constant: NumberType) {
-        self.init(terms: [], constant: constant)
-    }
 
-    init(exponentiation: ExponentiationType) {
-        self.init(term: TermType(exponentiation: exponentiation))
-    }
-
-    init(exponentiation: ExponentiationType, constant: NumberType = .zero) {
-        self.init(TermType(exponentiation: exponentiation), constant: constant)
-    }
-
-    init(variable: VariableStruct<NumberType>, constant: NumberType = .zero) {
-        self.init(exponentiation: ExponentiationType(variable), constant: constant)
-    }
-
-    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
     init(term: TermType, constant: NumberType = .zero) {
         self.init(terms: [term], constant: constant)
     }
 
-    init(_ term: TermType, constant: NumberType = .zero) {
-        self.init(terms: [term], constant: constant)
-    }
-
-//    init(constant: Double) {
-//        self.init(constant: NumberType(constant))
-//    }
-//
-//    init(constant: Int) {
-//        self.init(constant: NumberType(constant))
-//    }
-}
-
-public extension PolynomialProtocol where NumberType: FloatingPointNumberExpressible {
-
-    init<F>(constant: F) where F: BinaryFloatingPoint {
-        self.init(constant: NumberType(constant))
-    }
-
-    // delete either of these two, recently added the one directly below, having the label `term` during refactoring
-    init(_ constant: NumberType) {
-        self.init(terms: [], constant: constant)
-    }
     init(constant: NumberType) {
         self.init(terms: [], constant: constant)
     }
-}
 
-public extension PolynomialProtocol where NumberType: IntegerNumberExpressible {
-    init<I>(constant: I) where I: BinaryInteger {
-        self.init(constant: NumberType(constant))
+    init(exponentiation: ExponentiationType, constant: NumberType = .zero) {
+        self.init(term: TermType(exponentiation: exponentiation), constant: constant)
     }
-}
 
-
-// MARK: - Public Extensions
-public extension PolynomialProtocol {
-
-    func contains(variable: VariableStruct<NumberType>) -> Bool {
-        for term in terms {
-            guard term.contains(variable: variable) else { continue }
-            return true
-        }
-        return false
+    init(variable: VariableStruct<NumberType>, constant: NumberType = .zero) {
+        self.init(exponentiation: ExponentiationType(variable), constant: constant)
     }
 }
 

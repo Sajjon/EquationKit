@@ -24,13 +24,13 @@ class SimpleDifferentiationTests: DoubleTestsBase {
     func test𝟛𝑥²－𝟛𝑦() {
         let eq = 3*x² - 3*y
         XCTAssertEqual((6*x), eq.differentiateWithRespectTo(x)!)
-        XCTAssertEqual(Polynomial(-3), eq.differentiateWithRespectTo(y)!)
+        XCTAssertEqual(-3, eq.differentiateWithRespectTo(y)!)
     }
 
     /// 3y² - 3x
     func test𝟛𝑦²－𝟛𝑥() {
         let eq = 3*y² - 3*x
-        XCTAssertEqual(Polynomial(-3), eq.differentiateWithRespectTo(x)!)
+        XCTAssertEqual(-3, eq.differentiateWithRespectTo(x)!)
         XCTAssertEqual((6*y), eq.differentiateWithRespectTo(y)!)
     }
 

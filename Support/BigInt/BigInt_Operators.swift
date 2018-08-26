@@ -14,42 +14,42 @@ import BigInt
 // Do not include this line when you copy the contents of this file to your own project
 @testable import EquationKit // This is only included since this file is used by EquationKitBigIntTests
 
-public func +(lhs: Concatenating, rhs: Concatenating) -> PolynomialType<BigInt> {
+public func +(lhs: Atom, rhs: Atom) -> PolynomialType<BigInt> {
     return Polynomial(lhs).adding(other: Polynomial(rhs))
 }
 
-public func +(lhs: Concatenating, rhs: BigInt) -> PolynomialType<BigInt> {
+public func +(lhs: Atom, rhs: BigInt) -> PolynomialType<BigInt> {
     return Polynomial(lhs).adding(constant: rhs)
 }
 
-public func +(lhs: BigInt, rhs: Concatenating) -> PolynomialType<BigInt> {
+public func +(lhs: BigInt, rhs: Atom) -> PolynomialType<BigInt> {
     return Polynomial(rhs).adding(constant: lhs)
 }
 
-public func -(lhs: Concatenating, rhs: Concatenating) -> PolynomialType<BigInt> {
+public func -(lhs: Atom, rhs: Atom) -> PolynomialType<BigInt> {
     return Polynomial(lhs).subtracting(other: Polynomial(rhs))
 }
 
-public func -(lhs: Concatenating, rhs: BigInt) -> PolynomialType<BigInt> {
+public func -(lhs: Atom, rhs: BigInt) -> PolynomialType<BigInt> {
     return Polynomial(lhs).subtracting(constant: rhs)
 }
 
-public func -(lhs: BigInt, rhs: Concatenating) -> PolynomialType<BigInt> {
+public func -(lhs: BigInt, rhs: Atom) -> PolynomialType<BigInt> {
     return Polynomial(rhs).negated().adding(constant: lhs)
 }
 
-public func *(lhs: Concatenating, rhs: Concatenating) -> PolynomialType<BigInt> {
+public func *(lhs: Atom, rhs: Atom) -> PolynomialType<BigInt> {
     return Polynomial(lhs).multipliedBy(other: Polynomial(rhs))
 }
 
-public func *(lhs: Concatenating, rhs: BigInt) -> PolynomialType<BigInt> {
+public func *(lhs: Atom, rhs: BigInt) -> PolynomialType<BigInt> {
     return Polynomial(lhs).multipliedBy(constant: rhs)
 }
 
-public func *(lhs: BigInt, rhs: Concatenating) -> PolynomialType<BigInt> {
+public func *(lhs: BigInt, rhs: Atom) -> PolynomialType<BigInt> {
     return rhs * lhs
 }
 
-public func ^^(lhs: Concatenating, rhs: Int) -> PolynomialType<BigInt> {
+public func ^^(lhs: Atom, rhs: Int) -> PolynomialType<BigInt> {
     return Polynomial(lhs).raised(to: rhs)
 }

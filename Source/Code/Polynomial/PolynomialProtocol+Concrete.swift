@@ -26,6 +26,6 @@ public struct PolynomialStruct<Term: TermProtocol>: PolynomialProtocol {
 extension PolynomialStruct: ExpressibleByIntegerLiteral where Term.NumberType == Double {
     public typealias IntegerLiteralType = Int
     public init(integerLiteral value: Int) {
-        self.init(constant: Double(value))
+        self.init(constant: NumberType(value))
     }
 }

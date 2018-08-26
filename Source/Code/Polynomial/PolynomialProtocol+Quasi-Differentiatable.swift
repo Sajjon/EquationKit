@@ -29,3 +29,14 @@ public extension PolynomialProtocol {
         return PolynomialType(terms: terms, constant: constant)
     }
 }
+
+// MARK: - Public Extensions
+public extension PolynomialProtocol {
+    func contains(variable: VariableStruct<NumberType>) -> Bool {
+        for term in terms {
+            guard term.contains(variable: variable) else { continue }
+            return true
+        }
+        return false
+    }
+}
