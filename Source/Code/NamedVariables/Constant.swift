@@ -33,16 +33,14 @@ public extension ConstantProtocol {
 // MARK: - Convenience Initializers
 public extension ConstantProtocol {
 
-    init(variable: VariableStruct<NumberType>, value: NumberType) {
+    init(_ variable: VariableStruct<NumberType>, value: NumberType) {
         self.init(name: variable.name, value: value)
     }
+}
 
-    init(_ variable: VariableStruct<NumberType>, value: Double) {
-        self.init(variable: variable, value: NumberType(value))
-    }
-
+public extension ConstantProtocol where NumberType: FloatingPointNumberExpressible {
     init(_ variable: VariableStruct<NumberType>, value: Int) {
-        self.init(variable: variable, value: NumberType(value))
+        self.init(variable, value: NumberType(Double(value)))
     }
 }
 

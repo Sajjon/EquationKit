@@ -35,11 +35,7 @@ public extension SortingWithinTerm {
         }
     }
 }
-//public extension Array where Element == SortingWithinTerm {
-//    static var `default`: [SortingWithinTerm] {
-//        return [.descendingExponent, .variablesAlphabetically]
-//    }
-//}
+
 
 public extension Array where Element: ExponentiationProtocol {
 

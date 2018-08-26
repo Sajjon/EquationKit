@@ -26,12 +26,6 @@ public protocol NumberExpressible: Numeric, Negatable, Hashable, Comparable {
     var isNegative: Bool { get }
     var isPositive: Bool { get }
     var shortFormat: String { get }
-
-    init(_ int: Int)
-    init(_ double: Double)
-    init<F>(_ binaryFloatingPoint: F) where F: BinaryFloatingPoint
-    init<I>(_ binaryInteger: I) where I: BinaryInteger
-
 }
 
 public extension NumberExpressible {

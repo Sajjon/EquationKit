@@ -11,7 +11,7 @@ import Foundation
 public struct PolynomialStruct<Term: TermProtocol>: PolynomialProtocol {
 
     public typealias NumberType = Term.NumberType
-    public typealias TermType = Term//TermStruct<Number>
+    public typealias TermType = Term
 
     public let constant: NumberType
     public let terms: [TermType]
@@ -20,21 +20,12 @@ public struct PolynomialStruct<Term: TermProtocol>: PolynomialProtocol {
         self.terms = terms.merged().sorted(by: sorting)
         self.constant = constant
     }
-    
-}
-
-// MARK: - ExpressibleByFloatLiteral
-extension PolynomialStruct: ExpressibleByFloatLiteral {
-    public typealias FloatLiteralType = Float
-    public init(floatLiteral value: Float) {
-        self.init(constant: NumberType(value))
-    }
 }
 
 // MARK: - ExpressibleByIntegerLiteral
-extension PolynomialStruct: ExpressibleByIntegerLiteral {
+extension PolynomialStruct: ExpressibleByIntegerLiteral where Term.NumberType == Double {
     public typealias IntegerLiteralType = Int
     public init(integerLiteral value: Int) {
-        self.init(constant: NumberType(value))
+        self.init(constant: Double(value))
     }
 }
