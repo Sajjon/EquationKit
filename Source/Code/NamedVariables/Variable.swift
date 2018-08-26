@@ -8,27 +8,48 @@
 
 import Foundation
 
-public struct Variable: NamedVariable, Algebraic {
+public protocol VariableProtocol: NamedVariable, Algebraic {
+    init(_ name: String)
 
+}
+
+public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
+    public typealias NumberType = Number
     public let name: String
 
-    init(_ name: String) {
+    public init(_ name: String) {
         self.name = name
     }
 }
 
-// MARK: - Solvable
-public extension Variable {
-    func solve(constants: Set<Constant>, modulus: Double?, modulusMode: ModulusMode) -> Double? {
+// MARK: - Evaluatable
+public extension VariableProtocol {
+    func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
         guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
         return constant.value
     }
 }
 
+// MARK: - Solvable
+public extension VariableProtocol {
+
+    var uniqueVariables: Set<VariableStruct<NumberType>> {
+        return Set([self as! VariableStruct<NumberType>])
+    }
+
+    func findRoots(constants: Set<ConstantStruct<NumberType>>) -> Set<ConstantStruct<NumberType>> {
+        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return Set() }
+        return Set([ConstantStruct<NumberType>(name: self.name, value: constant.value)])
+    }
+}
+
 // MARK: - Differentiatable
-public extension Variable {
-    func differentiateWithRespectTo(_ variableToDifferentiate: Variable) -> Variable? {
+public extension VariableProtocol {
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
         guard variableToDifferentiate == self else { return nil }
-        return self
+        // actually this is never used.... but makes us able to distinguish between
+        // doing `exponentiations.append(exponentiation)` and doing
+        // nothing in differentiation in TermProtocol
+        return Polynomial(constant: .one)
     }
 }

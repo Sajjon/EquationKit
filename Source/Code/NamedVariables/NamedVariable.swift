@@ -8,8 +8,15 @@
 
 import Foundation
 
-public protocol NamedVariable: CustomStringConvertible, Hashable, Comparable {
+public protocol NamedVariable: NumberTypeSpecifying, CustomStringConvertible, Hashable, Comparable {
     var name: String { get }
+    static func == <N>(lhs: N, rhs: Self) -> Bool where N: NamedVariable, N.NumberType == Self.NumberType
+}
+
+public extension NamedVariable {
+    static func == <N>(lhs: N, rhs: Self) -> Bool where N: NamedVariable, N.NumberType == Self.NumberType {
+        return lhs.name == rhs.name
+    }
 }
 
 // MARK: - Equatable

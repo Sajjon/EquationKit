@@ -8,36 +8,52 @@
 
 import Foundation
 
-public struct Constant: NamedVariable {
+public protocol ConstantProtocol: NamedVariable {
+    var name: String { get }
+    var value: NumberType { get }
+    init(name: String, value: NumberType)
+
+    func toVariable() -> VariableStruct<NumberType>
+}
+
+// MARK: - Default Implementation
+public extension ConstantProtocol {
+    func toVariable() -> VariableStruct<NumberType> {
+        return VariableStruct<NumberType>(name)
+    }
+}
+
+// MARK: - CustomStringConvertible
+public extension ConstantProtocol {
+    var description: String {
+        return "<\(name)=\(value.shortFormat)>"
+    }
+}
+
+// MARK: - Convenience Initializers
+public extension ConstantProtocol {
+
+    init(variable: VariableStruct<NumberType>, value: NumberType) {
+        self.init(name: variable.name, value: value)
+    }
+
+    init(_ variable: VariableStruct<NumberType>, value: Double) {
+        self.init(variable: variable, value: NumberType(value))
+    }
+
+    init(_ variable: VariableStruct<NumberType>, value: Int) {
+        self.init(variable: variable, value: NumberType(value))
+    }
+}
+
+// MARK: - ConstantStruct
+public struct ConstantStruct<Number: NumberExpressible>: ConstantProtocol {
+    public typealias NumberType = Number
     public let name: String
-    public let value: Double
-    public init(_ name: String, value: Double) {
+    public let value: NumberType
+    public init(name: String, value: NumberType) {
         self.name = name
         self.value = value
     }
 }
 
-// MARK: - Convenience Initializers
-public extension Constant {
-    init(_ variable: Variable, value: Double) {
-        self.init(variable.name, value: value)
-    }
-
-    init(_ variable: Variable, value: Int) {
-        self.init(variable, value: Double(value))
-    }
-}
-
-// MARK: - Public
-public extension Constant {
-    func toVariable() -> Variable {
-        return Variable(name)
-    }
-}
-
-// MARK: - CustomStringConvertible
-public extension Constant {
-    var description: String {
-        return "<\(name)=\(value.shortFormat)>"
-    }
-}

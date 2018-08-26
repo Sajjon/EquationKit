@@ -9,58 +9,22 @@
 
 import Foundation
 
-public protocol Concatenating {
-    func asVariable() -> Variable?
-    func asExponentiation() -> Exponentiation?
-    func asTerm() -> Term?
-    func asPolynomial() -> Polynomial?
-}
-
-public extension Concatenating {
-    func asVariable() -> Variable? { return nil }
-    func asExponentiation() -> Exponentiation? { return nil }
-    func asTerm() -> Term? { return nil }
-    func asPolynomial() -> Polynomial? { return nil }
-}
-
-// MARK: - Conformance - Variable
-extension Variable: Concatenating {}
-public extension Variable {
-    func asVariable() -> Variable? { return self }
-}
-
-// MARK: - Conformance - Exponentiation
-extension Exponentiation: Concatenating {}
-public extension Exponentiation {
-    func asExponentiation() -> Exponentiation? { return self }
-}
-
-// MARK: - Conformance - Term
-extension Term: Concatenating {}
-public extension Term {
-    func asTerm() -> Term? { return self }
-}
-
-// MARK: - Conformance - Variable
-extension Polynomial: Concatenating {}
-public extension Polynomial {
-    func asPolynomial() -> Polynomial? { return self }
-}
+public protocol Concatenating {}
 
 // MARK: - Polynomial init Concatenating
-public extension Polynomial {
+public extension PolynomialProtocol {
 
     init(_ concatenating: Concatenating) {
-        if let variable = concatenating.asVariable() {
+        if let variable = concatenating as? VariableStruct<NumberType> {
             self.init(variable: variable)
-        } else if let exponentiation = concatenating.asExponentiation() {
-            self.init(exponentiation: exponentiation)
-        } else if let term = concatenating.asTerm() {
+        } else if let exponentiation = concatenating as? ExponentiationType {
+            self.init(exponentiation: exponentiation, constant: NumberType.zero)
+        } else if let term = concatenating as? TermType {
             self.init(term: term)
-        } else if let polynomial = concatenating.asPolynomial() {
+        } else if let polynomial = concatenating as? Self {
             self.init(terms: polynomial.terms, constant: polynomial.constant)
         } else {
-            fatalError("unhandled")
+            fatalError("incorrect implementation")
         }
     }
 }

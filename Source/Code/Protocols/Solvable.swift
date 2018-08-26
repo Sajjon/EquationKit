@@ -2,56 +2,69 @@
 //  Solvable.swift
 //  EquationKit
 //
-//  Created by Alexander Cyon on 2018-08-15.
+//  Created by Alexander Cyon on 2018-08-26.
 //  Copyright © 2018 Sajjon. All rights reserved.
 //
 
 import Foundation
 
-public protocol Solvable {
-    func solve(constants: Set<Constant>, modulus: Double?, modulusMode: ModulusMode) -> Double?
+/// *****************************************
+///         NOT IMPLEMENTED YET
+/// *****************************************
+
+public enum Solution<Number: NumberExpressible>: NumberTypeSpecifying {
+    public typealias NumberType = Number
+
+    case roots(Set<ConstantStruct<NumberType>>)
+    case number(NumberType)
+}
+
+public protocol Solvable: Evaluatable {
+    func solve(constants: Set<ConstantStruct<NumberType>>) -> Solution<NumberType>
+
+    /// Might have a look at Sympys solver: https://github.com/sympy/sympy/blob/master/sympy/solvers/solvers.py#L450-L1349
+    func findRoots(constants: Set<ConstantStruct<NumberType>>) -> Set<ConstantStruct<NumberType>>
 }
 
 public extension Solvable {
-    func solve(constants: [Variable: Double], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        return solve(constants: Set(constants.map { Constant($0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
-    }
 
-    func solve(constants: [Variable: Int], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        return solve(constants: constants.mapValues { Double($0) }, modulus: modulus, modulusMode: modulusMode)
-    }
+    func solve(constants: Set<ConstantStruct<NumberType>>) -> Solution<NumberType> {
+        let variablesPassed = Set<VariableStruct<NumberType>>(constants.map { $0.toVariable() })
 
-    func solve(constants: [String: Double], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        return solve(constants: Set(constants.map { Constant($0, value: $1) }), modulus: modulus, modulusMode: modulusMode)
+        if variablesPassed.isSuperset(of: uniqueVariables) {
+            return .number(evaluate(constants: constants)!)
+        } else {
+            return .roots(findRoots(constants: constants))
+        }
     }
+}
 
-    func solve(constants: [String: Int], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        return solve(constants: constants.mapValues { Double($0) }, modulus: modulus, modulusMode: modulusMode)
+public extension Set where Element: ConstantProtocol {
+    func toValues() -> [VariableStruct<Element.NumberType>: Element.NumberType] {
+        let array: [(VariableStruct<Element.NumberType>, Element.NumberType)] = self.map { ($0.toVariable(), $0.value) }
+        let dictionary: [VariableStruct<Element.NumberType>: Element.NumberType] = array.reduce(into: [:]) { $0[$1.0] = $1.1 }
+        return dictionary
     }
+}
+public extension ExponentiationProtocol {
 
-    func solve(constants: [Constant], modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        guard !constants.containsDuplicates() else { fatalError() }
-        return solve(constants: Set(constants), modulus: modulus, modulusMode: modulusMode)
+    func findRoots(constants: Set<ConstantStruct<NumberType>>) -> Set<ConstantStruct<NumberType>> {
+        fatalError()
     }
+}
+// MARK: - Solvable
+public extension TermProtocol {
 
-    func solve(constants: Constant..., modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Double? {
-        return solve(constants: constants, modulus: modulus, modulusMode: modulusMode)
+    func findRoots(constants: Set<ConstantStruct<NumberType>>) -> Set<ConstantStruct<NumberType>> {
+        fatalError()
     }
+}
 
-    func solve(modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [Constant]) -> Double? {
-        return solve(constants: assertingValue(), modulus: modulus, modulusMode: modulusMode)
-    }
 
-    func solve(modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> Constant) -> Double? {
-        return solve(constants: [assertingValue()], modulus: modulus, modulusMode: modulusMode)
-    }
+// MARK: - Solvable
+public extension PolynomialProtocol {
 
-    func solve(modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: () -> [(Variable, Double)]) -> Double? {
-        let array = assertingValue().map { Constant($0, value: $1) }
-        return solve(constants: Set(array), modulus: modulus, modulusMode: modulusMode)
-    }
-
-    func solve(modulus: Double? = nil, modulusMode: ModulusMode = .alwaysPositive, assertingValue: @escaping () -> [(Variable, Int)]) -> Double? {
-        return solve(modulus: modulus, modulusMode: modulusMode, assertingValue: { assertingValue().map { ($0.0, Double($0.1)) } })
+    func findRoots(constants: Set<ConstantStruct<NumberType>>) -> Set<ConstantStruct<NumberType>> {
+        fatalError()
     }
 }

@@ -1,0 +1,6 @@
+framework module Pods_EquationKitBigIntTests {
+  umbrella header "Pods-EquationKitBigIntTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
