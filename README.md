@@ -18,7 +18,7 @@ print(x＇) // 8x - 90y + 268
 ## Generics
 EquationKit is fully generic and supports any number type conforming to the protocol [`NumberExpressible`](Source/Code/Protocols/NumberExpressible.swift), Swift Foundation's `Int` and `Double` both conforms to said protocol. By conforming to `NumberExpressible` you can use EquationKit with e.g. excellent [attaswift/BigInt](https://github.com/attaswift/BigInt). You need only to copy the code from [`BigInt+IntegerNumberExpressible`](Support/BigInt/BigInt+IntegerNumberExpressible.swift)
 
-We would like to use operator overloading, making it possible to write `x + y`, `x - 2`, `x*z² - y³` etc. Supporting operator overloading using generic `func + <N: NumberExpressible>(lhs: Variable, rhs: N) -> PolynomialStruct<N>` results in Swift compiler taking to long time to compile polynomials having over 3 terms (using Xcode 10 beta 6 at least). Thus EquationKit does not come bundled with any operator support at all. Instead you chose your Number type yourself. If you don't need `BigInt` then `Double` is probably what you want. Juse copy the file [`Double_Operators.swift`](Support/Double/Double_Operators.swift) into your project and you are good to go! It contains around 10 operators which are all 3 lines of code each.
+We would like to use operator overloading, making it possible to write `x + y`, `x - 2`, `x*z² - y³` etc. Supporting operator overloading using generic `func + <N: NumberExpressible>(lhs: Variable, rhs: N) -> PolynomialStruct<N>` results in Swift compiler taking too long time to compile polynomials having over 3 terms (using Xcode 10 beta 6 at least). Thus EquationKit does not come bundled with any operator support at all. Instead, you chose your Number type yourself. If you don't need `BigInt` then `Double` is probably what you want. Just copy the file [`Double_Operators.swift`](Support/Double/Double_Operators.swift) into your project and you are good to go! It contains around 10 operators which are all 3 lines of code each.
 
 If you need `BigInt` support, just copy the file [`BigInt_Operators.swift`](Support/BigInt/BigInt_Operators.swift) instead.
 
@@ -57,7 +57,7 @@ You can copy the contents of the file [`Double_Variables.swift`](Support/Double/
 - Finding roots (solving)
 
 
-### Not supported and not on roadmap
+### Not supported and not on the roadmap
 - Variables in exponents, such as `2^x`
 - `log`/`ln` functions
 - Trigonometric functions (`sin`, `cos`, `tan` etc.)
