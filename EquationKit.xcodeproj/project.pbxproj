@@ -22,6 +22,14 @@
 		4815964C21318A4100C49431 /* Double_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815964B21318A4100C49431 /* Double_Operators.swift */; };
 		4815964E2131909400C49431 /* Evaluatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815964D2131909400C49431 /* Evaluatable.swift */; };
 		481596502132D7BB00C49431 /* Solvable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815964F2132D7BB00C49431 /* Solvable.swift */; };
+		481596542132E0F800C49431 /* BigInt+IntegerNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596532132E0F800C49431 /* BigInt+IntegerNumberExpressible.swift */; };
+		481596562132E11900C49431 /* BigInt_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596552132E11900C49431 /* BigInt_Operators.swift */; };
+		481596582132E4C100C49431 /* BigInt_Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596572132E4C100C49431 /* BigInt_Variables.swift */; };
+		4815965B2132E57300C49431 /* Double_Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815965A2132E57300C49431 /* Double_Variables.swift */; };
+		4815965E2132E65200C49431 /* FloatingPointNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815965D2132E65200C49431 /* FloatingPointNumberExpressible.swift */; };
+		481596602132E67400C49431 /* Double+FloatingPointNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4815965F2132E67300C49431 /* Double+FloatingPointNumberExpressible.swift */; };
+		481596622132E68400C49431 /* IntegerNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596612132E68400C49431 /* IntegerNumberExpressible.swift */; };
+		481596642132E69900C49431 /* Int+IntegerNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596632132E69900C49431 /* Int+IntegerNumberExpressible.swift */; };
 		482972AA21317D2700EB0CA9 /* PolynomialMultipliedByPolynomialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482972A321317D1400EB0CA9 /* PolynomialMultipliedByPolynomialTests.swift */; };
 		482D232F21317B26004B2E50 /* BigIntAdditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D232B21317B26004B2E50 /* BigIntAdditionTests.swift */; };
 		482D233021317B26004B2E50 /* BigIntTestsBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482D232C21317B26004B2E50 /* BigIntTestsBase.swift */; };
@@ -97,6 +105,14 @@
 		4815964B21318A4100C49431 /* Double_Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double_Operators.swift; sourceTree = "<group>"; };
 		4815964D2131909400C49431 /* Evaluatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluatable.swift; sourceTree = "<group>"; };
 		4815964F2132D7BB00C49431 /* Solvable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solvable.swift; sourceTree = "<group>"; };
+		481596532132E0F800C49431 /* BigInt+IntegerNumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigInt+IntegerNumberExpressible.swift"; sourceTree = "<group>"; };
+		481596552132E11900C49431 /* BigInt_Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigInt_Operators.swift; sourceTree = "<group>"; };
+		481596572132E4C100C49431 /* BigInt_Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigInt_Variables.swift; sourceTree = "<group>"; };
+		4815965A2132E57300C49431 /* Double_Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double_Variables.swift; sourceTree = "<group>"; };
+		4815965D2132E65200C49431 /* FloatingPointNumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPointNumberExpressible.swift; sourceTree = "<group>"; };
+		4815965F2132E67300C49431 /* Double+FloatingPointNumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+FloatingPointNumberExpressible.swift"; sourceTree = "<group>"; };
+		481596612132E68400C49431 /* IntegerNumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerNumberExpressible.swift; sourceTree = "<group>"; };
+		481596632132E69900C49431 /* Int+IntegerNumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+IntegerNumberExpressible.swift"; sourceTree = "<group>"; };
 		4818E1E5212DC92B0027D2C5 /* NumberExpressible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExpressible.swift; sourceTree = "<group>"; };
 		4829729E21317D1400EB0CA9 /* ConcatenationBySubtractionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenationBySubtractionTests.swift; sourceTree = "<group>"; };
 		482972A021317D1400EB0CA9 /* ConcatenationByMultiplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcatenationByMultiplicationTests.swift; sourceTree = "<group>"; };
@@ -207,6 +223,7 @@
 				2C1DE76D5F6FFA9CC205F471 /* Frameworks */,
 				D864A0A457A84D4070C76230 /* Pods */,
 				48022803211B1FFC00AEFB58 /* Products */,
+				4815964A21318A1000C49431 /* Support */,
 				48022804211B1FFC00AEFB58 /* Source */,
 				482D230F21317B0A004B2E50 /* Tests */,
 			);
@@ -240,12 +257,44 @@
 			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
-		4815964A21318A1000C49431 /* OperatorSupport */ = {
+		4815964A21318A1000C49431 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				481596592132E52100C49431 /* Double */,
+				481596522132E0B800C49431 /* BigInt */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		481596522132E0B800C49431 /* BigInt */ = {
+			isa = PBXGroup;
+			children = (
+				481596532132E0F800C49431 /* BigInt+IntegerNumberExpressible.swift */,
+				481596552132E11900C49431 /* BigInt_Operators.swift */,
+				481596572132E4C100C49431 /* BigInt_Variables.swift */,
+			);
+			path = BigInt;
+			sourceTree = "<group>";
+		};
+		481596592132E52100C49431 /* Double */ = {
 			isa = PBXGroup;
 			children = (
 				4815964B21318A4100C49431 /* Double_Operators.swift */,
+				4815965A2132E57300C49431 /* Double_Variables.swift */,
 			);
-			path = OperatorSupport;
+			path = Double;
+			sourceTree = "<group>";
+		};
+		4815965C2132E5F200C49431 /* NumberExpressible */ = {
+			isa = PBXGroup;
+			children = (
+				4818E1E5212DC92B0027D2C5 /* NumberExpressible.swift */,
+				4815965D2132E65200C49431 /* FloatingPointNumberExpressible.swift */,
+				4815965F2132E67300C49431 /* Double+FloatingPointNumberExpressible.swift */,
+				481596612132E68400C49431 /* IntegerNumberExpressible.swift */,
+				481596632132E69900C49431 /* Int+IntegerNumberExpressible.swift */,
+			);
+			path = NumberExpressible;
 			sourceTree = "<group>";
 		};
 		4829729B21317D1400EB0CA9 /* Tests */ = {
@@ -360,12 +409,12 @@
 		484D742321238C52003C1700 /* Code */ = {
 			isa = PBXGroup;
 			children = (
+				4815965C2132E5F200C49431 /* NumberExpressible */,
 				48FBE3BF2124A45E00ECD8D7 /* CustomOperators.swift */,
 				48E70E60213057AC00DF10AF /* Exponentiation */,
 				48FBE3BC2124A3DD00ECD8D7 /* Extensions */,
 				48FBE3C12124A47A00ECD8D7 /* Modulus */,
 				48FBE3C62124A62D00ECD8D7 /* NamedVariables */,
-				4815964A21318A1000C49431 /* OperatorSupport */,
 				48E70E7E21305AEA00DF10AF /* Polynomial */,
 				48FBE3D12124ABB300ECD8D7 /* Protocols */,
 				48E70E8921305BD100DF10AF /* SortingOfTerms */,
@@ -465,7 +514,6 @@
 				48FBE3D42124ABCE00ECD8D7 /* Differentiatable.swift */,
 				4815964D2131909400C49431 /* Evaluatable.swift */,
 				48FBE3D22124ABC300ECD8D7 /* Negatable.swift */,
-				4818E1E5212DC92B0027D2C5 /* NumberExpressible.swift */,
 				4815964F2132D7BB00C49431 /* Solvable.swift */,
 			);
 			path = Protocols;
@@ -729,7 +777,9 @@
 				48E70E952130621A00DF10AF /* TermProtocol+Differentiatable.swift in Sources */,
 				48E70E642130582000DF10AF /* ExponentiationProtocol+Comparable.swift in Sources */,
 				487C60D6212F086F00F72442 /* PolynomialProtocol.swift in Sources */,
+				481596622132E68400C49431 /* IntegerNumberExpressible.swift in Sources */,
 				48E70E8621305B7C00DF10AF /* PolynomialProtocol+Evaluatable.swift in Sources */,
+				481596642132E69900C49431 /* Int+IntegerNumberExpressible.swift in Sources */,
 				481596502132D7BB00C49431 /* Solvable.swift in Sources */,
 				48E70E712130598500DF10AF /* TermProtocol+Comparable.swift in Sources */,
 				48E70E6F2130597400DF10AF /* TermProtocol+Evaluatable.swift in Sources */,
@@ -742,6 +792,7 @@
 				48E70E932130620500DF10AF /* PolynomialProtocol+Quasi-Differentiatable.swift in Sources */,
 				48E70EA82130649A00DF10AF /* Sorting.swift in Sources */,
 				487C60C6212F058900F72442 /* ModulusMode.swift in Sources */,
+				481596602132E67400C49431 /* Double+FloatingPointNumberExpressible.swift in Sources */,
 				48E70E62213057FF00DF10AF /* ExponentiationProtocol+Evaluatable.swift in Sources */,
 				48E70E6D2130596300DF10AF /* TermProtocol+Negatable.swift in Sources */,
 				48E70E8221305B5500DF10AF /* PolynomialProtocol+CustomStringConvertible.swift in Sources */,
@@ -753,6 +804,7 @@
 				4838F14A212F4AF9008D5626 /* Differentiatable.swift in Sources */,
 				48E70EA92130649A00DF10AF /* SortingBetweenTerms.swift in Sources */,
 				48E70E6B213058E200DF10AF /* TermProtocol+Concrete.swift in Sources */,
+				4815965E2132E65200C49431 /* FloatingPointNumberExpressible.swift in Sources */,
 				487C60C8212F059900F72442 /* Constant.swift in Sources */,
 				487C60CD212F068300F72442 /* Algebraic.swift in Sources */,
 				487C60C3212F056B00F72442 /* Concatenating.swift in Sources */,
@@ -778,6 +830,7 @@
 				482D234E21317B3D004B2E50 /* DoubleTestsBase.swift in Sources */,
 				481596492131831100C49431 /* ExploringRandomStuffTests.swift in Sources */,
 				48159644213182E200C49431 /* ConcatenationByMultiplicationTests.swift in Sources */,
+				4815965B2132E57300C49431 /* Double_Variables.swift in Sources */,
 				48159645213182F100C49431 /* ConcatenationByAdditionTests.swift in Sources */,
 				481596482131830E00C49431 /* TermSortingTests.swift in Sources */,
 				48159643213182DE00C49431 /* ConcatenationBySubtractionTests.swift in Sources */,
@@ -792,7 +845,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				481596562132E11900C49431 /* BigInt_Operators.swift in Sources */,
 				482D232F21317B26004B2E50 /* BigIntAdditionTests.swift in Sources */,
+				481596542132E0F800C49431 /* BigInt+IntegerNumberExpressible.swift in Sources */,
+				481596582132E4C100C49431 /* BigInt_Variables.swift in Sources */,
 				482D233021317B26004B2E50 /* BigIntTestsBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

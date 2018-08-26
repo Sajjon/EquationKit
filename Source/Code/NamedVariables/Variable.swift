@@ -45,11 +45,11 @@ public extension VariableProtocol {
 
 // MARK: - Differentiatable
 public extension VariableProtocol {
-    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> Polynomial<NumberType>? {
+    func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> PolynomialType<NumberType>? {
         guard variableToDifferentiate == self else { return nil }
         // actually this is never used.... but makes us able to distinguish between
         // doing `exponentiations.append(exponentiation)` and doing
         // nothing in differentiation in TermProtocol
-        return Polynomial(constant: .one)
+        return PolynomialType(constant: .one)
     }
 }
