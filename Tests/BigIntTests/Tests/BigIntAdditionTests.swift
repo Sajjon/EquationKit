@@ -11,7 +11,7 @@ import XCTest
 @testable import EquationKit
 import BigInt
 
-class BigIntAdditionTests: BigIntTestsBase {
+class BigIntAdditionTests: XCTestCase {
     func testSimpleBigIntTests() {
         let f = BigInt("F", radix: 16)!
         let c = BigInt("C", radix: 16)!
