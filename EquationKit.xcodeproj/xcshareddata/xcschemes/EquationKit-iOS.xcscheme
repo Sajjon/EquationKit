@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48022801211B1FFC00AEFB58"
-               BuildableName = "EquationKit.framework"
-               BlueprintName = "EquationKit"
+               BuildableName = "EquationKit_iOS.framework"
+               BlueprintName = "EquationKit_iOS"
                ReferencedContainer = "container:EquationKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48E4044321317A77003DEA4B"
-               BuildableName = "EquationKitBigIntTests.xctest"
-               BlueprintName = "EquationKitBigIntTests"
+               BuildableName = "EquationKitBigIntTests_iOS.xctest"
+               BlueprintName = "EquationKitBigIntTests_iOS"
                ReferencedContainer = "container:EquationKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,8 +43,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48022810211B203500AEFB58"
-               BuildableName = "EquationKitDoubleTests.xctest"
-               BlueprintName = "EquationKitDoubleTests"
+               BuildableName = "EquationKitDoubleTests_iOS.xctest"
+               BlueprintName = "EquationKitDoubleTests_iOS"
                ReferencedContainer = "container:EquationKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -53,8 +53,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48022801211B1FFC00AEFB58"
-            BuildableName = "EquationKit.framework"
-            BlueprintName = "EquationKit"
+            BuildableName = "EquationKit_iOS.framework"
+            BlueprintName = "EquationKit_iOS"
             ReferencedContainer = "container:EquationKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48022801211B1FFC00AEFB58"
-            BuildableName = "EquationKit.framework"
-            BlueprintName = "EquationKit"
+            BuildableName = "EquationKit_iOS.framework"
+            BlueprintName = "EquationKit_iOS"
             ReferencedContainer = "container:EquationKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -93,8 +93,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "48022801211B1FFC00AEFB58"
-            BuildableName = "EquationKit.framework"
-            BlueprintName = "EquationKit"
+            BuildableName = "EquationKit_iOS.framework"
+            BlueprintName = "EquationKit_iOS"
             ReferencedContainer = "container:EquationKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "48E4044321317A77003DEA4B"
-               BuildableName = "EquationKitBigIntTests.xctest"
-               BlueprintName = "EquationKitBigIntTests"
+               BuildableName = "EquationKitBigIntTests_iOS.xctest"
+               BlueprintName = "EquationKitBigIntTests_iOS"
                ReferencedContainer = "container:EquationKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
