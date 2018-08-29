@@ -6,12 +6,12 @@
 //  Copyright © 2018 Sajjon. All rights reserved.
 //
 
-import Foundation
-import XCTest
-@testable import EquationKit
-import BigInt
+//import Foundation
+//import XCTest
+//@testable import EquationKit
+//import BigInt
 
-
+/*
 class BigIntTestsBase: XCTestCase {
    
     lazy var tx = Term(x)
@@ -58,3 +58,4 @@ class BigIntTestsBase: XCTestCase {
     lazy var －tx²y²z³ = tx²y²z³.negated()
 
 }
+*/

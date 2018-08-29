@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
     s.summary      = 'Differentiate and evaluate multivariate polynomials in pure Swift'
     s.homepage     = 'https://github.com/Sajjon/EquationKit'
     s.author       = 'Alex Cyon'
-    s.source       = { :git => 'https://github.com/Sajjon/EquationKit', :tag => s.version.to_s }
+    s.source       = { :git => 'https://github.com/Sajjon/EquationKit.git', :tag => s.version.to_s }
     s.source_files = 'Source/**/*.swift'
     s.resources = 'Support/**/*.swift'
     s.social_media_url = 'https://twitter.com/alexcyon'

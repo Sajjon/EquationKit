@@ -1,0 +1,8 @@
+#include "base_shared.xcconfig"
+
+ONLY_ACTIVE_ARCH = YES
+
+//Only used by APPS but it does not mess up build settings for test targets for FRAMEWORKS in Xcode 9.3 so will keep it here for now
+PRODUCT_NAME = $(TARGET_NAME:c99extidentifier)
+BUNDLE_LOADER = $(TEST_HOST)
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES

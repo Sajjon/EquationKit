@@ -1,0 +1,6 @@
+#include "base_tests.xcconfig"
+#include "equationkit_debug.xcconfig"
+
+INFOPLIST_FILE = Tests/BigIntTests/SupportingFiles/EquationKit-BigIntTests-Info.plist
+PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EquationKitBigIntTests
+FRAMEWORK_SEARCH_PATHS = $(inherited) $(PROJECT_DIR)/Carthage/Build/iOS

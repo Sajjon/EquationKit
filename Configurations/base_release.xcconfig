@@ -1,0 +1,9 @@
+// DO NOT INCLUDE ANYTHING, configs should include `base_shared.xcconfig` and this independently
+
+// BuildSettings that are specific for RELEASE, indentical for both FRAMEWORKS (Cocoa Touch Framework) and APPS (iOS)
+DEBUG_INFORMATION_FORMAT = dwarf-with-dsym
+ENABLE_NS_ASSERTIONS = NO
+SWIFT_COMPILATION_MODE = wholemodule
+SWIFT_OPTIMIZATION_LEVEL = -O
+VALIDATE_PRODUCT = YES
+MTL_ENABLE_DEBUG_INFO = NO
