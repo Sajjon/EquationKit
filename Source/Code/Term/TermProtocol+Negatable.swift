@@ -11,6 +11,6 @@ import Foundation
 // MARK: - Negatable
 public extension TermProtocol {
     func negated() -> Self {
-        return Self(exponentiations: exponentiations, coefficient: coefficient.negated())
+        return Self(exponentiations: exponentiations, coefficient: coefficient.negated())!
     }
 }

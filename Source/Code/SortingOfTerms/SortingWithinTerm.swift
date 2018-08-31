@@ -65,6 +65,6 @@ public extension Array where Element: ExponentiationProtocol {
         for exponentiation in self {
             count[exponentiation.variable] += exponentiation.exponent
         }
-        return count.map { Element.init(variable: $0.key, exponent: $0.value) }
+        return count.compactMap { Element.init(variable: $0.key, exponent: $0.value) }
     }
 }

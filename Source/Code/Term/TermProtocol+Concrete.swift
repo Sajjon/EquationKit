@@ -15,8 +15,8 @@ public struct TermStruct<Exponentiation: ExponentiationProtocol>: TermProtocol {
     public let coefficient: NumberType
     public let exponentiations: [ExponentiationType]
 
-    public init(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm<NumberType>], coefficient: NumberType) {
-        guard coefficient != 0 else { fatalError("You probably don't want a Zero coefficient") }
+    public init?(exponentiations: [ExponentiationType], sorting: [SortingWithinTerm<NumberType>], coefficient: NumberType) {
+        guard coefficient != 0 else { return nil }
         self.exponentiations = exponentiations.merged().sorted(by: sorting)
         self.coefficient = coefficient
     }

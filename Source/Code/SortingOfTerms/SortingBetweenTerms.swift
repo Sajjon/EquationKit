@@ -65,7 +65,7 @@ public extension Array where Element: TermProtocol {
         for term in self {
             count[term.exponentiations] += term.coefficient
         }
-        return count.map { Element.init(exponentiations: $0.key, coefficient: $0.value) }
+        return count.compactMap { Element.init(exponentiations: $0.key, coefficient: $0.value) }
     }
 
     func sorting(betweenTerms: SortingBetweenTerms<Element.NumberType>) -> [Element] {

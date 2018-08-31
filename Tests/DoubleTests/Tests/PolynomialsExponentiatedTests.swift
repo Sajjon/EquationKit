@@ -26,6 +26,13 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         XCTAssertEqual(eq, x³ + 3*x² + 3*x + 1)
     }
 
+    func testMultiplyWithZero() {
+        let a = 0.0
+        let b = 7.0
+        let eq = y² - x³ + a*x + b
+        XCTAssertEqual(eq, y² - x³ + 7)
+    }
+
     func test﹙𝑥－𝟙﹚²() {
         let eq = (x - 1)^^2
         XCTAssertEqual(eq, (x - 1) * (x - 1))

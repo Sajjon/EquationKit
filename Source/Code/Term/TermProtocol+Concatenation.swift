@@ -11,10 +11,10 @@ import Foundation
 // MARK: - Private Extension Term
 public extension TermProtocol {
     func multipliedBy(other: Self) -> Self {
-        return Self(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)
+        return Self(exponentiations: exponentiations + other.exponentiations, coefficient: coefficient*other.coefficient)!
     }
 
-    func multiplyingCoefficientBy(constant: NumberType) -> Self {
+    func multiplyingCoefficientBy(constant: NumberType) -> Self? {
         return Self(exponentiations: exponentiations, coefficient: coefficient * constant)
     }
 }

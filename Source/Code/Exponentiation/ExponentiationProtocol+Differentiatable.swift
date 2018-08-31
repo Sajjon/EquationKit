@@ -27,7 +27,7 @@ public extension ExponentiationProtocol {
         }
 
         let exponentiation = PolynomialType.ExponentiationType(variable, exponent: exponent)
-        let term = PolynomialType.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)
+        let term = PolynomialType.TermType(exponentiation: exponentiation, coefficient: exponentPriorToDifferentiation)!
         return PolynomialType(term: term)
     }
 

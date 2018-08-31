@@ -11,7 +11,7 @@ import Foundation
 public extension TermProtocol {
     
     func sortingExponentiations(by sorting: [SortingWithinTerm<NumberType>] = SortingWithinTerm<NumberType>.defaultArray) -> Self {
-        return Self(exponentiations: exponentiations, sorting: sorting, coefficient: coefficient)
+        return Self(exponentiations: exponentiations, sorting: sorting, coefficient: coefficient)!
     }
     
     func sortingExponentiations(by sorting: SortingWithinTerm<NumberType>) -> Self {

@@ -44,12 +44,14 @@ public extension PolynomialProtocol {
                 multipliedTerm.append(lhsTerm.multipliedBy(other: rhsTerm))
             }
             if other.constant != 0 {
-                multipliedTerm.append(lhsTerm.multiplyingCoefficientBy(constant: other.constant))
+                guard let multiplied = lhsTerm.multiplyingCoefficientBy(constant: other.constant) else { continue }
+                multipliedTerm.append(multiplied)
             }
         }
         if constant != 0 {
             for rhsTerm in other.terms {
-                multipliedTerm.append(rhsTerm.multiplyingCoefficientBy(constant: constant))
+                guard let multiplied = rhsTerm.multiplyingCoefficientBy(constant: constant) else { continue }
+                multipliedTerm.append(multiplied)
             }
         }
 
@@ -58,7 +60,9 @@ public extension PolynomialProtocol {
 
     func multipliedBy(constant: NumberType) -> Self {
         guard let firstTerm = terms.first else { return Self(terms: [], constant: constant * constant) }
-        let termMultiplied = TermType(exponentiations: firstTerm.exponentiations, coefficient: firstTerm.coefficient * constant)
+        guard let termMultiplied = TermType(exponentiations: firstTerm.exponentiations, coefficient: firstTerm.coefficient * constant) else {
+            return Self(constant: .zero)
+        }
         guard terms.count > 1 else { return Self(termMultiplied) }
         let rest = terms.dropFirst()
         return Self(terms: [termMultiplied] + rest, constant: constant)
