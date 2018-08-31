@@ -72,6 +72,10 @@ public extension TermProtocol {
     func contains(variable: VariableStruct<NumberType>) -> Bool {
         return exponentiations.map { $0.variable }.contains(variable)
     }
+
+    var highestExponent: NumberType {
+        return exponentiations.sorted(by: .descendingExponent)[0].exponent
+    }
 }
 
 // MARK: - Internal Extensions
@@ -79,10 +83,6 @@ internal extension TermProtocol {
 
     var signString: String {
         return isNegative ? "-" : "+"
-    }
-
-    var highestExponent: NumberType {
-        return exponentiations.sorted(by: .descendingExponent)[0].exponent
     }
 
     var variableNames: String {

@@ -57,6 +57,14 @@ public extension PolynomialProtocol {
     }
 }
 
+// MARK: - Public Extensions
+public extension PolynomialProtocol {
+    var highestExponent: NumberType? {
+        guard !terms.isEmpty else { return nil }
+        return terms.sorting(betweenTerms: .descendingExponent)[0].highestExponent
+    }
+}
+
 // MARK: - ExpressibleByArrayLiteral
 extension PolynomialStruct: ExpressibleByArrayLiteral {
     public init(arrayLiteral terms: TermType...) {

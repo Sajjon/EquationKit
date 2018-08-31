@@ -1,5 +1,5 @@
 //
-//  PolynomialProtocol+Quasi-Differentiatable.swift
+//  PolynomialProtocol+Differentiatable.swift
 //  EquationKit
 //
 //  Created by Alexander Cyon on 2018-08-24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-// MARK: - Differentiatable LIKE but cannot mark conformance because it would result in circular reference
+// MARK: - Differentiatable
 public extension PolynomialProtocol {
 
     func differentiateWithRespectTo(_ variableToDifferentiate: VariableStruct<NumberType>) -> PolynomialType<NumberType>? {

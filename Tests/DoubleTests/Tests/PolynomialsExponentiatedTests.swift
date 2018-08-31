@@ -67,4 +67,11 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         XCTAssertEqual(eq.absolute(), expectedAbsolute)
         XCTAssertEqual(expectedAbsolute.evaluate() {[ x <- 2, y <- 3 ]}, 43)
     }
+
+    func testHighestExponent() {
+        let eq = x³ + x⁸ - y⁵ + 1337
+        XCTAssertEqual(eq.highestExponent, 8)
+        XCTAssertEqual((x + 1).highestExponent, 1)
+        XCTAssertNil((x - x).highestExponent)
+    }
 }
