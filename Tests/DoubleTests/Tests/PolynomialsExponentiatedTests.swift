@@ -60,4 +60,11 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         XCTAssertEqual(eq.evaluate() { x <- 3 }!, 512)
         XCTAssertEqual(eq.evaluate() { x <- 4 }!, 19683)
     }
+
+    func testAbsolute() {
+        let eq = y³ - x² - 2*x + y - 5
+        let expectedAbsolute = y³ + x² + 2*x + y + 5
+        XCTAssertEqual(eq.absolute(), expectedAbsolute)
+        XCTAssertEqual(expectedAbsolute.evaluate() {[ x <- 2, y <- 3 ]}, 43)
+    }
 }

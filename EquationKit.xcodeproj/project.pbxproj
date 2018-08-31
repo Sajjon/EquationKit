@@ -44,6 +44,9 @@
 		487C60D6212F086F00F72442 /* PolynomialProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 484D742421238C64003C1700 /* PolynomialProtocol.swift */; };
 		487C60D7212F0B0000F72442 /* CustomOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48FBE3BF2124A45E00ECD8D7 /* CustomOperators.swift */; };
 		487C60D8212F0B0500F72442 /* Comparable_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D95963212C3E3400C86B50 /* Comparable_Extension.swift */; };
+		48AB0AEB213981FA00801711 /* AbsoluteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0AEA213981FA00801711 /* AbsoluteConvertible.swift */; };
+		48AB0AED2139856300801711 /* TermProtocol+AbsoluteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0AEC2139856300801711 /* TermProtocol+AbsoluteConvertible.swift */; };
+		48AB0AEF2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0AEE2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift */; };
 		48E4044921317A77003DEA4B /* EquationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48022802211B1FFC00AEFB58 /* EquationKit.framework */; };
 		48E70E62213057FF00DF10AF /* ExponentiationProtocol+Evaluatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E70E61213057FF00DF10AF /* ExponentiationProtocol+Evaluatable.swift */; };
 		48E70E642130582000DF10AF /* ExponentiationProtocol+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E70E632130582000DF10AF /* ExponentiationProtocol+Comparable.swift */; };
@@ -147,6 +150,9 @@
 		4897470721371968008C10EA /* equationkit_double_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = equationkit_double_tests.xcconfig; sourceTree = "<group>"; };
 		4897470821371968008C10EA /* equationkit_bigint_tests.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = equationkit_bigint_tests.xcconfig; sourceTree = "<group>"; };
 		4897470921371A06008C10EA /* equationkit.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = equationkit.xcconfig; sourceTree = "<group>"; };
+		48AB0AEA213981FA00801711 /* AbsoluteConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsoluteConvertible.swift; sourceTree = "<group>"; };
+		48AB0AEC2139856300801711 /* TermProtocol+AbsoluteConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TermProtocol+AbsoluteConvertible.swift"; sourceTree = "<group>"; };
+		48AB0AEE2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolynomialProtocol+AbsoluteConvertible.swift"; sourceTree = "<group>"; };
 		48D95963212C3E3400C86B50 /* Comparable_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comparable_Extension.swift; sourceTree = "<group>"; };
 		48D95970212C69B800C86B50 /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		48D95972212C69CC00C86B50 /* SortingBetweenTerms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingBetweenTerms.swift; sourceTree = "<group>"; };
@@ -469,6 +475,7 @@
 				48E70E942130621A00DF10AF /* TermProtocol+Differentiatable.swift */,
 				48E70E6E2130597400DF10AF /* TermProtocol+Evaluatable.swift */,
 				48E70E6C2130596300DF10AF /* TermProtocol+Negatable.swift */,
+				48AB0AEC2139856300801711 /* TermProtocol+AbsoluteConvertible.swift */,
 				48E70E7921305A8E00DF10AF /* TermProtocol+Sorting.swift */,
 			);
 			path = Term;
@@ -484,6 +491,7 @@
 				48E70E8721305BA600DF10AF /* PolynomialProtocol+Equatable.swift */,
 				48E70E8521305B7C00DF10AF /* PolynomialProtocol+Evaluatable.swift */,
 				48E70E8321305B6A00DF10AF /* PolynomialProtocol+Negatable.swift */,
+				48AB0AEE2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift */,
 				48E70E922130620500DF10AF /* PolynomialProtocol+Quasi-Differentiatable.swift */,
 			);
 			path = Polynomial;
@@ -535,6 +543,7 @@
 				48FBE3D42124ABCE00ECD8D7 /* Differentiatable.swift */,
 				4815964D2131909400C49431 /* Evaluatable.swift */,
 				48FBE3D22124ABC300ECD8D7 /* Negatable.swift */,
+				48AB0AEA213981FA00801711 /* AbsoluteConvertible.swift */,
 				4815964F2132D7BB00C49431 /* Solvable.swift */,
 			);
 			path = Protocols;
@@ -726,6 +735,7 @@
 				48E70EA82130649A00DF10AF /* Sorting.swift in Sources */,
 				487C60C6212F058900F72442 /* ModulusMode.swift in Sources */,
 				481596602132E67400C49431 /* Double+FloatingPointNumberExpressible.swift in Sources */,
+				48AB0AED2139856300801711 /* TermProtocol+AbsoluteConvertible.swift in Sources */,
 				48E70E62213057FF00DF10AF /* ExponentiationProtocol+Evaluatable.swift in Sources */,
 				48E70E6D2130596300DF10AF /* TermProtocol+Negatable.swift in Sources */,
 				48E70E8221305B5500DF10AF /* PolynomialProtocol+CustomStringConvertible.swift in Sources */,
@@ -738,8 +748,10 @@
 				48E70EA92130649A00DF10AF /* SortingBetweenTerms.swift in Sources */,
 				48E70E6B213058E200DF10AF /* TermProtocol+Concrete.swift in Sources */,
 				4815965E2132E65200C49431 /* FloatingPointNumberExpressible.swift in Sources */,
+				48AB0AEB213981FA00801711 /* AbsoluteConvertible.swift in Sources */,
 				487C60C8212F059900F72442 /* Constant.swift in Sources */,
 				487C60CD212F068300F72442 /* Algebraic.swift in Sources */,
+				48AB0AEF2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift in Sources */,
 				48E70E8021305B1300DF10AF /* PolynomialProtocol+Concrete.swift in Sources */,
 				487C60C7212F058C00F72442 /* ModulusFunction.swift in Sources */,
 				487C60C4212F057100F72442 /* Variable.swift in Sources */,

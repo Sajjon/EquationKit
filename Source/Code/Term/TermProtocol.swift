@@ -11,6 +11,7 @@ import Foundation
 public protocol TermProtocol:
     Algebraic,
     Negatable,
+    AbsoluteConvertible,
     Comparable,
     CustomDebugStringConvertible
     where

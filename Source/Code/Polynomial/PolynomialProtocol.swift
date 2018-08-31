@@ -10,6 +10,7 @@ import Foundation
 
 public protocol PolynomialProtocol:
     Algebraic,
+    AbsoluteConvertible,
     Negatable
     where
     TermType.NumberType == Self.NumberType

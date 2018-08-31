@@ -11,6 +11,6 @@ import Foundation
 // MARK: - Negatable
 public extension PolynomialProtocol {
     func negated() -> Self {
-        return Self(terms: terms.negated(), sorting: TermSorting<NumberType>(), constant: constant.negated())
+        return Self(terms: terms.negated(), constant: constant.negated())
     }
 }

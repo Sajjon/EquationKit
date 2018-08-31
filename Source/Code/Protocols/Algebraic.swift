@@ -15,8 +15,6 @@ public protocol Algebraic: Atom, Evaluatable, Differentiatable, Hashable, Custom
 
 public extension PolynomialProtocol {
 
-
-
     init(_ atom: Atom) {
         if let variable = atom as? VariableStruct<NumberType> {
             self.init(variable: variable)
