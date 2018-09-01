@@ -74,4 +74,15 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         XCTAssertEqual((x + 1).highestExponent, 1)
         XCTAssertNil((x - x).highestExponent)
     }
+
+    func testNegationOfTermsInsidePolynmoial() {
+        let eq = 5*y² - (x³ + 3*x² + x)
+        let expected = 5*y² - x³ - 3*x² - x
+        func _test(_ poly: Polynomial) {
+            XCTAssertEqual(poly.evaluate() {[ x <- 2, y <- 3 ]}, 23)
+        }
+        _test(eq)
+        _test(expected)
+        XCTAssertEqual(eq, expected)
+    }
 }
