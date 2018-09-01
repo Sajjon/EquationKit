@@ -146,8 +146,31 @@ class MathematicalOperatorTests: XCTestCase {
         XCTAssertFalse(validityOfShortWeierstraßCurveParameters(a: -15, b: 18, modulus: 99))
     }
 
-    func testOperators() {
+    func testAssignmentOperator() {
         XCTAssertEqual(x ≔ 2, x <- 2)
+    }
+
+    func testEvaluationOperators() {
+        let poly = x² + y
+
+        XCTAssertTrue(poly == 5 ↤ [x ≔ 2, y ≔ 1 ])
+        XCTAssertFalse(poly == 1337 ↤ [x ≔ 2, y ≔ 1 ])
+
+        XCTAssertTrue(poly != 1337 ↤ [x ≔ 2, y ≔ 1 ])
+        XCTAssertFalse(poly != 5 ↤ [x ≔ 2, y ≔ 1 ])
+        XCTAssertTrue(poly ≠ 1337 ↤ [x ≔ 2, y ≔ 1 ])
+        XCTAssertFalse(poly ≠ 5 ↤ [x ≔ 2, y ≔ 1 ])
+
+        let constants = [x ≔ 123, y ≔ 987 ]
+        let value: BigInt = 1 << 65
+        XCTAssertEqual(
+            poly != value ↤ constants,
+            poly ≠ value ↤ constants
+        )
+    }
+
+    func testCongruenceOperators() {
+
         let poly = x² + y
         let op1 = 7 <-- [x <- 2, y <- 3]
         let op2 = 7 ↤ [x <- 2, y <- 3]

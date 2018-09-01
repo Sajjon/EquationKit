@@ -70,8 +70,6 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
         XCTAssertEqual(x - x, x - x) // trivial
         XCTAssertEqual(x - y, x - y) // trivial
         XCTAssertEqual((x - y).asString(sorting: .coefficient), "x - y")
-        print((x - y).asString(sorting: .coefficient))
-        print((y - x).asString(sorting: .coefficient))
         XCTAssertNotEqual(x - y, y - x)
     }
 

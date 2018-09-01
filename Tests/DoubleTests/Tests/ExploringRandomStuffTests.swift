@@ -31,7 +31,6 @@ class ExploringRandomStuffTests: DoubleTestsBase {
             let modRes = mod(difference, modulus: 10)
             list.append(modRes)
             if list.count == hexagonalRightmostDigitsPattern.count {
-                print("Found \(i/hexagonalRightmostDigitsPattern.count) hexagonal number")
                 XCTAssertEqual(list, hexagonalRightmostDigitsPattern)
                 list = []
             }
