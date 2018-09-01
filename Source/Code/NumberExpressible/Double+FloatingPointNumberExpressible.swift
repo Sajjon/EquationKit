@@ -35,6 +35,15 @@ public extension Double {
         return -self
     }
 
+    func gcd(other: Double) -> Double {
+        var a = self
+        var b = other
+        while b != 0 {
+            (a, b) = (b, a.mod(b, modulusMode: .allowNegative) )
+        }
+        return abs(a)
+    }
+
     func raised(to exponent: Double) -> Double {
         return pow(self, exponent)
     }

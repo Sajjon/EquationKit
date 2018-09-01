@@ -74,4 +74,11 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         XCTAssertEqual((x + 1).highestExponent, 1)
         XCTAssertNil((x - x).highestExponent)
     }
+
+    func testCoefficientsOfUnivaratePolynomial() {
+        let eq = x⁹ - 2*x⁸ + 3*x⁷ - 4*x⁶ + 5*x⁵ - 6*x⁴ + 7*x³ - 8*x² + 9*x - 10
+        XCTAssertTrue(eq.isUnivariate)
+        XCTAssertEqual(eq.coefficientsOfUnivariatePolynomial(), [1, -2, 3, -4, 5, -6, 7, -8, 9, -10])
+        XCTAssertEqual((1337*x⁹ - x + 237).coefficientsOfUnivariatePolynomial(), [1337, 0, 0, 0, 0, 0, 0, 0, -1, 237])
+    }
 }

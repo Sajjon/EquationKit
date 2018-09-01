@@ -26,4 +26,13 @@ class BigIntAdditionTests: XCTestCase {
     func testBigExp() {
         XCTAssertEqual((x⁹ + 1).evaluate() { x <- 1 << 65 }, "126633165554229521438977290762059361297987250739820462036000284719563379254544315991201997343356439034674007770120263341747898897565056619503383631412169301973302667340133957633")
     }
+
+    func testAddingTwoPolynomials() {
+        let a: BigInt = 1 << 65
+        let b: BigInt = 1 << 66
+        let foo: Polynomial = a*x
+        let bar: Polynomial = b*y
+        let foobar = foo + bar
+        XCTAssertEqual(foobar, a*x + b*y)
+    }
 }

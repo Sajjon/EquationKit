@@ -8,7 +8,9 @@
 
 import Foundation
 
-public protocol TermProtocol:
+public protocol TermExpressible {}
+
+public protocol TermProtocol: TermExpressible,
     Algebraic,
     Negatable,
     AbsoluteConvertible,

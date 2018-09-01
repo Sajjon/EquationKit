@@ -11,6 +11,9 @@ import Foundation
 // Do not include this line when you copy the contents of this file to your own project
 @testable import EquationKit // This is only included since this file is used by EquationKitDoubleTests
 
+
+
+
 public func +(lhs: Atom, rhs: Atom) -> PolynomialType<Double> {
     return Polynomial(lhs).adding(other: Polynomial(rhs))
 }

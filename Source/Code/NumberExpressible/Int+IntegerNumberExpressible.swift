@@ -34,6 +34,14 @@ public extension Int {
         return -self
     }
 
+    public func gcd(other: Int) -> Int {
+        var a = self
+        var b = other
+        while b != 0 {
+            (a, b) = (b, a.mod(b, modulusMode: .allowNegative))
+        }
+        return abs(a)
+    }
 
     func raised(to exponent: Int) -> Int {
         return Int(pow(Double(self), Double(exponent)))

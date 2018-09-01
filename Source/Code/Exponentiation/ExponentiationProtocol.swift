@@ -8,7 +8,9 @@
 
 import Foundation
 
-public protocol ExponentiationProtocol: Algebraic, Comparable {
+public protocol ExponentiationExpressible {}
+
+public protocol ExponentiationProtocol: ExponentiationExpressible, Algebraic, Comparable {
     var variable: VariableStruct<NumberType> { get }
     var exponent: NumberType { get }
     init(variable: VariableStruct<NumberType>, exponent: NumberType)

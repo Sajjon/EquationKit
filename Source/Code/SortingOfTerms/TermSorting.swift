@@ -23,3 +23,13 @@ public extension TermSorting {
         self.init(betweenTerms: [betweenTerms])
     }
 }
+
+public extension TermSorting {
+    static var `default`: TermSorting {
+        return descendingExponents
+    }
+
+    static var descendingExponents: TermSorting {
+        return TermSorting(betweenTerms: [.descendingExponent, .termsWithMostVariables, .termsAlphabetically, .coefficient], withinTerm: [.descendingExponent, .variablesAlphabetically])
+    }
+}

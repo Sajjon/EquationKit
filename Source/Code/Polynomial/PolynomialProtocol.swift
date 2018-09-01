@@ -10,6 +10,7 @@ import Foundation
 
 public protocol PolynomialProtocol:
     Algebraic,
+    Solvable,
     AbsoluteConvertible,
     Negatable
     where
@@ -36,7 +37,7 @@ public extension PolynomialProtocol {
         self.init(terms: polynomial.terms, constant: polynomial.constant)
     }
 
-    init(terms: [TermType], sorting: TermSorting<NumberType> = TermSorting<NumberType>(), constant: NumberType = .zero) {
+    init(terms: [TermType], sorting: TermSorting<NumberType> = .default, constant: NumberType = .zero) {
         self.init(terms: terms, sorting: sorting, constant: constant)
     }
 
@@ -62,6 +63,10 @@ public extension PolynomialProtocol {
     var highestExponent: NumberType? {
         guard !terms.isEmpty else { return nil }
         return terms.sorting(betweenTerms: .descendingExponent)[0].highestExponent
+    }
+
+    func sorted(by sorting: TermSorting<NumberType>) -> Self {
+        return Self(terms: terms, sorting: sorting, constant: constant)
     }
 }
 

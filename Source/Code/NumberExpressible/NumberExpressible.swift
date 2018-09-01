@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol NumberExpressible: Numeric, Negatable, AbsoluteConvertible, Hashable, Comparable {
+public protocol NumberExpressible: Atom, Numeric, Negatable, AbsoluteConvertible, Hashable, Strideable {
 
     static func + (lhs: Self, rhs: Self) -> Self
     static func * (lhs: Self, rhs: Self) -> Self
@@ -18,6 +18,7 @@ public protocol NumberExpressible: Numeric, Negatable, AbsoluteConvertible, Hash
 
     func raised(to exponent: Self) -> Self
     func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self
+    func gcd(other: Self) -> Self
 
     static var zero: Self { get }
     static var one: Self { get }
