@@ -53,3 +53,12 @@ public func *(lhs: BigInt, rhs: Atom) -> PolynomialType<BigInt> {
 public func ^^(lhs: Atom, rhs: Int) -> PolynomialType<BigInt> {
     return Polynomial(lhs).raised(to: rhs)
 }
+public func ^^(lhs: BigInt, rhs: Int) -> BigInt {
+    return lhs.power(rhs)
+}
+public func ^^(lhs: Int, rhs: Int) -> BigInt {
+    return BigInt(lhs) ^^ rhs
+}
+public func -(lhs: BigInt, rhs: Int) -> BigInt {
+    return lhs - BigInt(rhs)
+}
