@@ -42,12 +42,12 @@ let y² = Exponentiation(y, exponent: 2)
 You can copy the contents of the file [`Double_Variables`](Support/Double/Double_Variables.swift) or for BigInt support: [`BigInt_Variables`](Support/BigInt/BigInt_Variables.swift) and of course extended with more variables of your choice.
 
 ## Advanced operators
-You can use some of the advanced mathematical operators provided in the folder [MathematicalOperators](Source/Code/MathematicalOperators) to precicely express the mathematical constraints you might have.
+You can use some of the advanced mathematical operators provided in the folder [MathematicalOperators](Source/Code/MathematicalOperators) to precisely express the mathematical constraints you might have.
 
 ### Variable to Constant (evaluation)
-Lets have a look at one of the simplest scenario:
+Let's have a look at one of the simplest scenario:
 
-Using the special unicode char `≔` (single character for `:=` often used in literature for `assignment` of value.) we can write evaluations as:
+Using the special Unicode char `≔` (single character for `:=` often used in literature for `assignment` of value.) we can write evaluations as:
 ```swift
 𝑦² - 𝑥³.evaluate() {[ x ≔ 1, y ≔ 2 ]} 
 ```
@@ -59,7 +59,7 @@ Instead of:
 
 ### Complex examples
 
- Below is the example of how [`EllipticCurveKit`](https://github.com/Sajjon/EllipticCurveKit) uses `EquationKit` to express requirements on the elliptic curve parameters. Elliptic curves on Weierstraß form requires this congurence inequality to hold:
+ Below is the example of how [`EllipticCurveKit`](https://github.com/Sajjon/EllipticCurveKit) uses `EquationKit` to express requirements on the elliptic curve parameters. Elliptic curves on the Weierstraß form requires this congruence inequality to hold:
 
 ```math
 𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 mod 𝑝
@@ -70,7 +70,7 @@ Thanks to `EquationKit` we can express said inequality almost identically to pur
 𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 0 % 𝑝 
 ```
 
-But that is not enough, since we also need to evaluate said inequality (polynomial) using the arguments pass in the initializer. We can of course write
+But that is not enough since we also need to evaluate said inequality (polynomial) using the arguments passed in the initializer. We can of course write
 ```swift
 (𝟜𝑎³ + 𝟚𝟟𝑏²).evaluate(modulus: 𝑝) {[ 𝑎 ≔ a, 𝑏 ≔ b ]} != 0
 ```
@@ -81,7 +81,7 @@ But a slightly more "mathy" syntax would be:
 ```
 
 
-Which evaluates the polynomial `𝟜𝑎³ + 𝟚𝟟𝑏²` given `a` and `b` and performs modulo `𝑝` and compares it to `0`. We could of course add support for this syntax as well:
+Which evaluates the polynomial `𝟜𝑎³ + 𝟚𝟟𝑏²` given `a` and `b` and performs modulo `𝑝` and compares it to `0`. We could of co, of course, support for this syntax as well:
 ```swift
 // This syntax is not yet supported, but can easily be added
 [a→𝑎, b→𝑏] ⟼ 𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 % 𝑝
@@ -116,14 +116,14 @@ let 𝟘: BigInt = 0
 /// - Requires: `𝟜𝑎³ + 𝟚𝟟𝑏² ≠ 𝟘 in 𝔽_𝑝 (mod 𝑝)`
 ///
 struct ShortWeierstraßCurve {
-	/// Try to initialize an elliptic curve on ShortWeierstraß form using parameters for `a`, `b` in the given galoisField (mod 𝑝).
+    /// Try to initialize an elliptic curve on the ShortWeierstraß form using parameters for `a`, `b` in the given Galois field (mod 𝑝).
     public init(a: BigInt, b: BigInt, field 𝑝: BigInt) throws {
-		guard 
-			𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑏 ≔ b ]
-		else { throw EllipticCurveError.invalidCurveParameters }
-		self.a = a
-		self.b = b
-		self.field = 𝑝
+        guard 
+            𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑏 ≔ b ]
+        else { throw EllipticCurveError.invalidCurveParameters }
+        self.a = a
+        self.b = b
+        self.field = 𝑝
     }
 }
 ```
