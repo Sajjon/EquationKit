@@ -81,7 +81,7 @@ But a slightly more "mathy" syntax would be:
 ```
 
 
-Which evaluates the polynomial `𝟜𝑎³ + 𝟚𝟟𝑏²` given `a` and `b` and performs modulo `𝑝` and compares it to `0`. We could, of course, support for this syntax as well:
+Which evaluates the polynomial `𝟜𝑎³ + 𝟚𝟟𝑏²` given `a` and `b` and performs modulo `𝑝` and compares it to `0`. We could, of course, add support for this syntax as well:
 ```swift
 // This syntax is not yet supported, but can easily be added
 [a→𝑎, b→𝑏] ⟼ 𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 % 𝑝
