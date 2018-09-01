@@ -69,7 +69,9 @@ class MathematicalOperatorTests: XCTestCase {
     private func validityOfShortWeierstraßCurveParameters(a: BigInt, b: BigInt, modulus 𝑝: BigInt) -> Bool {
         let 𝟜𝑎³ = 4*𝑎³
         let 𝟚𝟟𝑏² = 27*𝑏²
-        return (𝟜𝑎³ + 𝟚𝟟𝑏²) !≡ 0 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑏 ≔ b ]
+        let 𝟘: BigInt = 0
+
+        return 𝟜𝑎³ + 𝟚𝟟𝑏² ≢ 𝟘 % 𝑝 ↤ [ 𝑎 ≔ a, 𝑏 ≔ b ]
     }
 
     func testSecp256k1Parameters() {
