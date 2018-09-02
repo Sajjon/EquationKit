@@ -12,13 +12,12 @@ import XCTest
 
 class ConstantSubstitutionTests: DoubleTestsBase {
 
-    func testFoo() {
-        XCTAssertTrue(true)
-//        let eq = x + y
-//        XCTAssertEqual(
-//            x + 2,
-//            eq.substitute() {[ y <- 2 ]}
-//        )
+    func testReplaceYWith2() {
+        let eq = x + y
+        XCTAssertEqual(
+            x + 2,
+            Polynomial(eq.substitute() {[ y <- 2 ]}.asAtom)
+        )
     }
 
 }

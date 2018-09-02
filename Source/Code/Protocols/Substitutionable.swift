@@ -8,8 +8,7 @@
 
 import Foundation
 
-public enum Substitution<Number: NumberExpressible>: NumberTypeSpecifying {
-    public typealias NumberType = Number
+public enum Substitution<Number: NumberExpressible> {
 
     case constant(Number)
     case algebraic(Atom)
@@ -18,13 +17,6 @@ public enum Substitution<Number: NumberExpressible>: NumberTypeSpecifying {
     var asConstant: Number? {
         switch self {
         case .constant(let number): return number
-        default: return nil
-        }
-    }
-    var isAlgebraic: Bool { return asAlgebraic != nil }
-    var asAlgebraic: Atom? {
-        switch self {
-        case .algebraic(let atom): return atom
         default: return nil
         }
     }
@@ -38,13 +30,21 @@ public enum Substitution<Number: NumberExpressible>: NumberTypeSpecifying {
 }
 
 public protocol Substitutionable: NumberTypeSpecifying {
+    
     var uniqueVariables: Set<VariableStruct<NumberType>> { get }
+
     func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType>
 }
 
 public extension Substitutionable {
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType? = nil) -> Substitution<NumberType> {
-        return substitute(constants: constants, modulus: modulus, modulusMode: .alwaysPositive)
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive) -> Substitution<NumberType> {
+        return substitute(constants: constants, modulus: modulus, modulusMode: modulusMode)
+    }
+
+    func substitute(modulus: NumberType? = nil, modulusMode: ModulusMode = .alwaysPositive, makeConstants: () -> ([ConstantStruct<NumberType>])) -> Substitution<NumberType> {
+        let constantArray = makeConstants()
+        guard !constantArray.containsDuplicates() else { fatalError("cannot contain duplicates") }
+        return substitute(constants: Set(constantArray), modulus: modulus, modulusMode: modulusMode)
     }
 }
 
