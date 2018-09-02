@@ -8,7 +8,13 @@
 
 import Foundation
 
-extension Double: FloatingPointNumberExpressible {}
+extension Double: FloatingPointNumberExpressible {
+    public typealias NumberType = Double
+    public var asConstant: NumberType? {
+        return self
+    }
+
+}
 public extension Double {
 
     static var zero: Double { return 0 }
@@ -17,6 +23,10 @@ public extension Double {
         let decimalsEqualToZero = truncatingRemainder(dividingBy: 1) == 0
         let format = decimalsEqualToZero ? "%.0f" : "%.2f"
         return String(format: format, self)
+    }
+
+    var asInteger: Int {
+        return Int(exactly: self)!
     }
 
     var isNegative: Bool {

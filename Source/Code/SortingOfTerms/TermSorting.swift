@@ -22,4 +22,8 @@ public extension TermSorting {
     init(betweenTerms: SortingBetweenTerms<Number>) {
         self.init(betweenTerms: [betweenTerms])
     }
+
+    static var `default`: TermSorting {
+        return TermSorting()
+    }
 }

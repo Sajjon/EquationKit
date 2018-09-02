@@ -8,7 +8,12 @@
 
 import Foundation
 
-extension Int: IntegerNumberExpressible {}
+extension Int: IntegerNumberExpressible {
+    public typealias NumberType = Int
+    public var asConstant: NumberType? {
+        return self
+    }
+}
 public extension Int {
 
     static var zero: Int { return 0 }
@@ -20,6 +25,10 @@ public extension Int {
 
     var isNegative: Bool {
         return self < 0
+    }
+
+    var asInteger: Int {
+        return self
     }
 
     var isPositive: Bool {

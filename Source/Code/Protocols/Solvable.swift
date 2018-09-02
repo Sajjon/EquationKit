@@ -19,7 +19,7 @@ public enum Solution<Number: NumberExpressible>: NumberTypeSpecifying {
     case number(NumberType)
 }
 
-public protocol Solvable: Evaluatable {
+public protocol Solvable: Substitutionable {
     func solve(constants: Set<ConstantStruct<NumberType>>) -> Solution<NumberType>
 
     /// Might have a look at Sympys solver: https://github.com/sympy/sympy/blob/master/sympy/solvers/solvers.py#L450-L1349
@@ -40,7 +40,7 @@ public extension Solvable {
 }
 
 public extension Set where Element: ConstantProtocol {
-    func toValues() -> [VariableStruct<Element.NumberType>: Element.NumberType] {
+    func toVariables() -> [VariableStruct<Element.NumberType>: Element.NumberType] {
         let array: [(VariableStruct<Element.NumberType>, Element.NumberType)] = self.map { ($0.toVariable(), $0.value) }
         let dictionary: [VariableStruct<Element.NumberType>: Element.NumberType] = array.reduce(into: [:]) { $0[$1.0] = $1.1 }
         return dictionary

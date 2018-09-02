@@ -8,13 +8,14 @@
 
 import Foundation
 
-public protocol NumberExpressible: Numeric, Negatable, AbsoluteConvertible, Hashable, Comparable {
+public protocol NumberExpressible: Numeric, ConstantExpressible, Negatable, AbsoluteConvertible, Hashable, Comparable where NumberType == Self {
 
     static func + (lhs: Self, rhs: Self) -> Self
     static func * (lhs: Self, rhs: Self) -> Self
     static func - (lhs: Self, rhs: Self) -> Self
     static func / (lhs: Self, rhs: Self) -> Self
 
+    var asInteger: Int { get }
 
     func raised(to exponent: Self) -> Self
     func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self

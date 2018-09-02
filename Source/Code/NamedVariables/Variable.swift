@@ -22,13 +22,14 @@ public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
     }
 }
 
-// MARK: - Evaluatable
+// MARK: - Substitution
 public extension VariableProtocol {
-    func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> NumberType? {
-        guard let constant = constants.first(where: { $0.toVariable() == self }) else { return nil }
-        return constant.value
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType> {
+        guard let constant = constants.first(where: { $0 == self }) else { return .algebraic(self) }
+        return .constant(constant.value)
     }
 }
+
 
 // MARK: - Solvable
 public extension VariableProtocol {
