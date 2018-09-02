@@ -8,13 +8,7 @@
 
 import Foundation
 
-extension Double: FloatingPointNumberExpressible {
-    public typealias NumberType = Double
-    public var asConstant: NumberType? {
-        return self
-    }
-
-}
+extension Double: FloatingPointNumberExpressible {}
 public extension Double {
 
     static var zero: Double { return 0 }

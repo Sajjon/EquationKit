@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol NumberExpressible: Numeric, ConstantExpressible, Negatable, AbsoluteConvertible, Hashable, Comparable where NumberType == Self {
+public protocol NumberExpressible: Numeric, Negatable, AbsoluteConvertible, Hashable, Comparable {
 
     static func + (lhs: Self, rhs: Self) -> Self
     static func * (lhs: Self, rhs: Self) -> Self

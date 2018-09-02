@@ -8,10 +8,6 @@
 
 import Foundation
 
-
-
-
-
 // MARK: - Substitionable
 public extension ExponentiationProtocol {
 
@@ -34,16 +30,5 @@ public extension ExponentiationProtocol {
             }
         )
     }
-
-
-    //    func substitute(constants: Set<ConstantStruct<NumberType>>) -> Substitution<NumberType> {
-    //        guard let constant = constants.first(where: { $0 == self.variable }) else {
-    //            return .algebraic(self)
-    //        }
-    //        let base = constant.value
-    //
-    //        return .number(constant: base.raised(to: exponent))
-    //    }
-
 }
 

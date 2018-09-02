@@ -8,11 +8,7 @@
 
 import Foundation
 
-public protocol ConstantExpressible: NumberTypeSpecifying {
-    var asConstant: NumberType? { get }
-}
-
-public protocol ConstantProtocol: NamedVariable, ConstantExpressible {
+public protocol ConstantProtocol: NamedVariable {
     var name: String { get }
     var value: NumberType { get }
     init(name: String, value: NumberType)
@@ -32,10 +28,6 @@ public extension ConstantProtocol {
     var description: String {
         return "<\(name)=\(value.shortFormat)>"
     }
-}
-
-public extension ConstantProtocol {
-    var asConstant: NumberType? { return value }
 }
 
 // MARK: - Convenience Initializers

@@ -11,14 +11,9 @@ import Foundation
 /// Shared protocol by all algebraic types.
 public protocol Atom {}
 
-public protocol Algebraic: Atom, Differentiatable, Substitutionable, Hashable, CustomStringConvertible {
-
-}
+public protocol Algebraic: Atom, Differentiatable, Substitutionable, Hashable, CustomStringConvertible {}
 
 public extension PolynomialProtocol {
-
-    static var zero: Self { return Self(constant: .zero) }
-    static var one: Self { return Self(constant: .one) }
 
     init(_ atom: Atom) {
 //        if let constant = atom as? NumberType {

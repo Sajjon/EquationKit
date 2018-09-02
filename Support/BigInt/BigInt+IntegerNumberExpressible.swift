@@ -20,12 +20,6 @@ extension BigInt: IntegerNumberExpressible {
         return Int(description)!
     }
 }
-extension BigInt {
-    public typealias NumberType = BigInt
-    public var asConstant: NumberType? {
-        return self
-    }
-}
 public extension BigInt {
     var isNegative: Bool {
         return self < 0

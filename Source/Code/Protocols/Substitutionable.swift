@@ -8,17 +8,6 @@
 
 import Foundation
 
-extension Atom {
-    func asConstant<N>() -> N? where N: NumberExpressible {
-        if let number = self as? N {
-            return number
-        } else if let poly = self as? PolynomialType<N> {
-            return poly.asConstant
-        }
-        return nil
-    }
-}
-
 public enum Substitution<Number: NumberExpressible>: NumberTypeSpecifying {
     public typealias NumberType = Number
 
@@ -29,7 +18,7 @@ public enum Substitution<Number: NumberExpressible>: NumberTypeSpecifying {
     var asConstant: Number? {
         switch self {
         case .constant(let number): return number
-        case .algebraic(let atom): return atom.asConstant()
+        default: return nil
         }
     }
     var isAlgebraic: Bool { return asAlgebraic != nil }

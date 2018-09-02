@@ -8,12 +8,7 @@
 
 import Foundation
 
-extension Int: IntegerNumberExpressible {
-    public typealias NumberType = Int
-    public var asConstant: NumberType? {
-        return self
-    }
-}
+extension Int: IntegerNumberExpressible {}
 public extension Int {
 
     static var zero: Int { return 0 }

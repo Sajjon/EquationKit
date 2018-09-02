@@ -10,7 +10,6 @@ import Foundation
 
 public protocol PolynomialProtocol:
     Algebraic,
-    ConstantExpressible,
     AbsoluteConvertible,
     Negatable
     where
@@ -70,13 +69,5 @@ public extension PolynomialProtocol {
 extension PolynomialStruct: ExpressibleByArrayLiteral {
     public init(arrayLiteral terms: TermType...) {
         self.init(terms: terms)
-    }
-}
-
-// MARK: - ConstantExpressible
-public extension PolynomialProtocol {
-    var asConstant: NumberType? {
-        guard terms.isEmpty else { return nil }
-        return constant
     }
 }
