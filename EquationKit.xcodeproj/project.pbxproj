@@ -90,6 +90,7 @@
 		48F0A2C4213727B300C32C12 /* BigInt+IntegerNumberExpressible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596532132E0F800C49431 /* BigInt+IntegerNumberExpressible.swift */; };
 		48F0A2C5213727B300C32C12 /* BigInt_Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596552132E11900C49431 /* BigInt_Operators.swift */; };
 		48F0A2C6213727B300C32C12 /* BigInt_Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481596572132E4C100C49431 /* BigInt_Variables.swift */; };
+		48F32ABE213DB1A400176CCE /* Modulus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F32ABD213DB1A400176CCE /* Modulus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,7 @@
 		48E70EB52130891D00DF10AF /* TermProtocol+Concatenation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TermProtocol+Concatenation.swift"; sourceTree = "<group>"; };
 		48F0A2BB2137248300C32C12 /* SipHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SipHash.framework; path = Carthage/Build/iOS/SipHash.framework; sourceTree = "<group>"; };
 		48F0A2BC2137248300C32C12 /* BigInt.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BigInt.framework; path = Carthage/Build/iOS/BigInt.framework; sourceTree = "<group>"; };
+		48F32ABD213DB1A400176CCE /* Modulus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modulus.swift; sourceTree = "<group>"; };
 		48FBE3BF2124A45E00ECD8D7 /* CustomOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomOperators.swift; sourceTree = "<group>"; };
 		48FBE3C22124A48300ECD8D7 /* ModulusMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulusMode.swift; sourceTree = "<group>"; };
 		48FBE3C42124A49B00ECD8D7 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 			children = (
 				48FBE3CB2124A6AA00ECD8D7 /* ModulusFunction.swift */,
 				48FBE3C22124A48300ECD8D7 /* ModulusMode.swift */,
+				48F32ABD213DB1A400176CCE /* Modulus.swift */,
 			);
 			path = Modulus;
 			sourceTree = "<group>";
@@ -803,6 +806,7 @@
 				48E70E6B213058E200DF10AF /* TermProtocol+Concrete.swift in Sources */,
 				4815965E2132E65200C49431 /* FloatingPointNumberExpressible.swift in Sources */,
 				48AB0AEB213981FA00801711 /* AbsoluteConvertible.swift in Sources */,
+				48F32ABE213DB1A400176CCE /* Modulus.swift in Sources */,
 				487C60C8212F059900F72442 /* Constant.swift in Sources */,
 				487C60CD212F068300F72442 /* Algebraic.swift in Sources */,
 				48AB0AEF2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift in Sources */,

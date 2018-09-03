@@ -24,7 +24,7 @@ public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
 
 // MARK: - Substitution
 public extension VariableProtocol {
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType> {
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> Substitution<NumberType> {
         guard let constant = constants.first(where: { $0 == self }) else { return .algebraic(self) }
         return .constant(constant.value)
     }

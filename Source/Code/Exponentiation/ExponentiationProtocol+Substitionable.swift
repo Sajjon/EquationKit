@@ -15,13 +15,12 @@ public extension ExponentiationProtocol {
         return variable.uniqueVariables
     }
 
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType> {
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> Substitution<NumberType> {
 
         return parse(
             substitutionable: variable,
             constants: constants,
             modulus: modulus,
-            modulusMode: modulusMode,
             handleNumber: { base in
                 base.raised(to: exponent)
             },

@@ -13,7 +13,7 @@ public protocol IntegerNumberExpressible: NumberExpressible, BinaryInteger {
 }
 
 public extension IntegerNumberExpressible {
-    func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self {
-        return EquationKit.mod(self, modulus: modulus, modulusMode: modulusMode)
+    func mod(_ modulus: Self, mode: ModulusMode) -> Self {
+        return EquationKit.mod(self, modulus: Modulus(modulus, mode: mode))
     }
 }

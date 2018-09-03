@@ -18,7 +18,7 @@ public protocol NumberExpressible: Numeric, Negatable, AbsoluteConvertible, Hash
     var asInteger: Int { get }
 
     func raised(to exponent: Self) -> Self
-    func mod(_ modulus: Self, modulusMode: ModulusMode) -> Self
+    func mod(_ modulus: Self, mode: ModulusMode) -> Self
 
     static var zero: Self { get }
     static var one: Self { get }
@@ -35,8 +35,8 @@ public extension NumberExpressible {
 }
 
 public extension NumberExpressible {
-    func modIfNeeded(_ modulus: Self?, modulusMode: ModulusMode) -> Self {
+    func modIfNeeded(_ modulus: Modulus<Self>?) -> Self {
         guard let modulus = modulus else { return self }
-        return mod(modulus, modulusMode: modulusMode)
+        return mod(modulus.number, mode: modulus.mode)
     }
 }

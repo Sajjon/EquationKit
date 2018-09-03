@@ -15,12 +15,11 @@ public extension PolynomialProtocol {
         return Set(terms.flatMap { Array($0.uniqueVariables) })
     }
 
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType> {
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> Substitution<NumberType> {
         return parseMany(
             substitutionables: terms,
             constants: constants,
             modulus: modulus,
-            modulusMode: modulusMode,
             manyHandleAllNumbers: { values in
                 values.reduce(self.constant, { $0 + $1 })
         },

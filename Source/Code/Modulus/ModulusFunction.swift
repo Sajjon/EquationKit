@@ -8,21 +8,21 @@
 
 import Foundation
 
-public func mod<T>(_ number: T, modulus: T, modulusMode: ModulusMode = .alwaysPositive) -> T where T: BinaryInteger {
-    var mod = number % modulus
-    guard modulusMode == .alwaysPositive else { return mod }
+public func mod<T>(_ number: T, modulus: Modulus<T>) -> T where T: BinaryInteger {
+    var mod = number % modulus.number
+    guard modulus.mode == .alwaysPositive else { return mod }
     if mod < 0 {
-        mod = mod + modulus
+        mod = mod + modulus.number
     }
     guard mod >= 0 else { fatalError("NEGATIVE VALUE") }
     return mod
 }
 
-public func mod<F>(_ number: F, modulus: F, modulusMode: ModulusMode = .alwaysPositive) -> F where F: BinaryFloatingPoint {
-    var mod = number.truncatingRemainder(dividingBy: modulus)
-    guard modulusMode == .alwaysPositive else { return mod }
+public func mod<F>(_ number: F, modulus: Modulus<F>) -> F where F: BinaryFloatingPoint {
+    var mod = number.truncatingRemainder(dividingBy: modulus.number)
+    guard modulus.mode == .alwaysPositive else { return mod }
     if mod < 0 {
-        mod = mod + modulus
+        mod = mod + modulus.number
     }
     guard mod >= 0 else { fatalError("NEGATIVE VALUE") }
     return mod
