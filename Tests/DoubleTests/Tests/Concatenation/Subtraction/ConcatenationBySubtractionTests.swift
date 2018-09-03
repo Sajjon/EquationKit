@@ -149,17 +149,17 @@ class ConcatenationBySubtractionTests: DoubleTestsBase {
         XCTAssertNotEqual(x - eq, eq - x)
         XCTAssertNotEqual(x - eq, y - eq)
 
-        XCTAssertEqual(x - eq, 2)
+        XCTAssertTrue(x - eq == 2)
         XCTAssertEqual((y - eq).asString(sorting: .coefficient), "y - x + 2")
         XCTAssertEqual((y - eq).evaluate() {[ x <- 3, y <- 1 ]}, 0)
     }
 
     // MARK: - Exponentiation
     func testExponentiationSubtractExponentiation() {
-        XCTAssertEqual(x² - x², 0)
-        XCTAssertEqual(x³ - x³, 0)
-        XCTAssertEqual(y² - y², 0)
-        XCTAssertEqual(y³ - y³, 0)
+        XCTAssertTrue(x² - x² == 0)
+        XCTAssertTrue(x³ - x³ == 0)
+        XCTAssertTrue(y² - y² == 0)
+        XCTAssertTrue(y³ - y³ == 0)
 
         XCTAssertNotEqual(x² - y², y² - x²)
 

@@ -15,10 +15,10 @@ public extension TermProtocol {
         return Set(exponentiations.map { $0.variable })
     }
 
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> PolynomialType<NumberType> {
+    func substitute(with substitutions: Set<Substitution<NumberType>>, modulus: Modulus<NumberType>?) -> PolynomialType<NumberType> {
         return parseMany(
             substitutionables: exponentiations,
-            constants: constants,
+            substitutions: substitutions,
             modulus: modulus,
             manyHandleAllNumbers: { values in
                 values.reduce(NumberType.one, { $0 * $1 }) * coefficient

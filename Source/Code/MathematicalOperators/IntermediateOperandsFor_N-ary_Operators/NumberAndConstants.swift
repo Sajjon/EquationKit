@@ -11,15 +11,15 @@ import Foundation
 public struct NumberAndConstants<Number: NumberExpressible> {
 
     public let number: Number
-    public let constants: Set<ConstantStruct<Number>>
-    public init(number: Number, constants: Set<ConstantStruct<Number>>) {
+    public let constants: Set<Substitution<Number>>
+    public init(number: Number, constants: Set<Substitution<Number>>) {
         self.number = number
         self.constants = constants
     }
 
 }
 public extension NumberAndConstants {
-    public init(number: Number, constants: [ConstantStruct<Number>]) {
+    public init(number: Number, constants: [Substitution<Number>]) {
         guard !constants.containsDuplicates() else { fatalError("Constants array should not contain duplicates") }
         self.init(number: number, constants: Set(constants))
     }

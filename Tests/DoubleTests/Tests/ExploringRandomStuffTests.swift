@@ -58,17 +58,8 @@ class ExploringRandomStuffTests: DoubleTestsBase {
         let eq2 = 8*(x³+x) // (x-1)^^4 - (x-1)^^4/
 
         for i in 5..<1000 {
-            let cx = Constant(x, value: i+1)
-            let cy = Constant(y, value: i)
-            let constants = [cx, cy]
 
-
-//            XCTAssertEqual(
-//                eq1.evaluate(constants: [cx, cy], modulus: 10)!,
-//                eq2.evaluate(modulus: 10) { x <- (i+1) }!
-//            )
-
-            let difference = eq1.evaluate(constants: constants)!
+            let difference = eq1.evaluate() {[ x <- Double(i + 1), y <- Double(i) ]}!
 
             defer { lastDiff = difference }
             guard let lastDiff = lastDiff else { continue }

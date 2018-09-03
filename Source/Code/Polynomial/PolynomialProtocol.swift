@@ -71,6 +71,16 @@ public extension PolynomialProtocol {
     var isNumber: Bool {
         return asNumber != nil
     }
+
+    var asVariable: VariableStruct<NumberType>? {
+        guard
+            let term = terms.first,
+            terms.count == 1,
+            let exp = term.exponentiations.first,
+            term.exponentiations.count == 1
+        else { return nil }
+        return exp.variable
+    }
 }
 
 // MARK: - ExpressibleByArrayLiteral

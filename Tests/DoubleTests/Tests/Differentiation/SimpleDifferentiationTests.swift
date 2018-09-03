@@ -10,6 +10,19 @@ import Foundation
 import XCTest
 @testable import EquationKit
 
+func == (lhs: Double, rhs: Polynomial) -> Bool {
+    return lhs == rhs.asNumber
+}
+func == (lhs: Polynomial, rhs: Double) -> Bool {
+    return lhs.asNumber == rhs
+}
+func == (lhs: Int, rhs: Polynomial) -> Bool {
+    return Double(lhs) == rhs
+}
+func == (lhs: Polynomial, rhs: Int) -> Bool {
+    return lhs == Double(rhs)
+}
+
 class SimpleDifferentiationTests: DoubleTestsBase {
 
     /// y³x²
@@ -24,13 +37,13 @@ class SimpleDifferentiationTests: DoubleTestsBase {
     func test𝟛𝑥²－𝟛𝑦() {
         let eq = 3*x² - 3*y
         XCTAssertEqual((6*x), eq.differentiateWithRespectTo(x)!)
-        XCTAssertEqual(-3, eq.differentiateWithRespectTo(y)!)
+        XCTAssertTrue(-3 == eq.differentiateWithRespectTo(y)!)
     }
 
     /// 3y² - 3x
     func test𝟛𝑦²－𝟛𝑥() {
         let eq = 3*y² - 3*x
-        XCTAssertEqual(-3, eq.differentiateWithRespectTo(x)!)
+        XCTAssertTrue(-3 == eq.differentiateWithRespectTo(x)!)
         XCTAssertEqual((6*y), eq.differentiateWithRespectTo(y)!)
     }
 

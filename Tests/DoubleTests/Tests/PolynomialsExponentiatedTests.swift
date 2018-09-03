@@ -55,7 +55,7 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
     func test𝑥·𝑥²＋𝑥²·𝑥－𝟚𝑥³() {
         let eq = x*x² + x²*x - 2*x³
         XCTAssertEqual(eq.description, "")
-        XCTAssertEqual(eq, 0)
+        XCTAssertTrue(eq == 0)
     }
 
     func test﹙𝑥－𝟙﹚⁹() {

@@ -11,12 +11,26 @@ import Foundation
 public protocol NamedVariable: NumberTypeSpecifying, CustomStringConvertible, Hashable, Comparable {
     var name: String { get }
     static func == <N>(lhs: N, rhs: Self) -> Bool where N: NamedVariable, N.NumberType == Self.NumberType
+//    static func == (lhs: PolynomialType<NumberType>, rhs: Self) -> Bool
 }
 
 public extension NamedVariable {
     static func == <N>(lhs: N, rhs: Self) -> Bool where N: NamedVariable, N.NumberType == Self.NumberType {
         return lhs.name == rhs.name
     }
+
+//    static func == (lhs: PolynomialType<NumberType>, rhs: Self) -> Bool {
+//        guard
+//            let term = lhs.terms.first,
+//            lhs.terms.count == 1,
+//            let exp = term.exponentiations.first,
+//            term.exponentiations.count == 1,
+//            exp.variable
+//    }
+//
+//    static func == (lhs: Self, rhs: PolynomialType<NumberType>) -> Bool {
+//        return rhs == lhs
+//    }
 }
 
 // MARK: - Equatable

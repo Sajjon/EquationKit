@@ -47,6 +47,8 @@
 		4898192E213C279900BDD603 /* Set_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4898192D213C279900BDD603 /* Set_Extension.swift */; };
 		48981932213C2AB200BDD603 /* ConstantSubstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48981931213C2AB200BDD603 /* ConstantSubstitutionTests.swift */; };
 		48981934213C5F0700BDD603 /* Substitutionable+Evaluate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48981933213C5F0700BDD603 /* Substitutionable+Evaluate.swift */; };
+		489B8151213DC5D100869E79 /* PolynomialSubstitutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B8150213DC5D100869E79 /* PolynomialSubstitutionTests.swift */; };
+		489B8153213DCE4000869E79 /* PolynomialProtocol+Contains.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B8152213DCE4000869E79 /* PolynomialProtocol+Contains.swift */; };
 		48AB0AEB213981FA00801711 /* AbsoluteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0AEA213981FA00801711 /* AbsoluteConvertible.swift */; };
 		48AB0AED2139856300801711 /* TermProtocol+AbsoluteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0AEC2139856300801711 /* TermProtocol+AbsoluteConvertible.swift */; };
 		48AB0AEF2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AB0AEE2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift */; };
@@ -165,6 +167,8 @@
 		4898192D213C279900BDD603 /* Set_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Set_Extension.swift; sourceTree = "<group>"; };
 		48981931213C2AB200BDD603 /* ConstantSubstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantSubstitutionTests.swift; sourceTree = "<group>"; };
 		48981933213C5F0700BDD603 /* Substitutionable+Evaluate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Substitutionable+Evaluate.swift"; sourceTree = "<group>"; };
+		489B8150213DC5D100869E79 /* PolynomialSubstitutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolynomialSubstitutionTests.swift; sourceTree = "<group>"; };
+		489B8152213DCE4000869E79 /* PolynomialProtocol+Contains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolynomialProtocol+Contains.swift"; sourceTree = "<group>"; };
 		48AB0AEA213981FA00801711 /* AbsoluteConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbsoluteConvertible.swift; sourceTree = "<group>"; };
 		48AB0AEC2139856300801711 /* TermProtocol+AbsoluteConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TermProtocol+AbsoluteConvertible.swift"; sourceTree = "<group>"; };
 		48AB0AEE2139857A00801711 /* PolynomialProtocol+AbsoluteConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PolynomialProtocol+AbsoluteConvertible.swift"; sourceTree = "<group>"; };
@@ -339,6 +343,7 @@
 				482972A821317D1400EB0CA9 /* TermSortingTests.swift */,
 				482972A921317D1400EB0CA9 /* ExploringRandomStuffTests.swift */,
 				48981931213C2AB200BDD603 /* ConstantSubstitutionTests.swift */,
+				489B8150213DC5D100869E79 /* PolynomialSubstitutionTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -533,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				484D742421238C64003C1700 /* PolynomialProtocol.swift */,
+				489B8152213DCE4000869E79 /* PolynomialProtocol+Contains.swift */,
 				48E70EB32130883800DF10AF /* PolynomialProtocol+Concatenation.swift */,
 				48E70E7F21305B1300DF10AF /* PolynomialProtocol+Concrete.swift */,
 				48E70E8121305B5500DF10AF /* PolynomialProtocol+CustomStringConvertible.swift */,
@@ -815,6 +821,7 @@
 				487C60C4212F057100F72442 /* Variable.swift in Sources */,
 				48AB0AFA213AE1BC00801711 /* CongruentEqualityOperand.swift in Sources */,
 				48E70E8821305BA600DF10AF /* PolynomialProtocol+Equatable.swift in Sources */,
+				489B8153213DCE4000869E79 /* PolynomialProtocol+Contains.swift in Sources */,
 				48E70EAA2130649A00DF10AF /* SortingWithinTerm.swift in Sources */,
 				48E70E8421305B6A00DF10AF /* PolynomialProtocol+Negatable.swift in Sources */,
 				48AB0B00213AE77300801711 /* PolynomialCongruenceEvaluationOperators.swift in Sources */,
@@ -837,6 +844,7 @@
 				482D234E21317B3D004B2E50 /* DoubleTestsBase.swift in Sources */,
 				481596492131831100C49431 /* ExploringRandomStuffTests.swift in Sources */,
 				48981932213C2AB200BDD603 /* ConstantSubstitutionTests.swift in Sources */,
+				489B8151213DC5D100869E79 /* PolynomialSubstitutionTests.swift in Sources */,
 				48159644213182E200C49431 /* ConcatenationByMultiplicationTests.swift in Sources */,
 				4815965B2132E57300C49431 /* Double_Variables.swift in Sources */,
 				48159645213182F100C49431 /* ConcatenationByAdditionTests.swift in Sources */,

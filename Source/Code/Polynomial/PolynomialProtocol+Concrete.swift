@@ -22,10 +22,23 @@ public struct PolynomialStruct<Term: TermProtocol>: PolynomialProtocol {
     }
 }
 
-// MARK: - ExpressibleByIntegerLiteral
-extension PolynomialStruct: ExpressibleByIntegerLiteral where Term.NumberType == Double {
-    public typealias IntegerLiteralType = Int
-    public init(integerLiteral value: Int) {
-        self.init(constant: NumberType(value))
-    }
-}
+//// MARK: - ExpressibleByIntegerLiteral
+//extension PolynomialStruct: ExpressibleByIntegerLiteral where Term.NumberType: InitializableByInteger {
+//    public typealias IntegerLiteralType = Int
+//    public init(integerLiteral value: Int) {
+//        self.init(constant: NumberType(value))
+//    }
+//}
+//
+//extension PolynomialStruct: ExpressibleByFloatLiteral where Term.NumberType: InitializableByFloat {
+////    public typealias IntegerLiteralType = Int
+////    public init(integerLiteral value: Int) {
+////        self.init(constant: NumberType(value))
+////    }
+//
+//    public typealias FloatLiteralType = Float
+//
+//    public init(floatLiteral value: FloatLiteralType) {
+//        self.init(constant: NumberType(value))
+//    }
+//}

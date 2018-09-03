@@ -11,9 +11,9 @@ import Foundation
 public struct CongruentEqualityOperand<Number: NumberExpressible> {
     public let scalar: Number
     public let modulus: Modulus<Number>
-    public let constants: Set<ConstantStruct<Number>>
+    public let constants: Set<Substitution<Number>>
 
-    public init(scalar: Number, modulus: Number, constants: Set<ConstantStruct<Number>>) {
+    public init(scalar: Number, modulus: Number, constants: Set<Substitution<Number>>) {
         self.scalar = scalar
         self.modulus = Modulus<Number>(modulus)
         self.constants = constants

@@ -24,8 +24,8 @@ public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {
 
 // MARK: - Substitution
 public extension VariableProtocol {
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> PolynomialType<NumberType> {
-        guard let constant = constants.first(where: { $0 == self }) else { return PolynomialType<NumberType>(variable: self as! VariableStruct<NumberType>) }
+    func substitute(with substitutions: Set<Substitution<NumberType>>, modulus: Modulus<NumberType>?) -> PolynomialType<NumberType> {
+        guard let constant = substitutions.compactMap({ $0.asConstant }).first(where: { $0.toVariable() == self }) else { return PolynomialType<NumberType>(variable: self as! VariableStruct<NumberType>) }
         return PolynomialType<NumberType>(constant: constant.value)
     }
 }

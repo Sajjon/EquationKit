@@ -32,7 +32,8 @@ public extension Solvable {
         let variablesPassed = Set<VariableStruct<NumberType>>(constants.map { $0.toVariable() })
 
         if variablesPassed.isSuperset(of: uniqueVariables) {
-            return .number(evaluate(constants: constants)!)
+            fatalError()
+//            return .number(evaluate(constants: constants)!)
         } else {
             return .roots(findRoots(constants: constants))
         }
