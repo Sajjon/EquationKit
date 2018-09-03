@@ -15,7 +15,7 @@ public extension ExponentiationProtocol {
         return variable.uniqueVariables
     }
 
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> Substitution<NumberType> {
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> PolynomialType<NumberType> {
 
         return parse(
             substitutionable: variable,
@@ -24,8 +24,8 @@ public extension ExponentiationProtocol {
             handleNumber: { base in
                 base.raised(to: exponent)
             },
-            handleAlgebraic: { atom in
-                return PolynomialType<NumberType>(atom).raised(to: self.exponent.asInteger)
+            handleAlgebraic: { poly in
+                return poly.raised(to: self.exponent.asInteger)
             }
         )
     }

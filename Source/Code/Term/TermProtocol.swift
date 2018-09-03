@@ -18,7 +18,6 @@ public protocol TermProtocol:
     ExponentiationType.NumberType == Self.NumberType
 {
 
-    typealias Poly = PolynomialType<NumberType>
     associatedtype ExponentiationType: ExponentiationProtocol
 
     var coefficient: NumberType { get }

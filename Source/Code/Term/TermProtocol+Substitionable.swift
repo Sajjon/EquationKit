@@ -15,24 +15,17 @@ public extension TermProtocol {
         return Set(exponentiations.map { $0.variable })
     }
 
-    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> Substitution<NumberType> {
-
+    func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>?) -> PolynomialType<NumberType> {
         return parseMany(
             substitutionables: exponentiations,
             constants: constants,
             modulus: modulus,
             manyHandleAllNumbers: { values in
-                values.reduce(.one, { $0 * $1 }) * coefficient
+                values.reduce(NumberType.one, { $0 * $1 }) * coefficient
             },
-            manyHandleMixedReduce: (initialResult: Self.atom(coefficient: coefficient), combine: {
-                Poly($0).multipliedBy(other: Poly($1))
+            manyHandleMixedReduce: (initialResult: PolynomialType<NumberType>(constant: coefficient), combine: {
+                PolynomialType<NumberType>($0).multipliedBy(other: PolynomialType<NumberType>($1))
             })
         )
-    }
-}
-
-internal extension TermProtocol {
-    static func atom(coefficient: NumberType) -> Atom {
-        return PolynomialStruct<Self>(constant: coefficient) as Atom
     }
 }

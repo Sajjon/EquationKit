@@ -11,10 +11,7 @@ import Foundation
 public extension Substitutionable {
 
     func evaluate(constants: Set<ConstantStruct<NumberType>>, modulus: Modulus<NumberType>? = nil) -> NumberType? {
-        switch substitute(constants: constants, modulus: modulus) {
-        case .constant(let number): return number
-        default: return nil
-        }
+        return substitute(constants: constants, modulus: modulus).asNumber
     }
 
     func evaluate(constants: [ConstantStruct<NumberType>], modulus: Modulus<NumberType>? = nil) -> NumberType? {

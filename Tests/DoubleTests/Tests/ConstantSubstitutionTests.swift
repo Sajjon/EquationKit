@@ -16,7 +16,7 @@ class ConstantSubstitutionTests: DoubleTestsBase {
         let eq = x + y
         XCTAssertEqual(
             x + 2,
-            Polynomial(eq.substitute() {[ y <- 2 ]}.asAtom)
+            eq.substitute() {[ y <- 2 ]}
         )
     }
 
@@ -28,7 +28,7 @@ class ConstantSubstitutionTests: DoubleTestsBase {
         let 𝑎 = Variable("𝑎")
         let 𝑏 = Variable("𝑏")
         let eq = 𝑦² - 𝑥³ - 𝑎*𝑥 - 𝑏
-        XCTAssertEqual(Polynomial(eq.substitute() {[ 𝑎 <- 0, 𝑏 <- 7 ]}.asAtom), 𝑦² - 𝑥³ - 7)
+        XCTAssertEqual(eq.substitute() {[ 𝑎 <- 0, 𝑏 <- 7 ]}, 𝑦² - 𝑥³ - 7)
     }
 
 }
