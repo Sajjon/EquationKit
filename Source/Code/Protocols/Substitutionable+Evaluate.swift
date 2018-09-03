@@ -18,7 +18,7 @@ public extension Substitutionable {
     }
 
     func evaluate(constants: [ConstantStruct<NumberType>], modulus: Modulus<NumberType>? = nil) -> NumberType? {
-        guard !constants.containsDuplicates() else { fatalError() }
+        guard !constants.containsDuplicates() else { fatalError("cannot contain duplicates") }
         return evaluate(constants: Set(constants), modulus: modulus)
     }
 
