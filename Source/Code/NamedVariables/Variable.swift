@@ -10,7 +10,6 @@ import Foundation
 
 public protocol VariableProtocol: NamedVariable, Algebraic {
     init(_ name: String)
-
 }
 
 public struct VariableStruct<Number: NumberExpressible>: VariableProtocol {

@@ -11,7 +11,7 @@ import Foundation
 public struct Modulus<Number: NumberExpressible> {
     public let number: Number
     public let mode: ModulusMode
-    init(_ number: Number, mode: ModulusMode = .alwaysPositive) {
+    public init(_ number: Number, mode: ModulusMode = .alwaysPositive) {
         self.number = number
         self.mode = mode
     }
