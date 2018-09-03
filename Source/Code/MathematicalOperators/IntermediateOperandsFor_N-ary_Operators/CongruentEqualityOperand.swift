@@ -10,12 +10,12 @@ import Foundation
 
 public struct CongruentEqualityOperand<Number: NumberExpressible> {
     public let scalar: Number
-    public let modulus: Number
+    public let modulus: Modulus<Number>
     public let constants: Set<ConstantStruct<Number>>
 
     public init(scalar: Number, modulus: Number, constants: Set<ConstantStruct<Number>>) {
         self.scalar = scalar
-        self.modulus = modulus
+        self.modulus = Modulus<Number>(modulus)
         self.constants = constants
     }
 }

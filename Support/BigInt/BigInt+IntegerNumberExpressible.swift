@@ -14,7 +14,12 @@ import BigInt
 // Do not include this line when you copy the contents of this file to your own project
 @testable import EquationKit // This is only included since this file is used by EquationKitBigIntTests
 
-extension BigInt: IntegerNumberExpressible {}
+extension BigInt: IntegerNumberExpressible {
+    public var asInteger: Int {
+        guard bitWidth < 32 else { fatalError("overflow") }
+        return Int(description)!
+    }
+}
 public extension BigInt {
     var isNegative: Bool {
         return self < 0

@@ -23,7 +23,7 @@ public extension ExponentiationProtocol {
             // actually this is never used.... but makes us able to distinguish between
             // doing `exponentiations.append(exponentiation)` and doing
             // nothing in differentiation in TermProtocol
-            return PolynomialType(constant: .one)
+            return PolynomialType(constant: NumberType.one)
         }
 
         let exponentiation = PolynomialType.ExponentiationType(variable, exponent: exponent)

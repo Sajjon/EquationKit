@@ -22,6 +22,10 @@ public extension Int {
         return self < 0
     }
 
+    var asInteger: Int {
+        return self
+    }
+
     var isPositive: Bool {
         return self > 0
     }

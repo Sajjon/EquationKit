@@ -20,6 +20,13 @@ class PolynomialsExponentiatedTests: DoubleTestsBase {
         XCTAssertEqual(eq, (Double(1) + x)^^2)
     }
 
+//    func test𝑥²＋𝑦ToPowerOf3() {
+    func test𝑥²ToPowerOf3() {
+        let eq = x²^^3
+        XCTAssertEqual(eq, x^^6)
+        XCTAssertEqual(eq, Polynomial(x⁶))
+    }
+
     func test﹙𝑥＋𝟙﹚³() {
         let eq = (x + 1)^^3
         XCTAssertEqual(eq, (x + 1) * (x + 1) * (x + 1))

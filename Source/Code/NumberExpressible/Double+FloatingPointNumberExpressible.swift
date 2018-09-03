@@ -19,6 +19,10 @@ public extension Double {
         return String(format: format, self)
     }
 
+    var asInteger: Int {
+        return Int(exactly: self)!
+    }
+
     var isNegative: Bool {
         return self < 0
     }
