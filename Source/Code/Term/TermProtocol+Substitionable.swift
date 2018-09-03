@@ -25,7 +25,7 @@ public extension TermProtocol {
             manyHandleAllNumbers: { values in
                 values.reduce(.one, { $0 * $1 }) * coefficient
             },
-            manyHandleMixedReduce: (initialResult: Self.atom1, combine: {
+            manyHandleMixedReduce: (initialResult: Self.atom(coefficient: coefficient), combine: {
                 Poly($0).multipliedBy(other: Poly($1))
             })
         )
@@ -33,5 +33,7 @@ public extension TermProtocol {
 }
 
 internal extension TermProtocol {
-    static var atom1: Atom { return PolynomialStruct<Self>(constant: .one) as Atom }
+    static func atom(coefficient: NumberType) -> Atom {
+        return PolynomialStruct<Self>(constant: coefficient) as Atom
+    }
 }

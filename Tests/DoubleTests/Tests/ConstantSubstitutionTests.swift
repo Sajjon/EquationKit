@@ -20,5 +20,16 @@ class ConstantSubstitutionTests: DoubleTestsBase {
         )
     }
 
+    func testWeierstrass() {
+        let 𝑥 = Variable("𝑥")
+        let 𝑦 = Variable("𝑦")
+        let 𝑥³ = 𝑥^^3
+        let 𝑦² = 𝑦^^2
+        let 𝑎 = Variable("𝑎")
+        let 𝑏 = Variable("𝑏")
+        let eq = 𝑦² - 𝑥³ - 𝑎*𝑥 - 𝑏
+        XCTAssertEqual(Polynomial(eq.substitute() {[ 𝑎 <- 0, 𝑏 <- 7 ]}.asAtom), 𝑦² - 𝑥³ - 7)
+    }
+
 }
 
