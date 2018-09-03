@@ -30,7 +30,7 @@ public enum Substitution<Number: NumberExpressible> {
 }
 
 public protocol Substitutionable: NumberTypeSpecifying {
-    
+
     var uniqueVariables: Set<VariableStruct<NumberType>> { get }
 
     func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType>
@@ -58,12 +58,7 @@ internal func parse<S, N>(
     ) -> Substitution<N> where S: Substitutionable, N == S.NumberType {
 
     switch substitutionable.substitute(constants: constants, modulus: modulus, modulusMode: modulusMode) {
-    case .constant(let number):
-        var value = handleNumber(number)
-        if let modulus = modulus {
-            value = value.mod(modulus, modulusMode: modulusMode)
-        }
-        return .constant(value)
+    case .constant(let number): return .constant(handleNumber(number).modIfNeeded(modulus, modulusMode: modulusMode))
     case .algebraic(let algebraicAtom): return .algebraic(handleAlgebraic(algebraicAtom) as Atom)
     }
 }
@@ -80,12 +75,8 @@ internal func parseMany<S, N>(
     let parsed = substitutionables.map { $0.substitute(constants: constants, modulus: modulus, modulusMode: modulusMode) }
 
     if parsed.allSatisfy({ $0.isConstant }) {
-        let constants = parsed.compactMap { $0.asConstant }
-        var value = manyHandleAllNumbers(constants)
-        if let modulus = modulus {
-            value = value.mod(modulus, modulusMode: modulusMode)
-        }
-        return .constant(value)
+        let value = manyHandleAllNumbers(parsed.compactMap { $0.asConstant })
+        return .constant(value.modIfNeeded(modulus, modulusMode: modulusMode))
     } else {
         let (initialResult, combine) = manyHandleMixedReduce
         let atom = parsed.reduce(initialResult, combine)

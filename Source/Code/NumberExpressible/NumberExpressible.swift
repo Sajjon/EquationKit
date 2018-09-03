@@ -34,3 +34,9 @@ public extension NumberExpressible {
     }
 }
 
+public extension NumberExpressible {
+    func modIfNeeded(_ modulus: Self?, modulusMode: ModulusMode) -> Self {
+        guard let modulus = modulus else { return self }
+        return mod(modulus, modulusMode: modulusMode)
+    }
+}
