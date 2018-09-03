@@ -17,19 +17,17 @@ public extension TermProtocol {
 
     func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType> {
 
-        let nextPartialResult = { (accumulatingValue: Atom, nextElement: Substitution<NumberType>) -> Atom in
-            return PolynomialType<NumberType>(accumulatingValue).multipliedBy(other: PolynomialType<NumberType>(nextElement.asAtom)) as Atom
-        }
-
         return parseMany(
             substitutionables: exponentiations,
             constants: constants,
             modulus: modulus,
             modulusMode: modulusMode,
             manyHandleAllNumbers: { values in
-                return values.reduce(NumberType.one, { $0 * $1 }) * coefficient
+                values.reduce(.one, { $0 * $1 }) * coefficient
             },
-            manyHandleMixedReduce: (initialResult: Self.atom1, combine: nextPartialResult)
+            manyHandleMixedReduce: (initialResult: Self.atom1, combine: {
+                Poly($0).multipliedBy(other: Poly($1))
+            })
         )
     }
 }

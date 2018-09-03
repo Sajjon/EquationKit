@@ -15,6 +15,7 @@ public protocol PolynomialProtocol:
     where
     TermType.NumberType == Self.NumberType
 {
+    typealias Poly = PolynomialType<NumberType>
     associatedtype TermType: TermProtocol
     var constant: NumberType { get }
     var terms: [TermType] { get }

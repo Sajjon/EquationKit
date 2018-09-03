@@ -16,10 +16,6 @@ public extension PolynomialProtocol {
     }
 
     func substitute(constants: Set<ConstantStruct<NumberType>>, modulus: NumberType?, modulusMode: ModulusMode) -> Substitution<NumberType> {
-        let nextPartialResult = { (accumulatingValue: Atom, nextElement: Substitution<NumberType>) -> Atom in
-            return PolynomialType<NumberType>(accumulatingValue).adding(other: PolynomialType<NumberType>(nextElement.asAtom)) as Atom
-        }
-
         return parseMany(
             substitutionables: terms,
             constants: constants,
@@ -28,7 +24,7 @@ public extension PolynomialProtocol {
             manyHandleAllNumbers: { values in
                 values.reduce(self.constant, { $0 + $1 })
         },
-            manyHandleMixedReduce: (initialResult: Self.atom0, combine: nextPartialResult)
+            manyHandleMixedReduce: (initialResult: Self.atom0, combine: { Poly($0).adding(other: Poly($1)) })
         )
     }
 }

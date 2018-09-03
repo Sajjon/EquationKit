@@ -69,7 +69,7 @@ internal func parseMany<S, N>(
     modulus: N?,
     modulusMode: ModulusMode,
     manyHandleAllNumbers: (([N]) -> N),
-    manyHandleMixedReduce: (initialResult: Atom, combine: ((Atom, Substitution<N>) -> Atom))
+    manyHandleMixedReduce: (initialResult: Atom, combine: ((Atom, Atom) -> Atom))
     ) -> Substitution<N> where S: Substitutionable, N == S.NumberType {
 
     let parsed = substitutionables.map { $0.substitute(constants: constants, modulus: modulus, modulusMode: modulusMode) }
@@ -79,7 +79,7 @@ internal func parseMany<S, N>(
         return .constant(value.modIfNeeded(modulus, modulusMode: modulusMode))
     } else {
         let (initialResult, combine) = manyHandleMixedReduce
-        let atom = parsed.reduce(initialResult, combine)
+        let atom = parsed.map { $0.asAtom }.reduce(initialResult, combine)
         return .algebraic(atom)
     }
 
