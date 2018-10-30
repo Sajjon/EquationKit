@@ -6,11 +6,11 @@ print(polynomial) // 21x² + 8xy - 50x - 45y² + 268y - 391)
 let number = polynomial.evaluate() {[ x <- 4, y <- 1 ]}
 print(number) // 0
 
-let y＇ = equation.differentiateWithRespectTo(x)
+let y＇ = polynomial.differentiateWithRespectTo(x)
 print(y＇) // 42x + 8y - 50
 y＇.evaluate() {[ x <- 1, y <- 1 ]} // 0
 
-let x＇ = equation.differentiateWithRespectTo(y)
+let x＇ = polynomial.differentiateWithRespectTo(y)
 print(x＇) // 8x - 90y + 268
  x＇.evaluate() {[ x <- 11.5,  y <- 4 ]} // 0
 ```
