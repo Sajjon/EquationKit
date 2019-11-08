@@ -6,21 +6,21 @@ print(polynomial) // 21x² + 8xy - 50x - 45y² + 268y - 391)
 let number = polynomial.evaluate() {[ x <- 4, y <- 1 ]}
 print(number) // 0
 
-let y＇ = equation.differentiateWithRespectTo(x)
+let y＇ = polynomial.differentiateWithRespectTo(x)
 print(y＇) // 42x + 8y - 50
 y＇.evaluate() {[ x <- 1, y <- 1 ]} // 0
 
-let x＇ = equation.differentiateWithRespectTo(y)
+let x＇ = polynomial.differentiateWithRespectTo(y)
 print(x＇) // 8x - 90y + 268
  x＇.evaluate() {[ x <- 11.5,  y <- 4 ]} // 0
 ```
 
 ## Generics
-EquationKit is fully generic and supports any number type conforming to the protocol [`NumberExpressible`](Source/Code/NumberExpressible/NumberExpressible.swift), Swift Foundation's `Int` and `Double` both conforms to said protocol. By conforming to `NumberExpressible` you can use EquationKit with e.g. excellent [attaswift/BigInt](https://github.com/attaswift/BigInt). You need only to copy the code from [`BigInt+IntegerNumberExpressible`](Support/BigInt/BigInt+IntegerNumberExpressible.swift)
+EquationKit is fully generic and supports any number type conforming to the protocol [`NumberExpressible`](Sources/EquationKit/NumberExpressible/NumberExpressible.swift), Swift Foundation's `Int` and `Double` both conforms to said protocol. By conforming to `NumberExpressible` you can use EquationKit with e.g. excellent [attaswift/BigInt](https://github.com/attaswift/BigInt). 
 
-We would like to use operator overloading, making it possible to write `x + y`, `x - 2`, `x*z² - y³` etc. Supporting operator overloading using generic `func + <N: NumberExpressible>(lhs: Variable, rhs: N) -> PolynomialStruct<N>` results in Swift compiler taking too long time to compile polynomials having over 3 terms (using Xcode 10 beta 6 at least). Thus EquationKit does not come bundled with any operator support at all. Instead, you chose your Number type yourself. If you don't need `BigInt` then `Double` is probably what you want. Just copy the file [`Double_Operators`](Support/Double/Double_Operators.swift) into your project and you are good to go! It contains around 10 operators which are all 3 lines of code each.
+You need only to `import EquationKitBigIntSupport`
 
-If you need `BigInt` support, just copy the file [`BigInt_Operators`](Support/BigInt/BigInt_Operators.swift) instead.
+We would like to use operator overloading, making it possible to write `x + y`, `x - 2`, `x*z² - y³` etc. Supporting operator overloading using generic `func + <N: NumberExpressible>(lhs: Variable, rhs: N) -> PolynomialStruct<N>` results in Swift compiler taking too long time to compile polynomials having over 3 terms (using Xcode 10 beta 6 at least). Thus EquationKit does not come bundled with any operator support at all. Instead, you chose your Number type yourself. If you don't need `BigInt` then `Double` is probably what you want, just `import EquationKitDoubleSupport` and you are good to go! It contains around 10 operators which are all 3 lines of code each.
 
 ## Variables
 You write powers using the custom operator `x^^2`, but for powers between `2` and `9` you can use the [unicode superscript symbols](https://en.wikipedia.org/wiki/Unicode_subscripts_and_superscripts#Superscripts_and_subscripts_block) instead, like so:
@@ -39,10 +39,8 @@ let x⁹ = Exponentiation(x, exponent: 9)
 let y² = Exponentiation(y, exponent: 2)
 ```
 
-You can copy the contents of the file [`Double_Variables`](Support/Double/Double_Variables.swift) or for BigInt support: [`BigInt_Variables`](Support/BigInt/BigInt_Variables.swift) and of course extended with more variables of your choice.
-
 ## Advanced operators
-You can use some of the advanced mathematical operators provided in the folder [MathematicalOperators](Source/Code/MathematicalOperators) to precisely express the mathematical constraints you might have.
+You can use some of the advanced mathematical operators provided in the folder [MathematicalOperators](Sources/EquationKit/MathematicalOperators) to precisely express the mathematical constraints you might have.
 
 ### Variable to Constant (evaluation)
 Let's have a look at one of the simplest scenario:
