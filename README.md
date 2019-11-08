@@ -1,3 +1,5 @@
+# EquationKit
+
 ## Write equations in pure Swift, differentiate and/or evaluate them.
 
 ```swift
@@ -14,6 +16,18 @@ let x＇ = polynomial.differentiateWithRespectTo(y)
 print(x＇) // 8x - 90y + 268
  x＇.evaluate() {[ x <- 11.5,  y <- 4 ]} // 0
 ```
+
+# Installation
+
+## Swift Package Manager
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Sajjon/EquationKit", from: "0.1.0")
+]
+```
+
+# Usage
 
 ## Generics
 EquationKit is fully generic and supports any number type conforming to the protocol [`NumberExpressible`](Sources/EquationKit/NumberExpressible/NumberExpressible.swift), Swift Foundation's `Int` and `Double` both conforms to said protocol. By conforming to `NumberExpressible` you can use EquationKit with e.g. excellent [attaswift/BigInt](https://github.com/attaswift/BigInt). 
