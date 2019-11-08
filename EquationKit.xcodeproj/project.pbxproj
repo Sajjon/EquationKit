@@ -254,7 +254,7 @@
 				483FFBBD2137110B003F8A3F /* Configurations */,
 				48022803211B1FFC00AEFB58 /* Products */,
 				4815964A21318A1000C49431 /* Support */,
-				48022804211B1FFC00AEFB58 /* Source */,
+				48022804211B1FFC00AEFB58 /* Sources */,
 				482D230F21317B0A004B2E50 /* Tests */,
 				4897470A21371AC4008C10EA /* Frameworks */,
 			);
@@ -270,13 +270,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		48022804211B1FFC00AEFB58 /* Source */ = {
+		48022804211B1FFC00AEFB58 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				484D742321238C52003C1700 /* Code */,
 				48022822211B209C00AEFB58 /* SupportingFiles */,
 			);
-			path = Source;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		48022822211B209C00AEFB58 /* SupportingFiles */ = {
