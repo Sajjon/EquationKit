@@ -1,5 +1,0 @@
-#include "base_tests.xcconfig"
-#include "equationkit_debug.xcconfig"
-
-INFOPLIST_FILE = Tests/DoubleTests/SupportingFiles/EquationKit-DoubleTests-Info.plist
-PRODUCT_BUNDLE_IDENTIFIER = com.cyon.EquationKitDoubleTests
